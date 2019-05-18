@@ -48,7 +48,7 @@ rm -f ~/.zshrc
 ln -s ~/.config/zsh/zshrc ~/.zshrc
 
 echo 'Installing i3 ...'
-sudo -Sp '' dnf coprenable gregw/i3desktop<<<${pw}
+sudo -Sp '' dnf copr enable -y gregw/i3desktop<<<${pw}
 sudo -Sp '' dnf install i3blocks<<<${pw}
 rm -f ~/.i3blocks.conf
 ln -s ~/.config/i3/i3blocks.conf ~/.i3blocks.conf
