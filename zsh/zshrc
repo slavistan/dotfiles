@@ -1,25 +1,23 @@
 # Path to your oh-my-zsh installation.
-export ZSH="/home/shuell/.oh-my-zsh"
+export ZSH="/home/shuell/.config/zsh/oh-my-zsh"
+export ZSH_HOME="/home/shuell/.config/zsh"
 
 ZSH_THEME="robbyrussell"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
 plugins=(
-  git wd colored-man-pages zsh-syntax-highlighting zsh-completions extract
+  git wd colored-man-pages extract
 )
 
 source $ZSH/oh-my-zsh.sh
-source ~/.scripts/zsh/startup.zsh
-source ~/.scripts/zsh/functions.zsh
+source $ZSH_HOME/startup.zsh
+source $ZSH_HOME/functions.zsh
 
 # User configuration
 
 export EDITOR='vim'
 export BROWSER='firefox'
 
-alias xlip='xclip -selection clipboard'
+alias xclip='xclip -selection clipboard'
 alias vim=nvim

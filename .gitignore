@@ -9,6 +9,7 @@
 nvim/plug-plugins
 
 !zsh/zshrc
+zsh/oh-my-zsh
 
 !i3/config
 !i3/i3blocks.conf
