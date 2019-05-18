@@ -25,8 +25,8 @@ if [[ -z "$(command -v git)" ]]; then
 fi
 
 echo "Install cmake .. "
-if [[ -z "$(command -v cmake)" ]]; then
-  sudo -Sp '' $PKGMGR install -y cmake <<<${pw}
+if [[ -z "$(command -v cmake3)" ]]; then
+  sudo -Sp '' $PKGMGR install -y cmake3 <<<${pw}
 fi
 
 echo 'Installing nvim ...'
