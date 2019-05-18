@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 PKGMGR="$1"
 if [[ -z "$(command -v $PKGMGR)" ]]; then
   echo 'Unknown package manager.'
@@ -29,6 +31,7 @@ fi
 
 echo 'Installing nvim ...'
 if [[ -z "$(command -v nvim)" ]]; then
+  sudo -Sp '' $PKGMGR install -y libtool <<<${pw}
   mkdir -p ~/Downloads/dotfiles/nvim && cd "$_"
   git clone https://github.com/neovim/neovim.git ~/Downloads/dotfiles/nvim
   make CMAKE_BUILD_TYPE=Release
@@ -54,8 +57,8 @@ git clone --recursive git://github.com/joel-porquet/zsh-dircolors-solarized ~/.c
 echo 'lssolarized' | zsh -s
 
 echo 'Installing i3 ...'
-sudo -Sp '' dnf copr enable -y gregw/i3desktop<<<${pw}
-sudo -Sp '' dnf install i3blocks<<<${pw}
+sudo -Sp '' $PKGMGR copr enable -y gregw/i3desktop<<<${pw}
+sudo -Sp '' $PKGMGR install i3blocks<<<${pw}
 rm -f ~/.i3blocks.conf
 ln -s ~/.config/i3/i3blocks.conf ~/.i3blocks.conf
 
