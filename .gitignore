@@ -8,6 +8,8 @@
 !nvim/autoload/plug.vim
 nvim/plug-plugins
 
-!i3/config
-
 !zsh/zshrc
+
+!i3/config
+!i3/i3blocks.conf
+

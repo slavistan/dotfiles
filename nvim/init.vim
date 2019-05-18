@@ -12,6 +12,7 @@ call plug#end()
 " Settings
 """
 
+set termguicolors
 silent! colorscheme molokai
 
 let &backupdir=g:NVIMHOME . '/backup'
