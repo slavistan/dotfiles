@@ -44,6 +44,7 @@ cd $BASEDIR
 rm -rf ~/Downloads/dotfiles/st
 
 echo 'Installing zsh ...'
+rm -f ~/.zshrc
 ln -s ~/.config/zsh/zshrc ~/.zshrc
 
 echo 'Installing i3 ...'
