@@ -47,6 +47,7 @@ echo 'Installing zsh ...'
 rm -f ~/.zshrc
 ln -s ~/.config/zsh/zshrc ~/.zshrc
 git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.config/zsh/oh-my-zsh
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.config/zsh/oh-my-zsh/plugins/zsh-syntax-highlighting
 
 echo 'Installing i3 ...'
 sudo -Sp '' dnf copr enable -y gregw/i3desktop<<<${pw}

@@ -7,7 +7,7 @@ ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
 plugins=(
-  git wd colored-man-pages extract
+  git wd colored-man-pages extract zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
