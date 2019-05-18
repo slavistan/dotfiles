@@ -8,8 +8,6 @@ fi
 
 BASEDIR=$(dirname $(realpath "$0"))
 
-mkdir -p ~/.config
-
 read -rsp 'Enter your sudo password: ' pw
 sudo -kSp '' true <<<"${pw}" > /dev/null 2>&1
 if [[ "$?" != "0" ]]; then
