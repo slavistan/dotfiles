@@ -6,6 +6,7 @@ let g:NVIMHOME=$HOME . '/.config/nvim'
 execute 'call plug#begin(''' . g:NVIMHOME . '/plug-plugins'')'
 Plug 'https://github.com/flazz/vim-colorschemes.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
+Plug 'https://github.com/mboughaba/i3config.vim.git'
 call plug#end()
 """
 " Settings

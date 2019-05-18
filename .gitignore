@@ -7,3 +7,7 @@
 !nvim/init.vim
 !nvim/autoload/plug.vim
 nvim/plug-plugins
+
+!i3/config
+
+!zsh/zshrc

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 BASEDIR=$(dirname $(realpath "$0"))
+
 mkdir -p ~/.config
 
 read -rsp 'Enter your sudo password: ' pw
@@ -40,13 +41,10 @@ mkdir -p ~/Downloads/dotfiles/st && cd "$_"
 git clone git@github.com:slavistan/st.git ~/Downloads/dotfiles/st
 sudo -Sp '' make clean install <<<${pw}
 cd $BASEDIR
+rm -rf ~/Downloads/dotfiles/st
 
 echo 'Installing zsh ...'
-rm -rf ~/.zshrc ~/.config/zsh
-mkdir -p ~/.config && cp -r zsh ~/.config
 ln -s ~/.config/zsh/zshrc ~/.zshrc
 
 echo 'Installing i3 ...'
-rm -rf ~/.config/i3
-mkdir -p ~/.config && cp -r i3 ~/.config
 

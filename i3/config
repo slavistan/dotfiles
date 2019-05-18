@@ -1,0 +1,157 @@
+# vim: filetype=i3config
+# Modifier = Windows-key
+set $mod Mod4
+font pango:Comfortaa 14
+
+# Start a terminal in home and the previously accessed directory
+set $term st
+bindsym $mod+Return exec $term
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start a program launcher
+bindsym $mod+d exec rofi -theme arthur -show run
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (tabbed, toggle split)
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Set split direction split for toggle split mode
+bindsym $mod+Shift+v split h
+bindsym $mod+v split v
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+bindsym $mod+s focus child
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (use vim-like keybinds above homerow)
+bindsym $mod+u resize grow height 5 px or 5 ppt
+bindsym $mod+Shift+u resize shrink height 5 px or 5 ppt
+bindsym $mod+y resize grow width 5 px or 5 ppt
+bindsym $mod+Shift+y resize shrink width 5 px or 5 ppt
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+        status_command i3blocks
+}
+
+# Screen brightness controls
+bindsym $mod+Up exec "~/.scripts/i3-brightness.sh --increase"
+bindsym $mod+Shift+Up exec "~/.scripts/i3-brightness.sh --decrease"
+
+# Volumecontrol
+bindsym $mod+Right exec "~/.scripts/i3-volume.sh --increase"
+bindsym $mod+Shift+Right exec "~/.scripts/i3-volume.sh --decrease"
+bindsym $mod+m exec "~/.scripts/i3-volume.sh --toggle"
+
+# Multi-monitor setup
+exec_always --no-startup-id xrandr --output HDMI1 --right-of eDP1 --auto
+
+# Screencap - Select area and put to clipboard. Requires 'gnome-screenshot' and active 'clipman'
+exec --no-startup-id xfce4-clipman
+bindsym --release $mod+n exec "gnome-screenshot -ac"
+bindsym --release $mod+Shift+n exec "gnome-screenshot -i"
+bindsym --release $mod+F10 exec --no-startup-id "~/.scripts/ffcast2gif.sh -w"
+
+# VPN Connections
+bindsym $mod+F9 exec "~/.scripts/i3-vpn.sh --interactive"
+
+# Lock Screen
+bindsym $mod+Shift+Escape exec --no-startup-id "i3lock"
+
+##
+## Dropdown/Scratchpad Windows
+##
+# (1) Math (F12)
+exec --no-startup-id $term -bg black -fg white -name math -e R -q
+for_window [instance="math"] floating enable
+for_window [instance="math"] resize set 650 400
+for_window [instance="math"] move scratchpad
+for_window [instance="math"] border pixel 0
+bindsym $mod+F12 [instance="math"] scratchpad show; [instance="math"] move position center
+
+# (2) Notes (F11)
+exec --no-startup-id $term -bg black -fg white -name notes -e vim ~/.notes
+for_window [instance="notes"] floating enable
+for_window [instance="notes"] resize set 800 400
+for_window [instance="notes"] move scratchpad
+for_window [instance="notes"] border pixel 0
+bindsym $mod+F11 [instance="notes"] scratchpad show; [instance="notes"] move position center
+
+##
+## i3-gaps settings
+##
+# Disable the title bar, but keep borders around containers
+for_window [class="^.*"] border normal 0
+for_window [class="^.*"] border pixel 0
+# Set gaps
+gaps inner 15
