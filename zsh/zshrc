@@ -1,6 +1,6 @@
 # Path to your oh-my-zsh installation.
-export ZSH="/home/shuell/.config/zsh/oh-my-zsh"
-export ZSH_HOME="/home/shuell/.config/zsh"
+export ZSH=$HOME'/.config/zsh/oh-my-zsh'
+export ZSH_HOME=$HOME'/.config/zsh'
 
 ZSH_THEME="robbyrussell"
 ENABLE_CORRECTION="true"

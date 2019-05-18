@@ -42,6 +42,7 @@ mkdir -p ~/.config/nvim/plug-plugins ~/.config/nvim/autoload
 nvim +PlugInstall +quitall
 
 echo 'Installing st ...'
+sudo -Sp '' $PKGMGR install -y fontconfig-devel <<<${pw}
 mkdir -p ~/Downloads/dotfiles/st && cd "$_"
 git clone https://github.com/slavistan/st.git ~/Downloads/dotfiles/st
 sudo -Sp '' make clean install <<<${pw}
