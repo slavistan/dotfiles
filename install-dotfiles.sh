@@ -1,5 +1,11 @@
 #!/bin/bash
 
+PKGMGR="$1"
+if [[ -z "$(command -v $PKGMGR)" ]]; then
+  echo 'Unknown package manager.'
+  exit 1
+fi
+
 BASEDIR=$(dirname $(realpath "$0"))
 
 mkdir -p ~/.config
@@ -46,8 +52,11 @@ rm -rf ~/Downloads/dotfiles/st
 echo 'Installing zsh ...'
 rm -f ~/.zshrc
 ln -s ~/.config/zsh/zshrc ~/.zshrc
+rm -rf ~/.config/zsh/oh-my-zsh
 git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.config/zsh/oh-my-zsh
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.config/zsh/oh-my-zsh/plugins/zsh-syntax-highlighting
+git clone --recursive git://github.com/joel-porquet/zsh-dircolors-solarized ~/.config/zsh/oh-my-zsh/plugins/zsh-dircolors-solarized
+echo 'lssolarized' | zsh -s
 
 echo 'Installing i3 ...'
 sudo -Sp '' dnf copr enable -y gregw/i3desktop<<<${pw}
