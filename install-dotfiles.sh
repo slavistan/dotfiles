@@ -6,6 +6,7 @@ if [[ -z "$(command -v $PKGMGR)" ]]; then
   exit 1
 fi
 
+rm -rf ~/Downloads/dotfiles
 BASEDIR=$(dirname $(realpath "$0"))
 
 read -rsp 'Enter your sudo password: ' pw
@@ -27,25 +28,21 @@ if [[ -z "$(command -v cmake)" ]]; then
 fi
 
 echo 'Installing nvim ...'
-if [[ ! -z "$(command -v nvim)" ]]; then
-  rm -rf ~/Downloads/dotfiles/nvim
+if [[ -z "$(command -v nvim)" ]]; then
   mkdir -p ~/Downloads/dotfiles/nvim && cd "$_"
   git clone https://github.com/neovim/neovim.git ~/Downloads/dotfiles/nvim
   make CMAKE_BUILD_TYPE=Release
   sudo -Sp '' make install <<<${pw}
   cd $BASEDIR
-  rm -rf ~/Downloads/dotfiles/nvim
 fi
 mkdir -p ~/.config/nvim/plug-plugins ~/.config/nvim/autoload
 nvim +PlugInstall +quitall
 
 echo 'Installing st ...'
-rm -rf ~/Downloads/dotfiles/st
 mkdir -p ~/Downloads/dotfiles/st && cd "$_"
-git clone https://github.com:slavistan/st.git ~/Downloads/dotfiles/st
+git clone https://github.com/slavistan/st.git ~/Downloads/dotfiles/st
 sudo -Sp '' make clean install <<<${pw}
 cd $BASEDIR
-rm -rf ~/Downloads/dotfiles/st
 
 echo 'Installing zsh ...'
 rm -f ~/.zshrc
@@ -61,4 +58,6 @@ sudo -Sp '' dnf copr enable -y gregw/i3desktop<<<${pw}
 sudo -Sp '' dnf install i3blocks<<<${pw}
 rm -f ~/.i3blocks.conf
 ln -s ~/.config/i3/i3blocks.conf ~/.i3blocks.conf
+
+rm -rf ~/Downloads/dotfiles
 
