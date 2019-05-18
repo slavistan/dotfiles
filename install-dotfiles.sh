@@ -27,10 +27,10 @@ if [[ -z "$(command -v cmake)" ]]; then
 fi
 
 echo 'Installing nvim ...'
-if [[ -z "$(command -v nvim)" ]]; then
+if [[ ! -z "$(command -v nvim)" ]]; then
   rm -rf ~/Downloads/dotfiles/nvim
   mkdir -p ~/Downloads/dotfiles/nvim && cd "$_"
-  git clone https://github.com/nvim/nvim.git ~/Downloads/dotfiles/nvim
+  git clone https://github.com/neovim/neovim.git ~/Downloads/dotfiles/nvim
   make CMAKE_BUILD_TYPE=Release
   sudo -Sp '' make install <<<${pw}
   cd $BASEDIR
