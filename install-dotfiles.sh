@@ -54,7 +54,7 @@ rm -rf ~/.config/zsh/oh-my-zsh
 git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.config/zsh/oh-my-zsh
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.config/zsh/oh-my-zsh/plugins/zsh-syntax-highlighting
 git clone --recursive git://github.com/joel-porquet/zsh-dircolors-solarized ~/.config/zsh/oh-my-zsh/plugins/zsh-dircolors-solarized
-echo 'lssolarized' | zsh -s
+echo 'source ~/.zshrc;setupsolarized dircolors.ansi-light' | zsh -s
 
 echo 'Installing i3 ...'
 sudo -Sp '' $PKGMGR copr enable -y gregw/i3desktop<<<${pw}
