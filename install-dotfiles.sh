@@ -42,7 +42,7 @@ nvim +PlugInstall +quitall
 echo 'Installing st ...'
 rm -rf ~/Downloads/dotfiles/st
 mkdir -p ~/Downloads/dotfiles/st && cd "$_"
-git clone git@github.com:slavistan/st.git ~/Downloads/dotfiles/st
+git clone https://github.com:slavistan/st.git ~/Downloads/dotfiles/st
 sudo -Sp '' make clean install <<<${pw}
 cd $BASEDIR
 rm -rf ~/Downloads/dotfiles/st
