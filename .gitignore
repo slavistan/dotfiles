@@ -1,0 +1,9 @@
+*
+!*/
+
+!.gitignore
+!install-dotfiles.sh
+
+!nvim/init.vim
+!nvim/autoload/plug.vim
+nvim/plug-plugins
