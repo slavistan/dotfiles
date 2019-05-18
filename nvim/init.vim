@@ -11,7 +11,7 @@ call plug#end()
 " Settings
 """
 
-colorscheme molokai
+silent! colorscheme molokai
 
 let &backupdir=g:NVIMHOME . '/backup'
 let &directory=&backupdir
