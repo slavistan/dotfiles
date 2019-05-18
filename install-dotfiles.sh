@@ -18,12 +18,12 @@ echo 'OK.'
 
 echo "Installing git .. "
 if [[ -z "$(command -v git)" ]]; then
-  sudo -Sp '' yum install git <<<${pw}
+  sudo -Sp '' $PKGMGR install -y git <<<${pw}
 fi
 
 echo "Install cmake .. "
 if [[ -z "$(command -v cmake)" ]]; then
-  sudo -Sp '' yum install cmake <<<${pw}
+  sudo -Sp '' $PKGMGR install -y cmake <<<${pw}
 fi
 
 echo 'Installing nvim ...'
