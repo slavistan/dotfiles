@@ -109,8 +109,11 @@ bar {
   binding_mode_indicator yes
 
   colors {
-    background #272822
-    statusline #FFFFFF
+    background         #1B1D1E
+    statusline         #F8F8F2
+    focused_workspace  #D0D0D0 #121212 #D0D0D0
+    active_workspace   #121212 #121212 #D0D0D0
+    inactive_workspace #121212 #121212 #4E4E4E
   }
 }
 

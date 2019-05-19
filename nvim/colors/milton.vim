@@ -9,7 +9,7 @@ hi clear
 if exists("syntax_on")
   syntax reset
 endif
-let g:colors_name="molokai"
+let g:colors_name="milton"
 
 hi Boolean         guifg=#AE81FF
 hi Character       guifg=#E6DB74
@@ -65,12 +65,11 @@ hi SignColumn      guifg=#A6E22E guibg=#232526
 hi SpecialChar     guifg=#F92672               gui=bold
 hi SpecialComment  guifg=#7E8E91               gui=bold
 hi Special         guifg=#66D9EF guibg=bg      gui=italic
-if has("spell")
-    hi SpellBad    guisp=#FF0000 gui=undercurl
-    hi SpellCap    guisp=#7070F0 gui=undercurl
-    hi SpellLocal  guisp=#70F0F0 gui=undercurl
-    hi SpellRare   guisp=#FFFFFF gui=undercurl
-endif
+hi SpellBad        guisp=#FF0000 gui=undercurl
+hi SpellCap        guisp=#7070F0 gui=undercurl
+hi SpellLocal      guisp=#70F0F0 gui=undercurl
+hi SpellRare       guisp=#FFFFFF gui=undercurl
+
 hi Statement       guifg=#F92672               gui=bold
 hi StatusLine      guifg=#455354 guibg=fg
 hi StatusLineNC    guifg=#808080 guibg=#080808
@@ -99,7 +98,7 @@ hi CursorLine                    guibg=#293739
 hi CursorLineNr    guifg=#FD971F               gui=none
 hi CursorColumn                  guibg=#293739
 hi ColorColumn                   guibg=#232526
-hi LineNr          guifg=#465457 guibg=#232526
+hi LineNr          guifg=#465457 guibg=#1B1D1E
 hi NonText         guifg=#465457
 hi SpecialKey      guifg=#465457
 
@@ -107,9 +106,9 @@ hi SpecialKey      guifg=#465457
 " Support for 256-color terminal
 "
 if &t_Co > 255
-  hi normal         ctermfg=252 ctermbg=233
-  hi cursorline                 ctermbg=234   cterm=none
-  hi cursorlinenr   ctermfg=208               cterm=none
+  hi Normal         ctermfg=252 ctermbg=233
+  hi CursorLine                 ctermbg=234   cterm=none
+  hi CursorLinenr   ctermfg=208               cterm=none
   hi Boolean        ctermfg=135
   hi Character      ctermfg=144
   hi Number         ctermfg=135
@@ -189,7 +188,6 @@ if &t_Co > 255
   hi Visual                      ctermbg=235
   hi WarningMsg      ctermfg=231 ctermbg=238   cterm=bold
   hi WildMenu        ctermfg=81  ctermbg=16
-
   hi Comment         ctermfg=59
   hi CursorColumn                ctermbg=236
   hi ColorColumn                 ctermbg=236
@@ -197,7 +195,7 @@ if &t_Co > 255
   hi NonText         ctermfg=59
 
   hi SpecialKey      ctermfg=59
-end
+endif
 
 " Must be at the end, because of ctermbg=234 bug.
 " https://groups.google.com/forum/#!msg/vim_dev/afPqwAFNdrU/nqh6tOM87QUJ
