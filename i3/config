@@ -140,3 +140,5 @@ client.focused_inactive $bg $bg #888888 $bg $bg
 client.unfocused        $bg $bg #888888 $bg $bg
 client.urgent           $bg $bg #888888 $bg $bg
 client.background       $bg
+
+# TODO: Custom header icons depending on active task, e.g. Firefox fox
