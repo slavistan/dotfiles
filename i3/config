@@ -1,9 +1,9 @@
 # vim: filetype=i3config
+set $bg #1B1D1E
+set $fg #F8F8F2
 # Modifier = Windows-key
 set $mod Mod4
-font pango:inconsolata 18
-
-for_window [class="^.*"] border pixel 3
+font pango:consolas 13
 
 # Start a terminal in home and the previously accessed directory
 set $term st
@@ -102,18 +102,19 @@ bar {
   position top # top|bottom
   tray_output none # hide tray icons
   status_command i3blocks -c ~/.config/i3/i3blocks-config
-  font pango:DejaVu Sans Mono 17
+  font pango:Consolas 17
   separator_symbol ·
   workspace_buttons yes
   strip_workspace_numbers yes
   binding_mode_indicator yes
 
   colors {
-    background         #1B1D1E
-    statusline         #F8F8F2
-    focused_workspace  #D0D0D0 #121212 #D0D0D0
-    active_workspace   #121212 #121212 #D0D0D0
-    inactive_workspace #121212 #121212 #4E4E4E
+    background         $bg
+    statusline         $fg
+    focused_workspace  $fg $bg     $fg
+    active_workspace   $bg $bg     #D0D0D0
+    inactive_workspace $bg $bg     #D0D0D0
+    urgent_workspace   $bg $D70000 #D0D0D0
   }
 }
 
@@ -134,7 +135,8 @@ exec --no-startup-id xfce4-clipman
 bindsym --release $mod+n exec "gnome-screenshot -ac"
 bindsym --release $mod+Shift+n exec "gnome-screenshot -i"
 
-client.focused          #3F8AC2 #096BAA #00BAA7 #00DA8E
-client.focused_inactive #333333 #5F676A #ffffff #484e50
-client.unfocused        #333333 #424242 #888888 #292d2e
-client.urgent           #C10004 #900000 #ffffff #900000
+client.focused          $bg $bg #00BAA7 $bg $bg
+client.focused_inactive $bg $bg #888888 $bg $bg
+client.unfocused        $bg $bg #888888 $bg $bg
+client.urgent           $bg $bg #888888 $bg $bg
+client.background       $bg

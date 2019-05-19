@@ -1,4 +1,4 @@
-" Vim color file
+" NVim color file
 "
 " Note: Based on the Monokai theme for TextMate
 " by Wimer Hazenberg and its darker variant
