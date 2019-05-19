@@ -3,6 +3,8 @@
 set $mod Mod4
 font pango:inconsolata 18
 
+for_window [class="^.*"] border pixel 3
+
 # Start a terminal in home and the previously accessed directory
 set $term st
 bindsym $mod+Return exec $term
@@ -107,7 +109,7 @@ bar {
   binding_mode_indicator yes
 
   colors {
-    background #232323
+    background #272822
     statusline #FFFFFF
   }
 }
@@ -122,7 +124,7 @@ bindsym $mod+Shift+Right exec "~/.scripts/i3-volume.sh --decrease"
 bindsym $mod+m exec "~/.scripts/i3-volume.sh --toggle"
 
 # Multi-monitor setup
-exec_always --no-startup-id xrandr --output HDMI1 --right-of eDP1 --auto
+exec_always --no-startup-id xrandr --output HDMI1 --left-of eDP1 --auto
 
 # Screencap - Select area and put to clipboard. Requires 'gnome-screenshot' and active 'clipman'
 exec --no-startup-id xfce4-clipman

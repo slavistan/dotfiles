@@ -13,7 +13,7 @@ call plug#end()
 """
 
 set termguicolors
-silent! colorscheme molokai
+colorscheme milton
 
 let &backupdir=g:NVIMHOME . '/backup'
 let &directory=&backupdir

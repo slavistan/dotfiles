@@ -6,6 +6,7 @@
 
 !nvim/init.vim
 !nvim/autoload/plug.vim
+!nvim/colors/milton.vim
 nvim/plug-plugins
 
 !zsh/zshrc
