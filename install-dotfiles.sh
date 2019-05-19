@@ -58,8 +58,12 @@ git clone --recursive git://github.com/joel-porquet/zsh-dircolors-solarized ~/.c
 echo 'source ~/.zshrc;setupsolarized dircolors.ansi-light' | zsh -s
 
 echo 'Installing i3 ...'
-sudo -Sp '' $PKGMGR copr enable -y gregw/i3desktop<<<${pw}
-sudo -Sp '' $PKGMGR install i3blocks<<<${pw}
+rm -rf ~/Downloads/dotfiles/i3blocks
+git clone https://github.com/vivien/i3blocks.git ~/.Downloads/dotfiles/i3blocks && cd "$_"
+./autogen.sh
+./configure
+make
+sudo -Sp '' make clean install <<<${pw}
 rm -f ~/.i3blocks.conf
 ln -s ~/.config/i3/i3blocks.conf ~/.i3blocks.conf
 

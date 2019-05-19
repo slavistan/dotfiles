@@ -9,6 +9,8 @@
 nvim/plug-plugins
 
 !zsh/zshrc
+!zsh/functions.zsh
+!zsh/startup.zsh
 zsh/oh-my-zsh
 
 !i3/config

@@ -3,7 +3,6 @@ export ZSH=$HOME'/.config/zsh/oh-my-zsh'
 export ZSH_HOME=$HOME'/.config/zsh'
 
 ZSH_THEME="robbyrussell"
-ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
 plugins=(

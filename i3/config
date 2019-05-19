@@ -6,12 +6,8 @@ font pango:Comfortaa 14
 # Start a terminal in home and the previously accessed directory
 set $term st
 bindsym $mod+Return exec $term
-
-# kill focused window
 bindsym $mod+Shift+q kill
-
-# start a program launcher
-bindsym $mod+d exec rofi -theme arthur -show run
+bindsym $mod+d exec dmenu_run
 
 # change focus
 bindsym $mod+h focus left
@@ -25,7 +21,6 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-# enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
 # change container layout (tabbed, toggle split)
@@ -120,38 +115,3 @@ exec_always --no-startup-id xrandr --output HDMI1 --right-of eDP1 --auto
 exec --no-startup-id xfce4-clipman
 bindsym --release $mod+n exec "gnome-screenshot -ac"
 bindsym --release $mod+Shift+n exec "gnome-screenshot -i"
-bindsym --release $mod+F10 exec --no-startup-id "~/.scripts/ffcast2gif.sh -w"
-
-# VPN Connections
-bindsym $mod+F9 exec "~/.scripts/i3-vpn.sh --interactive"
-
-# Lock Screen
-bindsym $mod+Shift+Escape exec --no-startup-id "i3lock"
-
-##
-## Dropdown/Scratchpad Windows
-##
-# (1) Math (F12)
-exec --no-startup-id $term -bg black -fg white -name math -e R -q
-for_window [instance="math"] floating enable
-for_window [instance="math"] resize set 650 400
-for_window [instance="math"] move scratchpad
-for_window [instance="math"] border pixel 0
-bindsym $mod+F12 [instance="math"] scratchpad show; [instance="math"] move position center
-
-# (2) Notes (F11)
-exec --no-startup-id $term -bg black -fg white -name notes -e vim ~/.notes
-for_window [instance="notes"] floating enable
-for_window [instance="notes"] resize set 800 400
-for_window [instance="notes"] move scratchpad
-for_window [instance="notes"] border pixel 0
-bindsym $mod+F11 [instance="notes"] scratchpad show; [instance="notes"] move position center
-
-##
-## i3-gaps settings
-##
-# Disable the title bar, but keep borders around containers
-for_window [class="^.*"] border normal 0
-for_window [class="^.*"] border pixel 0
-# Set gaps
-gaps inner 15
