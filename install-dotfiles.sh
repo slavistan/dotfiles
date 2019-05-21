@@ -1,11 +1,21 @@
 #!/bin/bash
-set -e
 
 if [[ "$1" == "--check-dependencies" ]]; then
-  command -v git nvim i3 i3blocks st
-  exit 0
+  return_code=0
+  deps=(git nvim i3 i3blocks st)
+  for dep in ${deps[@]}; do
+    echo -n "$dep: "
+    if [[ ! -z $(command -v $dep) ]]; then 
+      echo $(command -v $dep)
+    else
+      echo -- missing --
+      return_code=1
+    fi
+  done
+  exit $return_code
 fi
 
+set -e
 ##
 # Options - Adjust according to setup
 ##
