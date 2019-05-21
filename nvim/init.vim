@@ -28,6 +28,7 @@ set path+=**
 set updatetime=100
 set scrolloff=999 " Center cursor vertically
 set number
+set signcolumn=yes
 let mapleader=","
 
 set list listchars=tab:‣\ ,trail:␣ " Display tabs and trailing whitespaces
