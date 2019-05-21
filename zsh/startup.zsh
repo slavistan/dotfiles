@@ -1,10 +1,3 @@
-## Load custom scripts
-fpath=(~/.config/zsh/completions/ $fpath)
-autoload -U compinit && compinit
-
-## Spack
-source /home/shuell/bin/program-files/spack/share/spack/setup-env.sh
-
 ## ls/tree when changing the directory
 function chpwd() {
     emulate -L zsh
