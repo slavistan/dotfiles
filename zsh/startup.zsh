@@ -1,9 +1,9 @@
-## ls/tree when changing the directory
-function chpwd() {
-    emulate -L zsh
-    #ls -a
-    tree -L 1 -a --dirsfirst
-}
+### ls/tree when changing the directory
+#function chpwd() {
+#    emulate -L zsh
+#    #ls -a
+#    tree -L 1 -a --dirsfirst
+#}
 
 ## <CR> executes default command
 # my-accept-line () {
@@ -27,6 +27,3 @@ function chpwd() {
 # zle -N my-accept-line
 # ## rebind Enter, usually this is `^M'
 # bindkey '^M' my-accept-line
-
-## Unbind Ctrl-D
-setopt IGNORE_EOF

@@ -10,12 +10,13 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+[[ -r $ZSH_HOME/setup-specific.zsh ]] && source $ZSH_HOME/setup-specific.zh
 source $ZSH_HOME/startup.zsh
 source $ZSH_HOME/functions.zsh
 
 # User configuration
 
-export EDITOR='vim'
+export EDITOR='nvim'
 export BROWSER='firefox'
 
 alias xclip='xclip -selection clipboard'
