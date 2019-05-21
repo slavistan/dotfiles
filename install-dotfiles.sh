@@ -23,15 +23,15 @@ configure_nvim=true
 configure_st=true
 configure_i3=true
 configure_zsh=true
-config_dir='~/.config'
+config_dir=$HOME'/.config'
 
 ##
 # Script
 ##
 my_dir=$(dirname $(realpath "$0"))
-temp_dir=mktemp -d
+temp_dir=$(mktemp -d)
 
-mkdir -p $config_home
+mkdir -p $config_dir
 
 read -rsp 'Enter your sudo password: ' pw
 sudo -kSp '' true <<<"${pw}" > /dev/null 2>&1
@@ -41,22 +41,22 @@ if [[ "$?" != "0" ]]; then
 fi
 echo 'OK.'
 
-if [[ configure_nvim == true ]]; then
+if [[ $configure_nvim == true ]]; then
   echo "Configuring nvim ..."
   rm -rf $config_dir/nvim
   cp -r $my_dir/nvim $config_dir
   nvim +PlugInstall +quitall
 fi
 
-if [[ configure_st == true ]]; then
+if [[ $configure_st == true ]]; then
   echo 'Configuring st ...'
-  mkdir -p $temp_dir/st && cd "$_"
-  git clone https://github.com/slavistan/st.git ~/Downloads/dotfiles/st
+  mkdir -p $temp_dir/st
+  git clone https://github.com/slavistan/st.git $temp_dir/sh && cd "$_"
   sudo -Sp '' make clean install <<<${pw}
   cd $my_dir
 fi
 
-if [[ configure_zsh == true ]]; then
+if [[ $configure_zsh == true ]]; then
   echo 'Configuring zsh ...'
   rm -rf $config_dir/zsh
   cp -r $my_dir/zsh $config_dir
@@ -67,7 +67,7 @@ if [[ configure_zsh == true ]]; then
   echo 'source ~/.zshrc;setupsolarized dircolors.ansi-light' | zsh -s
 fi
 
-if [[ configure_i3 == true ]]; then
+if [[ $configure_i3 == true ]]; then
   echo 'Configuring i3 ...'
   rm -rf $config_dir/i3
   cp -r $my_dir/i3 $config_dir
