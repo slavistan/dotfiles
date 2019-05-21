@@ -1,0 +1,15 @@
+---
+title: "Rmarkdown report"
+author: "Stanislaw Hüll"
+output:
+  pdf_document:
+    latex_engine: xelatex
+    extra_dependencies: ["bbm", "unicode-math"]
+
+---
+
+# Hi there. This is a RMD file
+
+$$
+y_{ij} = b_{ij} + \beta_{0} + \symbf{\alpha} + \mathbb{1}
+$$
