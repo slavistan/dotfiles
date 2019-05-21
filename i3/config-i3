@@ -115,22 +115,8 @@ bar {
   }
 }
 
-# Screen brightness controls
-bindsym $mod+Up exec "~/.scripts/i3-brightness.sh --increase"
-bindsym $mod+Shift+Up exec "~/.scripts/i3-brightness.sh --decrease"
-
-# Volumecontrol
-bindsym $mod+Right exec "~/.scripts/i3-volume.sh --increase"
-bindsym $mod+Shift+Right exec "~/.scripts/i3-volume.sh --decrease"
-bindsym $mod+m exec "~/.scripts/i3-volume.sh --toggle"
-
 # Multi-monitor setup
 exec_always --no-startup-id xrandr --output HDMI1 --left-of eDP1 --auto
-
-# Screencap - Select area and put to clipboard. Requires 'gnome-screenshot' and active 'clipman'
-exec --no-startup-id xfce4-clipman
-bindsym --release $mod+n exec "gnome-screenshot -ac"
-bindsym --release $mod+Shift+n exec "gnome-screenshot -i"
 
 client.focused          $bg $bg #FFFFFF $bg $bg
 client.focused_inactive $bg $bg #888888 $bg $bg
