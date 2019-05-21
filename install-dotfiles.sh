@@ -2,6 +2,7 @@
 
 set -e
 
+TEMP_DIR=mktemp -d
 rm -rf ~/Downloads/dotfiles
 BASEDIR=$(dirname $(realpath "$0"))
 
@@ -20,9 +21,13 @@ if [[ "$?" != "0" ]]; then
   exit 1
 fi
 
-echo "Configuring nvim ..."
-mkdir -p ~/.config/nvim/plug-plugins ~/.config/nvim/autoload
-nvim +PlugInstall +quitall
+if [[ ! -z $(commands -v nvim) ]]; then
+  echo "Configuring nvim ..."
+  mkdir -p ~/.config/nvim/plug-plugins ~/.config/nvim/autoload
+  nvim +PlugInstall +quitall
+else
+  echo "nvim not found. Skipping configuration."
+fi
 
 echo 'Configuring st ...'
 sudo -Sp '' $PKGMGR install -y fontconfig-devel <<<${pw}
