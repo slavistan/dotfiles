@@ -1,9 +1,8 @@
 # vim: filetype=i3config
+font pango:consolas 13
 set $bg #1B1D1E
 set $fg #F8F8F2
-# Modifier = Windows-key
 set $mod Mod4
-font pango:consolas 13
 
 # Start a terminal in home and the previously accessed directory
 set $term st
@@ -11,13 +10,11 @@ bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec dmenu_run
 
-# change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-# move focused window
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
@@ -135,10 +132,11 @@ exec --no-startup-id xfce4-clipman
 bindsym --release $mod+n exec "gnome-screenshot -ac"
 bindsym --release $mod+Shift+n exec "gnome-screenshot -i"
 
-client.focused          $bg $bg #00BAA7 $bg $bg
+client.focused          $bg $bg #FFFFFF $bg $bg
 client.focused_inactive $bg $bg #888888 $bg $bg
 client.unfocused        $bg $bg #888888 $bg $bg
 client.urgent           $bg $bg #888888 $bg $bg
 client.background       $bg
 
+focus_wrapping no
 # TODO: Custom header icons depending on active task, e.g. Firefox fox

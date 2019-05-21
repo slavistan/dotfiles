@@ -8,10 +8,10 @@ Plug 'https://github.com/flazz/vim-colorschemes.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/mboughaba/i3config.vim.git'
 call plug#end()
+
 """
 " Settings
 """
-
 set termguicolors
 colorscheme milton
 
