@@ -2,8 +2,8 @@
 
 if [[ "$1" == "--check-dependencies" ]]; then
   return_code=0
-  deps=(git nvim i3 i3blocks st)
-  for dep in ${deps[@]}; do
+  # Binaries
+  for dep in {git,nvim,i3,i3blocks,st}; do
     echo -n "$dep: "
     if [[ ! -z $(command -v $dep) ]]; then 
       echo $(command -v $dep)
@@ -12,6 +12,11 @@ if [[ "$1" == "--check-dependencies" ]]; then
       return_code=1
     fi
   done
+
+  # Hack font
+  echo 'Hack font: '$(fc-list | grep Hack | head -n 1)
+  [[ -z "$(fc-list | grep Hack)" ]] && return_code=1
+
   exit $return_code
 fi
 
