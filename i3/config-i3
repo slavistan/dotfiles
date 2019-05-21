@@ -98,7 +98,7 @@ bar {
   mode dock # dock|hide|invisible
   position top # top|bottom
   tray_output none # hide tray icons
-  status_command i3blocks -c ~/.config/i3/i3blocks-config
+  status_command i3blocks -c ~/.config/i3/config-i3blocks
   font pango:Consolas 17
   separator_symbol ·
   workspace_buttons yes
