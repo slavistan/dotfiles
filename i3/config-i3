@@ -1,5 +1,5 @@
 # vim: filetype=i3config
-font pango:consolas 13
+font pango:Hack Bold 13
 set $bg #1B1D1E
 set $fg #F8F8F2
 set $mod Mod4
@@ -99,7 +99,7 @@ bar {
   position top # top|bottom
   tray_output none # hide tray icons
   status_command i3blocks -c ~/.config/i3/config-i3blocks
-  font pango:Consolas 17
+  font pango:Hack Bold 17
   separator_symbol ·
   workspace_buttons yes
   strip_workspace_numbers yes
