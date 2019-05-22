@@ -78,3 +78,7 @@ if [[ $configure_i3 == true ]]; then
   cp -r $my_dir/i3 $config_dir
   ln -fs $config_dir/i3/config-i3 $config_dir/i3/config
 fi
+
+# TODO:
+## Blocks
+## .profile
