@@ -5,7 +5,7 @@ if [[ "$1" == "--check-dependencies" ]]; then
   # Binaries
   for dep in {git,nvim,i3,i3blocks,st}; do
     echo -n "$dep: "
-    if [[ ! -z $(command -v $dep) ]]; then 
+    if [[ ! -z $(command -v $dep) ]]; then
       echo $(command -v $dep)
     else
       echo -- missing --
@@ -16,11 +16,14 @@ if [[ "$1" == "--check-dependencies" ]]; then
   # Hack font
   echo 'Hack font: '$(fc-list | grep Hack | head -n 1)
   [[ -z "$(fc-list | grep Hack)" ]] && return_code=1
+  echo 'FontAwesome font: '$(fc-list | grep FontAwesome | head -n 1)
+  [[ -z "$(fc-list | grep Hack)" ]] && return_code=1
 
   exit $return_code
 fi
 
 set -e
+
 ##
 # Options - Adjust according to setup
 ##
@@ -33,10 +36,8 @@ config_dir=$HOME'/.config'
 ##
 # Script
 ##
-my_dir=$(dirname $(realpath "$0"))
+dotfiles_dir=$(dirname $(realpath "$0"))
 temp_dir=$(mktemp -d)
-
-mkdir -p $config_dir
 
 read -rsp 'Enter your sudo password: ' pw
 sudo -kSp '' true <<<"${pw}" > /dev/null 2>&1
@@ -48,8 +49,8 @@ echo 'OK.'
 
 if [[ $configure_nvim == true ]]; then
   echo "Configuring nvim ..."
-  rm -rf $config_dir/nvim
-  cp -r $my_dir/nvim $config_dir
+  mkdir -p $config_dir && cd "$_" && rm -rf nvim
+  ln -s $dotfiles_dir/nvim nvim
   nvim +PlugInstall +quitall
 fi
 
@@ -58,13 +59,13 @@ if [[ $configure_st == true ]]; then
   mkdir -p $temp_dir/st
   git clone https://github.com/slavistan/st.git $temp_dir/sh && cd "$_"
   sudo -Sp '' make clean install <<<${pw}
-  cd $my_dir
 fi
 
 if [[ $configure_zsh == true ]]; then
   echo 'Configuring zsh ...'
-  rm -rf $config_dir/zsh
-  cp -r $my_dir/zsh $config_dir
+  rm -rf $dotfiles_dir/zsh/oh-my-zsh
+  mkdir -p $config_dir && cd "$_" && rm -rf zsh
+  ln -s $dotfiles_dir/zsh zsh
   ln -fs $config_dir/zsh/zshrc ~/.zshrc
   git clone https://github.com/robbyrussell/oh-my-zsh.git $config_dir/zsh/oh-my-zsh
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $config_dir/zsh/oh-my-zsh/plugins/zsh-syntax-highlighting
@@ -73,9 +74,8 @@ if [[ $configure_zsh == true ]]; then
 fi
 
 if [[ $configure_i3 == true ]]; then
-  echo 'Configuring i3 ...'
-  rm -rf $config_dir/i3
-  cp -r $my_dir/i3 $config_dir
+  mkdir -p $config_dir && cd "$_" && rm -rf i3
+  ln -s $dotfiles_dir/i3 i3
   ln -fs $config_dir/i3/config-i3 $config_dir/i3/config
 fi
 
