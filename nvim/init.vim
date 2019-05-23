@@ -12,7 +12,6 @@ call plug#end()
 """
 " Settings
 """
-set termguicolors
 colorscheme milton
 
 let &backupdir=g:NVIMHOME . '/backup'
@@ -29,6 +28,7 @@ set updatetime=100
 set scrolloff=999 " Center cursor vertically
 set number
 set signcolumn=yes
+set textwidth=120
 let mapleader=","
 
 set list listchars=tab:‣\ ,trail:␣ " Display tabs and trailing whitespaces

@@ -28,8 +28,8 @@ set -e
 # Options - Adjust according to setup
 ##
 configure_nvim=true
-configure_st=true
-configure_i3=true
+configure_st=false
+configure_i3=false
 configure_zsh=true
 config_dir=$HOME'/.config'
 
