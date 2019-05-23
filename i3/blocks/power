@@ -1,0 +1,31 @@
+#!/bin/zsh
+
+if [[ "$#" == "0" ]]; then
+  is_charging=$([[ "$(acpi -b | awk -F'[, ]' '/^Battery/ { print $3 }')" == "Charging" ]] \
+    && echo 'true' \
+    || echo 'false')
+
+  # Get correct battery symbol
+  charge=$(acpi -b | awk '/^Battery/ { print $4 }' | tr -d '%,' | xargs printf '%.2Xh')
+  declare -A dict=( \
+    80 '<span font="FontAwesome 17">&#xf240;</span>' \
+    60 '<span font="FontAwesome 17">&#xf241;</span>' \
+    40 '<span font="FontAwesome 17">&#xf242;</span>' \
+    20 '<span font="FontAwesome 17">&#xf243;</span>' \
+     0 '<span font="FontAwesome 17">&#xf244;</span>' )
+  threshold="0"
+  for key val in ${(kv)dict}; do
+    if [[ "$key" -ge "$threshold" ]]; then
+      symbol=$val
+      threshold=$key
+    fi
+  done
+
+  if [[ "$is_charging" == "true" ]]; then
+    echo "$symbol "'<span font="FontAwesome 17">&#xf1e6;</span>'
+  else
+    echo "$symbol $charge"
+  fi
+
+  pkill --signal SIGRTMIN+10 i3blocks
+fi
