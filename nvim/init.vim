@@ -40,6 +40,7 @@ Plug 'https://github.com/mboughaba/i3config.vim.git'
 Plug 'https://github.com/jalvesaq/Nvim-R.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
+Plug 'https://github.com/jeffkreeftmeijer/vim-dim.git'
 call plug#end()
 
 """
@@ -75,3 +76,14 @@ function SetRmdOptions()
   vmap <CR> <Leader>se<Esc>
   vmap <F1> "1y:execute 'Rhelp ' . getreg('1')<CR>
 endfunction
+
+"""
+" Utility
+"""
+" Show highlight groups under cursor
+function! SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
