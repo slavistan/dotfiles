@@ -5,6 +5,7 @@ let g:NVIMHOME=$HOME . '/.config/nvim'
 "
 " Some settings must preceed the loading of plugins.
 """
+set termguicolors
 colorscheme milton
 
 let &backupdir=g:NVIMHOME . '/backup'
