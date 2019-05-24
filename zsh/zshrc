@@ -24,3 +24,5 @@ export BROWSER='firefox'
 alias xclip='xclip -selection clipboard'
 alias vim=nvim
 alias ls='ls --almost-all --color=tty'
+
+export DISPLAY=localhost:0.0
