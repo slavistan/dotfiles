@@ -79,6 +79,11 @@ if [[ $configure_i3 == true ]]; then
   ln -fs $config_dir/i3/config-i3 $config_dir/i3/config
 fi
 
+if [[ $configure_tmux == true ]]; then
+  mkdir -p $config_dir && cd "$_" && rm -rf tmux
+  ln -s $dotfiles_dir/tmux tmux
+  ln -fs $config_dir/tmux/config ~/.tmux.conf
+
 # TODO:
 ## Blocks
 ## .profile
