@@ -1,10 +1,12 @@
 #SingleInstance force
-SetTitleMatchMode RegEx
 DetectHiddenWindows, On
+
+; Map Capslock to Escape
+Capslock::Esc
 
 ; Win+F12: Toggle VcXsrv instance
 #F12::
-{
+  SetTitleMatchMode RegEx
   DetectHiddenWindows, On
   IfWinExist, ahk_class VcXsrv
   {
@@ -19,14 +21,30 @@ DetectHiddenWindows, On
     }
     WinHide, ahk_class VcXsrv
   }
-}
-
-; Map Capslock to Escape
-Capslock::Esc
+  return
 
 ; Run file-explorer
-#e::
-Run, % systemroot "\explorer.exe"
+<#e::
+  SetTitleMatchMode RegEx
+  DetectHiddenWindows, On
+  WinGet, uid, ID, ahk_class CabinetWClass
+  if ( uid = "" ) {
+    Run, % systemroot "\explorer.exe"
+    WinGet, uid_run, ID, ahk_class CabinetWClass
+    WinMaximize, ahk_id %uid_run%
+    WinActivate, ahk_id %uid_run%
+    return
+  }
+  DetectHiddenWindows, Off
+  IfWinNotExist, ahk_id %uid%
+  {
+    WinShow, ahk_id %uid%
+    WinMaximize, ahk_id %uid%
+    WinActivate, ahk_id %uid%
+    return
+  }
+  WinHide, ahk_id %uid%
+  return
 
 <#l::AltTab
 <#h::ShiftAltTab
@@ -34,7 +52,6 @@ Run, % systemroot "\explorer.exe"
 
 ; Win+F: Maximize if not max'ed. Restore otherwise
 <#f::
-{
   WinGet, state, MinMax, A
   if (state == -1 || state == 0) {
     WinMaximize A
@@ -42,11 +59,10 @@ Run, % systemroot "\explorer.exe"
   else {
     WinRestore A
   }
-}
+  return
 
 ; Win+D: Run 'run' dialogue
 <#d::
-{
   InputBox, string, Run, ,,200,100,
   Run %string%
-}
+  return

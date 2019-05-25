@@ -1,3 +1,5 @@
+#SingleInstance force
+
 ; Globals
 DesktopCount = 2 ; Windows starts with 2 desktops at boot
 CurrentDesktop = 1 ; Desktop count is 1-indexed (Microsoft numbers them this way)
@@ -67,6 +69,7 @@ getSessionId()
 ;
 switchDesktopByNumber(targetDesktop)
 {
+  ToolTip, %targetDesktop%, 10, 10
   global CurrentDesktop, DesktopCount
   ; Re-generate the list of desktops and where we fit in that. We do this because
   ; the user may have switched desktops via some other means than the script.
