@@ -1,9 +1,4 @@
-### ls/tree when changing the directory
-#function chpwd() {
-#    emulate -L zsh
-#    #ls -a
-#    tree -L 1 -a --dirsfirst
-#}
+export XDG_CONFIG_HOME=~/.config
 
 ## <CR> executes default command
 # my-accept-line () {

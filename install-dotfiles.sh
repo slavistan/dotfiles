@@ -31,6 +31,7 @@ configure_nvim=true
 configure_st=false
 configure_i3=false
 configure_zsh=true
+configure_byobu=true
 config_dir=$HOME'/.config'
 
 ##
@@ -74,16 +75,18 @@ if [[ $configure_zsh == true ]]; then
 fi
 
 if [[ $configure_i3 == true ]]; then
+  echo 'Configuring i3 ...'
   mkdir -p $config_dir && cd "$_" && rm -rf i3
   ln -s $dotfiles_dir/i3 i3
   ln -fs $config_dir/i3/config-i3 $config_dir/i3/config
 fi
 
-if [[ $configure_tmux == true ]]; then
-  mkdir -p $config_dir && cd "$_" && rm -rf tmux
-  ln -s $dotfiles_dir/tmux tmux
-  ln -fs $config_dir/tmux/config ~/.tmux.conf
-
+if [[ $configure_byobu == true ]]; then
+  echo 'Configuring byobu ...'
+  mkdir -p $config_dir && cd "$_" && rm -rf byobu
+  mkdir byobu && cd "$_"
+  ln -fs $dotfiles_dir/byobu/config-tmux keybindings.tmux
+fi
 # TODO:
 ## Blocks
 ## .profile

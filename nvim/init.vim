@@ -23,6 +23,7 @@ set scrolloff=999 " Center cursor vertically
 set number
 set signcolumn=yes
 set textwidth=120
+set modeline
 let mapleader=","
 let maplocalleader=","
 
