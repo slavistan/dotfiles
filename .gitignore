@@ -1,0 +1,4 @@
+nvim/plug-plugins/**
+zsh/backup/**
+nvim/backup/**
+zsh/oh-my-zsh/**
