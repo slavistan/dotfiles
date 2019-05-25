@@ -3,7 +3,7 @@ SetTitleMatchMode RegEx
 DetectHiddenWindows, On
 
 ; Win+F12: Toggle VcXsrv instance
-#s::
+#F12::
 {
   DetectHiddenWindows, On
   IfWinExist, ahk_class VcXsrv
