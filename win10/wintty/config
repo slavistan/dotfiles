@@ -1,0 +1,15 @@
+CursorType=block
+CursorBlinks=no
+Font=Hack
+FontHeight=10
+BoldAsFont=yes
+BoldAsColour=no
+AllowBlinking=yes
+Locale=de_DE
+CtrlShiftShortcuts=yes
+CopyOnSelect=no
+CopyAsRTF=no
+CopyAsHTML=0
+MiddleClickAction=void
+Language=en_US
+ConfirmExit=no
