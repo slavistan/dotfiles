@@ -20,10 +20,11 @@ source $ZSH_HOME/functions.zsh
 
 export EDITOR='nvim'
 export BROWSER='firefox'
+export LS_COLORS=$($ZSH_HOME/scripts/ls-colors.zsh)
 
 alias xclip='xclip -selection clipboard'
 alias vim=nvim
 alias ls='ls --almost-all --color=tty'
+alias sed='sed -r'
 
 export DISPLAY=localhost:0.0
-export LS_COLORS="$(vivid generate molokai)"

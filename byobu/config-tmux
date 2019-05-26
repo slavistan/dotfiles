@@ -58,3 +58,5 @@ bind-key -n M-S-l display-panes \; swap-pane -s :. -t :.+ \; select-pane -t :.+
 # bind-key -n C-S-F12 new-window $BYOBU_PREFIX/lib/byobu/include/mondrian
 # bind-key -n M-F12 source $BYOBU_PREFIX/share/byobu/keybindings/mouse.tmux.enable
 # bind-key -n M-IC paste-buffer
+set -g prefix F12
+unbind-key -n C-a

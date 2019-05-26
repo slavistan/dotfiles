@@ -69,7 +69,6 @@ getSessionId()
 ;
 switchDesktopByNumber(targetDesktop)
 {
-  ToolTip, %targetDesktop%, 10, 10
   global CurrentDesktop, DesktopCount
   ; Re-generate the list of desktops and where we fit in that. We do this because
   ; the user may have switched desktops via some other means than the script.

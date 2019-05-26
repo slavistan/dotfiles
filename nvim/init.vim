@@ -13,7 +13,7 @@ let &directory=&backupdir
 let &shadafile=&backupdir . '/shada'
 
 set clipboard=unnamed
-set ignorecase
+set noincsearch
 set smartcase
 set linebreak
 set virtualedit=block
@@ -22,8 +22,9 @@ set updatetime=100
 set scrolloff=999 " Center cursor vertically
 set number
 set signcolumn=yes
-set textwidth=120
+set textwidth=999
 set modeline
+set showbreak=↪
 let mapleader=","
 let maplocalleader=","
 
@@ -43,6 +44,7 @@ Plug 'https://github.com/jalvesaq/Nvim-R.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
 Plug 'https://github.com/jeffkreeftmeijer/vim-dim.git'
+Plug 'https://github.com/godlygeek/tabular.git'
 call plug#end()
 
 """

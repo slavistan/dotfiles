@@ -70,8 +70,6 @@ if [[ $configure_zsh == true ]]; then
   ln -fs $config_dir/zsh/zshrc ~/.zshrc
   git clone https://github.com/robbyrussell/oh-my-zsh.git $config_dir/zsh/oh-my-zsh
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $config_dir/zsh/oh-my-zsh/plugins/zsh-syntax-highlighting
-  git clone --recursive git://github.com/joel-porquet/zsh-dircolors-solarized $config_dir/zsh/oh-my-zsh/plugins/zsh-dircolors-solarized
-  echo 'source ~/.zshrc;setupsolarized dircolors.ansi-light' | zsh -s
 fi
 
 if [[ $configure_i3 == true ]]; then
