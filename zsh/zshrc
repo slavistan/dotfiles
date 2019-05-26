@@ -4,7 +4,7 @@ export ZSH_HOME=$HOME'/.config/zsh'
 export ZSH_DISABLE_COMPFIX="true"
 export ZSH_COMPDUMP=$ZSH_HOME/backup
 export HISTFILE=$ZSH_HOME/backup
-ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 COMPLETION_WAITING_DOTS="true"
 
 plugins=(
