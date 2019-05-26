@@ -8,7 +8,7 @@ ZSH_THEME="robbyrussell"
 COMPLETION_WAITING_DOTS="true"
 
 plugins=(
-  git wd colored-man-pages extract zsh-syntax-highlighting zsh-dircolors-solarized
+  git wd colored-man-pages extract zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -26,3 +26,4 @@ alias vim=nvim
 alias ls='ls --almost-all --color=tty'
 
 export DISPLAY=localhost:0.0
+export LS_COLORS="$(vivid generate molokai)"
