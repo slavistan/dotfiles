@@ -1,4 +1,3 @@
-export XDG_CONFIG_HOME=~/.config
 
 ## <CR> executes default command
 # my-accept-line () {

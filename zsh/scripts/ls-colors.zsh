@@ -18,20 +18,20 @@ exit 0
 # `LS_COLORS` accepts a colon-separated list of property:value pairs. See the list below for the different types of properties. The value consist of 
 # {EFFECT};{COLOR};{BACKGROUND}
 ##
-no=00;93 # Normal; Global default
+no=00 # Normal; Global default
 
-di=01;32;40 # directory
-ow=01;32;40 # directory (other-writable)
-st=01;32;40 # directory (sticky)
-tw=01;32;40 # directory (sticky + other-writable)
-# 
-ln=target # symlink
-or=5;38;2;0;0;0;48;2;255;74;68 # orphan; symlink to non-existing target
-mi=5;38;2;0;0;0;48;2;255;74;68 # missing; non-existing target of symlink
-# 
-fi=00;91;40 # file; normal file
-ex=01;91;40 # executable;
-# 
+di=01;33;40 # directory
+ow=01;33;40 # directory (other-writable)
+st=01;33;40 # directory (sticky)
+tw=01;33;40 # directory (sticky + other-writable)
+
+ln=0;92 # symlink
+or=1;5;101 # orphan; symlink to non-existing target
+mi=1;5;101 # missing; non-existing target of symlink
+ 
+fi=0;96;40 # file; normal file
+ex=0;96;40 # executable;
+ 
 # pi=no # pipe
 # do=no # door
 # bd=no # block device

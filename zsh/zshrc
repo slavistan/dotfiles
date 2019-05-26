@@ -21,10 +21,13 @@ source $ZSH_HOME/functions.zsh
 export EDITOR='nvim'
 export BROWSER='firefox'
 export LS_COLORS=$($ZSH_HOME/scripts/ls-colors.zsh)
+export TREE_COLORS=$($ZSH_HOME/scripts/ls-colors.zsh)
+export XDG_CONFIG_HOME=~/.config # used by byobu
 
 alias xclip='xclip -selection clipboard'
 alias vim=nvim
-alias ls='ls --almost-all --color=tty'
 alias sed='sed -r'
+alias l='ls -Aog --si --time-style=long-iso'
+alias t='tree -aL 1 --dirsfirst'
 
 export DISPLAY=localhost:0.0
