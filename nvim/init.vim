@@ -41,11 +41,11 @@ Plug 'https://github.com/flazz/vim-colorschemes.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/mboughaba/i3config.vim.git'
 Plug 'https://github.com/jalvesaq/Nvim-R.git'
-Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
-Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
 Plug 'https://github.com/jeffkreeftmeijer/vim-dim.git'
 Plug 'https://github.com/godlygeek/tabular.git'
 Plug 'https://github.com/thaerkh/vim-indentguides.git'
+Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
+Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
 call plug#end()
 
 """
@@ -84,6 +84,8 @@ endfunction
 
 let g:indentguides_spacechar = '┊'
 let g:indentguides_tabchar = '┊'
+
+let g:pandoc#syntax#conceal#use = 0
 """
 " Utility
 """

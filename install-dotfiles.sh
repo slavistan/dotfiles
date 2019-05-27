@@ -32,6 +32,7 @@ configure_st=false
 configure_i3=false
 configure_zsh=true
 configure_byobu=true
+configure_git=true
 config_dir=$HOME'/.config'
 
 ##
@@ -51,6 +52,7 @@ echo 'OK.'
 if [[ $configure_nvim == true ]]; then
   echo "Configuring nvim ..."
   mkdir -p $config_dir && cd "$_" && rm -rf nvim
+  rm -rf $dotfiles_dir/nvim/plug_plugins/*/
   ln -s $dotfiles_dir/nvim nvim
   nvim +PlugInstall +quitall
 fi
@@ -86,6 +88,14 @@ if [[ $configure_byobu == true ]]; then
   mkdir byobu && cd "$_"
   ln -fs $dotfiles_dir/byobu/config-tmux keybindings.tmux
 fi
+
+if [[ $configure_git == true ]]; then
+  echo 'Configuring git ...'
+  mkdir -p $config_dir && cd "$_" && rm -rf git
+  ln -s $dotfiles_dir/git git
+  ln -fs $config_dir/git/config ~/.gitconfig
+fi
+
 # TODO:
 ## Blocks
 ## .profile

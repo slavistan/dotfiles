@@ -55,12 +55,15 @@ Capslock::Esc
   WinGet, state, MinMax, A
   if (state == -1 || state == 0) {
     WinMaximize A
-    WinSet, Style, -0xC40000, A
   }
   else {
     WinRestore A
-    WinSet, Style, +0xC00000, A
   }
+  return
+
+; Win+B: Toggle window borders
+<#b::
+  WinSet, Style, ^0xC00000, A
   return
 
 ; Win+D: Run 'run' dialogue

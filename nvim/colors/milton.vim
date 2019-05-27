@@ -49,6 +49,12 @@ hi ModeMsg         guifg=#E6DB74
 hi MoreMsg         guifg=#E6DB74
 hi Operator        guifg=#F92672
 
+" Pandoc-related
+hi yamlKeyValueDelimiter  guifg=#FD971F guibg=#1B1D1E
+hi yamlBlockMappingKey    guifg=#FD971F guibg=#1B1D1E
+hi pandocUListItem        guifg=#FD971F
+hi pandocAtxHeader        guifg=#EF5939 guibg=#1B1D1E
+
 " complete menu
 hi Pmenu           guifg=#66D9EF guibg=#000000
 hi PmenuSel                      guibg=#808080
