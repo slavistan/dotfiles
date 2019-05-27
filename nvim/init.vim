@@ -45,6 +45,7 @@ Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
 Plug 'https://github.com/jeffkreeftmeijer/vim-dim.git'
 Plug 'https://github.com/godlygeek/tabular.git'
+Plug 'https://github.com/thaerkh/vim-indentguides.git'
 call plug#end()
 
 """
@@ -81,6 +82,8 @@ function SetRmdOptions()
   vmap <F1> "1y:execute 'Rhelp ' . getreg('1')<CR>
 endfunction
 
+let g:indentguides_spacechar = '┊'
+let g:indentguides_tabchar = '┊'
 """
 " Utility
 """

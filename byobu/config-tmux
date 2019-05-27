@@ -13,6 +13,7 @@ bind-key -n M-j display-panes \; select-pane -t :.-
 bind-key -n M-k display-panes \; select-pane -t :.+
 bind-key -n M-S-h display-panes \; swap-pane -s :. -t :.- \; select-pane -t :.-
 bind-key -n M-S-l display-panes \; swap-pane -s :. -t :.+ \; select-pane -t :.+
+bind-key -n M-S-F6 detach
 # Documented in: $BYOBU_PREFIX/share/doc/byobu/help.tmux.txt
 # bind-key -n F1 new-window -k -n config byobu-config
 # bind-key -n S-F1 new-window -k -n help "sh -c '$BYOBU_PAGER $BYOBU_PREFIX/share/doc/byobu/help.tmux.txt'"
