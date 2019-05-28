@@ -1,0 +1,13 @@
+# terminfo source implementing non-standard extensions for
+#
+# * truecolor: Tc
+# * overline: Smol/Rmol
+# * underline extensions: Smulx
+#
+# Compile and add to database using 'tic -x <filename>'
+#
+stanterm-256color|xterm with non-standard terminfo extensions,
+  use=xterm-256color,
+  Tc, 
+  Smol=\E[53m, Rmol=\E[55m, 
+  Smulx=\E[4:%p1%dm,
