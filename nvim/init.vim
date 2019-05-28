@@ -13,7 +13,6 @@ let &directory=&backupdir
 let &shadafile=&backupdir . '/shada'
 let g:netrw_home=&backupdir
 
-set nospell " disable spell checking
 set clipboard=unnamed
 set noincsearch
 set smartcase
@@ -78,16 +77,21 @@ inoremap <S-Tab> <Backspace>
 """
 autocmd FileType Rmd,rmd call SetRmdOptions()
 function SetRmdOptions()
-  set textwidth=120
+  set textwidth = 120
+  " Send line and selection to R 
   nmap <CR> <Leader>l
   vmap <CR> <Leader>se<Esc>
+  " Open R-help for selected keyword
   vmap <F1> "1y:execute 'Rhelp ' . getreg('1')<CR>
+
+  let R_assign = 0 " Disable automatic character substitution
 endfunction
 
 let g:indentguides_spacechar = '┊'
 let g:indentguides_tabchar = '┊'
 
 let g:pandoc#syntax#conceal#use = 0
+let g:pandoc#modules#disabled = [ "spell" ]
 """
 " Utility
 """

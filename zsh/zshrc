@@ -13,8 +13,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 [[ -r $ZSH_HOME/setup-specific.zsh ]] && source $ZSH_HOME/setup-specific.zh
-source $ZSH_HOME/startup.zsh
-source $ZSH_HOME/functions.zsh
+source $ZSH_HOME/envvars.zsh
 
 # User configuration
 
@@ -22,7 +21,6 @@ export EDITOR='nvim'
 export BROWSER='firefox'
 export LS_COLORS=$($ZSH_HOME/scripts/ls-colors.zsh)
 export TREE_COLORS=$($ZSH_HOME/scripts/ls-colors.zsh)
-export XDG_CONFIG_HOME=~/.config # used by byobu
 
 alias xclip='xclip -selection clipboard'
 alias vim=nvim

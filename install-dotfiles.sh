@@ -31,7 +31,7 @@ configure_nvim=true
 configure_st=false
 configure_i3=false
 configure_zsh=true
-configure_byobu=true
+configure_tmux=true
 configure_git=true
 config_dir=$HOME'/.config'
 
@@ -82,11 +82,10 @@ if [[ $configure_i3 == true ]]; then
   ln -fs $config_dir/i3/config-i3 $config_dir/i3/config
 fi
 
-if [[ $configure_byobu == true ]]; then
-  echo 'Configuring byobu ...'
-  mkdir -p $config_dir && cd "$_" && rm -rf byobu
-  mkdir byobu && cd "$_"
-  ln -fs $dotfiles_dir/byobu/config-tmux keybindings.tmux
+if [[ $configure_tmux == true ]]; then
+  echo 'Configuring tmux ...'
+  rm -rf $config_dir/tmux && ln -s $dotfiles_dir/tmux $config_dir/tmux
+  echo 'alias tmux=tmux -f '"$config_dir/tmux/config" >> $config_dir/zsh/envvars.zsh
 fi
 
 if [[ $configure_git == true ]]; then

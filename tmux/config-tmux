@@ -1,6 +1,11 @@
 # vim: filetype=tmux
 
+new-session -n $HOST # Attach to session or spawn a new one if none exist
+
 set -g default-terminal "tmux-256color"
+set -sg escape-time 0 # Remove delay after Esc
+set -g base-index 1
+set -wg pane-base-index 1
 
 set -g default-shell /bin/zsh
 set -g default-command /bin/zsh
@@ -61,5 +66,3 @@ bind-key -n M-S-F6 detach
 # bind-key -n C-S-F12 new-window $BYOBU_PREFIX/lib/byobu/include/mondrian
 # bind-key -n M-F13 source $BYOBU_PREFIX/share/byobu/keybindings/mouse.tmux.enable
 # bind-key -n M-IC paste-buffer
-set -g prefix F12
-unbind-key -n C-a
