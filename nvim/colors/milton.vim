@@ -53,7 +53,7 @@ hi Operator        guifg=#F92672
 hi yamlKeyValueDelimiter  guifg=#FD971F guibg=#1B1D1E
 hi yamlBlockMappingKey    guifg=#FD971F guibg=#1B1D1E
 hi pandocUListItem        guifg=#FD971F
-hi pandocAtxHeader        guifg=#EF5939 guibg=#1B1D1E
+hi pandocAtxHeader        guifg=#EF5939 guibg=#1B1D1E gui=NONE
 
 " complete menu
 hi Pmenu           guifg=#66D9EF guibg=#000000

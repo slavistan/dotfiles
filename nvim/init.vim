@@ -11,7 +11,9 @@ colorscheme milton
 let &backupdir=g:NVIMHOME . '/backup'
 let &directory=&backupdir
 let &shadafile=&backupdir . '/shada'
+let g:netrw_home=&backupdir
 
+set nospell " disable spell checking
 set clipboard=unnamed
 set noincsearch
 set smartcase

@@ -29,6 +29,5 @@ alias vim=nvim
 alias sed='sed -r'
 alias t='tree -aL 1 --dirsfirst'
 alias l='\ls --color=tty -Aog --si --time-style=long-iso --group-directories-first'
-alias ls='echo use "l"!'
 
 export DISPLAY=localhost:0.0

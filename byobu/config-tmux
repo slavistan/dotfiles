@@ -1,5 +1,7 @@
 # vim: filetype=tmux
 
+set -g default-terminal "tmux-256color"
+
 set -g default-shell /bin/zsh
 set -g default-command /bin/zsh
 
@@ -57,7 +59,7 @@ bind-key -n M-S-F6 detach
 # bind-key -n S-F11 resize-pane -Z
 # bind-key -n S-F12 source $BYOBU_PREFIX/share/byobu/keybindings/f-keys.tmux.disable \; display-message "Byobu F-keys: DISABLED"
 # bind-key -n C-S-F12 new-window $BYOBU_PREFIX/lib/byobu/include/mondrian
-# bind-key -n M-F12 source $BYOBU_PREFIX/share/byobu/keybindings/mouse.tmux.enable
+# bind-key -n M-F13 source $BYOBU_PREFIX/share/byobu/keybindings/mouse.tmux.enable
 # bind-key -n M-IC paste-buffer
 set -g prefix F12
 unbind-key -n C-a
