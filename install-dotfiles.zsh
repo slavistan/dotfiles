@@ -1,4 +1,7 @@
-#!/bin/bash
+#!/bin/zsh
+
+# Disable errors from empty globs
+setopt +o nomatch
 
 if [[ "$1" == "--check-dependencies" ]]; then
   return_code=0
@@ -27,10 +30,10 @@ set -e
 ##
 # Options - Adjust according to setup
 ##
-configure_nvim=true
-configure_st=false
-configure_i3=false
 configure_zsh=true
+configure_nvim=true
+onfigure_st=false
+configure_i3=false
 configure_tmux=true
 configure_git=true
 config_dir=$HOME'/.config'
@@ -38,10 +41,13 @@ config_dir=$HOME'/.config'
 ##
 # Script
 ##
-dotfiles_dir=$(dirname $(realpath "$0"))
+dotfiles_dir=$(dirname "$0:A")
 temp_dir=$(mktemp -d)
+echo 'Dotfiles: '$dotfiles_dir
+echo 'Config: '$config_dir
+echo 'Tempdir: '$temp_dir
 
-read -rsp 'Enter your sudo password: ' pw
+read "pw?Enter your sudo password: "
 sudo -kSp '' true <<<"${pw}" > /dev/null 2>&1
 if [[ "$?" != "0" ]]; then
   echo 'Invalid password. Abort.'
@@ -49,12 +55,29 @@ if [[ "$?" != "0" ]]; then
 fi
 echo 'OK.'
 
+if [[ $configure_zsh == true ]]; then
+  echo 'Configuring zsh ...'
+  cd $dotfiles_dir/zsh
+  rm -rf oh-my-zsh # remove oh-my-zsh files
+  git clone https://github.com/robbyrussell/oh-my-zsh.git
+  cd oh-my-zsh # clone oh-my-zsh and submodules ..
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ./plugins/zsh-syntax-highlighting # ..
+  git clone https://github.com/romkatv/powerlevel10k.git ./themes/powerlevel10k # ..
+  mkdir -p $config_dir && cd "$_" # enter config dir
+  ln -fs $dotfiles_dir/zsh # create symlink
+  cd $HOME
+  rm .zshrc
+  ln -fs $dotfiles_dir/zsh/zshrc ~/.zshrc
+
+  touch $dotfiles_dir/zsh/envvars.zsh
+fi
+
 if [[ $configure_nvim == true ]]; then
   echo "Configuring nvim ..."
-  mkdir -p $config_dir && cd "$_" && rm -rf nvim
   rm -rf $dotfiles_dir/nvim/plug_plugins/*/
-  ln -s $dotfiles_dir/nvim nvim
-  nvim +PlugInstall +quitall
+  rm -f $config_dir/nvim
+  mkdir -p $config_dir && cd "$_" && ln -s $dotfiles_dir/nvim .
+  nvim +PlugClean +PlugInstall +quitall
 fi
 
 if [[ $configure_st == true ]]; then
@@ -62,17 +85,6 @@ if [[ $configure_st == true ]]; then
   mkdir -p $temp_dir/st
   git clone https://github.com/slavistan/st.git $temp_dir/sh && cd "$_"
   sudo -Sp '' make clean install <<<${pw}
-fi
-
-if [[ $configure_zsh == true ]]; then
-  echo 'Configuring zsh ...'
-  rm -rf $dotfiles_dir/zsh/oh-my-zsh
-  mkdir -p $config_dir && cd "$_" && rm -rf zsh
-  ln -s $dotfiles_dir/zsh zsh
-  ln -fs $config_dir/zsh/zshrc ~/.zshrc
-  git clone https://github.com/robbyrussell/oh-my-zsh.git $config_dir/zsh/oh-my-zsh
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $config_dir/zsh/oh-my-zsh/plugins/zsh-syntax-highlighting
-  git clone https://github.com/romkatv/powerlevel10k.git $config_dir/zsh/oh-my-zsh/themes/powerlevel10k
 fi
 
 if [[ $configure_i3 == true ]]; then
@@ -84,8 +96,9 @@ fi
 
 if [[ $configure_tmux == true ]]; then
   echo 'Configuring tmux ...'
-  rm -rf $config_dir/tmux && ln -s $dotfiles_dir/tmux $config_dir/tmux
-  echo 'alias tmux=tmux -f '"$config_dir/tmux/config" >> $config_dir/zsh/envvars.zsh
+  rm -f $config_dir/tmux && ln -s $dotfiles_dir/tmux $config_dir/tmux
+# TODO: Make envvars unique
+  echo "alias tmux='tmux -f $config_dir/tmux/config'" >> $dotfiles_dir/zsh/envvars.zsh
 fi
 
 if [[ $configure_git == true ]]; then
@@ -94,6 +107,8 @@ if [[ $configure_git == true ]]; then
   ln -s $dotfiles_dir/git git
   ln -fs $config_dir/git/config ~/.gitconfig
 fi
+
+source ~/.zshrc
 
 # TODO:
 ## Blocks

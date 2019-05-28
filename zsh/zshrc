@@ -19,8 +19,8 @@ source $ZSH_HOME/envvars.zsh
 
 export EDITOR='nvim'
 export BROWSER='firefox'
-export LS_COLORS=$($ZSH_HOME/scripts/ls-colors.zsh)
-export TREE_COLORS=$($ZSH_HOME/scripts/ls-colors.zsh)
+export LS_COLORS=$($ZSH_HOME/scripts/dircolors.zsh)
+export TREE_COLORS=$($ZSH_HOME/scripts/dircolors.zsh)
 
 alias xclip='xclip -selection clipboard'
 alias vim=nvim
