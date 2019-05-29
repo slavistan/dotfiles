@@ -73,9 +73,9 @@ Capslock::Esc
   return
 
 ; Win+B / Toggle window borders
-<#b::
-  WinSet, Style, ^0xC00000, A ; TODO: Does break some borderless windows (i.e. firefox)
-  return
+;  <#b::
+;    WinSet, Style, ^0xC00000, A ; TODO: Does break some borderless windows (i.e. firefox)
+;    return
 
 ; Win+D / Run 'run' dialogue
 <#d::
