@@ -35,6 +35,11 @@ set autoindent " Keep indentation level for wrapped lines
 set breakindent " Wrapped lines preserve indentation
 
 """
+" PRE- Settings: Filtype specifics & Plugin settings
+"""
+let g:R_assign=0 " Disable automatic substitution of _
+
+"""
 " Plugins
 """
 execute 'call plug#begin(''' . g:NVIMHOME . '/plug-plugins'')'
@@ -73,18 +78,16 @@ vnoremap <S-Tab> <gv
 inoremap <S-Tab> <Backspace>
 
 """
-" Filtype specifics & Plugin settings
+" POST- Settings: Filtype specifics & Plugin settings
 """
 autocmd FileType Rmd,rmd call SetRmdOptions()
 function SetRmdOptions()
-  set textwidth = 120
+  set textwidth=120
   " Send line and selection to R 
   nmap <CR> <Leader>l
   vmap <CR> <Leader>se<Esc>
   " Open R-help for selected keyword
   vmap <F1> "1y:execute 'Rhelp ' . getreg('1')<CR>
-
-  let R_assign = 0 " Disable automatic character substitution
 endfunction
 
 let g:indentguides_spacechar = '┊'
