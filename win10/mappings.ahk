@@ -1,91 +1,99 @@
+; BUG: Script must be run as Admin manually. 'A_AsAdmin' check does not work
+;      Temporary fix: hardcode filepath (PATH cannot be accessed)
 #SingleInstance force
 
 ; Path to batchfile starting wsltty
 global termpath := "C:\Users\shuell\projects\dotfiles\win10\wintty\start-ubuntu-wsltty.bat"
-DetectHiddenWindows, On
+global xserv_id_string := "VcXsrv Server - Display"
 
-; Capslock / Maps to Escape
-Capslock::Esc
+startupSequence()
 
-; Win+F12 / Toggle-view VcXsrv instance
-#F12::
-  SetTitleMatchMode RegEx
-  DetectHiddenWindows, On
-  IfWinExist, ahk_class VcXsrv
-  {
-    DetectHiddenWindows, Off
-    ; Check if its hidden
-    IfWinNotExist, ahk_class VcXsrv
-    {
-      WinShow, ahk_class VcXsrv
-      WinMaximize, ahk_class VcXsrv
-      WinActivate, ahk_class VcXsrv
-      return
-    }
-    WinHide, ahk_class VcXsrv
-  }
+; Keybinds 
+Capslock::Esc ;
+<#l::focusRight()
+<#h::focusLeft()
+<#F12:: ; Win+F12 / Toggle-view VcXsrv instance
+  spawnUnique(xserv_id_string, "C:\Tools\VcXsrv\vcxsrv.exe")
+  toggleView(xserv_id_string, false)
   return
-
-; Win-E / Run file-explorer
-<#e::
-  SetTitleMatchMode RegEx
-  DetectHiddenWindows, On
-  WinGet, uid, ID, ahk_class CabinetWClass
-  if ( uid = "" ) {
-    Run, % systemroot "\explorer.exe"
-    WinGet, uid_run, ID, ahk_class CabinetWClass
-    WinMaximize, ahk_id %uid_run%
-    WinActivate, ahk_id %uid_run%
-    return
-  }
-  DetectHiddenWindows, Off
-  IfWinNotExist, ahk_id %uid%
-  {
-    WinShow, ahk_id %uid%
-    WinMaximize, ahk_id %uid%
-    WinActivate, ahk_id %uid%
-    return
-  }
-  WinHide, ahk_id %uid%
+<#e:: ; Win-E / Run file-explore
+  spawnUnique("ahk_class CabinetWClass", "explorer.exe")
+  toggleView("ahk_class CabinetWClass")
   return
-
-
-; Win-L / Focus previous window
-<#l::AltTab
-
-; Win-R / Focus next window
-<#h::ShiftAltTab
-
-; Shift-Win-R / Close focused window
-<#<+q::
-  WinClose A
+<#<+q:: ; Shift-Win-Q / Close focused window
+  WinClose("A")
   return
-
 ; Win+F / Maximize if not max'ed. Restore otherwise
 <#f::
-  WinGet, state, MinMax, A
-  if (state == -1 || state == 0) {
-    WinMaximize A
+  if (!(WinGetStyle("A") & 0x1000000))
+    WinMaximize("A")
+  else 
+    WinRestore("A")
+  return
+<#d::Run("cmd.exe") ; Win+D / Run 'run' dialogue
+<#Enter:: ; Win+Enter / Open terminal window
+  Run("cmd /C " . termpath)
+  return
+<#1::switchDesktopByNumber(1)
+<#2::switchDesktopByNumber(2)
+<#3::switchDesktopByNumber(3)
+<#4::switchDesktopByNumber(4)
+
+;;;
+;
+; Functions
+;;;
+
+; toggleView - Hide and show window
+toggleView(identifier,
+           focus := true,   ; focus the raised window
+           match_mode := 2) ; passed to SetTitleMatchMode
+{ 
+  SetTitleMatchMode match_mode
+  ; Toggle visible
+  DetectHiddenWindows false
+  if ( !WinExist(identifier) )
+  {
+    DetectHiddenWindows true
+    if ( WinExist(identifier) )
+    {
+      ; Window is hidden
+      WinShow(identifier)
+      WinMaximize(identifier)
+      if (focus)
+        WinActivate(identifier)
+      return
+    }
   }
-  else {
-    WinRestore A
-  }
+  WinHide(identifier)
   return
+}
 
-; Win+B / Toggle window borders
-;  <#b::
-;    WinSet, Style, ^0xC00000, A ; TODO: Does break some borderless windows (i.e. firefox)
-;    return
-
-; Win+D / Run 'run' dialogue
-<#d::
-  Send #x r
+; spawnUnique - Run process if it does not exist
+; Match mode and detection of hidden windows can be specified
+spawnUnique(identifier,            ; window identifier. E.g. "ahk_class Firefox"
+            path,                  ; executable. E.g. "Firefox.exe"
+            match_mode := 2,       ; forwarded to SetTitleMatchMode
+            detect_hidden := true) ; forwarded to DetectHiddenWindow
+{
+  DetectHiddenWindows detect_hidden
+  SetTitleMatchMode match_mode
+  if( !WinExist(identifier) )
+    Run(path)
   return
+}
 
-; Win+Enter / Open terminal window
-<#Enter::
-  Run, cmd /C %termpath%
-  return
+; focusRight - focus window to the right
+focusRight()
+{
+    Send("!{Tab}")
+}
+
+; focusLeft - focus window to the left
+focusLeft()
+{
+  Send("+!{Tab}")
+}
 
 ;
 ; Virtual Desktops (Win-1..9) 
@@ -94,19 +102,19 @@ Capslock::Esc
 ; Current desktop UUID appears to be in HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\SessionInfo\1\VirtualDesktops
 ; List of desktops appears to be in HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops
 ;
+global CurrentDesktop, DesktopCount, DesktopSettings
 mapDesktopsFromRegistry() {
-  global CurrentDesktop, DesktopCount
   ; Get the current desktop UUID. Length should be 32 always, but there's no guarantee this couldn't change in a later Windows release so we check.
-  IdLength := 32
-  SessionId := getSessionId()
-  if (SessionId) {
-    RegRead, CurrentDesktopId, HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\SessionInfo\%SessionId%\VirtualDesktops, CurrentVirtualDesktop
-    if (CurrentDesktopId) {
-      IdLength := StrLen(CurrentDesktopId)
-    }
-  }
-  ; Get a list of the UUIDs for all virtual desktops on the system
-  RegRead, DesktopList, HKEY_CURRENT_USER, SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops, VirtualDesktopIDs
+  ; Retrieve session ID
+  ProcessId := DllCall("ProcessIdToSessionId",
+                       "UInt", DllCall("GetCurrentProcessId", "UInt"),
+                       "UInt*", SessionId)
+
+  CurrentDesktopId := RegRead("HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\SessionInfo\" . SessionId . "\VirtualDesktops", "CurrentVirtualDesktop") 
+  IdLength := StrLen(CurrentDesktopId)
+
+; Get a list of the UUIDs for all virtual desktops on the system
+  DesktopList := RegRead("HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops", "VirtualDesktopIDs")
   if (DesktopList) {
     DesktopListLength := StrLen(DesktopList)
     ; Figure out how many virtual desktops there are
@@ -115,103 +123,88 @@ mapDesktopsFromRegistry() {
   else {
     DesktopCount := 1
   }
+
   ; Parse the REG_DATA string that stores the array of UUID's for virtual desktops in the registry.
   i := 0
+
   while (CurrentDesktopId and i < DesktopCount) {
     StartPos := (i * IdLength) + 1
     DesktopIter := SubStr(DesktopList, StartPos, IdLength)
-    OutputDebug, The iterator is pointing at %DesktopIter% and count is %i%.
-    ; Break out if we find a match in the list. If we didn't find anything, keep the
+
+    ; Break out if we find a match in the list. If we didn't find anything keep the
     ; old guess and pray we're still correct :-D.
     if (DesktopIter = CurrentDesktopId) {
       CurrentDesktop := i + 1
-      OutputDebug, Current desktop number is %CurrentDesktop% with an ID of %DesktopIter%.
+
       break
     }
     i++
   }
 }
 ;
-; This functions finds out ID of current session.
-;
-getSessionId()
-{
-  ProcessId := DllCall("GetCurrentProcessId", "UInt")
-  if ErrorLevel {
-    OutputDebug, Error getting current process id: %ErrorLevel%
-    return
-  }
-  OutputDebug, Current Process Id: %ProcessId%
-  DllCall("ProcessIdToSessionId", "UInt", ProcessId, "UInt*", SessionId)
-  if ErrorLevel {
-    OutputDebug, Error getting session id: %ErrorLevel%
-    return
-  }
-  OutputDebug, Current Session Id: %SessionId%
-  return SessionId
-}
-;
 ; This function switches to the desktop number provided.
 ;
 switchDesktopByNumber(targetDesktop)
 {
-  global CurrentDesktop, DesktopCount
-  ; Re-generate the list of desktops and where we fit in that. We do this because
-  ; the user may have switched desktops via some other means than the script.
   mapDesktopsFromRegistry()
-  ; Don't attempt to switch to an invalid desktop
-  if (targetDesktop > DesktopCount || targetDesktop < 1) {
-    OutputDebug, [invalid] target: %targetDesktop% current: %CurrentDesktop%
-    return
-  }
+  ; Store currently active window to be focused when returning the desktop
+   
   ; Go right until we reach the desktop we want
   while(CurrentDesktop < targetDesktop) {
-    Send ^#{Right}
+    Send("^#{Right}")
     CurrentDesktop++
-    OutputDebug, [right] target: %targetDesktop% current: %CurrentDesktop%
+    Sleep 75
   }
   ; Go left until we reach the desktop we want
   while(CurrentDesktop > targetDesktop) {
-    Send ^#{Left}
+    Send("^#{Left}")
     CurrentDesktop--
-    OutputDebug, [left] target: %targetDesktop% current: %CurrentDesktop%
+    Sleep 75
   }
 }
+
 ;
 ; This function creates a new virtual desktop and switches to it
 ;
 createVirtualDesktop()
 {
-  global CurrentDesktop, DesktopCount
-  Send, #^d
+  Send("#^d")
   DesktopCount++
-  CurrentDesktop = %DesktopCount%
-  OutputDebug, [create] desktops: %DesktopCount% current: %CurrentDesktop%
+  CurrentDesktop := DesktopCount
 }
 ;
 ; This function deletes the current virtual desktop
 ;
 deleteVirtualDesktop()
 {
-  global CurrentDesktop, DesktopCount
-  Send, #^{F4}
+  Send("#^{F4}")
   DesktopCount--
   CurrentDesktop--
-  OutputDebug, [delete] desktops: %DesktopCount% current: %CurrentDesktop%
 }
-; Main
-SetKeyDelay, 75
-mapDesktopsFromRegistry()
-OutputDebug, [loading] desktops: %DesktopCount% current: %CurrentDesktop%
-; User config!
-; This section binds the key combo to the switch/create/delete actions
-LWin & 1::switchDesktopByNumber(1)
-LWin & 2::switchDesktopByNumber(2)
-LWin & 3::switchDesktopByNumber(3)
-LWin & 4::switchDesktopByNumber(4)
-LWin & 5::switchDesktopByNumber(5)
-LWin & 6::switchDesktopByNumber(6)
-LWin & 7::switchDesktopByNumber(7)
-LWin & 8::switchDesktopByNumber(8)
-LWin & 9::switchDesktopByNumber(9)
 
+moveWindowToDesktop(targetDesktop)
+{
+  uid := WinExist("A")
+  WinHide ahk_id %uid%
+  switchDesktopByNumber(targetDesktop)
+  WinShow ahk_id %uid%
+}
+
+; <#+1::moveWindowToDesktop(1)
+; <#+2::moveWindowToDesktop(2)
+; <#+3::moveWindowToDesktop(3)
+; <#+4::moveWindowToDesktop(4)
+startupSequence()
+{
+  SetKeyDelay 75
+  mapDesktopsFromRegistry()
+
+  DetectHiddenWindows true
+  SetTitleMatchMode "RegEx"
+
+  if (!WinExist(xserv_string))
+  {
+    ; BUG: Cannot start hidden window :(
+    Run(vcxsrvpath)
+  }
+}  

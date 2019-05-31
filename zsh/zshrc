@@ -7,6 +7,8 @@ export HISTFILE=$ZSH_HOME/backup
 ZSH_THEME="powerlevel10k/powerlevel10k"
 COMPLETION_WAITING_DOTS="true"
 
+compinit -d $ZSH_HOME/backup
+
 plugins=(
   git wd colored-man-pages extract zsh-syntax-highlighting
 )
@@ -29,3 +31,5 @@ alias t='tree -aL 1 --dirsfirst'
 alias l='\ls --color=tty -Aog --si --time-style=long-iso --group-directories-first'
 
 export DISPLAY=localhost:0.0
+
+export DOTFILES=$HOME'/projects/dotfiles'

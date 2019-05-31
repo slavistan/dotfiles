@@ -1,4 +1,4 @@
-let g:NVIMHOME=$HOME . '/.config/nvim'
+let g:NVIMHOME=$DOTFILES . '/nvim'
 
 """
 " Settings
@@ -27,7 +27,7 @@ set textwidth=999
 set modeline
 set showbreak=↪
 let mapleader=","
-let maplocalleader=","
+let maplocalleader="\\"
 
 set list listchars=tab:‣\ ,trail:· " Display tabs and trailing whitespaces
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
@@ -83,9 +83,11 @@ inoremap <S-Tab> <Backspace>
 autocmd FileType Rmd,rmd call SetRmdOptions()
 function SetRmdOptions()
   set textwidth=120
-  " Send line and selection to R 
-  nmap <CR> <Leader>l
-  vmap <CR> <Leader>se<Esc>
+  set conceallevel=0 " Nvim-R conceals a lot
+  " Send code R 
+  nmap <Space>l \l
+  vmap <Space>l \se<Esc>
+  nmap <Space>c \ce<Esc>
   " Open R-help for selected keyword
   vmap <F1> "1y:execute 'Rhelp ' . getreg('1')<CR>
 endfunction
@@ -95,6 +97,12 @@ let g:indentguides_tabchar = '┊'
 
 let g:pandoc#syntax#conceal#use = 0
 let g:pandoc#modules#disabled = [ "spell" ]
+
+autocmd FileType autohotkey call SetAhkOptions()
+function SetAhkOptions()
+  " Reload script automatically
+  autocmd BufWritePost *.ahk silent execute ':!AutoHotkeyU64.exe ' . expand('%') . ' &'
+endfunction
 """
 " Utility
 """
