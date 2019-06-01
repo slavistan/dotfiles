@@ -2,50 +2,129 @@
 ;      Temporary fix: hardcode filepath (PATH cannot be accessed)
 #SingleInstance force
 
-; Path to batchfile starting wsltty
-global termpath := "C:\Users\shuell\projects\dotfiles\win10\wintty\start-ubuntu-wsltty.bat"
-global xserv_id_string := "VcXsrv Server - Display"
 
-startupSequence()
+globalInit()
 
-; Keybinds 
-Capslock::Esc ;
-<#l::focusRight()
-<#h::focusLeft()
-<#F12:: ; Win+F12 / Toggle-view VcXsrv instance
-  spawnUnique(xserv_id_string, "C:\Tools\VcXsrv\vcxsrv.exe")
-  toggleView(xserv_id_string, false)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; User Settings
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+global termpath        := "C:\Users\shuell\projects\dotfiles\win10\wintty\start-ubuntu-wsltty.bat" ; terminal
+global xserv_id_string := "VcXsrv Server - Display"                                                ; Xserver surrogate
+
+Capslock:: Esc
+      #l:: focusRight()
+      #h:: focusLeft()
+    #F12:: toggleXserver
+      #e:: toggleExplorer()
+     #+q:: close()
+      #f:: toggleMaximize()
+      #d:: runDialogue()
+  #Enter:: spawnTerminal()
+      #1:: switchDesktopByNumber(1)
+      #2:: switchDesktopByNumber(2)
+      #3:: switchDesktopByNumber(3)
+      #4:: switchDesktopByNumber(4)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Function Definitions
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; User interface functions (UIFs)
+
+; focusRight - focus window to the right
+focusRight()
+{
+  Send("!{Tab}")
+}
+
+; focusLeft - focus window to the left
+focusLeft()
+{
+  Send("+!{Tab}")
+}
+
+close(identifier := "A")
+{
+  WinClose(identifier)
   return
-<#e:: ; Win-E / Run file-explore
-  spawnUnique("ahk_class CabinetWClass", "explorer.exe")
-  toggleView("ahk_class CabinetWClass")
+}
+
+toggleXserver()
+{
+  _spawnUnique(xserv_id_string, "C:\Tools\VcXsrv\vcxsrv.exe")
+  _toggleView(xserv_id_string, false)
   return
-<#<+q:: ; Shift-Win-Q / Close focused window
-  WinClose("A")
+}
+
+toggleExplorer()
+{
+  _spawnUnique("ahk_class CabinetWClass", "explorer.exe")
+  _toggleView("ahk_class CabinetWClass")
   return
-; Win+F / Maximize if not max'ed. Restore otherwise
-<#f::
-  if (!(WinGetStyle("A") & 0x1000000))
-    WinMaximize("A")
-  else 
-    WinRestore("A")
-  return
-<#d::Run("cmd.exe") ; Win+D / Run 'run' dialogue
-<#Enter:: ; Win+Enter / Open terminal window
+}
+
+spawnTerminal()
+{
   Run("cmd /C " . termpath)
   return
-<#1::switchDesktopByNumber(1)
-<#2::switchDesktopByNumber(2)
-<#3::switchDesktopByNumber(3)
-<#4::switchDesktopByNumber(4)
+}
 
-;;;
-;
-; Functions
-;;;
+toggleMaximize(identifier := "A")
+{
+  if (!(WinGetStyle(identifier) & 0x1000000))
+    WinMaximize(identifier)
+  else 
+    WinRestore(identifier)
+  return
+}
 
-; toggleView - Hide and show window
-toggleView(identifier,
+; runDialogue - Display dialogue to run commands and programs
+runDialogue()
+{
+  ; BUG: For the love of god .. why does <#x & r not work???
+  Run("cmd.exe")
+}
+
+moveWindowToDesktop(targetDesktop)
+{
+  uid := WinExist("A")
+  WinHide ahk_id %uid%
+  switchDesktopByNumber(targetDesktop)
+  WinShow ahk_id %uid%
+}
+
+switchDesktopByNumber(targetDesktop)
+{
+  _mapDesktopsFromRegistry()
+  ; Store currently active window to be focused when returning the desktop
+   
+  ; Go right until we reach the desktop we want
+  while(CurrentDesktop < targetDesktop) {
+    Send("^#{Right}")
+    CurrentDesktop++
+    Sleep 75
+  }
+  ; Go left until we reach the desktop we want
+  while(CurrentDesktop > targetDesktop) {
+    Send("^#{Left}")
+    CurrentDesktop--
+    Sleep 75
+  }
+}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Level-1 functions (called by UIFs). Prefixed by a single underscore.
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; _toggleView - Hide and show window
+_toggleView(identifier,
            focus := true,   ; focus the raised window
            match_mode := 2) ; passed to SetTitleMatchMode
 { 
@@ -69,9 +148,10 @@ toggleView(identifier,
   return
 }
 
-; spawnUnique - Run process if it does not exist
+; _spawnUnique - Run process if it does not exist
+;
 ; Match mode and detection of hidden windows can be specified
-spawnUnique(identifier,            ; window identifier. E.g. "ahk_class Firefox"
+_spawnUnique(identifier,            ; window identifier. E.g. "ahk_class Firefox"
             path,                  ; executable. E.g. "Firefox.exe"
             match_mode := 2,       ; forwarded to SetTitleMatchMode
             detect_hidden := true) ; forwarded to DetectHiddenWindow
@@ -83,34 +163,24 @@ spawnUnique(identifier,            ; window identifier. E.g. "ahk_class Firefox"
   return
 }
 
-; focusRight - focus window to the right
-focusRight()
-{
-    Send("!{Tab}")
-}
-
-; focusLeft - focus window to the left
-focusLeft()
-{
-  Send("+!{Tab}")
-}
-
-;
-; Virtual Desktops (Win-1..9) 
+; _mapDesktopsFromRegistry() - Get current configuration
 ;
 ; This function examines the registry to build an accurate list of the current virtual desktops and which one we're currently on.
-; Current desktop UUID appears to be in HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\SessionInfo\1\VirtualDesktops
+; Current desktop UUID appears to be in HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\SessionInfo\<current session>\VirtualDesktops
 ; List of desktops appears to be in HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops
-;
 global CurrentDesktop, DesktopCount, DesktopSettings
-mapDesktopsFromRegistry() {
-
+_mapDesktopsFromRegistry()
+{
   ; Get current desktop ID ( a binary 32-char string )
   DllCall("ProcessIdToSessionId",
           "UInt", DllCall("GetCurrentProcessId", "UInt"),
           "UInt*", SessionId)
   CurrentDesktopId := RegRead("HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\SessionInfo\" .
                               SessionId . "\VirtualDesktops", "CurrentVirtualDesktop") 
+  if (CurrentDesktopId == "" ) ; No virtual desktops have been created sofar
+  {
+    MsgBox("TODO: Startup Sequence. No virtual desktops are active yet")  
+  }
   IdLength := StrLen(CurrentDesktopId)
 
   ; Calculate desktop count. This regkey consists of a concat of all desktop IDs
@@ -130,67 +200,16 @@ mapDesktopsFromRegistry() {
     i++
   }
 }
-;
-; This function switches to the desktop number provided.
-;
-switchDesktopByNumber(targetDesktop)
-{
-  mapDesktopsFromRegistry()
-  ; Store currently active window to be focused when returning the desktop
-   
-  ; Go right until we reach the desktop we want
-  while(CurrentDesktop < targetDesktop) {
-    Send("^#{Right}")
-    CurrentDesktop++
-    Sleep 75
-  }
-  ; Go left until we reach the desktop we want
-  while(CurrentDesktop > targetDesktop) {
-    Send("^#{Left}")
-    CurrentDesktop--
-    Sleep 75
-  }
-}
 
+; globalInit()
 ;
-; This function creates a new virtual desktop and switches to it
-;
-createVirtualDesktop()
-{
-  Send("#^d")
-  DesktopCount++
-  CurrentDesktop := DesktopCount
-}
-;
-; This function deletes the current virtual desktop
-;
-deleteVirtualDesktop()
-{
-  Send("#^{F4}")
-  DesktopCount--
-  CurrentDesktop--
-}
-
-moveWindowToDesktop(targetDesktop)
-{
-  uid := WinExist("A")
-  WinHide ahk_id %uid%
-  switchDesktopByNumber(targetDesktop)
-  WinShow ahk_id %uid%
-}
-
-; <#+1::moveWindowToDesktop(1)
-; <#+2::moveWindowToDesktop(2)
-; <#+3::moveWindowToDesktop(3)
-; <#+4::moveWindowToDesktop(4)
-startupSequence()
+; Initializes variables and starts applications
+globalInit()
 {
   SetKeyDelay 75
-  mapDesktopsFromRegistry()
-
+  _mapDesktopsFromRegistry()
   DetectHiddenWindows true
   SetTitleMatchMode "RegEx"
-
   if (!WinExist(xserv_string))
   {
     ; BUG: Cannot start hidden window :(
