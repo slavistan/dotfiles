@@ -104,39 +104,28 @@ focusLeft()
 ;
 global CurrentDesktop, DesktopCount, DesktopSettings
 mapDesktopsFromRegistry() {
-  ; Get the current desktop UUID. Length should be 32 always, but there's no guarantee this couldn't change in a later Windows release so we check.
-  ; Retrieve session ID
-  ProcessId := DllCall("ProcessIdToSessionId",
-                       "UInt", DllCall("GetCurrentProcessId", "UInt"),
-                       "UInt*", SessionId)
 
-  CurrentDesktopId := RegRead("HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\SessionInfo\" . SessionId . "\VirtualDesktops", "CurrentVirtualDesktop") 
+  ; Get current desktop ID ( a binary 32-char string )
+  DllCall("ProcessIdToSessionId",
+          "UInt", DllCall("GetCurrentProcessId", "UInt"),
+          "UInt*", SessionId)
+  CurrentDesktopId := RegRead("HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\SessionInfo\" .
+                              SessionId . "\VirtualDesktops", "CurrentVirtualDesktop") 
   IdLength := StrLen(CurrentDesktopId)
 
-; Get a list of the UUIDs for all virtual desktops on the system
-  DesktopList := RegRead("HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops", "VirtualDesktopIDs")
-  if (DesktopList) {
-    DesktopListLength := StrLen(DesktopList)
-    ; Figure out how many virtual desktops there are
-    DesktopCount := DesktopListLength / IdLength
-  }
-  else {
-    DesktopCount := 1
-  }
+  ; Calculate desktop count. This regkey consists of a concat of all desktop IDs
+  DesktopIdList := RegRead("HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops", "VirtualDesktopIDs")
+  DesktopCount := StrLen(DesktopIdList) / IdLength
 
-  ; Parse the REG_DATA string that stores the array of UUID's for virtual desktops in the registry.
+  ; Check which desktop we're currently on by matching all Id substrings
   i := 0
-
   while (CurrentDesktopId and i < DesktopCount) {
     StartPos := (i * IdLength) + 1
-    DesktopIter := SubStr(DesktopList, StartPos, IdLength)
+    DesktopId := SubStr(DesktopIdList, StartPos, IdLength)
 
-    ; Break out if we find a match in the list. If we didn't find anything keep the
-    ; old guess and pray we're still correct :-D.
-    if (DesktopIter = CurrentDesktopId) {
+    if (DesktopId = CurrentDesktopId) {
       CurrentDesktop := i + 1
-
-      break
+      return
     }
     i++
   }
