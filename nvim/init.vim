@@ -85,11 +85,18 @@ function SetRmdOptions()
   set textwidth=120
   set conceallevel=0 " Nvim-R conceals a lot
   " Send code R 
-  nmap <Space>l \l
-  vmap <Space>l \se<Esc>
-  nmap <Space>c \ce<Esc>
-  " Open R-help for selected keyword
+  nnoremap <Space>l :call SendLineToR("stay")<CR>
+  vnoremap <Space>s :call SendSelectionToR("echo", "stay")<CR><Esc>
+  nnoremap <Space>c :call b:SendChunkToR("echo", "stay")<CR>
   vmap <F1> "1y:execute 'Rhelp ' . getreg('1')<CR>
+
+  " Manual folding
+  set foldmethod=manual
+  set sessionoptions=folds
+  set viewoptions=folds
+  set viewdir=.vim
+  autocmd BufWinLeave *.rmd,*.Rmd mkview
+  autocmd BufWinEnter *.rmd,*.Rmd silent loadview
 endfunction
 
 let g:indentguides_spacechar = '┊'
