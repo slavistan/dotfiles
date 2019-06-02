@@ -64,7 +64,9 @@ toggleXserver()
 toggleExplorer()
 {
   _spawnUnique("ahk_class CabinetWClass", "explorer.exe")
-  _toggleView("ahk_class CabinetWClass")
+  static previously_focused := WinActive("A")
+  if (_toggleView("ahk_class CabinetWClass") == "hide")
+    WinActivate("ahk_id " . previously_focused)
   return
 }
 
@@ -123,10 +125,14 @@ switchDesktopByNumber(targetDesktop)
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; _toggleView - Hide and show window
-_toggleView(identifier,
-           focus := true,   ; focus the raised window
-           match_mode := 2) ; passed to SetTitleMatchMode
+global CurrentDesktop, DesktopCount, DesktopSettings
+; _toggleView - Hide and show a window. Shown windows are moved to the top of the window stack.
+;
+; returns "show" or "hide" depending on whether the toggle caused the window to be shown or hidden.
+;
+_toggleView(identifier,             ; window identifier. E.g. "ahk_class Firefox"
+           focus := true,           ; focus the raised window
+           match_mode := 2)         ; passed to SetTitleMatchMode
 { 
   SetTitleMatchMode match_mode
   ; Toggle visible
@@ -139,13 +145,19 @@ _toggleView(identifier,
       ; Window is hidden
       WinShow(identifier)
       WinMaximize(identifier)
+      _winMoveTop(identifier)
       if (focus)
         WinActivate(identifier)
+      return("show")
+    }
+    else
+    {
+      _debug("_toggleView called for non-existing identifier: " . identifier)
       return
     }
   }
   WinHide(identifier)
-  return
+  return("hide")
 }
 
 ; _spawnUnique - Run process if it does not exist
@@ -163,12 +175,18 @@ _spawnUnique(identifier,            ; window identifier. E.g. "ahk_class Firefox
   return
 }
 
+; _winMoveTop - Workaround for AHK's 'WinMoveTop' which fails at times
+_winMoveTop(identifier)
+{
+  WinSetAlwaysOnTop("On")
+  WinSetAlwaysOnTop("Off")
+}
+
 ; _mapDesktopsFromRegistry() - Get current configuration
 ;
 ; This function examines the registry to build an accurate list of the current virtual desktops and which one we're currently on.
 ; Current desktop UUID appears to be in HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\SessionInfo\<current session>\VirtualDesktops
 ; List of desktops appears to be in HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops
-global CurrentDesktop, DesktopCount, DesktopSettings
 _mapDesktopsFromRegistry()
 {
   ; Get current desktop ID ( a binary 32-char string )
@@ -201,6 +219,12 @@ _mapDesktopsFromRegistry()
   }
 }
 
+; _debug - Wrapper for debugging information
+_debug(msg)
+{
+  ; can't output be forwarded to stdout? Use a MsgBox for now
+  MsgBox("DEBUG: " . msg)
+}
 ; globalInit()
 ;
 ; Initializes variables and starts applications
