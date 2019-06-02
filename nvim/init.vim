@@ -86,9 +86,10 @@ function SetRmdOptions()
   set conceallevel=0 " Nvim-R conceals a lot
   " Send code R 
   nnoremap <Space>l :call SendLineToR("stay")<CR>
-  vnoremap <Space>s :call SendSelectionToR("echo", "stay")<CR><Esc>
+  " Send selection. <Esc> before 'call' removes '<,'> which causes the selection to be sent multiple times
+  vnoremap <Space>s <Esc>:call SendSelectionToR("echo", "stay")<CR><Esc>
   nnoremap <Space>c :call b:SendChunkToR("echo", "stay")<CR>
-  vmap <F1> "1y:execute 'Rhelp ' . getreg('1')<CR>
+  vnoremap <F1> "1y:execute 'Rhelp ' . getreg('1')<CR>
 
   " Manual folding
   set foldmethod=manual
