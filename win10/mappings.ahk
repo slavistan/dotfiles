@@ -102,6 +102,9 @@ moveWindowToDesktop(targetDesktop)
 
 switchDesktopByNumber(targetDesktop)
 {
+  static previously_focused := [0, 0, 0, 0]
+
+  previously_focused[CurrentDesktop] := WinActive("A")
   _mapDesktopsFromRegistry()
   ; Store currently active window to be focused when returning the desktop
    
@@ -117,6 +120,8 @@ switchDesktopByNumber(targetDesktop)
     CurrentDesktop--
     Sleep 75
   }
+  if( WinExist("ahk_id " . previously_focused[targetDesktop] ))
+    WinActive("ahk_id " . previously_focused[targetDesktop] ) 
 }
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
