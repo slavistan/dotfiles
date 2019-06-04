@@ -14,6 +14,7 @@ let &shadafile=&backupdir . '/shada'
 let g:netrw_home=&backupdir
 
 set clipboard=unnamed
+set foldlevelstart=0 " Files are opened with all folds closed
 set noincsearch
 set smartcase
 set linebreak

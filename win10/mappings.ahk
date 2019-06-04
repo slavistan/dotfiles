@@ -27,6 +27,7 @@ Capslock:: Esc
       #2:: switchDesktopByNumber(2)
       #3:: switchDesktopByNumber(3)
       #4:: switchDesktopByNumber(4)
+      #o:: _debug(_getDesktopIndex())
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -91,6 +92,7 @@ runDialogue()
   ; Spawn Windows built-in application launcher
   ; BUG: Hotkey does not work if any window is focused. Defocus first (by focusing the task bar)
   WinActivate("ahk_class Shell_TrayWnd")
+  Sleep(75)
   Send("#x")
   Sleep(15)
   Send("r")
@@ -105,28 +107,26 @@ moveWindowToDesktop(targetDesktop)
   WinShow ahk_id %uid%
 }
 
-switchDesktopByNumber(targetDesktop)
+switchDesktopByNumber(target_index)
 {
   static previously_focused := [0, 0, 0, 0]
+  previously_focused[_getDesktopIndex] := WinActive("A")
 
-  previously_focused[CurrentDesktop] := WinActive("A")
-  _mapDesktopsFromRegistry()
-  ; Store currently active window to be focused when returning the desktop
-   
+  info := _getDesktopInfo()
   ; Go right until we reach the desktop we want
-  while(CurrentDesktop < targetDesktop) {
+  while(info["current_index"] < target_index) {
     Send("^#{Right}")
-    CurrentDesktop++
+    info["current_index"]++
     Sleep 75
   }
   ; Go left until we reach the desktop we want
-  while(CurrentDesktop > targetDesktop) {
+  while(info["current_index"] > target_index) {
     Send("^#{Left}")
-    CurrentDesktop--
+    info["current_index"]--
     Sleep 75
   }
-  if( WinExist("ahk_id " . previously_focused[targetDesktop] ))
-    WinActive("ahk_id " . previously_focused[targetDesktop] ) 
+  if( WinExist("ahk_id " . previously_focused[target_index] ))
+    WinActive("ahk_id " . previously_focused[target_index] ) 
 }
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -135,7 +135,6 @@ switchDesktopByNumber(targetDesktop)
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-global CurrentDesktop, DesktopCount, DesktopSettings
 ; _toggleView - Hide and show a window. Shown windows are moved to the top of the window stack.
 ;
 ; returns "show" or "hide" depending on whether the toggle caused the window to be shown or hidden.
@@ -199,41 +198,58 @@ _winMoveTop(identifier)
   WinSetAlwaysOnTop("Off")
 }
 
-; _mapDesktopsFromRegistry() - Get current configuration
-;
-; This function examines the registry to build an accurate list of the current virtual desktops and which one we're currently on.
-; Current desktop UUID appears to be in HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\SessionInfo\<current session>\VirtualDesktops
-; List of desktops appears to be in HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops
-_mapDesktopsFromRegistry()
+_getDesktopCount()
 {
+  return(_getDesktopInfo()["count"])
+}
+
+; _getDesktopIndex - return index of current desktop.
+;
+; Returns 0 if virtual desktops are not initialized or information cannot be retrieved.
+_getDesktopIndex()
+{
+  return(_getDesktopInfo()["current_index"])
+}
+
+; _getDesktopInfo() - Returns hash of information about vdesks.
+_getDesktopInfo()
+{
+
+  local session_id
   ; Get current desktop ID ( a binary 32-char string )
   DllCall("ProcessIdToSessionId",
           "UInt", DllCall("GetCurrentProcessId", "UInt"),
-          "UInt*", SessionId)
-  CurrentDesktopId := RegRead("HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\SessionInfo\" .
-                              SessionId . "\VirtualDesktops", "CurrentVirtualDesktop") 
-  if (CurrentDesktopId == "" ) ; No virtual desktops have been created sofar
-  {
-    MsgBox("TODO: Startup Sequence. No virtual desktops are active yet")  
-  }
-  IdLength := StrLen(CurrentDesktopId)
+          "UInt*", session_id)
+  local current_desktop_id := RegRead("HKEY_CURRENT_USER\Software\Microsoft\Windows\" .
+                                    "CurrentVersion\Explorer\SessionInfo\" .
+                                    session_id . "\VirtualDesktops", "CurrentVirtualDesktop") 
+                              
+  ; Length of a desktop id string (number of hex-characters)
+  local id_length := StrLen(current_desktop_id)
 
   ; Calculate desktop count. This regkey consists of a concat of all desktop IDs
-  DesktopIdList := RegRead("HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops", "VirtualDesktopIDs")
-  DesktopCount := StrLen(DesktopIdList) / IdLength
+  local desktop_id_list := RegRead("HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops", "VirtualDesktopIDs")
+  local desktop_count := StrLen(desktop_id_list) / id_length
+  
+  local current_desktop_index
+  local ii := 0
+  while (ii < desktop_count) {
+    local start_index := (ii * id_length) + 1
+    local desktop_id := SubStr(desktop_id_list, start_index, id_length)
 
-  ; Check which desktop we're currently on by matching all Id substrings
-  i := 0
-  while (CurrentDesktopId and i < DesktopCount) {
-    StartPos := (i * IdLength) + 1
-    DesktopId := SubStr(DesktopIdList, StartPos, IdLength)
-
-    if (DesktopId = CurrentDesktopId) {
-      CurrentDesktop := i + 1
-      return
+    if (desktop_id == current_desktop_id) {
+      current_desktop_index := ii + 1
+      break
     }
-    i++
+    ii++
   }
+
+  result := {current_id :     current_desktop_id,
+          current_index :  current_desktop_index,
+                id_list :        desktop_id_list,
+              id_length :              id_length,
+                  count :          desktop_count}
+  return(result)
 }
 
 ; _debug - Wrapper for debugging information
@@ -247,8 +263,14 @@ _debug(msg)
 ; Initializes variables and starts applications
 globalInit()
 {
+   if (_getDesktopIndex() == 0) {
+     ; Initialize virtual desktops
+     switchDesktopByNumber(2)
+     Sleep(100)
+     switchDesktopByNumber(1)
+   }
+
   SetKeyDelay 75
-  _mapDesktopsFromRegistry()
   DetectHiddenWindows true
   SetTitleMatchMode "RegEx"
   if (!WinExist(xserv_string))
