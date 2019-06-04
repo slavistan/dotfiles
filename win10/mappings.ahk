@@ -88,10 +88,15 @@ toggleMaximize(identifier := "A")
 ; runDialogue - Display dialogue to run commands and programs
 runDialogue()
 {
-  ; BUG: For the love of god .. why does <#x & r not work???
-  Run("cmd.exe")
+  ; Spawn Windows built-in application launcher
+  ; BUG: Hotkey does not work if any window is focused. Defocus first (by focusing the task bar)
+  WinActivate("ahk_class Shell_TrayWnd")
+  Send("#x")
+  Sleep(15)
+  Send("r")
 }
 
+; WIP
 moveWindowToDesktop(targetDesktop)
 {
   uid := WinExist("A")
