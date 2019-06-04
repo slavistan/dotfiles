@@ -181,7 +181,14 @@ _spawnUnique(identifier,            ; window identifier. E.g. "ahk_class Firefox
   DetectHiddenWindows detect_hidden
   SetTitleMatchMode match_mode
   if( !WinExist(identifier) )
+  {
     Run(path)
+    ret := WinWait(identifier,,4)
+    if (ret == 0)
+    {
+      _debug("_spawnUnique: WinWait timed out.")
+    }
+  }
   return
 }
 
