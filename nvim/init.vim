@@ -81,7 +81,7 @@ inoremap <S-Tab> <Backspace>
 """
 " POST- Settings: Filtype specifics & Plugin settings
 """
-autocmd FileType Rmd,rmd call SetRmdOptions()
+autocmd FileType Rmd,rmd,r call SetRmdOptions()
 function SetRmdOptions()
   set textwidth=120
   set conceallevel=0 " Nvim-R conceals a lot
@@ -98,7 +98,7 @@ function SetRmdOptions()
   set viewoptions=folds
   set viewdir=.vim
   autocmd BufWinLeave *.rmd,*.Rmd mkview
-  autocmd BufWinEnter *.rmd,*.Rmd silent loadview
+  autocmd BufWinEnter *.rmd,*.Rmd silent loadview | foldclose!
 endfunction
 
 let g:indentguides_spacechar = '┊'

@@ -2,7 +2,6 @@
 ;      Temporary fix: hardcode filepath (PATH cannot be accessed)
 #SingleInstance force
 
-
 globalInit()
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -27,7 +26,7 @@ Capslock:: Esc
       #2:: switchDesktopByNumber(2)
       #3:: switchDesktopByNumber(3)
       #4:: switchDesktopByNumber(4)
-      #o:: _debug(_getDesktopIndex())
+      #o:: _debug("Hello World!")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -255,8 +254,13 @@ _getDesktopInfo()
 ; _debug - Wrapper for debugging information
 _debug(msg)
 {
-  ; can't output be forwarded to stdout? Use a MsgBox for now
-  MsgBox("DEBUG: " . msg)
+  __print("[MSG ]: " . msg)
+}
+
+; __print - Print string to stdout
+__print(msg)
+{
+  FileOpen("*", "w").WriteLine(msg)
 }
 ; globalInit()
 ;
