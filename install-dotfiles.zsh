@@ -77,9 +77,9 @@ echo '[[ ! -z $(command -v wslpath) ]] && export DISPLAY=localhost:0.0'         
 ###########
 ## Keyboard Layout
 ###########
-# TODO
-echo 'setxkbmap -layout us'                            >> $HOME/.profile
-echo "xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'" >> $HOME/.profile
+cd /usr/share/X11/xkb/symbols/
+_sudo ln -sf $dotfiles_dir/xkb/symbols/stan
+echo 'setxkbmap -layout stan' >> $HOME/.profile
 
 ###########
 ## ZSH + OhMyZsh
