@@ -124,8 +124,9 @@ if [[ $configure_nvim == true ]]; then
   mkdir -p $config_dir && cd "$_" && ln -s $dotfiles_dir/nvim .
   nvim +PlugClean +PlugInstall +quitall
 
-  echo "export EDITOR=nvim" >> $temp_dir/.profile
-  fi
+  echo "export EDITOR=nvim" >> $HOME/.profile
+  echo "alias view=$EDITOR -R" >> $dotfiles_dir/zsh/envvars.zsh
+fi
 
 ###########
 ## ST

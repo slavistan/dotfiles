@@ -50,7 +50,6 @@ Plug 'https://github.com/mboughaba/i3config.vim.git'
 Plug 'https://github.com/jalvesaq/Nvim-R.git'
 Plug 'https://github.com/jeffkreeftmeijer/vim-dim.git'
 Plug 'https://github.com/godlygeek/tabular.git'
-Plug 'https://github.com/thaerkh/vim-indentguides.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
 call plug#end()

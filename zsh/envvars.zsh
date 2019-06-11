@@ -15,3 +15,5 @@ alias tmux='tmux -f /home/shuell/.config/tmux/config'
 alias tmux='tmux -f /home/shuell/.config/tmux/config'
 alias tmux='tmux -f /home/shuell/.config/tmux/config'
 alias tmux='tmux -f /home/shuell/.config/tmux/config'
+alias view=nvim -R
+alias tmux='tmux -f /home/shuell/.config/tmux/config'
