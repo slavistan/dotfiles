@@ -3,7 +3,7 @@
 setopt +o nomatch # disable errors from empty globs
 set -e # abort on error
 
-# configuration files' base directory. Must be defined.
+# We use the XDG_... conventions. Enfore definition.
 if [[ -z "$XDG_CONFIG_HOME" ]]; then 
   echo "XDG_CONFIG_HOME is not defined. Abort."
   exit 1
@@ -67,7 +67,6 @@ function _sudo {
 ###########
 ## .profile - Create barebone and add content depending on installed modules
 ###########
-rm -f $HOME/.profile
 echo '# This file was created automatically.'                                                       > $HOME/.profile
 echo 'export XDG_CONFIG_HOME='"$XDG_CONFIG_HOME"                                                   >> $HOME/.profile
 echo 'export LANG=de_DE.utf8'                                                                      >> $HOME/.profile
@@ -79,8 +78,8 @@ echo '[[ ! -z $(command -v wslpath) ]] && export DISPLAY=localhost:0.0'         
 ## Keyboard Layout
 ###########
 # TODO
-# setxkbmap -layout stan
-# xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+echo 'setxkbmap -layout us'                            >> $HOME/.profile
+echo "xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'" >> $HOME/.profile
 
 ###########
 ## ZSH + OhMyZsh
@@ -89,11 +88,11 @@ if [[ $configure_zsh == true ]]; then
   echo 'Configuring zsh ...'
 
 # Make zsh use XDG_CONFIG_HOME
-# Cannot send output to a file using sudo thus we stuff a dummy file and sudo-move it in place.
+# Cannot send output to a file using sudo thus we stuff a dummy file and sudo-copy it in place.
 # Shell scripting is a royal pain the ass.
   _sudo printf \
     '# /etc/zsh/zshenv: system-wide .zshenv file for zsh(1).'"\n"'# Global Order: zshenv, zprofile, zshrc, zlogin'"\n"'[[ ! -z "$XDG_CONFIG_HOME" ]] && export ZDOTDIR="$XDG_CONFIG_HOME/zsh/"'"\n" > $temp_dir/zshenv
-  _sudo mv -f $temp_dir/zshenv /etc/zshenv
+  _sudo cp -f $temp_dir/zshenv /etc/zshenv
 
 # Export shell variable in profile
   echo "export SHELL=/usr/bin/zsh" >> $HOME/.profile
