@@ -1,4 +1,4 @@
-let g:NVIMHOME=$DOTFILES . '/nvim'
+let g:NVIMHOME=$XDG_CONFIG_HOME . '/nvim'
 
 """
 " Settings

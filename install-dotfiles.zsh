@@ -1,7 +1,13 @@
 #!/bin/zsh
 
-# Disable errors from empty globs
-setopt +o nomatch
+setopt +o nomatch # disable errors from empty globs
+set -e # abort on error
+
+# configuration files' base directory. Must be defined.
+if [[ -z "$XDG_CONFIG_HOME" ]]; then 
+  echo "XDG_CONFIG_HOME is not defined. Abort."
+  exit 1
+fi
 
 if [[ "$1" == "--check-dependencies" ]]; then
   return_code=0
@@ -25,15 +31,15 @@ if [[ "$1" == "--check-dependencies" ]]; then
   exit $return_code
 fi
 
-set -e
+
 
 ##
 # Options - Adjust according to setup
 ##
 configure_zsh=true
 configure_nvim=true
-onfigure_st=false
-configure_i3=false
+onfigure_st=true
+configure_i3=true
 configure_tmux=true
 configure_git=true
 config_dir=$HOME'/.config'
@@ -54,32 +60,77 @@ if [[ "$?" != "0" ]]; then
   exit 1
 fi
 echo 'OK.'
+function _sudo {
+  sudo -Sp '' "$@" <<<${pw}
+}
 
+###########
+## .profile - Create barebone and add content depending on installed modules
+###########
+rm -f $HOME/.profile
+echo '# This file was created automatically.'                                                       > $HOME/.profile
+echo 'export XDG_CONFIG_HOME='"$XDG_CONFIG_HOME"                                                   >> $HOME/.profile
+echo 'export LANG=de_DE.utf8'                                                                      >> $HOME/.profile
+echo 'export TZ="Europe/Berlin"'                                                                   >> $HOME/.profile
+echo '[[ ! -z $(command -v wslpath) ]] && export BROWSER="firefox.exe" || export BROWSER="firefox"'>> $HOME/.profile
+echo '[[ ! -z $(command -v wslpath) ]] && export DISPLAY=localhost:0.0'                            >> $HOME/.profile
+
+###########
+## Keyboard Layout
+###########
+# TODO
+# setxkbmap -layout stan
+# xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+
+###########
+## ZSH + OhMyZsh
+###########
 if [[ $configure_zsh == true ]]; then
   echo 'Configuring zsh ...'
+
+# Make zsh use XDG_CONFIG_HOME
+# Cannot send output to a file using sudo thus we stuff a dummy file and sudo-move it in place.
+# Shell scripting is a royal pain the ass.
+  _sudo printf \
+    '# /etc/zsh/zshenv: system-wide .zshenv file for zsh(1).'"\n"'# Global Order: zshenv, zprofile, zshrc, zlogin'"\n"'[[ ! -z "$XDG_CONFIG_HOME" ]] && export ZDOTDIR="$XDG_CONFIG_HOME/zsh/"'"\n" > $temp_dir/zshenv
+  _sudo mv -f $temp_dir/zshenv /etc/zshenv
+
+# Export shell variable in profile
+  echo "export SHELL=/usr/bin/zsh" >> $HOME/.profile
+
+# Install OhMyZsh
   cd $dotfiles_dir/zsh
   rm -rf oh-my-zsh # remove oh-my-zsh files
   git clone https://github.com/robbyrussell/oh-my-zsh.git
   cd oh-my-zsh # clone oh-my-zsh and submodules ..
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ./plugins/zsh-syntax-highlighting # ..
   git clone https://github.com/romkatv/powerlevel10k.git ./themes/powerlevel10k # ..
-  mkdir -p $config_dir && cd "$_" # enter config dir
-  ln -fs $dotfiles_dir/zsh # create symlink
-  cd $HOME
-  rm .zshrc
-  ln -fs $dotfiles_dir/zsh/zshrc ~/.zshrc
 
+# Symlink XDG path to dotfiles
+  mkdir -p $XDG_CONFIG_HOME && cd "$_" # enter config dir
+  ln -fs $dotfiles_dir/zsh # create symlink
+
+# Create barebone envvars file
   touch $dotfiles_dir/zsh/envvars.zsh
 fi
 
+
+###########
+## NVim
+###########
 if [[ $configure_nvim == true ]]; then
   echo "Configuring nvim ..."
   rm -rf $dotfiles_dir/nvim/plug_plugins/*/
   rm -f $config_dir/nvim
   mkdir -p $config_dir && cd "$_" && ln -s $dotfiles_dir/nvim .
   nvim +PlugClean +PlugInstall +quitall
-fi
 
+  echo "export EDITOR=nvim" >> $temp_dir/.profile
+  fi
+
+###########
+## ST
+###########
 if [[ $configure_st == true ]]; then
   echo 'Configuring st ...'
   mkdir -p $temp_dir/st
@@ -87,6 +138,9 @@ if [[ $configure_st == true ]]; then
   sudo -Sp '' make clean install <<<${pw}
 fi
 
+###########
+## i3wm
+###########
 if [[ $configure_i3 == true ]]; then
   echo 'Configuring i3 ...'
   mkdir -p $config_dir && cd "$_" && rm -rf i3
@@ -94,6 +148,9 @@ if [[ $configure_i3 == true ]]; then
   ln -fs $config_dir/i3/config-i3 $config_dir/i3/config
 fi
 
+###########
+## tmux
+###########
 if [[ $configure_tmux == true ]]; then
   echo 'Configuring tmux ...'
   rm -f $config_dir/tmux && ln -s $dotfiles_dir/tmux $config_dir/tmux
@@ -101,6 +158,9 @@ if [[ $configure_tmux == true ]]; then
   echo "alias tmux='tmux -f $config_dir/tmux/config'" >> $dotfiles_dir/zsh/envvars.zsh
 fi
 
+###########
+## git
+###########
 if [[ $configure_git == true ]]; then
   echo 'Configuring git ...'
   mkdir -p $config_dir && cd "$_" && rm -rf git
@@ -108,8 +168,9 @@ if [[ $configure_git == true ]]; then
   ln -fs $config_dir/git/config ~/.gitconfig
 fi
 
-source ~/.zshrc
+source $XDG_CONFIG_HOME/zsh/.zshrc
 
 # TODO:
 ## Blocks
 ## .profile
+## ~/.zcompdump
