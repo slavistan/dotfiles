@@ -78,7 +78,8 @@ echo '[[ ! -z $(command -v wslpath) ]] && export DISPLAY=localhost:0.0'         
 ## Keyboard Layout
 ###########
 cd /usr/share/X11/xkb/symbols/
-_sudo ln -sf $dotfiles_dir/xkb/symbols/stan
+# Can't use symlink on CentOS :( Hardcopy instead
+_sudo cp $dotfiles_dir/xkb/symbols/stan /usr/share/X11/xkb/symbols
 echo 'setxkbmap -layout stan' >> $HOME/.profile
 
 ###########
