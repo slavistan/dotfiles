@@ -78,8 +78,7 @@ echo '[[ ! -z $(command -v wslpath) ]] && export DISPLAY=localhost:0.0'         
 ## Keyboard Layout
 ###########
 cd /usr/share/X11/xkb/symbols/
-# Can't use symlink on CentOS :( Hardcopy instead
-_sudo cp $dotfiles_dir/xkb/symbols/stan /usr/share/X11/xkb/symbols
+_sudo ln -s $dotfiles_dir/xkb/symbols/stan
 echo 'setxkbmap -layout stan' >> $HOME/.profile
 
 ###########
@@ -111,6 +110,7 @@ if [[ $configure_zsh == true ]]; then
   ln -fs $dotfiles_dir/zsh # create symlink
 
 # Create barebone envvars file
+  rm $dotfiles_dir/zsh/envvars.zsh
   touch $dotfiles_dir/zsh/envvars.zsh
 fi
 
