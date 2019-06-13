@@ -1,5 +1,6 @@
 #!/bin/zsh
 
+# BUG: Muting headphones mutes speakers aswell. Something broken in alsamixer.
 function toggleDevice(){
   amixer --q --card 0 sset $1 toggle
   # amixer BUG: Master is toggled aswell. Unmute manually
