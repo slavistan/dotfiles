@@ -53,7 +53,8 @@ echo 'Dotfiles: '$dotfiles_dir
 echo 'Config: '$config_dir
 echo 'Tempdir: '$temp_dir
 
-read "pw?Enter your sudo password: "
+# Enter user password and check it
+read -s "pw?Enter your sudo password: "
 sudo -kSp '' true <<<"${pw}" > /dev/null 2>&1
 if [[ "$?" != "0" ]]; then
   echo 'Invalid password. Abort.'
@@ -69,7 +70,7 @@ function _sudo {
 ###########
 echo '# This file was created automatically.'                                                       > $HOME/.profile
 echo 'export XDG_CONFIG_HOME='"$XDG_CONFIG_HOME"                                                   >> $HOME/.profile
-echo 'export LANG=de_DE.utf8'                                                                      >> $HOME/.profile
+echo 'export LANG=en_US.utf8'                                                                      >> $HOME/.profile
 echo 'export TZ="Europe/Berlin"'                                                                   >> $HOME/.profile
 echo '[[ ! -z $(command -v wslpath) ]] && export BROWSER="firefox.exe" || export BROWSER="firefox"'>> $HOME/.profile
 echo '[[ ! -z $(command -v wslpath) ]] && export DISPLAY=localhost:0.0'                            >> $HOME/.profile
@@ -78,7 +79,7 @@ echo '[[ ! -z $(command -v wslpath) ]] && export DISPLAY=localhost:0.0'         
 ## Keyboard Layout
 ###########
 cd /usr/share/X11/xkb/symbols/
-_sudo ln -s $dotfiles_dir/xkb/symbols/stan
+_sudo ln -fs $dotfiles_dir/xkb/symbols/stan
 echo 'setxkbmap -layout stan' >> $HOME/.profile
 
 ###########
@@ -94,16 +95,16 @@ if [[ $configure_zsh == true ]]; then
     '# /etc/zsh/zshenv: system-wide .zshenv file for zsh(1).'"\n"'# Global Order: zshenv, zprofile, zshrc, zlogin'"\n"'[[ ! -z "$XDG_CONFIG_HOME" ]] && export ZDOTDIR="$XDG_CONFIG_HOME/zsh/"'"\n" > $temp_dir/zshenv
   _sudo cp -f $temp_dir/zshenv /etc/zshenv
 
-# Export shell variable in profile
   echo "export SHELL=/usr/bin/zsh" >> $HOME/.profile
 
 # Install OhMyZsh
+# Delete existing files, clone oh-my-zsh, install plugins and themes
   cd $dotfiles_dir/zsh
   rm -rf oh-my-zsh # remove oh-my-zsh files
   git clone https://github.com/robbyrussell/oh-my-zsh.git
-  cd oh-my-zsh # clone oh-my-zsh and submodules ..
+  cd oh-my-zsh
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ./plugins/zsh-syntax-highlighting # ..
-  git clone https://github.com/romkatv/powerlevel10k.git ./themes/powerlevel10k # ..
+  git clone https://github.com/slavistan/milton-oh-my-zsh-theme.git ./themes/milton
 
 # Symlink XDG path to dotfiles
   mkdir -p $XDG_CONFIG_HOME && cd "$_" # enter config dir

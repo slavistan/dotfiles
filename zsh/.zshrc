@@ -1,12 +1,14 @@
 source ~/.profile
 
+setopt globdots # tab-complete dotfiles
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME'/.config/zsh/oh-my-zsh'
 export ZSH_HOME=$HOME'/.config/zsh'
 export ZSH_DISABLE_COMPFIX="true"
 export ZSH_COMPDUMP=$ZSH_HOME/backup
 export HISTFILE=$ZSH_HOME/backup
-ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="milton/milton"
 COMPLETION_WAITING_DOTS="true"
 
 autoload -Uz compinit
@@ -17,7 +19,9 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-[[ -r $ZSH_HOME/setup-specific.zsh ]] && source $ZSH_HOME/setup-specific.zh
+
+# Source setup-specific configuration which shall not be committed to this repository.
+[[ -r $ZSH_HOME/setup-specific.zsh ]] && source $ZSH_HOME/setup-specific.zsh
 source $ZSH_HOME/envvars.zsh
 
 # User configuration
@@ -32,9 +36,7 @@ alias sed='sed -r'
 alias t='tree -aL 1 --dirsfirst'
 alias l='\ls --color=tty -Aog --si --time-style=long-iso --group-directories-first'
 
-export SPACK_ROOT=~/bin/program-files/spack
-source $SPACK_ROOT/share/spack/setup-env.sh
-
 export DOTFILES=$HOME'/projects/dotfiles'
 
-# TODO: --> .profile
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)

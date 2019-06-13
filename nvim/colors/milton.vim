@@ -11,6 +11,7 @@ if exists("syntax_on")
 endif
 let g:colors_name="milton"
 
+hi Normal          guifg=#F8F8F2 guibg=#1B1D1E
 hi Boolean         guifg=#AE81FF
 hi Character       guifg=#E6DB74
 hi Number          guifg=#AE81FF
@@ -99,7 +100,6 @@ hi WildMenu        guifg=#66D9EF guibg=#000000
 hi TabLineFill     guifg=#1B1D1E guibg=#1B1D1E
 hi TabLine         guibg=#1B1D1E guifg=#808080 gui=none
 
-hi Normal          guifg=#F8F8F2 guibg=#1B1D1E
 hi Comment          guifg=#FFD1B3 gui=none
 "hi Comment         guifg=#7E8E91                        ctermfg=249
 hi CursorLine                    guibg=#293739
@@ -113,7 +113,6 @@ hi SpecialKey      guifg=#465457
 "
 " Support for 256-color terminal
 "
-hi Normal         ctermfg=252 ctermbg=233
 hi CursorLine                 ctermbg=234   cterm=none
 hi CursorLinenr   ctermfg=208               cterm=none
 hi Boolean        ctermfg=135

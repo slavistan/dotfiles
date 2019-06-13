@@ -2,3 +2,5 @@ nvim/plug-plugins
 zsh/backup
 nvim/backup
 zsh/oh-my-zsh
+zsh/setup-specific.zsh
+zsh/envvars.zsh
