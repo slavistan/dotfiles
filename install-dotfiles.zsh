@@ -38,7 +38,7 @@ fi
 ##
 configure_zsh=true
 configure_nvim=true
-onfigure_st=true
+configure_st=true
 configure_i3=true
 configure_tmux=true
 configure_git=true
@@ -146,8 +146,9 @@ fi
 if [[ $configure_st == true ]]; then
   echo 'Configuring st ...'
   mkdir -p $temp/st
-  git clone https://github.com/slavistan/st.git $temp/sh && cd "$_"
-  sudo -Sp '' make clean install <<<${pw}
+  git clone https://github.com/slavistan/st.git $temp/st
+  cd $temp/st
+  _sudo make clean install
 fi
 
 ###########
