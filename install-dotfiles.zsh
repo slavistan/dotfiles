@@ -1,5 +1,8 @@
 #!/bin/zsh
 
+# TODO:
+## ~/.zcompdump
+
 setopt +o nomatch # disable errors from empty globs
 set -e # abort on error
 
@@ -38,8 +41,8 @@ fi
 ##
 configure_zsh=true
 configure_nvim=true
-configure_st=true
-configure_i3=true
+configure_st=false
+configure_i3=false
 configure_tmux=true
 configure_git=true
 configure_xkb=false
@@ -90,9 +93,11 @@ echo '[[ ! -z $(command -v wslpath) ]] && export DISPLAY=localhost:0.0'         
 ###########
 ## Keyboard Layout
 ###########
-cd /usr/share/X11/xkb/symbols/
-_sudo ln -fs $DOTFILES/xkb/symbols/stan
-echo 'setxkbmap -layout stan' >> $HOME/.profile
+if [[ $configure_xkb == true ]]; then
+  cd /usr/share/X11/xkb/symbols/
+  _sudo ln -fs $DOTFILES/xkb/symbols/stan
+  echo 'setxkbmap -layout stan' >> $HOME/.profile
+fi
 
 ###########
 ## ZSH + OhMyZsh
@@ -103,9 +108,9 @@ if [[ $configure_zsh == true ]]; then
 # Make zsh use XDG_CONFIG_HOME
 # Cannot send output to a file using sudo thus we stuff a dummy file and sudo-copy it in place.
 # Shell scripting is a royal pain the ass.
-  _sudo printf \
+  printf \
     '# /etc/zsh/zshenv: system-wide .zshenv file for zsh(1).'"\n"'# Global Order: zshenv, zprofile, zshrc, zlogin'"\n"'[[ ! -z "$XDG_CONFIG_HOME" ]] && export ZDOTDIR="$XDG_CONFIG_HOME/zsh/"'"\n" > $temp/zshenv
-  _sudo cp -f $temp/zshenv /etc/zshenv
+  _sudo cp -f $temp/zshenv /etc/zsh/zshenv
 
   echo "export SHELL=/usr/bin/zsh" >> $HOME/.profile
 
@@ -123,7 +128,7 @@ if [[ $configure_zsh == true ]]; then
   ln -fs $DOTFILES/zsh # create symlink
 
 # Create barebone envvars file
-  rm $DOTFILES/zsh/envvars.zsh
+  rm -f $DOTFILES/zsh/envvars.zsh
   touch $DOTFILES/zsh/envvars.zsh
 fi
 
@@ -183,8 +188,3 @@ if [[ $configure_git == true ]]; then
 fi
 
 source $XDG_CONFIG_HOME/zsh/.zshrc
-
-# TODO:
-## Blocks
-## .profile
-## ~/.zcompdump
