@@ -1,5 +1,7 @@
 # vim: filetype=i3config
 
+# TODO: | und - für neue Split verwenden
+
 font pango: FontAwesome 17, Hack Bold 17
 set $bg #1B1D1E
 set $fg #F8F8F2
