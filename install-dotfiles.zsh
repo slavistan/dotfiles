@@ -69,6 +69,7 @@ if [[ "$?" != "0" ]]; then
   exit 1
 fi
 echo 'OK.'
+# sudo wrapper
 function _sudo {
   sudo -Sp '' "$@" <<<${pw}
 }
