@@ -1,3 +1,6 @@
+" TODO:
+" List number of matches when searching (custom command?)
+" Incsearch without then adhs jumps
 let g:NVIMHOME=$XDG_CONFIG_HOME . '/nvim'
 
 """
