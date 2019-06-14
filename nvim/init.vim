@@ -142,5 +142,4 @@ let g:gitgutter_sign_removed = '--'
 let g:gitgutter_sign_removed_first_line ='--'
 let g:gitgutter_sign_modified_removed = '≠≠'
 
-
 colorscheme milton " postpone loading of colorscheme so that plugins' hi groups will be known
