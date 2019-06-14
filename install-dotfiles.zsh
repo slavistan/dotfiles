@@ -42,6 +42,7 @@ configure_st=true
 configure_i3=true
 configure_tmux=true
 configure_git=true
+configure_xkb=false
 
 ##
 # Script
