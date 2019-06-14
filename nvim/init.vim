@@ -24,7 +24,6 @@ set virtualedit=block
 set path+=**
 set scrolloff=999 " Center cursor vertically
 set number
-set signcolumn=yes
 set textwidth=999
 set modeline
 set showbreak=↪
@@ -137,7 +136,11 @@ nnoremap <Leader>gs :GitGutterStageHunk<CR>
 nnoremap <Leader>gu :GitGutterUndoHunk<CR>
 " review a hunk in split screen
 nnoremap <Leader>gp :GitGutterPreviewHunk<CR>
-
+let g:gitgutter_sign_added = '++'
+let g:gitgutter_sign_modified = '≠≠'
+let g:gitgutter_sign_removed = '--'
+let g:gitgutter_sign_removed_first_line ='--'
+let g:gitgutter_sign_modified_removed = '≠≠'
 
 
 colorscheme milton " postpone loading of colorscheme so that plugins' hi groups will be known
