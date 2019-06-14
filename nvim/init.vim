@@ -47,11 +47,9 @@ let g:R_assign=0 " Disable automatic substitution of _
 " Plugins
 """
 execute 'call plug#begin(''' . g:NVIMHOME . '/plug-plugins'')'
-Plug 'https://github.com/flazz/vim-colorschemes.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/mboughaba/i3config.vim.git'
 Plug 'https://github.com/jalvesaq/Nvim-R.git'
-Plug 'https://github.com/jeffkreeftmeijer/vim-dim.git'
 Plug 'https://github.com/godlygeek/tabular.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
@@ -103,9 +101,6 @@ function SetRmdOptions()
   autocmd BufWinEnter *.rmd,*.Rmd silent loadview | foldclose!
 endfunction
 
-let g:indentguides_spacechar = '┊'
-let g:indentguides_tabchar = '┊'
-
 let g:pandoc#syntax#conceal#use = 0
 let g:pandoc#modules#disabled = [ "spell" ]
 
@@ -124,3 +119,7 @@ function! SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
+" gitgutter
+
+nnoremap <F12> :GitGutterToggle<CR>
