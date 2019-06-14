@@ -9,7 +9,6 @@ let g:NVIMHOME=$XDG_CONFIG_HOME . '/nvim'
 " Some settings must preceed the loading of plugins.
 """
 set termguicolors
-colorscheme milton
 
 let &backupdir=g:NVIMHOME . '/backup'
 let &directory=&backupdir
@@ -23,7 +22,6 @@ set smartcase
 set linebreak
 set virtualedit=block
 set path+=**
-set updatetime=100
 set scrolloff=999 " Center cursor vertically
 set number
 set signcolumn=yes
@@ -120,6 +118,26 @@ function! SynStack()
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 
+"""
 " gitgutter
+"""
+set updatetime=100 " lessen reaction time
+let g:gitgutter_enabled=0 " don't run by default
+let g:gitgutter_highlight_lines=1 " highlight lines by default
+" toggle on/off
+nnoremap <Leader>gg :GitGutterToggle<CR>
+" toggle folding of unchanged lines
+nnoremap <Leader>gi :GitGutterFold<CR>
+" move between hunks
+nnoremap <Leader>gn :GitGutterNextHunk<CR>
+nnoremap <Leader>gN :GitGutterPrevHunk<CR>
+" stage a hunk
+nnoremap <Leader>gs :GitGutterStageHunk<CR>
+" undo a hunk
+nnoremap <Leader>gu :GitGutterUndoHunk<CR>
+" review a hunk in split screen
+nnoremap <Leader>gp :GitGutterPreviewHunk<CR>
 
-nnoremap <F12> :GitGutterToggle<CR>
+
+
+colorscheme milton " postpone loading of colorscheme so that plugins' hi groups will be known
