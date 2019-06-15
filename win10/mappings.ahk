@@ -20,13 +20,17 @@ Capslock:: Esc
       #e:: toggleExplorer()
      #+q:: close()
       #f:: toggleMaximize()
+     #+f:: _toggleTopBorder()
       #d:: runDialogue()
   #Enter:: spawnTerminal()
       #1:: switchDesktopByNumber(1)
       #2:: switchDesktopByNumber(2)
       #3:: switchDesktopByNumber(3)
       #4:: switchDesktopByNumber(4)
-      #o:: _debug("Hello World!")
+      #o:: 
+      MouseGetPos( , , uid, , )
+      _toggleTopBorder('ahk_id ' . uid)
+      return
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -72,7 +76,7 @@ toggleExplorer()
 
 spawnTerminal()
 {
-  Run("cmd /C " . termpath)
+  Run("cmd /C " . termpath, , uid)
   return
 }
 
@@ -166,6 +170,13 @@ _toggleView(identifier,             ; window identifier. E.g. "ahk_class Firefox
   }
   WinHide(identifier)
   return("hide")
+}
+
+; _toggleTopBorder - Hide/show border above window
+_toggleTopBorder(identifier := 'A')
+{
+  WinSetStyle("^0xC00000", identifier)
+  return
 }
 
 ; _spawnUnique - Run process if it does not exist

@@ -1,15 +1,15 @@
 # vim: filetype=tmux
 
 new-session -n $HOST # Attach to session or spawn a new one if none exist
-
 set -g default-terminal "tmux-256color"
 set -sg escape-time 0 # remove delay after Esc
 set -g base-index 1
 set -wg pane-base-index 1
 set -g mouse on
-set -f focus-events on # apparently needed by vim's git-gutter plugin
+set -g focus-events on # apparently needed by vim's git-gutter plugin
 set -g default-shell /usr/bin/zsh
 set -g default-command /usr/bin/zsh
+set-option -g status-position top
 
 unbind-key -a # unbind all keys
 

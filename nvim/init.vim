@@ -1,6 +1,8 @@
 " TODO:
 " List number of matches when searching (custom command?)
 " Incsearch without then adhs jumps
+" When linewraps are disabled (set wrap!) print a special character at the end of the visible line indicating that
+" the tail is hidden.
 let g:NVIMHOME=$XDG_CONFIG_HOME . '/nvim'
 
 """
