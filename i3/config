@@ -1,10 +1,24 @@
 # vim: filetype=i3config
-# TODO: Custom header icons depending on active task, e.g. Firefox fox
 
+#############
+## Startup
+#############
+
+# use Windows key
+set $mod Mod4
+
+# hardcode location of config file (TODO: abstract)
 set $i3home ~/.config/i3
 
-# Use Windows key
-set $mod Mod4
+# move and resize floating windows around with the mouse by pressing the mod-key
+floating_modifier $mod
+
+# detect monitors (TODO: custom script to change position)
+exec_always --no-startup-id xrandr --output HDMI1 --left-of eDP1 --auto
+
+############
+## Movement & Layout
+############
 
 bindsym $mod+Return exec "$i3home/scripts/spawn-term.zsh"
 bindsym $mod+minus split v; exec "$i3home/scripts/spawn-term.zsh"
@@ -24,6 +38,15 @@ bindsym $mod+Shift+l move right
 
 bindsym $mod+f fullscreen toggle
 
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
 # tab windows in container. toggle split to use tiling.
 # TODO: Implement toggling tabbing
 bindsym $mod+Shift+o layout tabbed
@@ -31,16 +54,12 @@ bindsym $mod+Shift+o layout tabbed
 # change container layout orientation
 bindsym $mod+o layout toggle split
 
-
 ## Floating stuff
 # toggle tiling / floating
 bindsym $mod+space floating toggle
-# move and resize floating windows around with the mouse by pressing the mod-key
-floating_modifier $mod
 
 # change focus between tiling / floating windows
 bindsym $mod+Shift+space focus mode_toggle
-
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -56,11 +75,6 @@ bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
 bindsym $mod+4 workspace $ws4
 bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
-bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -68,20 +82,6 @@ bindsym $mod+Shift+2 move container to workspace $ws2
 bindsym $mod+Shift+3 move container to workspace $ws3
 bindsym $mod+Shift+4 move container to workspace $ws4
 bindsym $mod+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6
-bindsym $mod+Shift+7 move container to workspace $ws7
-bindsym $mod+Shift+8 move container to workspace $ws8
-bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move container to workspace $ws10
-
-# reload the configuration file
-bindsym $mod+Shift+c reload
-
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (use vim-like keybinds above homerow)
 bindsym $mod+u resize grow height 5 px or 5 ppt
@@ -89,13 +89,10 @@ bindsym $mod+Shift+u resize shrink height 5 px or 5 ppt
 bindsym $mod+y resize grow width 5 px or 5 ppt
 bindsym $mod+Shift+y resize shrink width 5 px or 5 ppt
 
-
-font pango: FontAwesome 17, Hack Bold 17
-set $bg #1B1D1E
-set $fg #F8F8F2
-##
+#############
 # Scripts & Blocks
-##
+###########
+
 # Numpad keys are bugged as fuck.
 bindsym $mod+Mod2+KP_7 exec "$i3home/blocks/volume set Headphone 10%+"
 bindsym $mod+Mod2+KP_4 exec "$i3home/blocks/volume toggle Headphone"
@@ -107,8 +104,32 @@ bindsym $mod+Mod2+KP_9 exec "$i3home/blocks/screen brighter"
 bindsym $mod+Mod2+KP_6 exec "$i3home/blocks/screen reset"
 bindsym $mod+Mod2+KP_3 exec "$i3home/blocks/screen darker"
 
-## Start i3bar to display a workspace bar (plus the system information i3status
-## finds out, if available)
+#############
+## Default Visual Styling
+#############
+
+# Default colors (TODO: Use Xresources)
+set $bg #1B1D1E
+set $fg #F8F8F2
+
+# use custom font for unicode stuff
+font pango: FontAwesome 17, Hack Bold 17
+
+# thin border
+for_window [class=".*"] border pixel 3
+
+# gap sizes
+set $defaultgap 15
+gaps inner $defaultgap
+gaps outer 5
+
+# coloring
+client.focused          $bg $bg #FFFFFF $bg #FFD1B3
+client.focused_inactive $bg $bg #888888 $bg $bg
+client.unfocused        $bg $bg #888888 $bg $bg
+client.urgent           $bg $bg #888888 $bg $bg
+client.background       $bg
+
 bar {
   mode dock # dock|hide|invisible
   position top # top|bottom
@@ -130,16 +151,36 @@ bar {
   }
 }
 
-# Multi-monitor setup
-exec_always --no-startup-id xrandr --output HDMI1 --left-of eDP1 --auto
-
-client.focused          $bg $bg #FFFFFF $bg $bg
-client.focused_inactive $bg $bg #888888 $bg $bg
-client.unfocused        $bg $bg #888888 $bg $bg
-client.urgent           $bg $bg #888888 $bg $bg
-client.background       $bg
-
+# TODO: What is this?
 focus_wrapping no
+
+
+#############
+## Modes
+#############
+
+# mode to set visual settings
+set $mode_visual_set Visual Settings
+bindsym $mod+p mode "$mode_visual_set"
+mode "$mode_visual_set" {
+
+  # set gap size
+  #
+  # the up/down direction of the keys refers to the window size.
+  # A growing window implies a dimishing gap (bound to KP_8).
+
+  # current workspace
+  bindsym Mod2+KP_7 gaps inner current minus 15
+  bindsym Mod2+KP_4 gaps inner current set $defaultgap
+  bindsym Mod2+KP_1 gaps inner current plus 15
+
+  # all workspaces
+  bindsym Mod2+KP_8 gaps inner all minus 15
+  bindsym Mod2+KP_5 gaps inner all set $defaultgap
+  bindsym Mod2+KP_2 gaps inner all plus 15
+
+  bindsym Escape mode "default"
+}
 
 #############
 ## Rarely-Used Section
