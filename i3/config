@@ -1,15 +1,14 @@
 # vim: filetype=i3config
+# TODO: Custom header icons depending on active task, e.g. Firefox fox
 
-# TODO: | und - für neue Split verwenden
+set $i3home ~/.config/i3
 
-font pango: FontAwesome 17, Hack Bold 17
-set $bg #1B1D1E
-set $fg #F8F8F2
+# Use Windows key
 set $mod Mod4
 
-# Start a terminal in home and the previously accessed directory
-set $term st
-bindsym $mod+Return exec $term
+bindsym $mod+Return exec "$i3home/scripts/spawn-term.zsh"
+bindsym $mod+minus split v; exec "$i3home/scripts/spawn-term.zsh"
+bindsym $mod+Shift+backslash split h; exec "$i3home/scripts/spawn-term.zsh"
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec dmenu_run
 
@@ -25,30 +24,28 @@ bindsym $mod+Shift+l move right
 
 bindsym $mod+f fullscreen toggle
 
-# change container layout (tabbed, toggle split)
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+# tab windows in container. toggle split to use tiling.
+# TODO: Implement toggling tabbing
+bindsym $mod+Shift+o layout tabbed
 
-# Set split direction split for toggle split mode
-bindsym $mod+Shift+v split h
-bindsym $mod+v split v
+# change container layout orientation
+bindsym $mod+o layout toggle split
 
+
+## Floating stuff
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+space floating toggle
+# move and resize floating windows around with the mouse by pressing the mod-key
+floating_modifier $mod
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+Shift+space focus mode_toggle
 
-# focus the parent container
-bindsym $mod+a focus parent
-
-# focus the child container
-bindsym $mod+s focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1:🌎"
-set $ws2 "2:"
+set $ws1 "1:"
+set $ws2 "2:🌎"
 set $ws3 "3:"
 set $ws4 "4:"
 set $ws5 "5:"
@@ -79,8 +76,10 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
+
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
@@ -91,10 +90,12 @@ bindsym $mod+y resize grow width 5 px or 5 ppt
 bindsym $mod+Shift+y resize shrink width 5 px or 5 ppt
 
 
+font pango: FontAwesome 17, Hack Bold 17
+set $bg #1B1D1E
+set $fg #F8F8F2
 ##
 # Scripts & Blocks
 ##
-set $i3home ~/.config/i3
 # Numpad keys are bugged as fuck.
 bindsym $mod+Mod2+KP_7 exec "$i3home/blocks/volume set Headphone 10%+"
 bindsym $mod+Mod2+KP_4 exec "$i3home/blocks/volume toggle Headphone"
@@ -139,4 +140,15 @@ client.urgent           $bg $bg #888888 $bg $bg
 client.background       $bg
 
 focus_wrapping no
-# TODO: Custom header icons depending on active task, e.g. Firefox fox
+
+#############
+## Rarely-Used Section
+#############
+
+# Set split direction split for toggle split mode.
+bindsym $mod+Shift+v split h
+bindsym $mod+v split v
+
+# focus the parent/child container
+bindsym $mod+a focus parent
+bindsym $mod+s focus child

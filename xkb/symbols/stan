@@ -42,6 +42,7 @@ xkb_symbols "basic" {
   key <AC09> {[l,L]};
   key <AC10> {[semicolon,colon]};
   key <AC11> {[apostrophe,quotedbl]};
+  key <BKSL> {[backslash,         bar]};
 
   key <AB01> {[z,Z]};
   key <AB02> {[x,X]};
@@ -54,7 +55,6 @@ xkb_symbols "basic" {
   key <AB09> {[period,greater,greaterthanequal,rightarrow]};
   key <AB10> {[slash,question,questiondown,questiondown]};
 
-  key <BKSL> {[backslash,         bar]};
   key <CAPS> {[Escape]};
 
   include "level3(ralt_switch)"

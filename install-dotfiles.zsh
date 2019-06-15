@@ -41,11 +41,11 @@ fi
 ##
 configure_zsh=true
 configure_nvim=true
-configure_st=false
-configure_i3=false
+configure_st=true
+configure_i3=true
 configure_tmux=true
 configure_git=true
-configure_xkb=false
+configure_xkb=true
 
 ##
 # Script
@@ -110,7 +110,7 @@ if [[ $configure_zsh == true ]]; then
 # Shell scripting is a royal pain the ass.
   printf \
     '# /etc/zsh/zshenv: system-wide .zshenv file for zsh(1).'"\n"'# Global Order: zshenv, zprofile, zshrc, zlogin'"\n"'[[ ! -z "$XDG_CONFIG_HOME" ]] && export ZDOTDIR="$XDG_CONFIG_HOME/zsh/"'"\n" > $temp/zshenv
-  _sudo cp -f $temp/zshenv /etc/zsh/zshenv
+      _sudo cp -f $temp/zshenv $(locate zshenv | head -n 1)
 
   echo "export SHELL=/usr/bin/zsh" >> $HOME/.profile
 
@@ -156,6 +156,7 @@ if [[ $configure_st == true ]]; then
   git clone https://github.com/slavistan/st.git $temp/st
   cd $temp/st
   _sudo make clean install
+  echo "export TERMINAL="$(command -v st) >> $HOME/.profile
 fi
 
 ###########
