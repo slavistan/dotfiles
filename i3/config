@@ -115,7 +115,8 @@ set $fg #F8F8F2
 # use custom font for unicode stuff
 font pango: FontAwesome 17, Hack Bold 17
 
-# thin border
+# thin border + smart border (≥ 2 windows)
+smart_borders on
 for_window [class=".*"] border pixel 3
 
 # gap sizes
@@ -124,7 +125,7 @@ gaps inner $defaultgap
 gaps outer 5
 
 # coloring
-client.focused          $bg $bg #FFFFFF $bg #FFD1B3
+client.focused          $bg $bg #FFFFFF $bg $fg
 client.focused_inactive $bg $bg #888888 $bg $bg
 client.unfocused        $bg $bg #888888 $bg $bg
 client.urgent           $bg $bg #888888 $bg $bg
@@ -151,9 +152,8 @@ bar {
   }
 }
 
-# TODO: What is this?
+# don't wrap around to window at the opposite side of the screen when moving past the edge
 focus_wrapping no
-
 
 #############
 ## Modes

@@ -25,13 +25,14 @@ set linebreak
 set virtualedit=block
 set path+=**
 set scrolloff=999 " Center cursor vertically
-set number
+set number " show linenumbers
 set textwidth=999
 set modeline
 set showbreak=↪
 let mapleader=","
 let maplocalleader="\\"
 
+set nowrap " Disable wrapping by default
 set list listchars=tab:‣\ ,trail:· " Display tabs and trailing whitespaces
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 set autoindent " Keep indentation level for wrapped lines
@@ -52,6 +53,7 @@ Plug 'https://github.com/jalvesaq/Nvim-R.git'
 Plug 'https://github.com/godlygeek/tabular.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
+Plug 'https://github.com/w0rp/ale.git'
 call plug#end()
 
 """
