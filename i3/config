@@ -16,6 +16,9 @@ floating_modifier $mod
 # detect monitors (TODO: custom script to change position)
 exec_always --no-startup-id xrandr --output HDMI1 --left-of eDP1 --auto
 
+# startup 
+exec copyq
+
 ############
 ## Movement & Layout
 ############
