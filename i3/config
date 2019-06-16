@@ -24,8 +24,8 @@ exec copyq
 ############
 
 bindsym $mod+Return exec "$i3home/scripts/spawn-term.zsh"
-bindsym $mod+minus split v; exec "$i3home/scripts/spawn-term.zsh"
-bindsym $mod+Shift+backslash split h; exec "$i3home/scripts/spawn-term.zsh"
+bindsym $mod+minus split vertical; exec "$i3home/scripts/spawn-term.zsh"
+bindsym $mod+Shift+backslash split horizontal; exec "$i3home/scripts/spawn-term.zsh"
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec dmenu_run
 
@@ -135,9 +135,9 @@ client.urgent           $bg $bg #888888 $bg $bg
 client.background       $bg
 
 bar {
-  mode dock # dock|hide|invisible
-  position top # top|bottom
-  tray_output none # hide tray icons
+  mode           dock
+  position       top
+  tray_output    none
   status_command i3blocks -c ~/.config/i3/config-i3blocks
   font pango:Hack Bold 17
   separator_symbol ·
@@ -190,9 +190,15 @@ mode "$mode_visual_set" {
 #############
 
 # Set split direction split for toggle split mode.
-bindsym $mod+Shift+v split h
-bindsym $mod+v split v
+bindsym $mod+Shift+v split horizontal
+bindsym $mod+v split vertical
 
 # focus the parent/child container
 bindsym $mod+a focus parent
 bindsym $mod+s focus child
+
+
+
+
+
+
