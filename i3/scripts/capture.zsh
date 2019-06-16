@@ -1,5 +1,11 @@
 #!/usr/bin/env zsh
 
+main () {
+
+####
+# User interface for taking screenshots and video captures.
+####
+
 zparseopts -D -E -- -select:=arg_selection -interactive::=arg_interactive
 
 # '--interactive' presents a dmenu and reruns this script with the choice.
@@ -11,20 +17,22 @@ if [[ ! -z $arg_interactive ]]; then
 fi
 
 # '--select=Area|Window|Screen' makes a snapshot, saves it to disk and puts it into the clipboard
-outfile=$(mktemp --tmpdir=/tmp --suffix=.png snapshot_XXXXX)
 if [[ ! -z $arg_selection ]]; then
-  # remove the leading '=' from the choice (zparseopts why??)
-  choice=$(echo "$arg_selection[2]" | tr -d '=')
+  outfile=$(mktemp --tmpdir=/tmp --suffix=.png snapshot_XXXXX) # create the output file
+  choice=$(echo "$arg_selection[2]" | tr -d '=')               # remove leading '=' from choice
+                                                               # Why doesn'y zparseopts remove it? :(
   case $choice in
     Area)
-      gnome-screenshot --file=$outfile -a
-      notify-send "Saved to $outfile."
+      gnome-screenshot --file=$outfile --area  # let user select an area to snapshot
+                                               # TODO: snapshot_ <screen area>
+      clipcopy_ $outfile                       # copy MIME file to clipboard
+      notify_ "Saved to $outfile."             # send a notification
       ;;
     Window)
-      notify-send "Window capture not yet implemented."
+      notify_ "Window capture not yet implemented."
       ;;
     Screen)
-      notify-send "Window capture not yet implemented."
+      notify_ "Screen capture not yet implemented."
       ;;
     *)
       echo "'$choice'? What is this? I don't even."
@@ -33,3 +41,15 @@ if [[ ! -z $arg_selection ]]; then
       ;;
   esac
 fi
+
+} # main()
+
+notify_() {
+  notify-send $1
+}
+
+clipcopy_() {
+  copyq copy image/png - < $1
+}
+
+main "$@"; exit
