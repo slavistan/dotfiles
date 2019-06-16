@@ -23,10 +23,10 @@ if [[ ! -z $arg_selection ]]; then
                                                                # Why doesn'y zparseopts remove it? :(
   case $choice in
     Area)
-      gnome-screenshot --file=$outfile --area  # let user select an area to snapshot
-                                               # TODO: snapshot_ <screen area>
-      clipcopy_ $outfile                       # copy MIME file to clipboard
-      notify_ "Saved to $outfile."             # send a notification
+      gnome-screenshot --file=$outfile --area   # let user select an area to snapshot
+                                                # TODO: snapshot_ <screen area>
+      copyq copy image/png - < $outfile         # copy MIME file to clipboard
+      notify-send "Saved to $outfile"           # send a notification
       ;;
     Window)
       notify_ "Window capture not yet implemented."
@@ -43,13 +43,5 @@ if [[ ! -z $arg_selection ]]; then
 fi
 
 } # main()
-
-notify_() {
-  notify-send $1
-}
-
-clipcopy_() {
-  copyq copy image/png - < $1
-}
 
 main "$@"; exit
