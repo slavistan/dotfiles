@@ -17,7 +17,7 @@ floating_modifier $mod
 exec_always --no-startup-id xrandr --output HDMI1 --left-of eDP1 --auto
 
 # startup 
-exec copyq
+exec_always copyq
 
 ############
 ## Movement & Layout
