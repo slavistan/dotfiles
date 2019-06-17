@@ -110,6 +110,11 @@ function SetAhkOptions()
   " Reload script automatically
   autocmd BufWritePost *.ahk silent execute ':!AutoHotkeyU64.exe ' . expand('%') . ' &'
 endfunction
+
+" Source submodules
+"
+exe 'source ' . g:NVIMHOME . '/config/cpp.vim'
+
 """
 " Utility
 """
