@@ -1,6 +1,6 @@
-" Configuration pertaining to the C and C++ languages
+" Configuration pertaining to the C++ language
 
-autocmd FileType cpp,c call SetCppOptions()
+autocmd FileType cpp call SetCppOptions()
 function SetCppOptions()
 
 """ ALE configuration
@@ -19,14 +19,24 @@ let g:ale_linters_explicit=1
 if !exists('g:ale_linters')
   let g:ale_linters={}
 endif
-let g:ale_linters.cpp = ['clang', 'clangd']
+let g:ale_linters.cpp = ['clang', 'clangcheck', 'clangd', 'cppcheck', 'clangtidy']
 
 " Enable all warnings for clang and use the most recent standard.
 let g:ale_cpp_clang_options='-std=c++20 -Wall'
+
+" clangcheck: Nothing to do. 'compile_commands.json' is found by ALE.
+let g:ale_cpp_clangcheck_options=''
 
 " clangd's brains are based on an 'index' of the project. Provide the index by
 " generating it manually using the clangd-indexer tool, or let clangd do it.
 " We choose the latter method by passing it the '-background-index' flag.
 let g:ale_cpp_clangd_options='-background-index'
 
+" cppcheck: Enable all checks. We don't need to manually pass the path of the
+" compile_commands.json as this is handled automatically by ALE.
+let g:ale_cpp_cppcheck_options='--enable=all'
+
+" clang-tidy: Nothing to do. clang-tidy automatically finds its project-
+" specific dotfile if it's put inside the project's root directory.
+let g:ale_cpp_clangtidy_options=''
 endfunction
