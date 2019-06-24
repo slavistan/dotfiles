@@ -144,7 +144,7 @@ if [[ $configure_nvim == true ]]; then
   nvim +PlugClean +PlugInstall +quitall
 
   echo "export EDITOR=nvim" >> $HOME/.profile
-  echo "alias view=$EDITOR -R" >> $DOTFILES/zsh/envvars.zsh
+  echo "alias view=nvim -R" >> $DOTFILES/zsh/envvars.zsh
 fi
 
 ###########

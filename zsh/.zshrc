@@ -32,8 +32,9 @@ export TREE_COLORS=$($ZSH_HOME/scripts/dircolors.zsh)
 
 alias xclip='xclip -selection clipboard'
 alias vim=nvim
-alias sed='sed -r'
 alias t='tree -aL 1 --dirsfirst'
 alias l='\ls --color=tty -Aog --si --time-style=long-iso --group-directories-first'
 
 export DOTFILES=$HOME'/projects/dotfiles'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
