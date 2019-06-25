@@ -19,10 +19,11 @@ let g:ale_linters_explicit=1
 if !exists('g:ale_linters')
   let g:ale_linters={}
 endif
-let g:ale_linters.cpp = ['clang', 'clangcheck', 'clangd', 'cppcheck', 'clangtidy']
-
-" Enable all warnings for clang and use the most recent standard.
-let g:ale_cpp_clang_options='-std=c++20 -Wall'
+let g:ale_linters.cpp = [
+      \ 'clangd',
+      \ 'clangcheck',
+      \ 'cppcheck', 
+      \ 'clangtidy']
 
 " clangcheck: Nothing to do. 'compile_commands.json' is found by ALE.
 let g:ale_cpp_clangcheck_options=''
