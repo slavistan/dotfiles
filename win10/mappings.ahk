@@ -22,6 +22,8 @@ Capslock:: Esc
       #f:: toggleMaximize()
      #+f:: _toggleTopBorder()
       #d:: runDialogue()
+      #n:: snapshot()
+      #+n:: snapshot(true)
   #Enter:: spawnTerminal()
       #1:: switchDesktopByNumber(1)
       #2:: switchDesktopByNumber(2)
@@ -87,6 +89,17 @@ toggleMaximize(identifier := "A")
   else 
     WinRestore(identifier)
   return
+}
+
+; run SnippingTool
+snapshot(show_dialogue := false)
+{
+  if (show_dialogue) {
+    Run("SnippingTool.exe")
+  }
+  else {
+    Run("SnippingTool.exe /clip")
+  }
 }
 
 ; runDialogue - Display dialogue to run commands and programs
