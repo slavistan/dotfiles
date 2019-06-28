@@ -1,8 +1,6 @@
 " TODO:
 " List number of matches when searching (custom command?)
-" Incsearch without then adhs jumps
-" When linewraps are disabled (set wrap!) print a special character at the end of the visible line indicating that
-" the tail is hidden.
+" Incsearch without the adhs jumps
 let g:NVIMHOME=$XDG_CONFIG_HOME . '/nvim'
 
 """
@@ -33,7 +31,12 @@ let mapleader=","
 let maplocalleader="\\"
 
 set nowrap " Disable wrapping by default
-set list listchars=tab:‣\ ,trail:· " Display tabs and trailing whitespaces
+" Display tabs and trailing whitespaces
+set list
+set listchars=tab:⇤-⇥
+set listchars+=trail:·
+set listchars+=extends:⋯
+set listchars+=precedes:⋯
 set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 set autoindent " Keep indentation level for wrapped lines
 set breakindent " Wrapped lines preserve indentation
