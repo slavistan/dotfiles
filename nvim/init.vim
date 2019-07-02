@@ -15,9 +15,10 @@ let &directory=&backupdir
 let &shadafile=&backupdir . '/shada'
 let g:netrw_home=&backupdir
 
-set clipboard=unnamed
+set clipboard=unnamedplus
 set foldlevelstart=0 " Files are opened with all folds closed
 set noincsearch
+set ignorecase
 set smartcase
 set linebreak
 set virtualedit=block
@@ -101,8 +102,9 @@ function SetRmdOptions()
   set sessionoptions=folds
   set viewoptions=folds
   set viewdir=.vim
-  autocmd BufWinLeave *.rmd,*.Rmd mkview
-  autocmd BufWinEnter *.rmd,*.Rmd silent loadview | foldclose!
+" TODO: Check if a view-file exists prior to opening it.
+"  autocmd BufWinLeave *.rmd,*.Rmd mkview
+"  autocmd BufWinEnter *.rmd,*.Rmd silent loadview | foldclose!
 endfunction
 
 let g:pandoc#syntax#conceal#use = 0

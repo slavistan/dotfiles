@@ -30,7 +30,6 @@ export EDITOR='nvim'
 export LS_COLORS=$($ZSH_HOME/scripts/dircolors.zsh)
 export TREE_COLORS=$($ZSH_HOME/scripts/dircolors.zsh)
 
-alias xclip='xclip -selection clipboard'
 alias vim=nvim
 alias t='tree -aL 1 --dirsfirst'
 alias l='\ls --color=tty -Aog --si --time-style=long-iso --group-directories-first'

@@ -27,7 +27,7 @@ separator=false
 interval=60
 signal=10
 
-[screen]
+[backlight]
 interval=60
 signal=10
 

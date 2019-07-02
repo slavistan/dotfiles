@@ -23,9 +23,9 @@ exec_always copyq
 ## Movement & Layout
 ############
 
-bindsym $mod+Return exec "$i3home/scripts/spawn-term.zsh"
-bindsym $mod+minus split vertical; exec "$i3home/scripts/spawn-term.zsh"
-bindsym $mod+Shift+backslash split horizontal; exec "$i3home/scripts/spawn-term.zsh"
+bindsym $mod+Return exec "st"
+bindsym $mod+minus split vertical; exec "st"
+bindsym $mod+Shift+backslash split horizontal; exec "st"
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec dmenu_run
 
@@ -118,9 +118,9 @@ bindsym $mod+Mod2+KP_1 exec "$i3home/blocks/volume set Headphone 10%-"
 bindsym $mod+Mod2+KP_8 exec "$i3home/blocks/volume set Speaker 10%+"
 bindsym $mod+Mod2+KP_5 exec "$i3home/blocks/volume toggle Speaker"
 bindsym $mod+Mod2+KP_2 exec "$i3home/blocks/volume set Speaker 10%-"
-bindsym $mod+Mod2+KP_9 exec "$i3home/blocks/screen brighter"
-bindsym $mod+Mod2+KP_6 exec "$i3home/blocks/screen reset"
-bindsym $mod+Mod2+KP_3 exec "$i3home/blocks/screen darker"
+bindsym $mod+Mod2+KP_9 exec "$i3home/blocks/backlight brighter"
+bindsym $mod+Mod2+KP_6 exec "$i3home/blocks/backlight reset"
+bindsym $mod+Mod2+KP_3 exec "$i3home/blocks/backlight darker"
 
 #############
 ## Default Visual Styling
