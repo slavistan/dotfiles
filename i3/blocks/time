@@ -1,2 +1,2 @@
-#!/bin/zsh
-echo '<span font="FontAwesome 17">&#xf017;</span> '$(date +'%H:%M')
+#!/usr/bin/sh
+echo '<span font="FontAwesome5ProLight">&#xf017;</span> '$(date +'%H:%M')

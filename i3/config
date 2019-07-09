@@ -131,7 +131,8 @@ set $bg #1B1D1E
 set $fg #F8F8F2
 
 # use custom font for unicode stuff
-font pango: FontAwesome 17, Hack Bold 17
+# font pango: Hack 19
+font pango: FontAwesome5ProSolid
 
 # thin border + smart border (≥ 2 windows)
 smart_borders on
@@ -154,7 +155,7 @@ bar {
   position       top
   tray_output    none
   status_command i3blocks -c ~/.config/i3/config-i3blocks
-  font pango:Hack Bold 17
+  font pango: Hack 17
   separator_symbol ·
   workspace_buttons yes
   strip_workspace_numbers yes

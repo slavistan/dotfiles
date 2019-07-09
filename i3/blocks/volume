@@ -18,7 +18,7 @@ function deviceIsAvailable(){
 
 function getDeviceVolume(){
   vol=$(amixer -c 0 sget $1 | awk '/Front Left:/ { print $5 }' | tr -d '[]%')
-  printf '%.2Xh' $vol
+  printf '%.3d' $vol
 }
 
 function deviceIsActive(){
@@ -30,8 +30,8 @@ if [[ "$#" == "0" ]]; then
 
   # Device-Symbol pairs. Symbols use pango.
   declare -A dict=( \
-    Headphone '<span font="FontAwesome 17">&#xf025;</span>' \
-    Speaker   ' <span font="FontAwesome 17">&#xf028;</span>' \
+    Headphone '<span font="FontAwesome5ProLight">&#xf025;</span>' \
+    Speaker   ' <span font="FontAwesome5ProLight">&#xf028;</span>' \
   )
 
   for device in ${(k)dict}; do

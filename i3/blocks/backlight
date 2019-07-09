@@ -2,7 +2,7 @@
 
 if [[ "$#" == "0" ]]; then
   echo -n '<span font="FontAwesome 17">&#xf185;</span> '
-  printf '%.2Xh' $(xbacklight)
+  printf '%.3d' $(xbacklight)
   exit 0
 fi
 

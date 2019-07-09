@@ -1,13 +1,15 @@
-#!/usr/bin/bash
+#!/bin/bash
 
-[ -z "$5" ] \
-  && echo "Usage: $0 <image> <x> <y> <max height> <max width>" \
-  && exit
+[ -z "$3" ] && echo "Usage: $0 <file> <x> <y> [width] [height]" && exit 1
 
-source "$(ueberzug library)"
+source "`ueberzug library`"
+
+args="[path]=$1 [x]=$2 [y]=$3"
+args+=$([ ! -z "$4" ] && echo " [width]=$4")
+args+=$([ ! -z "$5" ] && echo " [height]=$5")
 
 ImageLayer 0< <(
-  ImageLayer::add [identifier]="example0" [x]="$1" [y]="$2" [path]="$1"
-  sleep 5
+  ImageLayer::add [identifier]="example0" $args
+  sleep 2
   ImageLayer::remove [identifier]="example0"
 )
