@@ -40,4 +40,5 @@ let g:ale_cpp_cppcheck_options='--enable=all'
 " clang-tidy: Nothing to do. clang-tidy automatically finds its project-
 " specific dotfile if it's put inside the project's root directory.
 let g:ale_cpp_clangtidy_options=''
+
 endfunction
