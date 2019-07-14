@@ -39,13 +39,14 @@ fi
 ##
 # Options - Adjust according to setup
 ##
-configure_zsh=true
-configure_nvim=true
-configure_st=true
-configure_i3=true
-configure_tmux=true
-configure_git=true
-configure_xkb=true
+configure_zsh=false
+configure_nvim=false
+configure_st=false
+configure_i3=false
+configure_tmux=false
+configure_git=false
+configure_xkb=false
+configure_acpi=true
 
 ##
 # Script
@@ -186,6 +187,16 @@ if [[ $configure_git == true ]]; then
   mkdir -p $XDG_CONFIG_HOME && cd "$_" && rm -rf git
   ln -s $DOTFILES/git git
   ln -fs $XDG_CONFIG_HOME/git/config ~/.gitconfig
+fi
+
+###########
+## ACPI
+###########
+# TODO: Configure systemd to ignore the corresponding events
+if [ $configure_acpi = "true" ]; then
+  _sudo rm -rf /etc/acpi/events /etc/acpi/actions
+  _sudo cp -r $DOTFILES/acpi/events /etc/acpi
+  _sudo cp -r $DOTFILES/acpi/actions /etc/acpi
 fi
 
 source $XDG_CONFIG_HOME/zsh/.zshrc

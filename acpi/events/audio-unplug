@@ -1,0 +1,2 @@
+event=jack/headphone HEADPHONE unplug
+action=/etc/acpi/actions/audio.sh unplug
