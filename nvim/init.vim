@@ -58,6 +58,7 @@ Plug 'https://github.com/godlygeek/tabular.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
 Plug 'https://github.com/w0rp/ale.git'
+Plug 'https://github.com/ap/vim-buftabline.git'
 
 call plug#end()
 
@@ -77,9 +78,11 @@ noremap <buffer> <silent> $ g$
 onoremap <silent> j gj
 onoremap <silent> k gk
 
-" Tab behaviour
-nnoremap <Tab> >>
-nnoremap <S-Tab> <<
+" Navigate across buffers using Tab
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
+
+" Indent selected lines using Tab
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
 inoremap <S-Tab> <Backspace>
