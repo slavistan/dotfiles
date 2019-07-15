@@ -81,6 +81,7 @@ onoremap <silent> k gk
 " Navigate across buffers using Tab
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
+let g:buftabline_indicators=1
 
 " Indent selected lines using Tab
 vnoremap <Tab> >gv
@@ -136,24 +137,26 @@ function! SynStack()
 endfunc
 
 """
-" gitgutter
+" Git + gitgutter
 """
+exe 'source ' . g:NVIMHOME . '/scripts/vimtig/vimtig.vim'
 set updatetime=100 " lessen reaction time
-let g:gitgutter_enabled=0 " don't run by default
+let g:gitgutter_enabled=1 " run by default
 let g:gitgutter_highlight_lines=1 " highlight lines by default
 " toggle on/off
 nnoremap <Leader>gg :GitGutterToggle<CR>
 " toggle folding of unchanged lines
 nnoremap <Leader>gi :GitGutterFold<CR>
-" move between hunks
 nnoremap <Leader>gn :GitGutterNextHunk<CR>
 nnoremap <Leader>gN :GitGutterPrevHunk<CR>
-" stage a hunk
 nnoremap <Leader>gs :GitGutterStageHunk<CR>
-" undo a hunk
 nnoremap <Leader>gu :GitGutterUndoHunk<CR>
-" review a hunk in split screen
-nnoremap <Leader>gp :GitGutterPreviewHunk<CR>
+" reView a hunk in split screen
+nnoremap <Leader>gv :GitGutterPreviewHunk<CR>
+nnoremap <Leader>gc :call VimtigCommit()<CR>
+nnoremap <Leader>ga :call VimtigStageFullBuffer()<CR>
+nnoremap <Leader>gp :call VimtigPush()<CR>
+
 let g:gitgutter_sign_added = '++'
 let g:gitgutter_sign_modified = '≠≠'
 let g:gitgutter_sign_removed = '--'
