@@ -7,7 +7,7 @@ export ZSH=$HOME'/.config/zsh/oh-my-zsh'
 export ZSH_HOME=$HOME'/.config/zsh'
 export ZSH_DISABLE_COMPFIX="true"
 export ZSH_COMPDUMP=$ZSH_HOME/backup
-export HISTFILE=$ZSH_HOME/backup
+export HISTFILE=$ZSH_HOME/backup/.zsh_history
 ZSH_THEME="milton/milton"
 COMPLETION_WAITING_DOTS="true"
 
