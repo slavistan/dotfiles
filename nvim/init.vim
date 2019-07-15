@@ -79,6 +79,7 @@ onoremap <silent> j gj
 onoremap <silent> k gk
 
 " Navigate across buffers using Tab
+set hidden " Change buffers without saving
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
 let g:buftabline_indicators=1
