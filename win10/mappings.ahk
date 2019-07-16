@@ -1,9 +1,9 @@
 ; BUG: Script must be run as Admin manually. 'A_AsAdmin' check does not work
 ;      Temporary fix: hardcode filepath (PATH cannot be accessed)
 #SingleInstance force
-
+  
 globalInit()
-
+ 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; User Settings
@@ -43,32 +43,32 @@ Capslock:: Esc
 ; User interface functions (UIFs)
 
 ; focusRight - focus window to the right
-focusRight()
-{
+focusRight() {
+
   Send("!{Tab}")
 }
 
 ; focusLeft - focus window to the left
-focusLeft()
-{
+focusLeft() {
+
   Send("+!{Tab}")
 }
 
-close(identifier := "A")
-{
+close(identifier := "A") {
+
   WinClose(identifier)
   return
 }
 
-toggleXserver()
-{
+toggleXserver() {
+
   _spawnUnique(xserv_id_string, "C:\Tools\VcXsrv\vcxsrv.exe")
   _toggleView(xserv_id_string, false)
   return
 }
 
-toggleExplorer()
-{
+toggleExplorer() {
+
   _spawnUnique("ahk_class CabinetWClass", "explorer.exe")
   static previously_focused := WinActive("A")
   if (_toggleView("ahk_class CabinetWClass") == "hide")
@@ -76,14 +76,14 @@ toggleExplorer()
   return
 }
 
-spawnTerminal()
-{
+spawnTerminal() {
+
   Run("cmd /C " . termpath, , uid)
   return
 }
 
-toggleMaximize(identifier := "A")
-{
+toggleMaximize(identifier := "A") {
+
   if (!(WinGetStyle(identifier) & 0x1000000))
     WinMaximize(identifier)
   else 
@@ -92,8 +92,8 @@ toggleMaximize(identifier := "A")
 }
 
 ; run SnippingTool
-snapshot(show_dialogue := false)
-{
+snapshot(show_dialogue := false) {
+
   if (show_dialogue) {
     Run("SnippingTool.exe")
   }
@@ -103,8 +103,8 @@ snapshot(show_dialogue := false)
 }
 
 ; runDialogue - Display dialogue to run commands and programs
-runDialogue()
-{
+runDialogue() {
+
   ; Spawn Windows built-in application launcher
   ; BUG: Hotkey does not work if any window is focused. Defocus first (by focusing the task bar)
   WinActivate("ahk_class Shell_TrayWnd")
@@ -115,16 +115,16 @@ runDialogue()
 }
 
 ; WIP
-moveWindowToDesktop(targetDesktop)
-{
+moveWindowToDesktop(targetDesktop) {
+
   uid := WinExist("A")
   WinHide ahk_id %uid%
   switchDesktopByNumber(targetDesktop)
   WinShow ahk_id %uid%
 }
 
-switchDesktopByNumber(target_index)
-{
+switchDesktopByNumber(target_index) {
+
   static previously_focused := [0, 0, 0, 0]
   previously_focused[_getDesktopIndex] := WinActive("A")
 
@@ -186,8 +186,8 @@ _toggleView(identifier,             ; window identifier. E.g. "ahk_class Firefox
 }
 
 ; _toggleTopBorder - Hide/show border above window
-_toggleTopBorder(identifier := 'A')
-{
+_toggleTopBorder(identifier := 'A') {
+
   WinSetStyle("^0xC00000", identifier)
   return
 }
@@ -198,8 +198,8 @@ _toggleTopBorder(identifier := 'A')
 _spawnUnique(identifier,            ; window identifier. E.g. "ahk_class Firefox"
             path,                  ; executable. E.g. "Firefox.exe"
             match_mode := 2,       ; forwarded to SetTitleMatchMode
-            detect_hidden := true) ; forwarded to DetectHiddenWindow
-{
+            detect_hidden := true) { ; forwarded to DetectHiddenWindow
+
   DetectHiddenWindows detect_hidden
   SetTitleMatchMode match_mode
   if( !WinExist(identifier) )
@@ -215,28 +215,28 @@ _spawnUnique(identifier,            ; window identifier. E.g. "ahk_class Firefox
 }
 
 ; _winMoveTop - Workaround for AHK's 'WinMoveTop' which fails at times
-_winMoveTop(identifier)
-{
+_winMoveTop(identifier) {
+
   WinSetAlwaysOnTop("On")
   WinSetAlwaysOnTop("Off")
 }
 
-_getDesktopCount()
-{
+_getDesktopCount() {
+
   return(_getDesktopInfo()["count"])
 }
 
 ; _getDesktopIndex - return index of current desktop.
 ;
 ; Returns 0 if virtual desktops are not initialized or information cannot be retrieved.
-_getDesktopIndex()
-{
+_getDesktopIndex() {
+
   return(_getDesktopInfo()["current_index"])
 }
 
 ; _getDesktopInfo() - Returns hash of information about vdesks.
-_getDesktopInfo()
-{
+_getDesktopInfo() {
+
 
   local session_id
   ; Get current desktop ID ( a binary 32-char string )
@@ -276,21 +276,21 @@ _getDesktopInfo()
 }
 
 ; _debug - Wrapper for debugging information
-_debug(msg)
-{
+_debug(msg) {
+
   __print("[MSG ]: " . msg)
 }
 
 ; __print - Print string to stdout
-__print(msg)
-{
+__print(msg) {
+
   FileOpen("*", "w").WriteLine(msg)
 }
 ; globalInit()
 ;
 ; Initializes variables and starts applications
-globalInit()
-{
+globalInit() {
+
    if (_getDesktopIndex() == 0) {
      ; Initialize virtual desktops
      switchDesktopByNumber(2)
