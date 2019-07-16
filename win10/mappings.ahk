@@ -157,8 +157,8 @@ switchDesktopByNumber(target_index) {
 ;
 _toggleView(identifier,             ; window identifier. E.g. "ahk_class Firefox"
            focus := true,           ; focus the raised window
-           match_mode := 2)         ; passed to SetTitleMatchMode
-{ 
+           match_mode := 2) {       ; passed to SetTitleMatchMode
+
   SetTitleMatchMode match_mode
   ; Toggle visible
   DetectHiddenWindows false
@@ -237,7 +237,6 @@ _getDesktopIndex() {
 ; _getDesktopInfo() - Returns hash of information about vdesks.
 _getDesktopInfo() {
 
-
   local session_id
   ; Get current desktop ID ( a binary 32-char string )
   DllCall("ProcessIdToSessionId",
@@ -286,6 +285,7 @@ __print(msg) {
 
   FileOpen("*", "w").WriteLine(msg)
 }
+
 ; globalInit()
 ;
 ; Initializes variables and starts applications
