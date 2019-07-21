@@ -27,6 +27,7 @@ let g:ale_linters.cpp = [
 
 " clangcheck: 'compile_commands.json' is found by ALE. We just pass the
 " documentation flag to clang in order to analyze the doxygen comments.
+" TODO: WDocumentation does not seem to work. Check what's wrong here.
 let g:ale_cpp_clangcheck_options='-extra-arg="Wdocumentation"'
 
 " clangd's brains are based on an 'index' of the project. Provide the index by
