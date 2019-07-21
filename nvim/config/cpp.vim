@@ -25,8 +25,9 @@ let g:ale_linters.cpp = [
       \ 'cppcheck', 
       \ 'clangtidy']
 
-" clangcheck: Nothing to do. 'compile_commands.json' is found by ALE.
-let g:ale_cpp_clangcheck_options=''
+" clangcheck: 'compile_commands.json' is found by ALE. We just pass the
+" documentation flag to clang in order to analyze the doxygen comments.
+let g:ale_cpp_clangcheck_options='-extra-arg="Wdocumentation"'
 
 " clangd's brains are based on an 'index' of the project. Provide the index by
 " generating it manually using the clangd-indexer tool, or let clangd do it.
