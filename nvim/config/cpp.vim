@@ -41,4 +41,7 @@ let g:ale_cpp_cppcheck_options='--enable=all'
 " specific dotfile if it's put inside the project's root directory.
 let g:ale_cpp_clangtidy_options=''
 
+""" Misc configuration
+set formatoptions=r
+set comments=srO:/**,mb:\ *,ex:\ */
 endfunction
