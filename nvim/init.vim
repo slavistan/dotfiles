@@ -59,7 +59,7 @@ Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
 Plug 'https://github.com/w0rp/ale.git'
 Plug 'https://github.com/ap/vim-buftabline.git'
-
+Plug 'https://github.com/vifm/vifm.vim'
 call plug#end()
 
 """
@@ -91,6 +91,7 @@ inoremap <S-Tab> <Backspace>
 
 """
 " POST- Settings: Filtype specifics & Plugin settings
+" TODO: Clean up this bloody mess.
 """
 autocmd FileType Rmd,rmd,r call SetRmdOptions()
 function SetRmdOptions()
@@ -122,7 +123,7 @@ function SetAhkOptions()
   autocmd BufWritePost *.ahk silent execute ':!AutoHotkeyU64.exe ' . expand('%') . ' &'
 endfunction
 
-" Source submodules
+" Source configuration submodules
 "
 exe 'source ' . g:NVIMHOME . '/config/cpp.vim'
 
@@ -164,4 +165,11 @@ let g:gitgutter_sign_removed = '--'
 let g:gitgutter_sign_removed_first_line ='--'
 let g:gitgutter_sign_modified_removed = '≠≠'
 
+"""
+" Vifm - plugin
+"""
+" TODO: Open multiple selected files at once (handy when working a project)
+" TODO: Open left tab in vim's working directory and the right tab in
+"       the directory of the currently viewed file (or the home dir?)
+let g:vifm_replace_netrw=1 " replace netrw with vifm
 colorscheme milton " postpone loading of colorscheme so that plugins' hi groups will be known
