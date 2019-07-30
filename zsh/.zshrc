@@ -1,5 +1,7 @@
 source ~/.profile
 
+# TODO: Make TAB complete the word until ambiguous and display the suggestions.
+#       Currently this requires two TABs.
 setopt globdots # tab-complete dotfiles
 
 # Path to your oh-my-zsh installation.
@@ -18,7 +20,7 @@ autoload -Uz +X compinit && compinit -d $ZSH_HOME/backup
 autoload -Uz +X bashcompinit && bashcompinit -d $ZSH_HOME/backup
 
 plugins=(
-  git wd colored-man-pages extract zsh-syntax-highlighting
+  git wd colored-man-pages extract zsh-syntax-highlighting zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
