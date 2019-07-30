@@ -20,7 +20,7 @@ autoload -Uz +X compinit && compinit -d $ZSH_HOME/backup
 autoload -Uz +X bashcompinit && bashcompinit -d $ZSH_HOME/backup
 
 plugins=(
-  git wd colored-man-pages extract zsh-syntax-highlighting zsh-autosuggestions
+  git wd colored-man-pages extract zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
