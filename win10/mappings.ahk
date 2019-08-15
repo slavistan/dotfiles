@@ -29,10 +29,7 @@ Capslock:: Esc
       #2:: switchDesktopByNumber(2)
       #3:: switchDesktopByNumber(3)
       #4:: switchDesktopByNumber(4)
-      #o:: 
-      MouseGetPos( , , uid, , )
-      _toggleTopBorder('ahk_id ' . uid)
-      return
+      #o:: _toggleTopBorder()
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -123,26 +120,28 @@ moveWindowToDesktop(targetDesktop) {
   WinShow ahk_id %uid%
 }
 
+; Move to a virtual desktop by index. 
 switchDesktopByNumber(target_index) {
 
-  static previously_focused := [0, 0, 0, 0]
-  previously_focused[_getDesktopIndex] := WinActive("A")
+  ; get the signed offset in terms of desktops
+  local dist := _getDesktopInfo()["current_index"] - target_index
+  if (dist < 0) {
+    local dir := "{Right}"
+  }
+  else {
+    local dir := "{Left}"
+  }
 
-  info := _getDesktopInfo()
-  ; Go right until we reach the desktop we want
-  while(info["current_index"] < target_index) {
-    Send("^#{Right}")
-    info["current_index"]++
-    Sleep 75
+  ; Repeatedly send Ctrl+Win+LeftArrow/Rightarrow until we arrive at our
+  ; destination
+  while (dist != 0) {
+    ; NOTE: We must input using blind mode, as the hotkey and the input it
+    ;       fires both use the Winkey. Otherwise we get defocused windows
+    ;       and flickering.
+    ;       Furthermore, we do not seem to require any Sleep in between sends.
+    Send("{Blind}^#" . dir)
+    dist := abs(dist) - 1
   }
-  ; Go left until we reach the desktop we want
-  while(info["current_index"] > target_index) {
-    Send("^#{Left}")
-    info["current_index"]--
-    Sleep 75
-  }
-  if( WinExist("ahk_id " . previously_focused[target_index] ))
-    WinActive("ahk_id " . previously_focused[target_index] ) 
 }
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
