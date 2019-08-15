@@ -117,12 +117,6 @@ endfunction
 let g:pandoc#syntax#conceal#use = 0
 let g:pandoc#modules#disabled = [ "spell" ]
 
-autocmd FileType autohotkey call SetAhkOptions()
-function SetAhkOptions()
-  " Reload script automatically
-  autocmd BufWritePost *.ahk silent execute ':!AutoHotkeyU64.exe ' . expand('%') . ' &'
-endfunction
-
 " Source configuration submodules
 "
 exe 'source ' . g:NVIMHOME . '/config/cpp.vim'
