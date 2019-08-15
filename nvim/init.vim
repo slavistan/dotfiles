@@ -1,6 +1,7 @@
 " TODO:
-" List number of matches when searching (custom command?)
-" Incsearch without the adhs jumps
+"      List number of matches when searching (custom command?)
+"      Incsearch without the adhs jumps
+"      C++: Automatically add comment header for line comments '// ... '
 let g:NVIMHOME=$XDG_CONFIG_HOME . '/nvim'
 
 """

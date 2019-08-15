@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # TODO:
-## ~/.zcompdump
+# - Make this posix-compliant
 
 setopt +o nomatch # disable errors from empty globs
 set -e # abort on error
@@ -33,8 +33,6 @@ if [[ "$1" == "--check-dependencies" ]]; then
 
   exit $return_code
 fi
-
-
 
 ##
 # Options - Adjust according to setup
@@ -108,7 +106,7 @@ if [[ $configure_zsh == true ]]; then
 
 # Make zsh use XDG_CONFIG_HOME
 # Cannot send output to a file using sudo thus we stuff a dummy file and sudo-copy it in place.
-# Shell scripting is a royal pain the ass.
+# Sometimes shell scripting is a royal pain the ass.
   printf \
     '# /etc/zsh/zshenv: system-wide .zshenv file for zsh(1).'"\n"'# Global Order: zshenv, zprofile, zshrc, zlogin'"\n"'[[ ! -z "$XDG_CONFIG_HOME" ]] && export ZDOTDIR="$XDG_CONFIG_HOME/zsh/"'"\n" > $temp/zshenv
       _sudo cp -f $temp/zshenv $(locate zshenv | head -n 1)
@@ -122,6 +120,7 @@ if [[ $configure_zsh == true ]]; then
   git clone https://github.com/robbyrussell/oh-my-zsh.git
   cd oh-my-zsh
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ./plugins/zsh-syntax-highlighting # ..
+  git clone https://github.com/zsh-users/zsh-autosuggestions.git ./plugins/zsh-autosuggestions # ..
   git clone https://github.com/slavistan/milton-oh-my-zsh-theme.git ./themes/milton
 
 # Symlink XDG path to dotfiles
