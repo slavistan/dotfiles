@@ -1,7 +1,7 @@
 " Configuration pertaining to the python language
 
 autocmd FileType python call SetPythonOptions()
-function SetPythonOptions()
+function! SetPythonOptions()
 
 """ ALE configuration
 

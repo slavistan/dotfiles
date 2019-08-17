@@ -1,7 +1,7 @@
 " Configuration pertaining to the C++ language
 
 autocmd FileType cpp call SetCppOptions()
-function SetCppOptions()
+function! SetCppOptions()
 
 """ ALE configuration
 
@@ -44,6 +44,7 @@ let g:ale_cpp_cppcheck_options='--enable=all'
 let g:ale_cpp_clangtidy_options=''
 
 """ Misc configuration
+set textwidth=120
 set formatoptions=r
-set comments=srO:/**,mb:\ *,ex:\ */
+set comments=srO:/**,mb:\ *,ex:\ */,://
 endfunction

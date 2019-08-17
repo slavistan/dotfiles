@@ -95,7 +95,7 @@ inoremap <S-Tab> <Backspace>
 " TODO: Clean up this bloody mess.
 """
 autocmd FileType Rmd,rmd,r call SetRmdOptions()
-function SetRmdOptions()
+function! SetRmdOptions()
   set textwidth=120
   set conceallevel=0 " Nvim-R conceals a lot
   " Send code R 
