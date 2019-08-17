@@ -121,6 +121,7 @@ let g:pandoc#modules#disabled = [ "spell" ]
 " Source configuration submodules
 "
 exe 'source ' . g:NVIMHOME . '/config/cpp.vim'
+exe 'source ' . g:NVIMHOME . '/config/python.vim'
 
 """
 " Utility
