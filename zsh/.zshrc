@@ -14,6 +14,10 @@ export HISTFILE=$ZSH_HOME/backup/.zsh_history
 ZSH_THEME="milton/milton"
 COMPLETION_WAITING_DOTS="true"
 
+# Remove the useless whitespace at the rhs of the RPROMPT.
+# TODO: This is bugged. Causes the cursor to be misplaced by 1 character.
+# ZLE_RPROMPT_INDENT=0
+
 # Configure the completion system. Allow bash completion scripts to be used.
 # Check out 'man zshbuiltins' for details.
 autoload -Uz +X compinit && compinit -d $ZSH_HOME/backup
