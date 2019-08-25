@@ -22,4 +22,8 @@ endif
 let g:ale_linters.python = [
       \ 'flake8']
 
+""" Misc configuration
+set textwidth=80
+set formatoptions=r
+set comments=:#
 endfunction
