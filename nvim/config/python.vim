@@ -22,6 +22,8 @@ endif
 let g:ale_linters.python = [
       \ 'flake8']
 
+let g:ale_python_flake8_options="--max-line-length=120"
+
 """ Misc configuration
 set textwidth=80
 set formatoptions=r
