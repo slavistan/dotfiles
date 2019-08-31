@@ -61,7 +61,11 @@ Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
 Plug 'https://github.com/w0rp/ale.git'
 Plug 'https://github.com/ap/vim-buftabline.git'
 Plug 'https://github.com/vifm/vifm.vim'
+Plug 'junegunn/fzf'
 call plug#end()
+
+let g:ale_lint_on_text_changed = 'never' " Lint only on save
+let g:ale_lint_on_enter = 0 " Don't lint when entering a file
 
 """
 " Key mappings
