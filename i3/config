@@ -13,9 +13,6 @@ set $i3home ~/.config/i3
 # move and resize floating windows around with the mouse by pressing the mod-key
 floating_modifier $mod
 
-# detect monitors (TODO: custom script to change position)
-exec_always --no-startup-id xrandr --output HDMI1 --left-of eDP1 --auto
-
 # startup 
 exec_always copyq
 

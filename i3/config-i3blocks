@@ -23,6 +23,9 @@ command=~/.config/i3/blocks/$BLOCK_NAME
 markup=pango
 separator=false
 
+[monitor]
+interval=once
+
 [power]
 interval=60
 signal=10
@@ -31,9 +34,10 @@ signal=10
 interval=60
 signal=10
 
-[volume]
-interval=60
-signal=10
+# TODO: Fix that alsamixer mess
+# [volume]
+# interval=60
+# signal=10
 
 [date]
 interval=30

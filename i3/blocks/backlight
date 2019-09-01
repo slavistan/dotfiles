@@ -1,25 +1,20 @@
-#!/bin/zsh
+#!/usr/bin/env sh
 
-if [[ "$#" == "0" ]]; then
+if [ "$#" -eq 0 ]; then
   echo -n '<span font="FontAwesome5ProSolid">&#xf042;</span> '
-  printf '%.3d' $(xbacklight)
+  echo $(printf '%.3d' $(xbacklight))
   exit 0
 fi
 
 case "$1" in
   brighter)
-    shift
     xbacklight -inc 5
-    pkill --signal SIGRTMIN+10 i3blocks
     ;;
   darker)
-    shift
     xbacklight -dec 5
-    pkill --signal SIGRTMIN+10 i3blocks
     ;;
   reset)
-    shift
     xbacklight -set 100
-    pkill --signal SIGRTMIN+10 i3blocks
     ;;
 esac
+pkill --signal SIGRTMIN+10 i3blocks # refresh

@@ -1,2 +1,2 @@
-#!/bin/zsh
+#!/usr/bin/env sh
 echo '<span font="FontAwesome5ProLight">&#xf073;</span> '$(date +'%d. %b')
