@@ -46,7 +46,6 @@ bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
 # tab windows in container. toggle split to use tiling.
 # TODO: Implement toggling tabbing
 bindsym $mod+Shift+o layout tabbed
@@ -134,6 +133,9 @@ font pango: FontAwesome5ProSolid
 # thin border + smart border (≥ 2 windows)
 smart_borders on
 for_window [class=".*"] border pixel 3
+
+# Allow floating windows for `yad`
+for_window [class="Yad"] floating enable border pixel 2
 
 # gap sizes
 set $defaultgap 15

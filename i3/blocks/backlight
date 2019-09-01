@@ -1,5 +1,11 @@
 #!/usr/bin/env sh
 
+if [ "$button" -eq 1 ]; then
+
+  # TODO: Imput volume per dialogue
+  yad --scale
+fi
+
 if [ "$#" -eq 0 ]; then
   echo -n '<span font="FontAwesome5ProSolid">&#xf042;</span> '
   echo $(printf '%.3d' $(xbacklight))
