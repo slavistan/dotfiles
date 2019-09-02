@@ -1,14 +1,28 @@
 #!/usr/bin/env sh
 
+symbol='<span font="FontAwesome5ProSolid">&#xf042;</span>'
+current_backlight=$(xbacklight)
+
 if [ "$button" -eq 1 ]; then
 
-  # TODO: Imput volume per dialogue
-  yad --scale
+  new_backlight=$( yad                      \
+    --scale                                 \
+    --vertical                              \
+    --value="$current_backlight"            \
+    --height="255"                          \
+    --width="60"                            \
+    --min-value="1"                         \
+    --max-value="100"                       \
+    --text="$symbol Choose a new backlight" \
+    --mouse )
+  if [ "$?" -eq 0 ]; then
+    xbacklight -set $new_backlight
+    pkill --signal SIGRTMIN+10 i3blocks
+  fi
 fi
 
 if [ "$#" -eq 0 ]; then
-  echo -n '<span font="FontAwesome5ProSolid">&#xf042;</span> '
-  echo $(printf '%.3d' $(xbacklight))
+  echo "$symbol" $(printf '%.3d' $current_backlight)
   exit 0
 fi
 

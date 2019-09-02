@@ -134,8 +134,8 @@ font pango: FontAwesome5ProSolid
 smart_borders on
 for_window [class=".*"] border pixel 3
 
-# Allow floating windows for `yad`
-for_window [class="Yad"] floating enable border pixel 2
+# Allow yad windows to float
+for_window [class="Yad"] floating enable border normal
 
 # gap sizes
 set $defaultgap 15
