@@ -3,11 +3,10 @@
 # TODO: Implement a default action which leaves the layout as it is.
 #       Read monitor positions from xrandr and set them via xrandr --output
 
-numOfMonitors=$(xrandr --listactivemonitors | head -n 1 | awk '{ print $2 }')
-
+monitors=$(xrandr | grep " connected" | awk '{ print $1 }')
+numOfMonitors=$(echo "$monitors" | wc -l)
 if [ "$numOfMonitors" -eq 2 ]; then
   # Get monitors' names
-  monitors=$(xrandr --listactivemonitors | tail -n 2 | awk '{ print $4 }')
   m1=$(echo "$monitors" | head -n 1)
   m2=$(echo "$monitors" | tail -n 1)
 
