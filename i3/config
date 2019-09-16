@@ -13,8 +13,12 @@ set $i3home ~/.config/i3
 # move and resize floating windows around with the mouse by pressing the mod-key
 floating_modifier $mod
 
-# startup 
+# startup
 exec_always copyq
+
+# Attempting to move to the currently active workspace will move to the
+# previously selected workspace
+workspace_auto_back_and_forth yes
 
 ############
 ## Movement & Layout
@@ -126,18 +130,14 @@ bindsym $mod+Mod2+KP_3 exec "$i3home/blocks/backlight darker"
 set $bg #1B1D1E
 set $fg #F8F8F2
 
-# use custom font for unicode stuff
-# font pango: Hack 19
-font pango: FontAwesome5ProSolid
-
 # thin border + smart border (≥ 2 windows)
 smart_borders on
 for_window [class=".*"] border pixel 3
 
 # Allow yad windows to float
-for_window [class="Yad"] floating enable border normal
+for_window [class="Yad"] floating enable border pixel 3
 
-# gap sizes
+# Gap settings
 set $defaultgap 15
 gaps inner $defaultgap
 gaps outer 5
@@ -211,9 +211,3 @@ bindsym $mod+v split vertical
 # focus the parent/child container
 bindsym $mod+a focus parent
 bindsym $mod+s focus child
-
-
-
-
-
-

@@ -61,11 +61,13 @@ Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
 Plug 'https://github.com/w0rp/ale.git'
 Plug 'https://github.com/ap/vim-buftabline.git'
 Plug 'https://github.com/vifm/vifm.vim'
-Plug 'junegunn/fzf'
+Plug 'https://github.com/junegunn/fzf.vim'
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 call plug#end()
 
 let g:ale_lint_on_text_changed = 'never' " Lint only on save
 let g:ale_lint_on_enter = 0 " Don't lint when entering a file
+let g:ale_linters_explicit=1 " Don't use all linters by default
 
 """
 " Key mappings
@@ -126,6 +128,7 @@ let g:pandoc#modules#disabled = [ "spell" ]
 "
 exe 'source ' . g:NVIMHOME . '/config/cpp.vim'
 exe 'source ' . g:NVIMHOME . '/config/python.vim'
+exe 'source ' . g:NVIMHOME . '/config/rust.vim'
 
 """
 " Utility

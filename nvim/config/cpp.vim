@@ -11,10 +11,6 @@ function! SetCppOptions()
 " to locate it. The next variable tells ALE to search for the database.
 let g:ale_c_parse_compile_commands=1
 
-" For now we only want to enable those linters we explicitly specified. Keep
-" the madness to a minimum during this phase of experimentation.
-let g:ale_linters_explicit=1
-
 " Now list the linters and tools we want to use and configure them afterwards.
 if !exists('g:ale_linters')
   let g:ale_linters={}
