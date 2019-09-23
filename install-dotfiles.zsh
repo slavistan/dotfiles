@@ -198,4 +198,10 @@ if [ $configure_acpi = "true" ]; then
   _sudo cp -r $DOTFILES/acpi/actions /etc/acpi
 fi
 
+###########
+## Misc
+###########
+# Makes jupyter use XDG paths
+echo "export JUPYTER_CONFIG_DIR=$XDG_CONFIG_HOME/jupyter" >> $DOTFILES/zsh/envvars.zsh
+
 source $XDG_CONFIG_HOME/zsh/.zshrc
