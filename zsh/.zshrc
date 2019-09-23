@@ -46,6 +46,8 @@ alias vim=nvim
 alias t='tree -aL 1 --dirsfirst'
 alias l='\ls --color=tty -Aog --si --time-style=long-iso --group-directories-first'
 
+# Disable zsh built-in
+disable r
 
 # TODO: What the fuck is this?
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

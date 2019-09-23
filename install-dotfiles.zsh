@@ -37,14 +37,14 @@ fi
 ##
 # Options - Adjust according to setup
 ##
-configure_zsh=false
-configure_nvim=false
+configure_zsh=true
+configure_nvim=true
 configure_st=false
 configure_i3=false
 configure_tmux=false
-configure_git=false
+configure_git=true
 configure_xkb=false
-configure_acpi=true
+configure_acpi=false
 
 ##
 # Script
