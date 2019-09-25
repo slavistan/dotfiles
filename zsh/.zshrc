@@ -41,6 +41,7 @@ source $ZSH_HOME/completions/cf # Cloud-Foundry CLI
 export EDITOR='nvim'
 export LS_COLORS=$($ZSH_HOME/scripts/dircolors.zsh)
 export TREE_COLORS=$($ZSH_HOME/scripts/dircolors.zsh)
+export XDG_DATA_HOME=$HOME'/.local'
 
 alias vim=nvim
 alias t='tree -aL 1 --dirsfirst'
@@ -48,6 +49,3 @@ alias l='\ls --color=tty -Aog --si --time-style=long-iso --group-directories-fir
 
 # Disable zsh built-in
 disable r
-
-# TODO: What the fuck is this?
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

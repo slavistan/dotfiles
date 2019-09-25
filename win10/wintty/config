@@ -1,7 +1,7 @@
 CursorType=block
 CursorBlinks=no
 Font=Hack
-FontHeight=10
+FontHeight=12
 BoldAsFont=no
 BoldAsColour=no
 AllowBlinking=yes
