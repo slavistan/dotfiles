@@ -10,8 +10,8 @@ setopt +o nomatch # disable errors from empty globs
 set -e # abort on error
 
 # We use the XDG_... conventions. Enfore definition.
-if [[ -z "$XDG_CONFIG_HOME" ]]; then 
-  echo "XDG_CONFIG_HOME is not defined. Abort."
+if [ -z "$XDG_CONFIG_HOME" ] || [ -z "$XDG_DATA_HOME" ]; then
+  echo "XDG_CONFIG_HOME or XDG_DATA_HOME is not defined. Abort."
   exit 1
 fi
 
@@ -107,23 +107,13 @@ fi
 if [[ $configure_zsh == true ]]; then
   printf 'Configuring zsh ...\n'
 
-# Make zsh use XDG_CONFIG_HOME
-# Cannot send output to a file using sudo thus we stuff a dummy file and sudo-copy it in place.
-# Sometimes shell scripting is a royal pain the ass.
-  printf \
-    '# /etc/zsh/zshenv: system-wide .zshenv file for zsh(1).'"\n"'# Global Order: zshenv, zprofile, zshrc, zlogin'"\n"'[[ ! -z "$XDG_CONFIG_HOME" ]] && export ZDOTDIR="$XDG_CONFIG_HOME/zsh/"'"\n" > $temp/zshenv
-      _sudo cp -f $temp/zshenv $(locate zshenv | head -n 1)
-
   echo "export SHELL=/usr/bin/zsh" >> $HOME/.profile
+  echo "export ZDOTDIR=$XDG_CONFIG_HOME/zsh" >> $HOME/.profile
 
 # Symlink XDG path to dotfiles
   mkdir -p $XDG_CONFIG_HOME && cd "$_" # enter config dir
   ln -fs $DOTFILES/zsh # create symlink
 
-# Create barebone envvars file
-# TODO: Envvars must go into .profile
-  rm -f $DOTFILES/zsh/envvars.zsh
-  touch $DOTFILES/zsh/envvars.zsh
 fi
 
 
@@ -138,7 +128,6 @@ if [[ $configure_nvim == true ]]; then
   nvim +PlugClean +PlugInstall +quitall
 
   echo "export EDITOR=nvim" >> $HOME/.profile
-  echo "alias view=nvim -R" >> $DOTFILES/zsh/envvars.zsh
 fi
 
 ###########
@@ -168,8 +157,6 @@ fi
 if [[ $configure_tmux == true ]]; then
   echo 'Configuring tmux ...'
   rm -f $XDG_CONFIG_HOME/tmux && ln -s $DOTFILES/tmux $XDG_CONFIG_HOME/tmux
-# TODO: Make envvars unique
-  echo "alias tmux='tmux -f $XDG_CONFIG_HOME/tmux/config'" >> $DOTFILES/zsh/envvars.zsh
 fi
 
 ###########
@@ -196,6 +183,6 @@ fi
 ## Misc
 ###########
 # Makes jupyter use XDG paths
-echo "export JUPYTER_CONFIG_DIR=$XDG_CONFIG_HOME/jupyter" >> $DOTFILES/zsh/envvars.zsh
+echo "export JUPYTER_CONFIG_DIR=$XDG_CONFIG_HOME/jupyter" >> ~/.profile
 
 source $XDG_CONFIG_HOME/zsh/.zshrc
