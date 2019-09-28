@@ -2,6 +2,9 @@
 
 # TODO:
 # - Make this posix-compliant
+# - Don't delete and recreate .profile. Insert lines only if the file does not
+#   contain them. This way we can put setup specific stuff into the .profile
+#   without that being wiped when running this install script.
 
 setopt +o nomatch # disable errors from empty globs
 set -e # abort on error
@@ -99,10 +102,10 @@ if [[ $configure_xkb == true ]]; then
 fi
 
 ###########
-## ZSH + OhMyZsh
+## zsh
 ###########
 if [[ $configure_zsh == true ]]; then
-  echo 'Configuring zsh ...'
+  printf 'Configuring zsh ...\n'
 
 # Make zsh use XDG_CONFIG_HOME
 # Cannot send output to a file using sudo thus we stuff a dummy file and sudo-copy it in place.
@@ -113,21 +116,12 @@ if [[ $configure_zsh == true ]]; then
 
   echo "export SHELL=/usr/bin/zsh" >> $HOME/.profile
 
-# Install OhMyZsh
-# Delete existing files, clone oh-my-zsh, install plugins and themes
-  cd $DOTFILES/zsh
-  rm -rf oh-my-zsh # remove oh-my-zsh files
-  git clone https://github.com/robbyrussell/oh-my-zsh.git
-  cd oh-my-zsh
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ./plugins/zsh-syntax-highlighting # ..
-  git clone https://github.com/zsh-users/zsh-autosuggestions.git ./plugins/zsh-autosuggestions # ..
-  git clone https://github.com/slavistan/milton-oh-my-zsh-theme.git ./themes/milton
-
 # Symlink XDG path to dotfiles
   mkdir -p $XDG_CONFIG_HOME && cd "$_" # enter config dir
   ln -fs $DOTFILES/zsh # create symlink
 
 # Create barebone envvars file
+# TODO: Envvars must go into .profile
   rm -f $DOTFILES/zsh/envvars.zsh
   touch $DOTFILES/zsh/envvars.zsh
 fi

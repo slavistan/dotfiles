@@ -1,29 +1,34 @@
+# TODO: Make TAB complete the word until ambiguous and display the suggestions.
+#       Currently this requires two TABs.
 source ~/.profile
 
 PROMPT="%F{default}%K{255}%K{255]}%F{16} 💻%n %#%F{255}%K{244}%K{244]}%F{255} %(4~|%-1~/.../%2~|%~) %F{244}%K{default}%f%k"
 RPROMPT="%F{%(?.28.160)}%K{default}%K{%(?.28.160)]}%F{255}%B %? %b⏎ %F{255}%K{%(?.28.160)}%K{255]}%F{16} /dev/pts/4 🖳 %F{default}%K{255}%f%k"
 
-# TODO: Make TAB complete the word until ambiguous and display the suggestions.
-#       Currently this requires two TABs.
+setopt autocd # change dirs without 'cd'
 setopt globdots # tab-complete dotfiles
+setopt menucomplete # tab-expand to first option immediately
+setopt markdirs # append / to globbed dirs
 
-# Path to your oh-my-zsh installation.
+COMPLETION_WAITING_DOTS="true"
+autoload -Uz +X compinit && compinit -d $ZSH_HOME/backup
+autoload -Uz +X bashcompinit && bashcompinit -d $ZSH_HOME/backup # allow bash-comps
+
+zstyle ':completion:*' menu select # select completions from menu
+zstyle ':completion:*' matcher-list \
+  'm:{a-zA-Z}={A-Za-z} l:|=* r:|=*' # case ins. & infix
+
 export DOTFILES=$HOME'/projects/dotfiles'
 export ZSH=$HOME'/.config/zsh/oh-my-zsh'
 export ZSH_HOME=$HOME'/.config/zsh'
 export ZSH_DISABLE_COMPFIX="true"
 export ZSH_COMPDUMP=$ZSH_HOME/backup/.zsh_compdump
 export HISTFILE=$ZSH_HOME/backup/.zsh_history
-COMPLETION_WAITING_DOTS="true"
 
 # Remove the useless whitespace at the rhs of the RPROMPT.
 # TODO: This is bugged. Causes the cursor to be misplaced by 1 character.
 # ZLE_RPROMPT_INDENT=0
 
-# Configure the completion system. Allow bash completion scripts to be used.
-# Check out 'man zshbuiltins' for details.
-autoload -Uz +X compinit && compinit -d $ZSH_HOME/backup
-autoload -Uz +X bashcompinit && bashcompinit -d $ZSH_HOME/backup
 
 plugins=(
   git wd colored-man-pages extract zsh-syntax-highlighting
@@ -51,3 +56,7 @@ alias l='\ls --color=tty -Aog --si --time-style=long-iso --group-directories-fir
 
 # Disable zsh built-in
 disable r
+
+# Load zsh-syntax-highlighting; should be last.
+source $DOTFILES/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $DOTFILES/zsh/plugins/fzf/shell/completion.zsh
