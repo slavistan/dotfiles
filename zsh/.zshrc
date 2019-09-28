@@ -1,5 +1,8 @@
 source ~/.profile
 
+PROMPT="%F{default}%K{255}%K{255]}%F{16} 💻%n %#%F{255}%K{244}%K{244]}%F{255} %(4~|%-1~/.../%2~|%~) %F{244}%K{default}%f%k"
+RPROMPT="%F{%(?.28.160)}%K{default}%K{%(?.28.160)]}%F{255}%B %? %b⏎ %F{255}%K{%(?.28.160)}%K{255]}%F{16} /dev/pts/4 🖳 %F{default}%K{255}%f%k"
+
 # TODO: Make TAB complete the word until ambiguous and display the suggestions.
 #       Currently this requires two TABs.
 setopt globdots # tab-complete dotfiles
@@ -11,7 +14,6 @@ export ZSH_HOME=$HOME'/.config/zsh'
 export ZSH_DISABLE_COMPFIX="true"
 export ZSH_COMPDUMP=$ZSH_HOME/backup/.zsh_compdump
 export HISTFILE=$ZSH_HOME/backup/.zsh_history
-ZSH_THEME="milton/milton"
 COMPLETION_WAITING_DOTS="true"
 
 # Remove the useless whitespace at the rhs of the RPROMPT.
@@ -27,7 +29,7 @@ plugins=(
   git wd colored-man-pages extract zsh-syntax-highlighting
 )
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # Source setup-specific configuration which shall not be committed to the repo.
 [[ -r $ZSH_HOME/setup-specific.zsh ]] && source $ZSH_HOME/setup-specific.zsh
