@@ -51,6 +51,7 @@ source $DOTFILES/zsh/completions/cf # Cloud-Foundry CLI
 
 alias view='nvim -R'
 alias vim=nvim
+alias gst='git status'
 
 # Load zsh-syntax-highlighting; should be last.
 source $DOTFILES/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
