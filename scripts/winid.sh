@@ -7,6 +7,10 @@ Select a window with the cursor to retrieve its window id.
 "
   exit 0
 fi
-xwininfo -int |
+
+winid=$(xwininfo -int          |
   grep "xwininfo: Window id: " |
-  awk '{ print $4 }'
+  awk '{ print $4 }')
+printf "$winid\n"
+printf "$winid\n" | xclip -selection clipboard
+notify-send "Added to clipboard"
