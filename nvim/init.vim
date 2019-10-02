@@ -11,6 +11,11 @@ let g:NVIMHOME=$XDG_CONFIG_HOME . '/nvim'
 """
 set termguicolors
 
+" Cursor shapes
+let &t_SI .= "\<Esc>[5 q"
+let &t_SR .= "\<Esc>[4 q"
+let &t_EI .= "\<Esc>[3 q"
+
 let &backupdir=g:NVIMHOME . '/backup'
 let &directory=&backupdir
 let &shadafile=&backupdir . '/shada'
