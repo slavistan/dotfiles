@@ -29,6 +29,8 @@ bindsym $mod+minus split vertical; exec "st"
 bindsym $mod+Shift+backslash split horizontal; exec "st"
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec dmenu_run -h 40 -p "Run:" -fn "Hack:size=17"
+bindsym $mod+i exec notify-send "$(xdotool getmouselocation)"
+bindsym $mod+x exec ~/projects/dotfiles/scripts/xrnr.sh
 
 bindsym $mod+h focus left
 bindsym $mod+j focus down
