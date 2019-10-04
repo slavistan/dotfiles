@@ -1,41 +1,27 @@
 #!/bin/zsh
 
 # TODO:
-# - Make this posix-compliant
 # - Don't delete and recreate .profile. Insert lines only if the file does not
 #   contain them. This way we can put setup specific stuff into the .profile
 #   without that being wiped when running this install script.
 
 setopt +o nomatch # disable errors from empty globs
-set -e # abort on error
 
-# We use the XDG_... conventions. Enfore definition.
-if [ -z "$XDG_CONFIG_HOME" ] || [ -z "$XDG_DATA_HOME" ]; then
-  echo "XDG_CONFIG_HOME or XDG_DATA_HOME is not defined. Abort."
-  exit 1
-fi
+logln() {
+  printf "\033[32m[INFO]\033[0m $@\n"
+}
 
-if [[ "$1" == "--check-dependencies" ]]; then
-  return_code=0
-  # Binaries
-  for dep in {git,nvim,i3,i3blocks,st}; do
-    echo -n "$dep: "
-    if [[ ! -z $(command -v $dep) ]]; then
-      echo $(command -v $dep)
-    else
-      echo -- missing --
-      return_code=1
-    fi
-  done
+# Add a line to a file iff the line is not part of the file.
+addln() {
+  # TODO
+  printf "$1\n" >> "$2"
+}
 
-  # Hack font
-  echo 'Hack font: '$(fc-list | grep Hack | head -n 1)
-  [[ -z "$(fc-list | grep Hack)" ]] && return_code=1
-  echo 'FontAwesome font: '$(fc-list | grep FontAwesome | head -n 1)
-  [[ -z "$(fc-list | grep Hack)" ]] && return_code=1
-
-  exit $return_code
-fi
+# We use the XDG_... conventions. Enforce definition.
+[ -z "$XDG_DATA_HOME" ] && XDG_DATA_HOME="~/.local/share"
+[ -z "$XDG_CONFIG_HOME" ] && XDG_CONFIG_HOME="~/.config"
+[ -z "$XDG_CACHE_HOME" ] && XDG_CACHE_HOME="~/.cache"
+[ -z "$XDG_DATA_DIRS" ] && XDG_DATA_DIRS="/usr/local/share/:/usr/share/"
 
 ##
 # Options - Adjust according to setup
@@ -54,10 +40,12 @@ configure_acpi=false
 ##
 [[ -z $DOTFILES ]] && export DOTFILES=$(dirname "$0:A")
 temp=$(mktemp -d)
-echo "Using the following directories: "
-echo "  DOTFILES:        $DOTFILES"
-echo "  XDG_CONFIG_HOME: $XDG_CONFIG_HOME"
-echo "  Temporary:       $temp"
+logln "I will work with the following variables:"
+logln "  XDG_DATA_HOME=\"$XDG_DATA_HOME\""
+logln "  XDG_CONFIG_HOME=\"$XDG_CONFIG_HOME\""
+logln "  XDG_CACHE_HOME=\"$XDG_CACHE_HOME\""
+logln "  XDG_DATA_DIRS=\"$XDG_DATA_DIRS\""
+logln "  DOTFILES=\"$DOTFILES\""
 read -qs "reply?> Continue? [Y/n]: "
 if [[ ! "$reply" == "y" ]]; then
   echo "Exiting. Nothing done."
@@ -79,11 +67,13 @@ function _sudo {
   sudo -Sp '' "$@" <<<${pw}
 }
 
+set -e # abort on error
 # create config directory, if it does not already exist.
 mkdir -p $XDG_CONFIG_HOME
 
 ###########
 ## .profile - Create barebone and add content depending on installed modules
+# TODO: Add lines only if they're not already contained in the file.
 ###########
 echo '# This file was created automatically.'                                                       > $HOME/.profile
 echo 'export XDG_CONFIG_HOME='"$XDG_CONFIG_HOME"                                                   >> $HOME/.profile
@@ -91,6 +81,7 @@ echo 'export LANG=en_US.utf8'                                                   
 echo 'export TZ="Europe/Berlin"'                                                                   >> $HOME/.profile
 echo '[[ ! -z $(command -v wslpath) ]] && export BROWSER="firefox.exe" || export BROWSER="firefox"'>> $HOME/.profile
 echo '[[ ! -z $(command -v wslpath) ]] && export DISPLAY=localhost:0.0'                            >> $HOME/.profile
+echo "export DOTFILES=$DOTFILES"                                                                   >> $HOME/.profile
 
 ###########
 ## Keyboard Layout
