@@ -1,16 +1,15 @@
 PS1="%F{default}%K{255}%K{255}%F{black}💻%n %#%F{255}%K{244}%K{244]}%F{255} %(4~|%-1~/.../%2~|%~) %F{244}%K{default}%f%k"
 RPROMPT="%F{%(?.28.160)}%K{default}%K{%(?.28.160)]}%F{255}%B %? %b⏎ %F{255}%K{%(?.28.160)}%K{255]}%F{16} /dev/pts/4 🖳 %F{default}%K{255}%f%k"
 
-# vi-mode
-bindkey -v
-bindkey -r '^c'
-bindkey '^[OP' where-is
-bindkey '^[OQ' beginning-of-line
-bindkey '^?' backward-delete-char
-bindkey '^h' backward-delete-char
-bindkey '^w' backward-kill-word
-bindkey '^a' beginning-of-line
-bindkey '^e' end-of-line
+# Bound words by '/'
+default-backward-delete-word () {
+  local WORDCHARS='*?_[]~=&;!#$%^(){}<>'
+  zle backward-delete-word
+}
+zle -N default-backward-delete-word
+bindkey '^W' default-backward-delete-word
+
+# Change cursor when switching modes
 function zle-line-init zle-keymap-select {
   case $KEYMAP in
     vicmd) printf "\033[0 q";;
@@ -20,6 +19,16 @@ function zle-line-init zle-keymap-select {
 }
 zle -N zle-line-init
 zle -N zle-keymap-select
+
+# vi-mode
+bindkey -v
+bindkey -r '^c'
+bindkey '^[OP' where-is
+bindkey '^[OQ' beginning-of-line
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^a' beginning-of-line
+bindkey '^e' end-of-line
 KEYTIMEOUT=1
 
 # Misc

@@ -15,7 +15,9 @@ $result")
 # Display via libnotify
 notify-send "$output"
 
+# Send to copyq
+copyq copy "$output"
+
 # TODO:
 # - Throw a warning if command is interactive (eg. sudo .. )
-# - Copy output to clipboard
 # - Command history
