@@ -17,5 +17,5 @@ let g:ale_python_flake8_options="--max-line-length=120"
 """ Misc configuration
 set textwidth=100
 set formatoptions=r
-set comments=srO:/*,mb:\ *,ex:\ */,://
+set comments=:#\ 
 endfunction
