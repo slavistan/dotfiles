@@ -177,3 +177,4 @@ fi
 echo "export JUPYTER_CONFIG_DIR=$XDG_CONFIG_HOME/jupyter" >> ~/.profile
 
 source $XDG_CONFIG_HOME/zsh/.zshrc
+Add vifm stuff

@@ -21,6 +21,7 @@ zle -N zle-line-init
 zle -N zle-keymap-select
 
 # vi-mode
+# TODO: Create keybinding to vifm
 bindkey -v
 bindkey -r '^c'
 bindkey '^[OP' where-is

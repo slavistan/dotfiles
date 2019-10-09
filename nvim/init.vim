@@ -38,6 +38,7 @@ let mapleader=","
 let maplocalleader="\\"
 
 set nowrap " Disable wrapping by default
+nnoremap ,w :set wrap!<cr>
 " Display tabs and trailing whitespaces
 set list
 set listchars=tab:⇤-⇥
