@@ -1,11 +1,8 @@
 " vim: filetype=vifm :
-" Sample configuration file for vifm (last updated: 2 June, 2019)
-" You can edit this file by hand.
-" The " character at the beginning of a line comments out the line.
-" Blank lines are ignored.
-" The basic format for each item is shown with an example.
 
 " ------------------------------------------------------------------------------
+" TODO: Display folder icon before directories and something other before
+"       files. Like so: https://s14-eu5.startpage.com/cgi-bin/serveimage?url=https%3A%2F%2Fvifm.info%2Fimages%2Fv0.10.1-beta%2Fmiller-preview-preview.gif&sp=598cfa90bb9e5adc50d8092b24228f8a&anticache=178110
 
 " This makes vifm perform file operations on its own instead of relying on
 " standard utilities like `cp`.  While using `cp` and alike is a more universal
