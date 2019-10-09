@@ -77,8 +77,6 @@ let g:ale_linters_explicit=1 " Don't use all linters by default
 """
 " Key mappings
 """
-nnoremap ; :
-vnoremap ; :
 nnoremap <Leader>yy ^yg_
 nnoremap <Leader>dd ^dg_
 
