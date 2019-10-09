@@ -47,9 +47,19 @@ source $DOTFILES/zsh/completions/cf # Cloud-Foundry CLI
 
 ZLE_RPROMPT_INDENT="-1" # removes rprompt's indent (use -1, not 0)
 
+# Aliases
+
 alias view='nvim -R'
 alias vim=nvim
 alias gst='git status'
+mkcd () {
+  if [ "$#" -eq 1 ]; then 
+    mkdir -p "$@" && cd "$@"
+  else
+    echo "Requires exactly one argument. Nothing done" 1>&2
+    return 1
+  fi
+}
 
 # Load zsh-syntax-highlighting; should be last.
 source $DOTFILES/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
