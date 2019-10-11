@@ -114,6 +114,7 @@ set statusline="  Hint: %z%= %A %10u:%-7g %15s %20d  "
 
 mark h ~/
 mark t /tmp/
+mark d /home/shuell/projects/dotfiles
 
 " ------------------------------------------------------------------------------
 
