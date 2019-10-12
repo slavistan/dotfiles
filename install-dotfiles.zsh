@@ -55,7 +55,8 @@ setup_prerequisites() {
   libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev \
   libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev \
   autoconf xutils-dev libtool automake libxcb-xrm0 libxcb-shape0-dev \
-  fonts-powerline dmenu fonts-inconsolata fonts-hack fonts-symbola
+  fonts-powerline dmenu fonts-inconsolata fonts-hack fonts-symbola \
+  fonts-font-awesome
   logln '... done setting up prerequisites.'
 }
 
