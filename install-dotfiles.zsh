@@ -23,12 +23,12 @@ main() {
   logln "  DOTFILES=\"$DOTFILES\""
   read -qs "reply?> Continue? [Y/n]: "
   if [ ! "$reply" = "y" ]; then
-    logln "Exiting. Nothing done."
+    printf "Exiting. Nothing done.\n"
     exit 0
   else
-    logln "Continuing installation."
+    printf "Continuing installation.\n"
   fi
-  
+
   # Store sudo password for later usage.
   read -s "pw?> Enter your sudo password: "
   sudo -kSp '' true <<<"${pw}" > /dev/null 2>&1
@@ -44,6 +44,7 @@ main() {
   setup_zsh
   setup_nvim
   setup_st
+  setup_dmenu
   setup_i3
 }
 
@@ -55,8 +56,9 @@ setup_prerequisites() {
   libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev \
   libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev \
   autoconf xutils-dev libtool automake libxcb-xrm0 libxcb-shape0-dev \
-  fonts-powerline dmenu fonts-inconsolata fonts-hack fonts-symbola \
-  fonts-font-awesome
+  fonts-powerline fonts-inconsolata fonts-hack fonts-symbola \
+  fonts-font-awesome libxinerama-dev copyq libnotify-dev libnotify-bin \
+  notification-daemon notify-osd yad
   logln '... done setting up prerequisites.'
 }
 
@@ -108,7 +110,7 @@ setup_nvim() {
     git clone https://github.com/neovim/neovim.git
     cd neovim
     make CMAKE_BUILD_TYPE=RelWithDebInfo
-    sudo make install
+    please make install
   fi
 
   rm -rf $DOTFILES/nvim/plug_plugins/*/
@@ -125,13 +127,39 @@ setup_st() {
   logln 'Setting up st ...'
   if [ -z "$(command -v st)" ]; then
     logln 'st not found. Installing from source...'
-    mkdir -p $temp/st
-    git clone https://github.com/slavistan/st.git $temp/st
-    cd $temp/st
-    please make clean install
+    cd /tmp
+    rm -rf st
+    git clone https://github.com/slavistan/st.git
+    cd st
+    make clean
+    please make install
   fi
   addln "export TERMINAL=$(command -v st)" $HOME/.profile
   logln '... done setting up st.'
+}
+
+setup_dmenu() {
+  logln 'Setting up dmenu ...'
+  if [ -z "$(command -v dmenu)" ]; then
+    logln 'dmenu not found. Installing from source...'
+    cd /tmp
+    rm -rf dmenu
+    git clone https://github.com/slavistan/dmenu.git
+    cd dmenu
+    make clean
+    please make install
+  fi
+  logln '... done setting up dmenu.'
+}
+
+setup_light() {
+  cd /tmp
+  rm -rf light
+  git clone https://github.com/haikarainen/light.git
+  cd light
+  ./autogen.sh
+  ./configure && make
+  please make install
 }
 
 setup_i3() {
@@ -149,7 +177,7 @@ setup_i3() {
     cd build
     ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
     make
-    sudo make install
+    please make install
   fi
   if [ -z "$(command -v i3blocks)" ]; then
     logln 'i3blocks not found. Installing from source ...'
@@ -181,7 +209,6 @@ setup_acpi() {
 # Makes jupyter use XDG paths
 setup_misc() {
   addln "export JUPYTER_CONFIG_DIR=$XDG_CONFIG_HOME/jupyter" $HOME/.profile
-  # TODO: Hack font + Powerline symbold
 }
 
 logln() {
@@ -208,5 +235,10 @@ addln() {
 please() {
   sudo -Sp '' "$@" <<<${pw}
 }
+
+# TODOS:
+# copyq autoinit
+# notify-send
+# acpi
 
 main

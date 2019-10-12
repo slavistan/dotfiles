@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 symbol='<span font="FontAwesome5ProSolid">&#xf042;</span>'
-current_backlight=$(xbacklight)
+current_backlight=$(light)
 
 if [ "$button" -eq 1 ]; then
 
@@ -16,7 +16,7 @@ if [ "$button" -eq 1 ]; then
     --text="$symbol Choose a new backlight" \
     --mouse )
   if [ "$?" -eq 0 ]; then
-    xbacklight -set $new_backlight
+    light -S $new_backlight
     pkill --signal SIGRTMIN+10 i3blocks
   fi
 fi
@@ -28,13 +28,13 @@ fi
 
 case "$1" in
   brighter)
-    xbacklight -inc 5
+    light -A 5
     ;;
   darker)
-    xbacklight -dec 5
+    light -U 5
     ;;
   reset)
-    xbacklight -set 100
+    light -S 100
     ;;
 esac
 pkill --signal SIGRTMIN+10 i3blocks # refresh
