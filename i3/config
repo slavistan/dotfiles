@@ -1,28 +1,60 @@
 # vim: filetype=i3config
 
-#############
-## Startup
-#############
+###############
+#
+# Startup. Envvars are automatically sourced from ~/.profile by i3.
+#
+###############
 
-# use Windows key
+exec_always "copyq"
+exec_always "pkill compton; compton --config $XDG_CONFIG_HOME/compton/compton.conf"
+exec_always "feh --bg-scale $DOTFILES/i3/backgrounds/ubuntu-avatar.png"
+
+################
+#
+# Visual Appearance
+#
+################
+
+# Font used to draw window titles
+
+font Hack
+
+# Gap size
+
+gaps inner 25
+gaps outer 0
+
+# Window corner radius
+
+border_radius 5
+
+for_window [class=".*"] border pixel 2
+for_window [class="Yad"] floating enable border pixel 0
+
+#################
+#
+# Movement & Layout
+#
+#################
+
+# Use windows key as modifier
+
 set $mod Mod4
 
-# hardcode location of config file (TODO: abstract)
-set $i3home ~/.config/i3
+# Move and resize floating windows around with the mouse by pressing the mod-key
 
-# move and resize floating windows around with the mouse by pressing the mod-key
 floating_modifier $mod
 
-# startup
-exec_always copyq
+# Don't wrap around to window at the opposite side of the screen when moving
+# past the edge
+
+focus_wrapping no
 
 # Attempting to move to the currently active workspace will move to the
 # previously selected workspace
-workspace_auto_back_and_forth yes
 
-############
-## Movement & Layout
-############
+workspace_auto_back_and_forth yes
 
 bindsym $mod+Return exec "st"
 bindsym $mod+minus split vertical; exec "st"
@@ -30,7 +62,7 @@ bindsym $mod+Shift+backslash split horizontal; exec "st"
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec dmenu_run -h 40 -p "Run:" -fn "Hack:size=17"
 bindsym $mod+i exec notify-send "$(xdotool getmouselocation)"
-bindsym $mod+x exec ~/projects/dotfiles/scripts/xrnr.sh
+bindsym $mod+x exec $DOTFILES/scripts/xrnr.sh
 
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -44,20 +76,23 @@ bindsym $mod+Shift+l move right
 
 bindsym $mod+f fullscreen toggle
 
-# reload the configuration file
+# Reload the configuration file
+
 bindsym $mod+Shift+c reload
 
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
 # tab windows in container. toggle split to use tiling.
 # TODO: Implement toggling tabbing
 bindsym $mod+Shift+o layout tabbed
 
-# change container layout orientation
-bindsym $mod+o layout toggle split
+# change tiled container layout orientation
+bindsym $mod+w layout toggle split
 
 ## Floating stuff
 # toggle tiling / floating
@@ -109,40 +144,11 @@ bindsym $mod+Shift+u resize shrink height 5 px or 5 ppt
 bindsym $mod+y resize grow width 5 px or 5 ppt
 bindsym $mod+Shift+y resize shrink width 5 px or 5 ppt
 
-#############
-# Scripts & Blocks
-###########
-
-# Numpad keys are bugged as fuck.
-bindsym $mod+Mod2+KP_7 exec "$i3home/blocks/volume set Headphone 10%+"
-bindsym $mod+Mod2+KP_4 exec "$i3home/blocks/volume toggle Headphone"
-bindsym $mod+Mod2+KP_1 exec "$i3home/blocks/volume set Headphone 10%-"
-bindsym $mod+Mod2+KP_8 exec "$i3home/blocks/volume set Speaker 10%+"
-bindsym $mod+Mod2+KP_5 exec "$i3home/blocks/volume toggle Speaker"
-bindsym $mod+Mod2+KP_2 exec "$i3home/blocks/volume set Speaker 10%-"
-bindsym $mod+Mod2+KP_9 exec "$i3home/blocks/backlight brighter"
-bindsym $mod+Mod2+KP_6 exec "$i3home/blocks/backlight reset"
-bindsym $mod+Mod2+KP_3 exec "$i3home/blocks/backlight darker"
-
-#############
-## Default Visual Styling
-#############
 
 # Default colors (TODO: Use Xresources)
 set $bg #1B1D1E
 set $fg #F8F8F2
 
-# thin border + smart border (≥ 2 windows)
-smart_borders on
-for_window [class=".*"] border pixel 3
-
-# Allow yad windows to float
-for_window [class="Yad"] floating enable border pixel 3
-
-# Gap settings
-set $defaultgap 15
-gaps inner $defaultgap
-gaps outer 5
 
 # coloring
 client.focused          $bg $bg #FFFFFF $bg $fg
@@ -173,44 +179,12 @@ bar {
   }
 }
 
-# don't wrap around to window at the opposite side of the screen when moving past the edge
-focus_wrapping no
-
 #############
-## Modes
+#
+# Misc
+#
 #############
-
-# mode to set visual settings
-set $mode_visual_set Visual Settings
-bindsym $mod+p mode "$mode_visual_set"
-mode "$mode_visual_set" {
-
-  # set gap size
-  #
-  # the up/down direction of the keys refers to the window size.
-  # A growing window implies a dimishing gap (bound to KP_8).
-
-  # current workspace
-  bindsym Mod2+KP_7 gaps inner current minus 15
-  bindsym Mod2+KP_4 gaps inner current set $defaultgap
-  bindsym Mod2+KP_1 gaps inner current plus 15
-
-  # all workspaces
-  bindsym Mod2+KP_8 gaps inner all minus 15
-  bindsym Mod2+KP_5 gaps inner all set $defaultgap
-  bindsym Mod2+KP_2 gaps inner all plus 15
-
-  bindsym Escape mode "default"
-}
-
-#############
-## Rarely-Used Section
-#############
-
-# Set split direction split for toggle split mode.
-bindsym $mod+Shift+v split horizontal
-bindsym $mod+v split vertical
 
 # focus the parent/child container
-bindsym $mod+a focus parent
-bindsym $mod+s focus child
+bindsym $mod+Shift+a focus parent
+bindsym $mod+Shift+s focus child

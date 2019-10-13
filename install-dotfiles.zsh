@@ -58,7 +58,8 @@ setup_prerequisites() {
   autoconf xutils-dev libtool automake libxcb-xrm0 libxcb-shape0-dev \
   fonts-powerline fonts-inconsolata fonts-hack fonts-symbola \
   fonts-font-awesome libxinerama-dev copyq libnotify-dev libnotify-bin \
-  notification-daemon notify-osd yad
+  notification-daemon notify-osd yad xdotoo imagemagick feh compton \
+  htop hub
   logln '... done setting up prerequisites.'
 }
 
@@ -165,10 +166,10 @@ setup_light() {
 setup_i3() {
   logln 'Setting up i3 ...'
   if [ -z "$(command -v i3)" ]; then
-    logln 'i3 not found. Installing i3-gaps from source ...'
+    logln 'i3 not found. Installing i3 with gaps and rounded corners from source ...'
     cd /tmp
     rm -rf i3
-    git clone https://www.github.com/Airblader/i3
+    git clone https://github.com/resloved/i3
     cd i3
     git checkout gaps && git pull
     autoreconf --force --install
@@ -238,7 +239,8 @@ please() {
 
 # TODOS:
 # copyq autoinit
-# notify-send
 # acpi
-
+# notify-send styling
+# transparenz des Terminals
+#
 main
