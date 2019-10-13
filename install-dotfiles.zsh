@@ -47,6 +47,7 @@ main() {
   setup_dmenu
   setup_light
   setup_compton
+  setup_flashfocus
   setup_i3
 }
 
@@ -61,7 +62,7 @@ setup_prerequisites() {
   fonts-powerline fonts-inconsolata fonts-hack fonts-symbola \
   fonts-font-awesome libxinerama-dev copyq libnotify-dev libnotify-bin \
   notification-daemon notify-osd yad xdotoo imagemagick feh compton \
-  htop hub
+  htop hub libxcb-render0-dev libffi-dev python-dev python-cffi python-pip
   logln '... done setting up prerequisites.'
 }
 
@@ -172,6 +173,16 @@ setup_compton() {
   cd $XDG_CONFIG_HOME
   ln -s $DOTFILES/compton
   logln '... done setting up compton.'
+}
+
+setup_flashfocus() {
+  logln 'Setting up flashfocus ...'
+  pip install flashfocus
+  rm -rf $XDG_CONFIG_HOME/flashfocus
+  mkdir -p $XDG_CONFIG_HOME
+  cd $XDG_CONFIG_HOME
+  ln -s $DOTFILES/flashfocus
+  logln '... done setting up flashfocus.'
 }
 
 setup_i3() {
