@@ -10,6 +10,7 @@ exec_always "copyq"
 exec_always "pkill compton; compton --config $XDG_CONFIG_HOME/compton/compton.conf"
 exec_always "feh --bg-scale $DOTFILES/i3/backgrounds/ubuntu-avatar.png"
 exec_always "flashfocus"
+exec_always "$DOTFILES/scripts/flashfocus-mousemode.sh"
 
 ################
 #
