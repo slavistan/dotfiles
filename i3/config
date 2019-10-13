@@ -29,7 +29,7 @@ gaps outer 0
 
 border_radius 5
 
-for_window [class=".*"] border pixel 2
+for_window [class=".*"] border pixel 0
 for_window [class="Yad"] floating enable border pixel 0
 
 #################

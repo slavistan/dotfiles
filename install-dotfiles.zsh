@@ -45,6 +45,8 @@ main() {
   setup_nvim
   setup_st
   setup_dmenu
+  setup_light
+  setup_compton
   setup_i3
 }
 
@@ -161,6 +163,15 @@ setup_light() {
   ./autogen.sh
   ./configure && make
   please make install
+}
+
+setup_compton() {
+  logln 'Setting up compton ...'
+  rm -rf $XDG_CONFIG_HOME/compton
+  mkdir -p $XDG_CONFIG_HOME
+  cd $XDG_CONFIG_HOME
+  ln -s $DOTFILES/compton
+  logln '... done setting up compton.'
 }
 
 setup_i3() {
