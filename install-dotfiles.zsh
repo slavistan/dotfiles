@@ -62,7 +62,8 @@ setup_prerequisites() {
   fonts-powerline fonts-inconsolata fonts-hack fonts-symbola \
   fonts-font-awesome libxinerama-dev copyq libnotify-dev libnotify-bin \
   notification-daemon notify-osd yad xdotoo imagemagick feh compton \
-  htop hub libxcb-render0-dev libffi-dev python-dev python-cffi python-pip
+  htop hub libxcb-render0-dev libffi-dev python-dev python-cffi python-pip \
+  redshift
   logln '... done setting up prerequisites.'
 }
 
