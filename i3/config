@@ -9,7 +9,6 @@
 exec "copyq"
 exec "compton --config $XDG_CONFIG_HOME/compton/compton.conf"
 exec "feh --bg-scale $DOTFILES/i3/backgrounds/ubuntu-avatar.png"
-exec "flashfocus &"
 exec "$DOTFILES/scripts/flashfocus-mousemode.sh &"
 exec "redshift -l 52:13 &"
 
