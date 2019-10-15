@@ -1,6 +1,7 @@
 #!/bin/zsh
 
 # TODO: use bash to run this script and install zsh along the way
+# TODO: Move setup_abc() function into their respective submodule's directory.
 set -e # abort on error
 
 setopt +o nomatch # disable errors from empty globs
