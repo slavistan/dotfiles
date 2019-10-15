@@ -24,14 +24,16 @@ set trash
 
 set history=100
 
-" Display linenumbers
+" Hide linenumbers by default and add a hotkey to toggle them.
 
-set number
+set nonumber
+nnoremap ,n :set nonumber!<cr>
 
-" View hidden files
+
+" Hide dotfiles by default and add a hotkey to toggle the setting.
 
 set nodotfiles
-nnoremap zi :set nodotfiles!<cr>
+nnoremap ,h :set nodotfiles!<cr>
 
 " Automatically resolve symbolic links on l or Enter.
 " TODO: Was macht das?
@@ -164,6 +166,9 @@ set vicmd='head -n 1'
 set vixcmd='head -n 1'
 
 " ------------------------------------------------------------------------------
+
+" File prefixes
+source $DOTFILES/vifm/plugins/vifm_devicons/SETUP
 
 " What should be saved automatically between vifm sessions.  Drop "savedirs"
 " value if you don't want vifm to remember last visited directories for you.

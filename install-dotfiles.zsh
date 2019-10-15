@@ -60,11 +60,11 @@ setup_prerequisites() {
   libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev \
   libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev \
   autoconf xutils-dev libtool automake libxcb-xrm0 libxcb-shape0-dev \
-  fonts-powerline fonts-inconsolata fonts-hack fonts-symbola \
+  fonts-powerline fonts-inconsolata fonts-symbola \
   fonts-font-awesome libxinerama-dev copyq libnotify-dev libnotify-bin \
   notification-daemon notify-osd yad xdotoo imagemagick feh compton \
   htop hub libxcb-render0-dev libffi-dev python-dev python-cffi python-pip \
-  redshift
+  redshift vifm sshfs curlftpfs fuse fuse-zip fusefat fuseiso libncurses-dev
   logln '... done setting up prerequisites.'
 }
 
@@ -143,6 +143,19 @@ setup_st() {
     please make install
   fi
   addln "export TERMINAL=$(command -v st)" $HOME/.profile
+
+  # Setup st's font. We're using nerdfont's patch for pretty vifm icons.
+  logln "Attempting to install nerdfont's version of Hack...."
+  if [ ! -z "$(fc-list | grep Hack)" ]; then
+    errln "Please remove the existing 'Hack' font. See 'fc-list | grep Hack'."
+    exit 1
+  fi
+  cd /tmp
+  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/Hack.zip
+  unzip Hack.zip -d Hack
+  please cp -r Hack "/usr/local/share/fonts"
+  please fc-cache -fv
+  logln "... installed nerdfont's version of Hack."
   logln '... done setting up st.'
 }
 
@@ -224,9 +237,19 @@ setup_i3() {
 
 # Setup nvidia graphics card related settings
 setup_nvidia() {
-  logln "Settings up nvidia settings ..."
+  logln "Setting up nvidia settings ..."
   addln "export __GL_SHADER_DISK_CACHE_PATH=$XDG_CACHE_HOME" $HOME/.profile
   logln "... done setting up nvidia settings."
+}
+
+# Setup vifm
+setup_vifm() {
+  logln "Setting up vifm ..."
+  mkdir -p $XDG_CONFIG_HOME
+  cd $XDG_CONFIG_HOME
+  rm -rf vifm
+  ln -s $DOTFILES/vifm
+  logln "... done setting up vifm."
 }
 
 # TODO: Configure systemd to ignore the corresponding events
