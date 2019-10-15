@@ -39,8 +39,8 @@ setopt autocd # change dirs without 'cd'
 # Completion
 setopt globdots # tab-complete dotfiles
 setopt menucomplete # tab-expand to first option immediately
-autoload -U compinit && compinit -D # -D prevents dumpfile
-autoload -U bashcompinit && bashcompinit
+autoload -U compinit && compinit -d $XDG_CACHE_HOME/zsh
+autoload -U bashcompinit && bashcompinit -d $XDG_CACHE_HOME/zsh
 zstyle ':completion:*' menu select # select completions from menu
 zstyle ':completion:*' matcher-list \
   'm:{a-zA-Z}={A-Za-z} l:|=* r:|=*' # case ins. & infix

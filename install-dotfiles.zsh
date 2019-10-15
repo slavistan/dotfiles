@@ -49,6 +49,7 @@ main() {
   setup_compton
   setup_flashfocus
   setup_i3
+  setup_nvidia
 }
 
 setup_prerequisites() {
@@ -70,6 +71,8 @@ setup_prerequisites() {
 setup_environment() {
   logln 'Setting up environment...'
   addln "export XDG_CONFIG_HOME=$XDG_CONFIG_HOME" "$HOME/.profile"
+  addln "export XDG_CACHE_HOME=$XDG_CACHE_HOME" "$HOME/.profile"
+  addln "export XDG_DATA_HOME=$XDG_DATA_HOME" "$HOME/.profile"
   addln 'export LANG=en_US.utf8' "$HOME/.profile"
   addln 'export TZ="Europe/Berlin"' "$HOME/.profile"
   addln "export DOTFILES=$DOTFILES" "$HOME/.profile"
@@ -219,6 +222,12 @@ setup_i3() {
   logln '... done setting up i3.'
 }
 
+# Setup nvidia graphics card related settings
+setup_nvidia() {
+  logln "Settings up nvidia settings ..."
+  addln "export __GL_SHADER_DISK_CACHE_PATH=$XDG_CACHE_HOME" $HOME/.profile
+  logln "... done setting up nvidia settings."
+}
 
 # TODO: Configure systemd to ignore the corresponding events
 setup_acpi() {
