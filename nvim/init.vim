@@ -82,10 +82,11 @@ Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 
 " vimwiki - Disable default key mappings and reassign them manually. Note that
 " this requires the development branch and the declaration of a global variable
-" before loading the plugin :(
+" before loading the plugin :( Also load the calendar used by vimwiki.
 
 call VimwikiPreLoad()
 Plug 'https://github.com/vimwiki/vimwiki.git', { 'branch': 'dev' }
+Plug 'mattn/calendar-vim'
 
 call plug#end()
 
