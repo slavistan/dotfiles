@@ -30,15 +30,23 @@ set linebreak
 set virtualedit=block
 set path+=**
 set scrolloff=999 " Center cursor vertically
-set number " show linenumbers
+
 set textwidth=999
 set modeline
 set showbreak=↪
 let mapleader=","
 let maplocalleader="\\"
 
-set nowrap " Disable wrapping by default
-nnoremap ,w :set wrap!<cr>
+" Disable line wrapping by default and set a hotkey to toggle it
+
+set nowrap
+nnoremap \w :set wrap!<cr>
+
+" Enable line numbers by default and set a hotkey to toggle them
+
+set number " show linenumbers
+nnoremap \n :set number!<cr>
+
 " Display tabs and trailing whitespaces
 set list
 set listchars=tab:⇤-⇥
@@ -53,6 +61,8 @@ set breakindent " Wrapped lines preserve indentation
 " PRE- Settings: Filtype specifics & Plugin settings
 """
 let g:R_assign=0 " Disable automatic substitution of _
+
+exe 'source ' . g:NVIMHOME . '/config/vimwiki.vim'
 
 """
 " Plugins
@@ -69,6 +79,14 @@ Plug 'https://github.com/vim-airline/vim-airline.git'
 Plug 'https://github.com/vifm/vifm.vim'
 Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+
+" vimwiki - Disable default key mappings and reassign them manually. Note that
+" this requires the development branch and the declaration of a global variable
+" before loading the plugin :(
+
+call VimwikiPreLoad()
+Plug 'https://github.com/vimwiki/vimwiki.git', { 'branch': 'dev' }
+
 call plug#end()
 
 let g:ale_lint_on_text_changed = 'never' " Lint only on save
