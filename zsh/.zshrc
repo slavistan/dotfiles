@@ -39,8 +39,12 @@ setopt autocd # change dirs without 'cd'
 # Completion
 setopt globdots # tab-complete dotfiles
 setopt menucomplete # tab-expand to first option immediately
-autoload -U compinit && compinit -d $XDG_CACHE_HOME/zsh
-autoload -U bashcompinit && bashcompinit -d $XDG_CACHE_HOME/zsh
+
+# Load completion system and stuff the zcompdump file somewhere I don't see
+# them. However.. the -d flag is bullshit and does not do what it's supposed to.
+autoload -Uz compinit && compinit -d $XDG_CACHE_HOME/zsh/.zcompdump
+autoload -Uz bashcompinit && bashcompinit -d $XDG_CACHE_HOME/zsh/.zbashcompdump
+
 zstyle ':completion:*' menu select # select completions from menu
 zstyle ':completion:*' matcher-list \
   'm:{a-zA-Z}={A-Za-z} l:|=* r:|=*' # case ins. & infix

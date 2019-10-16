@@ -11,7 +11,7 @@ if exists("syntax_on")
 endif
 let g:colors_name="milton"
 
-hi Normal          guifg=#F8F8F2 guibg=#1B1D1E
+hi Normal          guifg=#F8F8F2 guibg=None
 hi Boolean         guifg=#AE81FF
 hi Character       guifg=#E6DB74
 hi Number          guifg=#AE81FF
@@ -105,7 +105,7 @@ hi CursorLine                    guibg=#293739
 hi CursorLineNr    guifg=#FD971F               gui=none
 hi CursorColumn                  guibg=#293739
 hi ColorColumn                   guibg=#232526
-hi LineNr          guifg=#465457 guibg=#1B1D1E
+hi LineNr          guifg=#F4D03F guibg=None
 hi NonText         guifg=#465457
 hi SpecialKey      guifg=#465457
 
