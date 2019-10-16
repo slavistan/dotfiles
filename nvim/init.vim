@@ -84,9 +84,11 @@ Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 " this requires the development branch and the declaration of a global variable
 " before loading the plugin :( Also load the calendar used by vimwiki.
 
+let g:calendar_google_calendar=1
 call VimwikiPreLoad()
 Plug 'https://github.com/vimwiki/vimwiki.git', { 'branch': 'dev' }
-Plug 'mattn/calendar-vim'
+" Plug 'mattn/calendar-vim'
+Plug 'https://github.com/itchyny/calendar.vim.git'
 
 call plug#end()
 

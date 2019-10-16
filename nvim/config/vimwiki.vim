@@ -14,7 +14,7 @@ function! SetVimwikiOptions()
 
   nmap m <Plug>VimwikiNextLink
   nmap M <Plug>VimwikiPrevLink
-  nmap <Leader>w<Leader>i <Plug>VimwikiDiaryGenerateLink
+  nmap <Leader>w<Leader>i <Plug>VimwikiDiaryGenerateLinks
   nmap <CR> <Plug>VimwikiFollowLink
   nmap <Backspace> <Plug>VimwikiGoBackLink
   nmap <Leader>wd <Plug>VimwikiDeleteLink
