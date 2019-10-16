@@ -65,7 +65,7 @@ Plug 'https://github.com/godlygeek/tabular.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
 Plug 'https://github.com/w0rp/ale.git'
-Plug 'https://github.com/ap/vim-buftabline.git'
+Plug 'https://github.com/vim-airline/vim-airline.git'
 Plug 'https://github.com/vifm/vifm.vim'
 Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
@@ -74,6 +74,12 @@ call plug#end()
 let g:ale_lint_on_text_changed = 'never' " Lint only on save
 let g:ale_lint_on_enter = 0 " Don't lint when entering a file
 let g:ale_linters_explicit=1 " Don't use all linters by default
+
+" Enable powerline symbols for airline and vim-buffet
+
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 
 """
 " Key mappings
