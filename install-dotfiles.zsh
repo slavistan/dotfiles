@@ -65,7 +65,8 @@ setup_prerequisites() {
   fonts-font-awesome libxinerama-dev copyq libnotify-dev libnotify-bin \
   notification-daemon notify-osd yad xdotoo imagemagick feh compton \
   htop hub libxcb-render0-dev libffi-dev python-dev python-cffi python-pip \
-  redshift vifm sshfs curlftpfs fuse fuse-zip fusefat fuseiso libncurses-dev
+  redshift vifm sshfs curlftpfs fuse fuse-zip fusefat fuseiso libncurses-dev \
+  weechat
   logln '... done setting up prerequisites.'
 }
 
