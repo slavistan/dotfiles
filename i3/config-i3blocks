@@ -42,5 +42,12 @@ signal=10
 [date]
 interval=30
 
+[]
+full_text="hi"
+interval=30
+
 [time]
 interval=30
+
+[controlcenter]
+interval=once
