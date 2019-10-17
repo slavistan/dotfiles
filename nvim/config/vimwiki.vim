@@ -4,6 +4,7 @@
 
 function! VimwikiPreLoad()
   let g:vimwiki_key_mappings = { 'links': 0, }
+  let g:vimwiki_list = [{'path': '/tmp/wiki', 'syntax': 'markdown', 'ext': '.mdwiki'}]
 endfunction
 
 autocmd FileType vimwiki call SetVimwikiOptions()
