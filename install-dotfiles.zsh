@@ -66,7 +66,7 @@ setup_prerequisites() {
   notification-daemon notify-osd yad xdotoo imagemagick feh compton \
   htop hub libxcb-render0-dev libffi-dev python-dev python-cffi python-pip \
   redshift vifm sshfs curlftpfs fuse fuse-zip fusefat fuseiso libncurses-dev \
-  weechat youtube-dl entr fonts-hack-ttf
+  weechat youtube-dl entr fonts-hack-ttf pandoc
   logln '... done setting up prerequisites.'
 }
 

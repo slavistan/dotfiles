@@ -1,10 +1,9 @@
 " Configuration pertaining to vimwikis
 
-" Stuff that's executed prior to loading the plugin.
-
 function! VimwikiPreLoad()
+  " Remove mappings which use Tab
   let g:vimwiki_key_mappings = { 'links': 0, }
-  let g:vimwiki_list = [{'path': '/tmp/wiki', 'syntax': 'markdown', 'ext': '.mdwiki'}]
+  let g:vimwiki_list = [{'path': '/tmp/wiki'}]
 endfunction
 
 autocmd FileType vimwiki call SetVimwikiOptions()

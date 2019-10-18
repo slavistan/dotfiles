@@ -58,11 +58,6 @@ set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 set autoindent " Keep indentation level for wrapped lines
 set breakindent " Wrapped lines preserve indentation
 
-"""
-" PRE- Settings: Filtype specifics & Plugin settings
-"""
-let g:R_assign=0 " Disable automatic substitution of _
-
 exe 'source ' . g:NVIMHOME . '/config/vimwiki.vim'
 
 """
@@ -73,23 +68,22 @@ Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/mboughaba/i3config.vim.git'
 Plug 'https://github.com/jalvesaq/Nvim-R.git'
 Plug 'https://github.com/godlygeek/tabular.git'
-Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
-Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
 Plug 'https://github.com/w0rp/ale.git'
 Plug 'https://github.com/vim-airline/vim-airline.git'
 Plug 'https://github.com/vifm/vifm.vim'
 Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 
-" vimwiki - Disable default key mappings and reassign them manually. Note that
-" this requires the development branch and the declaration of a global variable
-" before loading the plugin :( Also load the calendar used by vimwiki.
+" rmarkdown syntax. Requires pandoc-syntax and pandoc plugins
 
-let g:calendar_google_calendar=1
+Plug 'vim-pandoc/vim-rmarkdown'
+Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
+Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
+
+" vimwiki - Adjust mapping which are mapped to tab by default
+
 call VimwikiPreLoad()
-Plug 'https://github.com/vimwiki/vimwiki.git', { 'branch': 'dev' }
-" Plug 'mattn/calendar-vim'
-Plug 'https://github.com/itchyny/calendar.vim.git'
+Plug 'https://github.com/vimwiki/vimwiki.git'
 
 call plug#end()
 
@@ -118,46 +112,22 @@ onoremap <silent> j gj
 onoremap <silent> k gk
 
 " Navigate across buffers using Tab
+
 set hidden " Change buffers without saving
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
-let g:buftabline_indicators=1
+set hidden " Change buffers without saving
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
 
-" Indent selected lines using Tab
+" Control line indent using Tab
+
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
 inoremap <S-Tab> <Backspace>
 
-"""
-" POST- Settings: Filtype specifics & Plugin settings
-" TODO: Clean up this bloody mess.
-"""
-autocmd FileType Rmd,rmd,r call SetRmdOptions()
-function! SetRmdOptions()
-  set textwidth=120
-  set conceallevel=0 " Nvim-R conceals a lot
-  " Send code R 
-  nnoremap <Space>l :call SendLineToR("stay")<CR>
-  " Send selection. <Esc> before 'call' removes '<,'> which causes the selection to be sent multiple times
-  vnoremap <Space>s <Esc>:call SendSelectionToR("echo", "stay")<CR><Esc>
-  nnoremap <Space>c :call b:SendChunkToR("echo", "stay")<CR>
-  vnoremap <F1> "1y:execute 'Rhelp ' . getreg('1')<CR>
-
-  " Manual folding
-  set foldmethod=manual
-  set sessionoptions=folds
-  set viewoptions=folds
-  set viewdir=.vim
-" TODO: Check if a view-file exists prior to opening it.
-"  autocmd BufWinLeave *.rmd,*.Rmd mkview
-"  autocmd BufWinEnter *.rmd,*.Rmd silent loadview | foldclose!
-endfunction
-
-let g:pandoc#syntax#conceal#use = 0
-let g:pandoc#modules#disabled = [ "spell" ]
-
 " Source configuration submodules
-"
+
 exe 'source ' . g:NVIMHOME . '/config/cpp.vim'
 exe 'source ' . g:NVIMHOME . '/config/python.vim'
 exe 'source ' . g:NVIMHOME . '/config/rust.vim'
