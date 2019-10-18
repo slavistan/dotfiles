@@ -8,8 +8,8 @@ if [ "$#" = "0" ]; then
   charge=$(acpi -b | awk '/^Battery/ { print $4 }' | tr -d '%,' | xargs printf '%.3d')
 
   [ "$charging" = "true" ] \
-    &&  echo -n '<span font="FontAwesome5ProLight">&#xf376;</span> ' \
-    || echo -n '<span font="FontAwesome5ProLight">&#xf240;</span> '
+    &&  echo -n '<span font="FontAwesome">&#xf376;</span> ' \
+    || echo -n '<span font="FontAwesome">&#xf240;</span> '
 
   echo $charge
 

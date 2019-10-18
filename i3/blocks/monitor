@@ -13,15 +13,15 @@ if [ "$numOfMonitors" -eq 2 ]; then
   # LMouse: Primary to the left; to the right otherwise.
   if [ "$button" -eq 1 ]; then
     xrandr --output $m1 --left-of $m2
-    echo -n '<span font="FontAwesome5ProSolid">&#xf108;</span> '
-    echo '<span font="FontAwesome5ProLight">&#xf108;</span> '
+    echo -n '<span font="FontAwesome">&#xf108;</span> '
+    echo '<span font="FontAwesome">&#xf108;</span> '
   else
     xrandr --output $m2 --left-of $m1
-    echo -n '<span font="FontAwesome5ProLight">&#xf108;</span> '
-    echo '<span font="FontAwesome5ProSolid">&#xf108;</span> '
+    echo -n '<span font="FontAwesome">&#xf108;</span> '
+    echo '<span font="FontAwesome">&#xf108;</span> '
   fi
 elif [ "$numOfMonitors" -eq 1 ]; then
-  echo '<span font="FontAwesome5ProSolid">&#xf108;</span> '
+  echo '<span font="FontAwesome">&#xf108;</span> '
 else
   notify-send "More than 2 monitors are not yet supported."
 fi

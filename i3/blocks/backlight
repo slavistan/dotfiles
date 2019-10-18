@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-symbol='<span font="FontAwesome5ProSolid">&#xf042;</span>'
+symbol='<span font="FontAwesome">&#xf042;</span>'
 current_backlight=$(light)
 
 if [ "$button" -eq 1 ]; then

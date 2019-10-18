@@ -31,8 +31,8 @@ if [[ "$#" == "0" ]]; then
 
   # Device-Symbol pairs. Symbols use pango.
   declare -A dict=( \
-    Headphone '<span font="FontAwesome5ProLight">&#xf025;</span>' \
-    Speaker   ' <span font="FontAwesome5ProLight">&#xf028;</span>' \
+    Headphone '<span font="FontAwesome">&#xf025;</span>' \
+    Speaker   ' <span font="FontAwesome">&#xf028;</span>' \
   )
 
   for device in ${(k)dict}; do
