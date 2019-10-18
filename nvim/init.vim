@@ -2,6 +2,7 @@
 "      List number of matches when searching (custom command?)
 "      Incsearch without the adhs jumps
 "      C++: Automatically add comment header for line comments '// ... '
+"      Use Ctrl + vimkeys to shift a line left, right, up and down
 let g:NVIMHOME=$XDG_CONFIG_HOME . '/nvim'
 
 """
