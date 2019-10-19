@@ -3,7 +3,7 @@
 function! VimwikiPreLoad()
   " Remove mappings which use Tab
   let g:vimwiki_key_mappings = { 'links': 0, }
-  let g:vimwiki_list = [{'path': '/tmp/wiki'}]
+  let g:vimwiki_list = [{'path': '$HOME/wiki'}]
 endfunction
 
 autocmd FileType vimwiki call SetVimwikiOptions()
@@ -23,5 +23,9 @@ function! SetVimwikiOptions()
   nmap <Leader>dN <Plug>VimwikiDiaryPrevDay
   nmap + <Plug>VimwikiNormalizeLink
   vmap + <Plug>VimwikiNormalizeLinkVisual
+
+  " Misc settings
+
+  set wrap
 
 endfunction

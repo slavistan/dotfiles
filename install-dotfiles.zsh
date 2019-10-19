@@ -295,9 +295,8 @@ please() {
 }
 
 # TODOS:
-# copyq autoinit
 # acpi
 # notify-send styling
-# transparenz des Terminals
+# dropbox
 #
 main

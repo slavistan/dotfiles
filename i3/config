@@ -11,6 +11,7 @@ exec "compton --config $XDG_CONFIG_HOME/compton/compton.conf"
 exec "feh --bg-scale --no-fehbg $DOTFILES/i3/backgrounds/ubuntu-avatar.png"
 exec "$DOTFILES/scripts/flashfocus-mousemode.sh &"
 exec "redshift -l 52:13 &"
+exec "dropboxd &"
 
 ################
 #
@@ -33,6 +34,7 @@ border_radius 5
 
 for_window [class=".*"] border pixel 0
 for_window [class="Yad"] floating enable border pixel 0
+
 # TODO: float gnome-control-center does not work.
 # for_window [class="InputOutput"] floating enable border pixel 0
 
