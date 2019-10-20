@@ -71,6 +71,8 @@ setup_prerequisites() {
 }
 
 setup_environment() {
+  # TODO: Use $HOME instead of full paths. This make this setup reusable on
+  #       other machines
   logln 'Setting up environment...'
   addln "export XDG_CONFIG_HOME=$XDG_CONFIG_HOME" "$HOME/.profile"
   addln "export XDG_CACHE_HOME=$XDG_CACHE_HOME" "$HOME/.profile"

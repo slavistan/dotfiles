@@ -68,3 +68,8 @@ mkcd () {
 
 # Load zsh-syntax-highlighting; should be last.
 source $DOTFILES/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Source machine-specific part
+if [ -f $DOTFILES/zsh/.machinerc ]; then
+  source $DOTFILES/zsh/.machinerc
+fi
