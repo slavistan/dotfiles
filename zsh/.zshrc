@@ -1,6 +1,7 @@
-PS1="%F{default}%K{255}%K{255}%F{black}💻%n %#%F{255}%K{244}%K{244]}%F{255} %(4~|%-1~/.../%2~|%~) %F{244}%K{default}%f%k"
-RPROMPT="%F{%(?.28.160)}%K{default}%K{%(?.28.160)]}%F{255}%B %? %b⏎ %F{255}%K{%(?.28.160)}%K{255]}%F{16} /dev/pts/4 🖳 %F{default}%K{255}%f%k"
+PS1='%F{138}%B[%l]%b%f %F{159}%B%n@%m%b%f %Bin%b %F{154}%B%(4~|%-1~/.../%2~|%~)%b%f
+%B%(?.%F{green}.%F{red})➤%b%f '
 
+RPROMPT=''
 # Bound words by '/'
 default-backward-delete-word () {
   local WORDCHARS='*?_[]~=&;!#$%^(){}<>'
