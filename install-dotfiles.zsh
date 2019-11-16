@@ -30,27 +30,20 @@ main() {
     printf "Continuing installation.\n"
   fi
 
-  # Store sudo password for later usage.
-  read -s "pw?> Enter your sudo password: "
-  sudo -kSp '' true <<<"${pw}" > /dev/null 2>&1
-  if [[ "$?" != "0" ]]; then
-    echo 'Invalid password. Abort.'
-    exit 1
-  fi
-  echo 'OK.'
+  get_sudo_pw
 
-  setup_prerequisites
-  setup_environment
-  setup_xkb
-  setup_zsh
-  setup_nvim
-  setup_st
-  setup_dmenu
-  setup_light
-  setup_compton
-  setup_flashfocus
-  setup_i3
-  setup_nvidia
+  # setup_prerequisites
+  # setup_environment
+  # setup_xkb
+  # setup_zsh
+  # setup_nvim
+  # setup_st
+  # setup_dmenu
+  # setup_light
+  # setup_compton
+  # setup_flashfocus
+  setup_i3 --force
+  # setup_nvidia
 }
 
 setup_prerequisites() {
@@ -208,11 +201,11 @@ setup_flashfocus() {
 
 setup_i3() {
   logln 'Setting up i3 ...'
-  if [ -z "$(command -v i3)" ]; then
-    logln 'i3 not found. Installing i3 with gaps and rounded corners from source ...'
+  if [ -z "$(command -v i3)" ] || [ "$1" = "--force" ]; then
+    logln 'i3 not found. Installing i3 with gaps corners from source ...'
     cd /tmp
     rm -rf i3
-    git clone https://github.com/resloved/i3
+    git clone https://github.com/Airblader/i3
     cd i3
     git checkout gaps && git pull
     autoreconf --force --install
@@ -292,6 +285,18 @@ addln() {
 }
 
 # sudo wrapper
+
+get_sudo_pw() {
+  # Store sudo password for later usage.
+  read -s "pw?> Enter your sudo password: "
+  sudo -kSp '' true <<<"${pw}" > /dev/null 2>&1
+  if [[ "$?" != "0" ]]; then
+    echo 'Invalid password. Abort.'
+    exit 1
+  fi
+  echo 'OK.'
+}
+
 please() {
   sudo -Sp '' "$@" <<<${pw}
 }

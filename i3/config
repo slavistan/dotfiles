@@ -28,10 +28,6 @@ font Hack
 gaps inner 25
 gaps outer 0
 
-# Window corner radius (requires the rounded-corners fork)
-
-border_radius 5
-
 for_window [class=".*"] border pixel 0
 for_window [class="Yad"] floating enable border pixel 0
 

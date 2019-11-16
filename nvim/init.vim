@@ -132,6 +132,9 @@ exe 'source ' . g:NVIMHOME . '/config/cpp.vim'
 exe 'source ' . g:NVIMHOME . '/config/python.vim'
 exe 'source ' . g:NVIMHOME . '/config/rust.vim'
 
+" Make super star highlight but not jump around
+nnoremap * :keepjumps normal! *``<cr>
+
 """
 " Utility
 """
