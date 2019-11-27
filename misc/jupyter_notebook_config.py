@@ -3,13 +3,6 @@
 # Don't clutter my projects with checkpoints
 c.FileCheckpoints.checkpoint_dir = '/tmp/jupyter_checkpoints'
 
-# Start in '/' since we cannot navigate to parent dirs because
-# muh security
-c.NotebookApp.notebook_dir = '/'
-
-# Allow jupyter to be run as root
-c.NotebookApp.allow_root = True
-
 # Disable authorization
 c.NotebookApp.token = ''
 

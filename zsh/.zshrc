@@ -23,6 +23,12 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
+# Execute
+function chpwd() {
+    emulate -L zsh
+    exa -T -L 1 -F --group-directories-first
+}
+
 # vi-mode
 # TODO: Create keybinding to vifm
 bindkey -v
