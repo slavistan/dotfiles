@@ -35,14 +35,14 @@ main() {
   # setup_prerequisites
   # setup_environment
   # setup_xkb
-  # setup_zsh
+  setup_zsh
   # setup_nvim
   # setup_st
   # setup_dmenu
   # setup_light
   # setup_compton
   # setup_flashfocus
-  setup_i3 --force
+  # setup_i3 --force
   # setup_nvidia
 }
 

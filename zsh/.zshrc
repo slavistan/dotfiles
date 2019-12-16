@@ -44,6 +44,7 @@ KEYTIMEOUT=1
 # Misc
 disable r
 setopt autocd # change dirs without 'cd'
+setopt hist_ignore_dups # don't add same cmd to hist
 
 # Completion
 setopt globdots # tab-complete dotfiles
