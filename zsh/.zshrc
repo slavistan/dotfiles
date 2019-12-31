@@ -4,7 +4,14 @@ PS1='%F{138}%B[%l]%b%f %F{159}%B%n@%m%b%f %Bin%b %F{154}%B%(4~|%-1~/.../%2~|%~)%
 %B%(?.%F{green}.%F{red})➤%b%f '
 RPROMPT=''
 
-# Bound words by '/'
+autoload -U edit-command-line
+
+# Load completion system and stuff the zcompdump file somewhere I don't see
+# them. However.. the -d flag is bullshit and does not do what it's supposed to.
+autoload -Uz compinit && compinit -d $XDG_CACHE_HOME/zsh/.zcompdump
+autoload -Uz bashcompinit && bashcompinit -d $XDG_CACHE_HOME/zsh/.zbashcompdump
+
+# Recreate familiar word boundaries
 default-backward-delete-word () {
   local WORDCHARS='*?_[]~=&;!#$%^(){}<>'
   zle backward-delete-word
@@ -23,39 +30,46 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-# Execute
+# Display files when changing directories
 function chpwd() {
     emulate -L zsh
-    exa -T -L 1 -F --group-directories-first
+    exa -T -a -L 1 -F --group-directories-first
 }
 
-# vi-mode
-# TODO: Create keybinding to vifm
+# Edit commmand-line in vim
+zle -N edit-command-line
+bindkey -M vicmd '^e' edit-command-line
+
+# Enable vi-mode; Navigate completions menu via vim-keys
 bindkey -v
+KEYTIMEOUT=1
+zstyle ':completion:*' menu select # select completions from menu
+zmodload zsh/complist
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+
+# <TAB> to accept a selection and expand immediately again
+function my-accept-and-expand {
+  zle accept-search
+  zle expand-or-complete
+}
+zle -N my-accept-and-expand
+bindkey -M menuselect '^I' my-accept-and-expand
+
+# Misc keybindings
 bindkey -r '^c'
-bindkey '^[OP' where-is
-bindkey '^[OQ' beginning-of-line
 bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
-bindkey '^a' beginning-of-line
-bindkey '^e' end-of-line
-KEYTIMEOUT=1
 
-# Misc
-disable r
-setopt autocd # change dirs without 'cd'
-setopt hist_ignore_dups # don't add same cmd to hist
-
-# Completion
+# Options
 setopt globdots # tab-complete dotfiles
 setopt menucomplete # tab-expand to first option immediately
+setopt autocd # change dirs without 'cd'
+setopt hist_ignore_dups # don't add duplicate cmd to hist
+disable r # Remove irritating alias
 
-# Load completion system and stuff the zcompdump file somewhere I don't see
-# them. However.. the -d flag is bullshit and does not do what it's supposed to.
-autoload -Uz compinit && compinit -d $XDG_CACHE_HOME/zsh/.zcompdump
-autoload -Uz bashcompinit && bashcompinit -d $XDG_CACHE_HOME/zsh/.zbashcompdump
-
-zstyle ':completion:*' menu select # select completions from menu
 zstyle ':completion:*' matcher-list \
   'm:{a-zA-Z}={A-Za-z} l:|=* r:|=*' # case ins. & infix
 source $DOTFILES/zsh/completions/cf # Cloud-Foundry CLI
