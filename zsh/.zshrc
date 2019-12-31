@@ -33,7 +33,9 @@ zle -N zle-keymap-select
 # Display files when changing directories
 function chpwd() {
     emulate -L zsh
-    exa -T -a -L 1 -F --group-directories-first
+  [ ! -z "$(command -v exa)" ] \
+    && exa -T -a -L 1 -F --group-directories-first
+    || ls
 }
 
 # Edit commmand-line in vim
