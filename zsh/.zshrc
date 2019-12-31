@@ -34,7 +34,7 @@ zle -N zle-keymap-select
 function chpwd() {
     emulate -L zsh
   [ ! -z "$(command -v exa)" ] \
-    && exa -T -a -L 1 -F --group-directories-first
+    && exa -T -a -L 1 -F --group-directories-first \
     || ls
 }
 
