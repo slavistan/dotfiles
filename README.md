@@ -2,9 +2,15 @@
 
 # Usage
 
-Run `./install.zsh --help` for a basic overview.
+Run `./install.zsh --help` for a basic overview or
+`./install.zsh --list-modules` to list available modules and their usages.
+Modules can be executed via `./install.zsh -m <module> <arg0> <arg1> ...`.
 
 ### Adding Custom Modules
+
+Modules are added by implementing a specifically named shell function
+`install_mymodule` in a specifically named file `install-mymodule.zsh`. The
+master script parses all 
 
 To make a custom module `funkymodule` available create the file
 `./funkymodule/install-funkymodule.zsh` and put the implementation in a shell
