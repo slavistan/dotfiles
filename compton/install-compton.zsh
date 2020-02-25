@@ -1,4 +1,4 @@
-install_compton() {
+__install_compton() {
   if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     printf "\
 Usage:

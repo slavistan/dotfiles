@@ -1,4 +1,4 @@
-install_zsh() {
+__install_zsh() {
   if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     printf "\
 Usage:

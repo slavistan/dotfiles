@@ -1,4 +1,4 @@
-install_dwm() {
+__install_dwm() {
   if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     printf "\
 Usage:

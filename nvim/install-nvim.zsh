@@ -1,4 +1,4 @@
-install_nvim() {
+__install_nvim() {
   if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     printf "\
 Usage:

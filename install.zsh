@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-install_prerequisites() {
+__install_prerequisites() {
   if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     printf "\
 Usage:
@@ -25,7 +25,7 @@ Installs many basic packages using apt."
   loglnprefix "prereq" "... done setting up prerequisites."
 }
 
-install_environment() {
+__install_environment() {
   if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     printf "\
 Usage:
@@ -68,7 +68,7 @@ during startup. Configures XDG_.. paths and locale."
   loglnprefix "env" "... done setting up environment."
 }
 
-install_st() {
+__install_st() {
   if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     printf "\
 Usage:
@@ -94,7 +94,7 @@ installed."
   fi
 }
 
-install_dmenu() {
+__install_dmenu() {
   if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     printf "\
 Usage:
@@ -117,7 +117,7 @@ reinstall even if 'dmenu' is already installed."
   fi
 }
 
-install_light() {
+__install_light() {
   if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     printf "\
 Usage:
@@ -195,14 +195,18 @@ please() {
 }
 
 list_available_modules() {
+  # Search all installer files for functions whose names match the
+  # expression '__installer_.*'. Return the name without the prefix.
   mods=""
   for file in $(printf "$INSTALLER_FILES\n$THISFILE"); do
-    mods=$(printf "$(sed -n -e 's/^\s*install_\([^(]*\)().*$/\1/gp' $file)\n$mods")
+    mods=$(printf "$(sed -n -e 's/^\s*__install_\([^(]*\)().*$/\1/gp' $file)\n$mods")
   done
   printf "$mods\n" | sort
 }
 
 list_installer_files() {
+  # Lists files whose names match './*/install-.*sh'. These files will be
+  # searched for aptly named shell functions ("modules").
   installer_files=""
   for subdir in $(find '.' -maxdepth 1 -regextype sed -regex './[^.]*' -type d); do
     for file in $(find $subdir -maxdepth 1 -regextype sed -type f -regex "$subdir"'/install-.*sh'); do
@@ -245,7 +249,7 @@ print this help (4).
 elif [ "$1" = "-l" ] || [ "$1" = "--list-modules" ]; then
   for mod in $(list_available_modules)
   do
-    help=$(install_$mod -h | sed 's@install_@'"$THISFILE"' -m @g' | sed -ne 's/^/  /gp')
+    help=$(__install_$mod -h | sed 's@__install_@'"$THISFILE"' -m @g' | sed -ne 's/^/  /gp')
     printf "\033[33;1m$mod\n\033[0m$help\n\n"
   done
 elif [ "$1" = "-m" ]; then

@@ -1,4 +1,4 @@
-install_misc() {
+__install_misc() {
   if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     printf "\
 Usage:

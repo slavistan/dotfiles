@@ -1,4 +1,4 @@
-install_sxhkd() {
+__install_sxhkd() {
   if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     printf "\
 Usage:

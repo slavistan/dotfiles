@@ -1,4 +1,4 @@
-install_nvidia() {
+__install_nvidia() {
   if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     printf "\
 Usage:

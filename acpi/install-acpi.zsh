@@ -1,5 +1,5 @@
 # TODO: Configure systemd to ignore the corresponding events
-install_acpi() {
+__install_acpi() {
   if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     printf "\
 Usage:
