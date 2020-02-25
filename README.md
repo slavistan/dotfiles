@@ -9,7 +9,7 @@ Modules can be executed via `./install.zsh -m <module> <arg0> <arg1> ...`.
 ### Adding Custom Modules
 
 Modules are added by implementing a specifically named shell function
-`install_mymodule` in a specifically named file `install-mymodule.zsh`. The
+`__install_mymodule` in a specifically named file `install-mymodule.zsh`. The
 master script parses all aptly named files in subdirectories and makes their
 funtionality available.
 
