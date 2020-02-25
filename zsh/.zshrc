@@ -52,13 +52,23 @@ bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 
-# <TAB> to accept a selection and expand immediately again
-function my-accept-and-expand {
+# <TAB> to accept a selection and expand again immediately
+function accept-search-and-expand {
   zle accept-search
   zle expand-or-complete
 }
-zle -N my-accept-and-expand
-bindkey -M menuselect '^I' my-accept-and-expand
+zle -N accept-search-and-expand
+bindkey -M menuselect '^I' accept-search-and-expand
+
+# <Shift+Enter> to accept a selection and expand again immediately
+# TODO: My terminal does not create a separate key sequence from Shift+Enter.
+#       Revisit this idea after this is possible.
+# function accept-search-and-accept-line {
+#   zle accept-search
+#   zle accept-line
+# }
+# zle -N accept-search-and-accept-line
+# bindkey -M menuselect '^I' accept-search-and-accept-line
 
 # Misc keybindings
 bindkey -r '^c'

@@ -86,7 +86,6 @@ setup_xkb() {
   logln 'Setting up xkb...'
   cd /usr/share/X11/xkb/symbols/
   please ln -fs $DOTFILES/xkb/symbols/stan
-  addln 'setxkbmap -layout stan' $HOME/.profile
   logln '... done settings up xkb.'
 }
 
