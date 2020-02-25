@@ -21,7 +21,7 @@ stdout. The usage information is displayed when listing available modules via
 `./install.zsh --list-modules`.
 
 ```sh
-install_funkymodule() {
+__install_funkymodule() {
   if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     printf "\
 Usage:
@@ -38,7 +38,7 @@ Install the funky module (1) or print this help (2)."
 ```
 
 When using the shell function's name `$0` in the help reply the master script
-substitutes the `install_`-prefix such that the proper usage command is
+substitutes the `__install_`-prefix such that the proper usage command is
 displayed when invoking `./install.zsh --list-modules`. For the example above
 the relevant output is as follows:
 
@@ -53,11 +53,16 @@ funkymodule
 
 The name of the subdirectory may be freely chosen as well as the module's name
 provided the filename matches the pattern `install-*sh` and the shell function
-name matches `__install_*`.
+name matches `__install_*`. Thus, creating the above file as
+`./funky/install-funky.zsh` is equivalent to the solution shown below as the
+module's name is extracted by stripping the function name from the
+`__install_` prefix.
 
 #### Convenience Macros
 
-`./install.zsh` defines a few useful macros and wrappers. As your module's
-code is sourced by the master installer you can make use of the macros.
+`./install.zsh` defines a few useful macros and wrappers. As your module's code
+is sourced by the master installer you can make use of the macros. You may
+define you own function and variables inside your `install-mymodule` file and
+use them ad libitum in your `__install_mymodule` function.
 
 
