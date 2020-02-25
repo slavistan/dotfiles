@@ -182,6 +182,15 @@ get_sudo_pw() {
 }
 
 please() {
+  # Prompts user for sudo pw only if needed.
+  prompt=$(sudo -nv 2>&1)
+  if [ $? -eq 0 ]; then
+  elif echo $prompt | grep -q '^sudo:'; then
+    get_sudo_pw
+  else
+    errln "You are not a sudoer :( Cannot proceed."
+    exit 1
+  fi
   sudo -Sp '' "$@" <<<${SUDOPW}
 }
 
@@ -223,13 +232,14 @@ source $(echo $INSTALLER_FILES)
 if [ -z "$1" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
   printf "\
 Usage:
-  (1) $0 --list-modules
-  (1) $0 -l
+  (1) $0 --list-modules | -l
   (2) $0 -m <module> <args>
   (3) $0 -- <args> ...
+  (4) $0 --help | -h
 
 List available modules (1) or run a module (2). Use double
-dashes (3) to run script commands directly for debugging.
+dashes (3) to run script commands directly for debugging or
+print this help (4).
 "
   exit 0
 elif [ "$1" = "-l" ] || [ "$1" = "--list-modules" ]; then
@@ -239,7 +249,6 @@ elif [ "$1" = "-l" ] || [ "$1" = "--list-modules" ]; then
     printf "\033[33;1m$mod\n\033[0m$help\n\n"
   done
 elif [ "$1" = "-m" ]; then
-  get_sudo_pw
   mod="$2"
   shift 2
   install_$mod "$@"

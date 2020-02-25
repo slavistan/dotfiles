@@ -9,7 +9,9 @@ Configures selected ACPI events."
     exit 0
   fi
 
+  loglnprefix "acpi" "Installing acpi events and actions ..."
   please rm -rf /etc/acpi/events /etc/acpi/actions
   please cp -r $DOTFILES/acpi/events /etc/acpi
   please cp -r $DOTFILES/acpi/actions /etc/acpi
+  loglnprefix "acpi" "... done."
 }
