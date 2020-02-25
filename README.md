@@ -78,7 +78,7 @@ is already available, i.e. all subdirectories have been traversed and all aptly
 named `install-*sh` files have been sourced. As an example consider
 `./install.zsh -- list_available_modules` which calls the function
 `list_available_modules` defined in `./install.zsh`. It lists the names of all
-available modules gathered from `__install_*` shell functions.
+available modules gathered from `__install_*` shell functions:
 
 ```
 acpi
@@ -96,6 +96,11 @@ sxhkd
 xkb
 zsh
 ```
+
+This feature can be used for easy debugging of your custom modules. Another
+additional preset function available from `./install.zsh` is
+`list_installer_files` which prints all `install-*` files sourced by the master
+script. In case of errors use it to check that your file has indeed been found.
 
 #### Convenience Macros
 
@@ -116,4 +121,4 @@ please echo "World"
 # > World
 ```
 
-WIP;
+WIP: THISFILE, THISDIR
