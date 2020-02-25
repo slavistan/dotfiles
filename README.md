@@ -56,14 +56,15 @@ The properly installed module may be called via
 module name are directly forwarded to the implementation. `./install.zsh -m funkymodule`
 is simply a wrapper around the `__install_funkymodule` shell function. The
 responsibility of correctly responding to calls and of proper handling of arguments
-lies fully with the implementation.
+lies fully with the implementation. Given the above `./install.zsh -m funkymodule --help`
+will simply print the above usage help, albeit without the substituted function name.
 
-Note that the name of the subdirectory may be freely chosen as well as the
-module's name provided the filename matches the pattern `install-*sh` and the
-shell function name matches `__install_*`. Thus, creating the above file as
-`./funky/install-funky.zsh` is equivalent to the solution shown below as the
-module's name is extracted by stripping the function name from the `__install_`
-prefix.
+As a final remark note that the name of the subdirectory may be freely chosen as
+well as the module's name provided the filename matches the pattern
+`install-*sh` and the shell function name matches `__install_*`. Thus, creating
+the above file as `./funky/install-funky.zsh` is equivalent to the solution
+shown previously as the module's name is extracted by stripping the function name
+from the `__install_` prefix.
 
 #### Convenience Macros
 
