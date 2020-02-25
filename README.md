@@ -21,6 +21,8 @@ stdout. The usage information is displayed when listing available modules via
 `./install.zsh --list-modules`.
 
 ```sh
+# Contents of ./funkymodule/install-funkymodule.zsh
+
 __install_funkymodule() {
   if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     printf "\
