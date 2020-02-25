@@ -183,13 +183,11 @@ get_sudo_pw() {
 
 please() {
   # Prompts user for sudo pw only if needed.
-  prompt=$(sudo -nv 2>&1)
-  if [ $? -eq 0 ]; then
-  elif echo $prompt | grep -q '^sudo:'; then
+  # prompt=$(sudo -nv 2>&1)
+  prompt=$(sudo -nv > /dev/null 2>&1)
+  reply="$?"
+  if [ ! "$reply" -eq 0 ]; then
     get_sudo_pw
-  else
-    errln "You are not a sudoer :( Cannot proceed."
-    exit 1
   fi
   sudo -Sp '' "$@" <<<${SUDOPW}
 }
@@ -219,8 +217,6 @@ list_installer_files() {
 ##########################
 ######### Start ##########
 ##########################
-
-set -e # abort on error
 
 THISFILE="$0"
 THISDIR="${0:A:h}"
@@ -255,7 +251,7 @@ elif [ "$1" = "-l" ] || [ "$1" = "--list-modules" ]; then
 elif [ "$1" = "-m" ]; then
   mod="$2"
   shift 2
-  install_$mod "$@"
+  __install_$mod "$@"
 elif [ "$1" = "--" ]; then
   shift
   "$@"

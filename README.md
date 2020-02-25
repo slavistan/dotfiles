@@ -53,13 +53,14 @@ funkymodule
   Install the funky module (1) or print this help (2).
 ```
 
-The properly installed module may be called via
-`./install.zsh -m funkymodule arg0 arg1 ...`. Any arguments passed after the
-module name are directly forwarded to the implementation. `./install.zsh -m funkymodule`
-is simply a wrapper around the `__install_funkymodule` shell function. The
-responsibility of correctly responding to calls and of proper handling of arguments
-lies fully with the implementation. Given the above `./install.zsh -m funkymodule --help`
-will simply print the above usage help, albeit without the substituted function name.
+The properly installed module may be called via `./install.zsh -m funkymodule
+arg0 arg1 ...`. Any arguments passed after the module name are directly
+forwarded to the implementation. `./install.zsh -m funkymodule` is simply
+a wrapper around the `__install_funkymodule` shell function. The responsibility
+of correctly responding to calls and of proper handling of arguments lies fully
+with the function implementation. Given the above `./install.zsh -m funkymodule
+--help` will simply print the above usage help, albeit without the substituted
+function name.
 
 As a final remark note that the name of the subdirectory may be freely chosen as
 well as the module's name provided the filename matches the pattern
@@ -73,6 +74,16 @@ from the `__install_` prefix.
 `./install.zsh` defines a few useful macros and wrappers. As your module's code
 is sourced by the master installer you can make use of the macros. You may
 define you own function and variables inside your `install-mymodule` file and
-use them ad libitum in your `__install_mymodule` function.
+use them ad libitum in your `__install_mymodule` function. Available macros
+and variables include:
 
+**please** Wrapper around the sudo command. Will prompt the user for the sudo
+command only if necessary. Reuses a running sudo session. Usage:
 
+```sh
+please echo "Hello"
+# > Enter your sudo password. OK.
+# > Hello
+please echo "World"
+# > World
+```
