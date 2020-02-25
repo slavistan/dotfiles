@@ -52,8 +52,8 @@ funkymodule
 ```
 
 The name of the subdirectory may be freely chosen as well as the module's name
-provided the filename matches the pattern `install-&ast;sh` and the shell function
-name matches `&lowbar;&lowbar;install&lowbar;&ast;`.
+provided the filename matches the pattern `install-*sh` and the shell function
+name matches `__install_*`.
 
 #### Convenience Macros
 
