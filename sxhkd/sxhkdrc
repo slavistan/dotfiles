@@ -1,0 +1,14 @@
+mod4 + d
+  dmenu_run -p "Run:"
+
+mod4 + o
+  kill -SIGUSR1 $(pgrep sxhkd)
+
+mod4 + Return
+  $TERMINAL
+
+shift + mod4 + x
+  $DOTFILES/scripts/xsendfocused.sh KILL
+
+ctrl + shift + mod4 + q
+  ;$DOTFILES/scripts/dwm/dwm-logout.sh
