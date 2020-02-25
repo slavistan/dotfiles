@@ -42,7 +42,7 @@ substitutes the `__install_`-prefix such that the proper usage command is
 displayed when invoking `./install.zsh --list-modules`. For the example above
 the relevant output is as follows:
 
-```sh
+```
 funkymodule
   Usage:
     (1) ./install.zsh -m funkymodule
