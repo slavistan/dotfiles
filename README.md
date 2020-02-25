@@ -39,8 +39,8 @@ Install the funky module (1) or print this help (2)."
 }
 ```
 
-When using the shell function's name `$0` in the help reply the master script
-substitutes the `__install_`-prefix such that the proper usage command is
+When using the shell function's name `$0` in the usage help reply the master
+script substitutes the `__install_`-prefix such that the proper usage command is
 displayed when listing all available modules. For the example above the relevant
 output of `./install.zsh --list-modules` is as follows:
 
