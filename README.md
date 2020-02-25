@@ -1,6 +1,6 @@
 **Dotfiles Installation Script**
 
-# Usage
+### Usage
 
 Run `./install.zsh --help` for a basic overview or
 `./install.zsh --list-modules` to list available modules and their usages.
@@ -69,6 +69,34 @@ the above file as `./funky/install-funky.zsh` is equivalent to the solution
 shown previously as the module's name is extracted by stripping the function name
 from the `__install_` prefix.
 
+#### Debugging
+
+The master script `./installer.zsh` allows to call sourced functions directly.
+`./installer.zsh -- my_function` will invoke `my_function` regardless of where
+and when it was defined. When the function is called all of the script's context
+is already available, i.e. all subdirectories have been traversed and all aptly
+named `install-*sh` files have been sourced. As an example consider
+`./install.zsh -- list_available_modules` which calls the function
+`list_available_modules` defined in `./install.zsh`. It lists the names of all
+available modules gathered from `__install_*` shell functions.
+
+```
+acpi
+compton
+dmenu
+dwm
+environment
+light
+misc
+nvidia
+nvim
+prerequisites
+st
+sxhkd
+xkb
+zsh
+```
+
 #### Convenience Macros
 
 `./install.zsh` defines a few useful macros and wrappers. As your module's code
@@ -87,3 +115,5 @@ please echo "Hello"
 please echo "World"
 # > World
 ```
+
+WIP;
