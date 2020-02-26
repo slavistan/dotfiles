@@ -24,7 +24,9 @@ To make a custom module `funkymodule` available create the file
 function named `__install_funkymodule` (note the underscores). When prompted for
 help via the *-h* or *--help* flag basic usage information shall be printed to
 stdout. The usage information is displayed when listing available modules via
-`./install.zsh --list-modules`.
+`./install.zsh --list-modules`. As `__install_funkymodule -h` is executed by the
+master script ensure that the call returns promptly, for the parsing of modules
+is performed in a sequential manner.
 
 ```sh
 # Contents of ./funkymodule/install-funkymodule.zsh
