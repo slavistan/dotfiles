@@ -7,8 +7,8 @@ mod4 + o
 mod4 + Return
   $TERMINAL
 
-shift + mod4 + x
-  $DOTFILES/scripts/xsendfocused.sh KILL
-
 ctrl + shift + mod4 + q
-  ;$DOTFILES/scripts/dwm/dwm-logout.sh
+  $DOTFILES/scripts/dwm/dwm-logout.sh
+
+mod4 + n
+  $DOTFILES/scripts/snapshot.sh --select-area

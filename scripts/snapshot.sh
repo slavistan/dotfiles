@@ -2,12 +2,15 @@
 
 if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
   printf "\
-Usage: $0 area
+Usage:
+  (1) $0 --select-area | -s
+
+Takes a snapshot of your desktop.
 "
   exit
 fi
 
-if [ "$1" = "area" ]; then
+if [ "$1" = "-s" ] || [ "$1" = "--select-area" ]; then
   outfile=$(mktemp --tmpdir=/tmp --suffix=.png snapshot_XXXXX)
   import -display :0 $outfile
   if [ ! $(ls -l $outfile | awk '{ print $5 }') = "0" ]; then
