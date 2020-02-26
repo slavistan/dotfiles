@@ -228,6 +228,8 @@ for file in $(echo $INSTALLER_FILES); do
   source $file
 done
 source $(echo $INSTALLER_FILES)
+git submodule init
+git submodule update
 
 if [ -z "$1" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
   printf "\

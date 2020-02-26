@@ -1,5 +1,11 @@
 **Dotfiles Installation Script**
 
+### Installation
+
+```sh
+git clone --recursive https://github.com/slavistan/dotfiles
+```
+
 ### Usage
 
 Run `./install.zsh --help` for a basic overview or
