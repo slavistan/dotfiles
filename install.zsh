@@ -10,7 +10,7 @@ Installs many basic packages using apt."
     exit 0
   fi
   loglnprefix "prereq" "Setting up prerequisites ..."
-  please apt install -y git cmake libtool libtool-bin autogen fontconfig \
+  please apt install -y git cmake curl libtool libtool-bin autogen fontconfig \
   libfreetype6-dev libx11-dev libxft-dev libxcb1-dev libxcb-keysyms1-dev \
   libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev \
   libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev \
@@ -22,6 +22,16 @@ Installs many basic packages using apt."
   htop hub libxcb-render0-dev libffi-dev python-dev python-cffi python-pip \
   redshift vifm sshfs curlftpfs fuse fuse-zip fusefat fuseiso libncurses-dev \
   weechat youtube-dl entr fonts-hack-ttf pandoc exa
+
+  loglnprefix "prereq" "Installing fonts ..."
+  tmp=$(mktemp -d)
+  cd $tmp
+  wget -O Hack.zip "https://github.com/source-foundry/Hack/releases/download/v3.003/Hack-v3.003-ttf.zip"
+  unzip Hack.zip
+  cd ./ttf
+  please mkdir -p /usr/share/fonts/truetype/hack-nerdfonts
+  please cp -f ./*.ttf /usr/share/fonts/truetype/hack-nerdfonts
+  fc-cache -rfv
   loglnprefix "prereq" "... done setting up prerequisites."
 }
 

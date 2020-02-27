@@ -12,16 +12,21 @@ else
   kill -SIGUSR1 "$(pgrep sxhkd)"
 fi
 
-
 ## Start copyq daemon
 
 if [ -z "$(pgrep copyq)" ]; then
   copyq &
 fi
 
+## Start compton (required for transparency)
+
+if [ -z "$(pgrep compton)" ]; then
+  compton &
+fi
+
 ## Set background image
 
-feh --bg-scale ~/pic/backgrounds/forest.jpg
+feh --bg-scale ~/dat/img/bgimg
 
 # Load custom keyboard layout
 
