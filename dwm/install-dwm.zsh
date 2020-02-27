@@ -10,7 +10,7 @@ even if already installed. A 'dwm.desktop' file is
 copied into '/usr/share/xsessions' registering dwm with
 your login-manager."
     exit 0
-  elif [ -z "$(command -v st)" ] || [ "$1" = "--force" ]; then
+  elif [ -z "$(command -v dwm)" ] || [ "$1" = "--force" ]; then
     loglnprefix "dwm" "Installing 'dwm' from source ..."
     cd /tmp
     rm -rf suckless
