@@ -35,11 +35,6 @@ Writes environment variables to $HOME/.profile to be loaded
 during startup. Configures XDG_.. paths and locale."
     exit 0
   fi
-  [ -z "$XDG_DATA_HOME" ] && XDG_DATA_HOME="$HOME/.local/share"
-  [ -z "$XDG_CONFIG_HOME" ] && XDG_CONFIG_HOME="$HOME/.config"
-  [ -z "$XDG_CACHE_HOME" ] && XDG_CACHE_HOME="$HOME/.cache"
-  DOTFILES="$THISDIR"
-
   loglnprefix "env" "I will set the following exports in '~/.profile':"
   loglnprefix "env" "  XDG_DATA_HOME=\"$XDG_DATA_HOME\""
   loglnprefix "env" "  XDG_CONFIG_HOME=\"$XDG_CONFIG_HOME\""
@@ -230,6 +225,11 @@ done
 source $(echo $INSTALLER_FILES)
 git submodule init
 git submodule update
+
+[ -z "$XDG_DATA_HOME" ] && XDG_DATA_HOME="$HOME/.local/share"
+[ -z "$XDG_CONFIG_HOME" ] && XDG_CONFIG_HOME="$HOME/.config"
+[ -z "$XDG_CACHE_HOME" ] && XDG_CACHE_HOME="$HOME/.cache"
+DOTFILES="$THISDIR"
 
 if [ -z "$1" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
   printf "\
