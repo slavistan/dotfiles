@@ -218,6 +218,11 @@ THISDIR="${0:A:h}"
 INSTALLER_FILES=$(list_installer_files)
 SUDOPW=""
 
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export DOTFILES="$THISDIR"
+
 cd $THISDIR
 for file in $(echo $INSTALLER_FILES); do
   source $file
@@ -225,16 +230,6 @@ done
 source $(echo $INSTALLER_FILES)
 git submodule init
 git submodule update
-
-[ -z "$XDG_DATA_HOME" ] && XDG_DATA_HOME="$HOME/.local/share"
-[ -z "$XDG_CONFIG_HOME" ] && XDG_CONFIG_HOME="$HOME/.config"
-[ -z "$XDG_CACHE_HOME" ] && XDG_CACHE_HOME="$HOME/.cache"
-DOTFILES="$THISDIR"
-
-loglnprefix "env" "XDG_DATA_HOME=\"$XDG_DATA_HOME\""
-loglnprefix "env" "XDG_CONFIG_HOME=\"$XDG_CONFIG_HOME\""
-loglnprefix "env" "XDG_CACHE_HOME=\"$XDG_CACHE_HOME\""
-loglnprefix "env" "DOTFILES=\"$DOTFILES\""
 
 if [ -z "$1" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
   printf "\
