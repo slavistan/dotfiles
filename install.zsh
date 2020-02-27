@@ -11,7 +11,7 @@ Installs many basic packages using apt."
   fi
   loglnprefix "prereq" "Setting up prerequisites ..."
   please apt install -y git cmake curl libtool libtool-bin autogen fontconfig \
-  libfreetype6-dev libx11-dev libxft-dev libxcb1-dev libxcb-keysyms1-dev \
+  i3lock libfreetype6-dev libx11-dev libxft-dev libxcb1-dev libxcb-keysyms1-dev \
   libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev \
   libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev \
   libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev \
