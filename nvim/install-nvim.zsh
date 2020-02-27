@@ -18,7 +18,8 @@ install even if 'nvim' is already installed."
     make CMAKE_BUILD_TYPE=RelWithDebInfo
     please make install
     loglnprefix "nvim" "Installing plugins and config ..."
-    rm -rf $DOTFILES/nvim/plug_plugins/*/
+    rm -rf $DOTFILES/nvim/plug_plugins
+    mkdir $DOTFILES/nvim/plug_plugins
     rm -rf $XDG_CONFIG_HOME/nvim
     mkdir -p $XDG_CONFIG_HOME
     cd $XDG_CONFIG_HOME
