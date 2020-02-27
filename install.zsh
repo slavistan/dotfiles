@@ -231,6 +231,11 @@ git submodule update
 [ -z "$XDG_CACHE_HOME" ] && XDG_CACHE_HOME="$HOME/.cache"
 DOTFILES="$THISDIR"
 
+loglnprefix "env" "XDG_DATA_HOME=\"$XDG_DATA_HOME\""
+loglnprefix "env" "XDG_CONFIG_HOME=\"$XDG_CONFIG_HOME\""
+loglnprefix "env" "XDG_CACHE_HOME=\"$XDG_CACHE_HOME\""
+loglnprefix "env" "DOTFILES=\"$DOTFILES\""
+
 if [ -z "$1" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
   printf "\
 Usage:
