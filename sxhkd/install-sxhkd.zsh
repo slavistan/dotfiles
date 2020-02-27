@@ -8,7 +8,7 @@ Installs 'sxhkd' from source and symlinks ./sxhkd/sxhkdrc
 into $XDG_CONFIG_HOME/sxhkd. Use the force-flag to overwrite
 an existing installation."
     exit 0
-  elif [ -z "$(command -v st)" ] || [ "$1" = "--force" ]; then
+  elif [ -z "$(command -v sxhkd)" ] || [ "$1" = "--force" ]; then
     loglnprefix "sxhkd" "Installing sxhkd from source ..."
     tmp=$(mktemp -d)
     git clone https://github.com/baskerville/sxhkd.git $tmp
