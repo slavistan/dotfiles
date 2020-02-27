@@ -25,8 +25,8 @@ your login-manager."
     ln -s "$DOTFILES/dwm/autostart.sh" "$XDG_CONFIG_HOME/dwm"
     ln -s "$DOTFILES/dwm/autostart-blocking.sh" "$XDG_CONFIG_HOME/dwm"
 
-    loglnprefix "dwm" "Copying './dwm/dwm.desktop' to '/etc/share/xsessions' ..."
-    please cp -f ./dwm/dwm.desktop /etc/share/xsessions
+    loglnprefix "dwm" "Copying 'dwm/dwm.desktop' to '/usr/share/xsessions' ..."
+    please cp -f $DOTFILES/dwm/dwm.desktop /usr/share/xsessions
 
     loglnprefix "dwm" "... done installing 'dwm'."
   else
