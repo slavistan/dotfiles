@@ -19,11 +19,11 @@ your login-manager."
     make clean
     please make install
 
-    loglnprefix "dwm" "Symlinking './dwm/*' to '~/.config/dwm/' ..."
+    loglnprefix "dwm" "Symlinking startup scripts ..."
     rm -rf "$XDG_CONFIG_HOME/dwm"
     mkdir -p "$XDG_CONFIG_HOME/dwm"
-    ln -s "$DOTFILES/dwm/autostart.sh" "$XDG_CONFIG_HOME/dwm"
-    ln -s "$DOTFILES/dwm/autostart-blocking.sh" "$XDG_CONFIG_HOME/dwm"
+    ln -s "$DOTFILES/startup/autostart.sh" "$XDG_CONFIG_HOME/dwm"
+    ln -s "$DOTFILES/startup/autostart-blocking.sh" "$XDG_CONFIG_HOME/dwm"
 
     loglnprefix "dwm" "Copying 'dwm/dwm.desktop' to '/usr/share/xsessions' ..."
     please cp -f $DOTFILES/dwm/dwm.desktop /usr/share/xsessions
