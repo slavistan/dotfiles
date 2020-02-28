@@ -32,8 +32,14 @@ feh --bg-scale ~/dat/img/bgimg
 
 setxkbmap -layout stan
 
+# Run monitor setup
+
+if [ -f "$DOTFILES/scripts/startup/monitor-setup.sh" ]; then
+  $DOTFILES/scripts/startup/monitor-setup.sh
+fi
+
 # Execution machine-specific startup script
 
-if [ -f "$DOTFILES/dwm/machine-specific.sh" ]; then
-  $DOTFILES/dwm/machine-specific.sh
+if [ -f "$DOTFILES/scripts/startup/machine-specific.sh" ]; then
+  $DOTFILES/scripts/startup/machine-specific.sh
 fi

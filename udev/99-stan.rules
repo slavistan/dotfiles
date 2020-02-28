@@ -1,0 +1,1 @@
+ACTION=="add|remove", SUBSYSTEM=="thunderbolt", RUN="/usr/bin/su stan -c 'source ~/.profile; export DISPLAY=:0; sleep 1; $DOTFILES/scripts/startup/monitor-setup.sh'"
