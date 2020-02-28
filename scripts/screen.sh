@@ -1,16 +1,16 @@
 #!/usr/bin/env sh
 
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+  printf "\
+Usage:
+  (1) $0
+
+Returns connected monitors as newline-sep'd list.
+"
+exit 0
+fi
+
 # Display screens left-to-right
 if [ -z "$1" ]; then
-  xrandr -q | grep -F " connected" | awk '{ print $1 }' | tr '\n' ' '
-  echo
-  exit 0
+  xrandr -q | grep -F " connected" | awk '{ print $1 }'
 fi
-
-if [ "$1" = "--align" ] || [ "$1" = "-a" ]; then
-  choices=$(./$0)
-  lscr=$(echo $choices | tr ' ' '\n' | dmenu -p "Left: ")
-  rscr=$(echo $choices | tr ' ' '\n' | dmenu -p "Right: ")
-  xrandr --output $lscr --left-of $rscr --auto
-fi
-

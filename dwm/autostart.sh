@@ -31,3 +31,9 @@ feh --bg-scale ~/dat/img/bgimg
 # Load custom keyboard layout
 
 setxkbmap -layout stan
+
+# Execution machine-specific startup script
+
+if [ -f "$DOTFILES/dwm/machine-specific.sh" ]; then
+  $DOTFILES/dwm/machine-specific.sh
+fi
