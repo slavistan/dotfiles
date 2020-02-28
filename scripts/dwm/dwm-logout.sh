@@ -10,4 +10,6 @@ Quits dwm and exits session. Prompts user for confirmation first.
 fi
 
 ans=$(echo "Yes\nCancel" | dmenu -p "Exit session and quit dwm?")
-[ "$ans$" = "Yes" ] && kill -SIGQUIT $(pgrep dwm)
+if [ "$ans" = "Yes" ]; then
+  kill -s QUIT $(pgrep dwm)
+fi
