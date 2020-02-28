@@ -4,11 +4,11 @@ __install_dwm() {
 Usage:
   $0 [--force]
 
-Installs 'dwm' from source and symlinks './dwm' into
-'$XDG_CONFIG_HOME/dwm'. Use force-flag to install 'dwm'
-even if already installed. A 'dwm.desktop' file is
-copied into '/usr/share/xsessions' registering dwm with
-your login-manager."
+Installs 'dwm' from source and symlinks startup scripts into
+'$XDG_CONFIG_HOME/dwm'. Use force-flag to install 'dwm' even
+if already installed. A 'dwm.desktop' file is copied into
+'/usr/share/xsessions' registering dwm with your
+login-manager."
     exit 0
   elif [ -z "$(command -v dwm)" ] || [ "$1" = "--force" ]; then
     loglnprefix "dwm" "Installing 'dwm' from source ..."
@@ -22,8 +22,8 @@ your login-manager."
     loglnprefix "dwm" "Symlinking startup scripts ..."
     rm -rf "$XDG_CONFIG_HOME/dwm"
     mkdir -p "$XDG_CONFIG_HOME/dwm"
-    ln -s "$DOTFILES/startup/autostart.sh" "$XDG_CONFIG_HOME/dwm"
-    ln -s "$DOTFILES/startup/autostart-blocking.sh" "$XDG_CONFIG_HOME/dwm"
+    ln -s "$DOTFILES/scripts/startup/autostart.sh" "$XDG_CONFIG_HOME/dwm"
+    ln -s "$DOTFILES/scripts/startup/autostart-blocking.sh" "$XDG_CONFIG_HOME/dwm"
 
     loglnprefix "dwm" "Copying 'dwm/dwm.desktop' to '/usr/share/xsessions' ..."
     please cp -f $DOTFILES/dwm/dwm.desktop /usr/share/xsessions
