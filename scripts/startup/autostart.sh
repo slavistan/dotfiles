@@ -26,7 +26,7 @@ fi
 
 ## Set background image
 
-feh --bg-scale ~/dat/img/bgimg
+feh --bg-scale $DOTFILES/files/img/ubuntu-teal.jpg
 
 # Load custom keyboard layout
 
