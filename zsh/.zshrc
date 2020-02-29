@@ -101,6 +101,12 @@ mkcd () {
     return 1
   fi
 }
+gsap () {
+  set -e
+  git add -u
+  git commit -am "stuff"
+  git push
+}
 
 # Load zsh-syntax-highlighting; should be last.
 source $DOTFILES/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
