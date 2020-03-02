@@ -4,7 +4,7 @@ __install_dwm() {
 Usage:
   $0 [--force]
 
-Installs lightdm and the webkit2-greeter.
+Installs lightdm, the webkit2-greeter and the Aether theme.
 "
     exit 0
   elif
@@ -20,6 +20,17 @@ Installs lightdm and the webkit2-greeter.
     please apt-key add - < Release.key
     please apt-get update
     please apt-get install lightdm-webkit2-greeter
+    please cp -f $DOTFILES/lightdm/lightdm-webkit2-greeter.conf /etc/lightdm
+
+    loglnprefix "lightdm" "Installing webkit2-greeter theme 'Aether' ..."
+    tmp=$(ktemp -d)
+    cd $tmp
+    git clone git@github.com:NoiSek/Aether.git
+    sudo cp --recursive Aether /usr/share/lightdm-webkit/themes/Aether
+
+    loglnprefix "lightdm" "Apply workaround hack for 'Aether' theme (see issue #73) ..."
+    cd /usr/share/lightdm-webkit/themes
+    please ln -s ./Aether lightdm-webkit-theme-aether
 
     loglnprefix "lightdm" "... done installing lightdm."
   fi
