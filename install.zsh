@@ -16,7 +16,7 @@ Installs many basic packages using apt."
   libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev \
   libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev \
   autoconf xutils-dev libtool automake libxcb-xrm0 libxcb-shape0-dev \
-  fonts-powerline fonts-inconsolata fonts-symbola \
+  fonts-powerline fonts-inconsolata fonts-symbola python3-pip \
   fonts-font-awesome libxinerama-dev copyq libnotify-dev libnotify-bin \
   notification-daemon notify-osd yad xdotool imagemagick feh compton \
   htop hub libxcb-render0-dev libffi-dev python-dev python-cffi python-pip \
