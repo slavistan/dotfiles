@@ -10,5 +10,8 @@ mod4 + Return
 ctrl + shift + mod4 + q
   $DOTFILES/scripts/dwm/dwm-logout.sh
 
+ctrl + shift + mod4 + l
+  dm-tool lock
+
 mod4 + n
   $DOTFILES/scripts/snapshot.sh --select-area

@@ -130,3 +130,10 @@ please echo "World"
 ```
 
 WIP: THISFILE, THISDIR
+
+---
+
+#### Roadmap & Todos
+
+- zsh: Path in prompt shall expand as wide as can be displayed by the terminal
+- zsh: Unscrew tab-expansion of paths.
