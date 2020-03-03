@@ -5,7 +5,7 @@ mod4 + o
   kill -SIGUSR1 $(pgrep sxhkd)
 
 mod4 + Return
-  $TERMINAL
+  $TERMINAL -e sh -c "cd $(xcwd); zsh"
 
 ctrl + shift + mod4 + q
   $DOTFILES/scripts/dwm/dwm-logout.sh

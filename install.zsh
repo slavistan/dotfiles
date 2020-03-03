@@ -6,7 +6,7 @@ __install_prerequisites() {
 Usage:
   $0
 
-Installs many basic packages using apt."
+Installs many basic packages."
     exit 0
   fi
   loglnprefix "prereq" "Setting up prerequisites ..."
@@ -32,6 +32,13 @@ Installs many basic packages using apt."
   please mkdir -p /usr/share/fonts/truetype/hack-nerdfonts
   please cp -f ./*.ttf /usr/share/fonts/truetype/hack-nerdfonts
   fc-cache -rfv
+
+  loglnprefix "prereq" "Installing xcwd from source ..."
+  tmp=$(mktemp -d)
+  git clone https://github.com/schischi/xcwd.git $tmp
+  cd $tmp
+  please make install
+
   loglnprefix "prereq" "... done setting up prerequisites."
 }
 
