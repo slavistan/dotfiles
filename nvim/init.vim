@@ -1,9 +1,29 @@
+if exists('g:vscode')
+  let &backupdir=g:NVIMHOME . '/backup'
+  let &directory=&backupdir
+  let &shadafile=&backupdir . '/shada'
+  let g:netrw_home=&backupdir
+
+  set clipboard=unnamedplus
+  set ignorecase
+  set smartcase
+  set virtualedit=block
+
+  vnoremap <Tab> >gv
+  vnoremap <S-Tab> <gv
+  inoremap <S-Tab> <Backspace>
+
+  nnoremap <Leader>yy ^yg_
+  nnoremap <Leader>dd ^dg_
+else
+
 " TODO:
 "      List number of matches when searching (custom command?)
 "      Incsearch without the adhs jumps
 "      C++: Automatically add comment header for line comments '// ... '
 "      Use Ctrl + vimkeys to shift a line left, right, up and down
 let g:NVIMHOME=$XDG_CONFIG_HOME . '/nvim'
+
 
 """
 " Settings
@@ -80,11 +100,6 @@ Plug 'vim-pandoc/vim-rmarkdown'
 Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
 
-" vimwiki - Adjust mapping which are mapped to tab by default
-
-call VimwikiPreLoad()
-Plug 'https://github.com/vimwiki/vimwiki.git'
-
 call plug#end()
 
 let g:ale_lint_on_text_changed = 'never' " Lint only on save
@@ -92,7 +107,6 @@ let g:ale_lint_on_enter = 0 " Don't lint when entering a file
 let g:ale_linters_explicit=1 " Don't use all linters by default
 
 " Enable powerline symbols for airline and vim-buffet
-
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
@@ -173,11 +187,6 @@ let g:gitgutter_sign_removed = '--'
 let g:gitgutter_sign_removed_first_line ='--'
 let g:gitgutter_sign_modified_removed = '≠≠'
 
-"""
-" Vifm - plugin
-"""
-" TODO: Open multiple selected files at once (handy when working a project)
-" TODO: Open left tab in vim's working directory and the right tab in
-"       the directory of the currently viewed file (or the home dir?)
-let g:vifm_replace_netrw=1 " replace netrw with vifm
 colorscheme milton " postpone loading of colorscheme so that plugins' hi groups will be known
+
+endif
