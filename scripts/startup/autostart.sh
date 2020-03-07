@@ -24,6 +24,10 @@ if [ -z "$(pgrep compton)" ]; then
   compton &
 fi
 
+## Run dwm status bar script
+
+$DOTFILES/scripts/dwm/dwm-status.sh &
+
 ## Set background image
 
 feh --bg-scale $DOTFILES/files/img/ubuntu-teal.jpg
