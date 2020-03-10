@@ -18,6 +18,10 @@ if [ -z "$(pgrep copyq)" ]; then
   copyq &
 fi
 
+## Start dropbox daemon
+
+dropbox start &
+
 ## Start compton (required for transparency)
 
 if [ -z "$(pgrep compton)" ]; then
