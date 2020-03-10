@@ -278,4 +278,4 @@ fi
 
 # TODOS:
 # notify-send styling
-# dropbox
+# dropbox: https://linoxide.com/linux-how-to/install-dropbox-ubuntu/
