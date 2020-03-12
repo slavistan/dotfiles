@@ -84,7 +84,9 @@ disable r # Remove irritating alias
 
 zstyle ':completion:*' matcher-list \
   'm:{a-zA-Z}={A-Za-z} l:|=* r:|=*' # case ins. & infix
+
 source $DOTFILES/zsh/completions/cf # Cloud-Foundry CLI
+source $DOTFILES/zsh/completions/npm.plugin.zsh # npm
 
 ZLE_RPROMPT_INDENT="-1" # removes rprompt's indent (use -1, not 0)
 
