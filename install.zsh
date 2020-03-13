@@ -279,3 +279,5 @@ fi
 # TODOS:
 # notify-send styling
 # dropbox: https://linoxide.com/linux-how-to/install-dropbox-ubuntu/
+# dwm: unscrew
+# st: Ausgabe der letzten Befehle in Clipboard
