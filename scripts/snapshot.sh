@@ -12,7 +12,7 @@ fi
 
 if [ "$1" = "-s" ] || [ "$1" = "--select-area" ]; then
   outfile=$(mktemp --tmpdir=/tmp --suffix=.png snapshot_XXXXX)
-  import -display :0 $outfile
+  import $outfile
   if [ ! $(ls -l $outfile | awk '{ print $5 }') = "0" ]; then
     copyq copy image/png - < $outfile
     notify-send -i $outfile "Saved to $outfile"
