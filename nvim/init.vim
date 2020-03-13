@@ -86,19 +86,11 @@ exe 'source ' . g:NVIMHOME . '/config/vimwiki.vim'
 execute 'call plug#begin(''' . g:NVIMHOME . '/plug-plugins'')'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/mboughaba/i3config.vim.git'
-Plug 'https://github.com/jalvesaq/Nvim-R.git'
 Plug 'https://github.com/godlygeek/tabular.git'
 Plug 'https://github.com/w0rp/ale.git'
 Plug 'https://github.com/vim-airline/vim-airline.git'
-Plug 'https://github.com/vifm/vifm.vim'
-Plug 'https://github.com/junegunn/fzf.vim'
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
-
-" rmarkdown syntax. Requires pandoc-syntax and pandoc plugins
-
-Plug 'vim-pandoc/vim-rmarkdown'
-Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
-Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
+Plug 'https://github.com/dbridges/vim-markdown-runner.git'
 
 call plug#end()
 
@@ -186,6 +178,11 @@ let g:gitgutter_sign_modified = '≠≠'
 let g:gitgutter_sign_removed = '--'
 let g:gitgutter_sign_removed_first_line ='--'
 let g:gitgutter_sign_modified_removed = '≠≠'
+
+""" MarkdownRunner
+
+autocmd FileType markdown nnoremap <buffer> <Leader>r :MarkdownRunner<CR>
+autocmd FileType markdown nnoremap <buffer> <Leader>R :MarkdownRunnerInsert<CR>
 
 colorscheme milton " postpone loading of colorscheme so that plugins' hi groups will be known
 
