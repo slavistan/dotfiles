@@ -71,6 +71,7 @@ during startup. Configures XDG_.. paths and locale."
   addln "export BROWSER=$(command -v firefox)" "$HOME/.profile"
   addln 'export LANG=en_US.utf8' "$HOME/.profile"
   addln 'export TZ="Europe/Berlin"' "$HOME/.profile"
+  addln 'export LC_NUMERIC="C"' "$HOME/.profile" # make printf floats use '.'
   addln "export DOTFILES=$DOTFILES" "$HOME/.profile"
 
   # Add WSL-specific environment
