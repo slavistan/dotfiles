@@ -85,12 +85,12 @@ exe 'source ' . g:NVIMHOME . '/config/vimwiki.vim'
 """
 execute 'call plug#begin(''' . g:NVIMHOME . '/plug-plugins'')'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
-Plug 'https://github.com/mboughaba/i3config.vim.git'
 Plug 'https://github.com/godlygeek/tabular.git'
 Plug 'https://github.com/w0rp/ale.git'
 Plug 'https://github.com/vim-airline/vim-airline.git'
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'https://github.com/dbridges/vim-markdown-runner.git'
+Plug 'https://github.com/tpope/vim-commentary'
 
 call plug#end()
 
