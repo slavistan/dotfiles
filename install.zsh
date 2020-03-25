@@ -68,8 +68,10 @@ during startup. Configures XDG_.. paths and locale."
   addln "export XDG_CONFIG_HOME=$XDG_CONFIG_HOME" "$HOME/.profile"
   addln "export XDG_CACHE_HOME=$XDG_CACHE_HOME" "$HOME/.profile"
   addln "export XDG_DATA_HOME=$XDG_DATA_HOME" "$HOME/.profile"
+  addln "export BROWSER=$(command -v firefox)" "$HOME/.profile"
   addln 'export LANG=en_US.utf8' "$HOME/.profile"
   addln 'export TZ="Europe/Berlin"' "$HOME/.profile"
+  addln 'export LC_NUMERIC="C"' "$HOME/.profile" # make printf floats use '.'
   addln "export DOTFILES=$DOTFILES" "$HOME/.profile"
 
   # Add WSL-specific environment
@@ -279,3 +281,5 @@ fi
 # TODOS:
 # notify-send styling
 # dropbox: https://linoxide.com/linux-how-to/install-dropbox-ubuntu/
+# dwm: unscrew
+# st: Ausgabe der letzten Befehle in Clipboard
