@@ -91,6 +91,7 @@ Plug 'https://github.com/w0rp/ale.git'
 Plug 'https://github.com/vim-airline/vim-airline.git'
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'https://github.com/dbridges/vim-markdown-runner.git'
+Plug 'https://github.com/alcesleo/vim-uppercase-sql'
 
 call plug#end()
 
