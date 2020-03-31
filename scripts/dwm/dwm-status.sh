@@ -7,13 +7,7 @@ battery() {
 }
 
 power() {
-  for p in /sys/class/power_supply/ADP?/online; do
-    if [ $(cat $p) = "1" ]; then
-      printf ⚡
-    else
-      printf 🔋
-    fi
-  done
+   [ $(cat /sys/class/power_supply/AC/online) -eq 1 ] && printf ⚡|| printf 🔋
 }
 
 time() {
