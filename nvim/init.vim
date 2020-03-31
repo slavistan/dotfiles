@@ -185,6 +185,10 @@ let g:gitgutter_sign_modified_removed = '≠≠'
 autocmd FileType markdown nnoremap <buffer> <Leader>r :MarkdownRunner<CR>
 autocmd FileType markdown nnoremap <buffer> <Leader>R :MarkdownRunnerInsert<CR>
 
+""" Markdown Fenced Code Syntax Highlighting
+
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'zsh=zsh']
+
 colorscheme milton " postpone loading of colorscheme so that plugins' hi groups will be known
 
 endif
