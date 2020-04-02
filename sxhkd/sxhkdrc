@@ -18,3 +18,7 @@ mod4 + n
 
 mod4 + e
   spacefm
+
+mod4 + F12
+  $DOTFILES/scripts/webcam.sh view toggle
+

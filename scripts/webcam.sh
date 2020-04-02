@@ -6,6 +6,7 @@ view() {
   on)
     $0 loopback on && sleep 0.5
     $cmd &
+    sleep 0.1
     ;;
   off)
     $0 loopback off && sleep 0.2
