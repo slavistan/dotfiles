@@ -273,7 +273,7 @@ elif [ "$1" = "-l" ] || [ "$1" = "--list-modules" ]; then
   for mod in $(list_available_modules)
   do
     help=$(__install_$mod -h | sed 's@__install_@'"$THISFILE"' -m @g' | sed -ne 's/^/  /gp')
-    printf "\033[33;1m$mod\n\033[0m$help\n\n"
+    printf "Module \033[32;1m$mod\033[0m\n$help\n\n"
   done
 elif [ "$1" = "-m" ]; then
   mod="$2"
