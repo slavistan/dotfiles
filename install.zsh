@@ -287,5 +287,4 @@ fi
 # TODOS:
 # notify-send styling
 # dropbox: https://linoxide.com/linux-how-to/install-dropbox-ubuntu/
-# vscode:
 # st: Ausgabe der letzten Befehle in Clipboard
