@@ -196,9 +196,14 @@ get_sudo_pw() {
   echo 'OK.'
 }
 
+# Change into directory and silently create it if necessary
+
+mkcd() {
+  mkdir -p "$1" && cd "$1"
+}
+
 please() {
   # Prompts user for sudo pw only if needed.
-  # prompt=$(sudo -nv 2>&1)
   prompt=$(sudo -nv > /dev/null 2>&1)
   reply="$?"
   if [ ! "$reply" -eq 0 ]; then
@@ -282,4 +287,5 @@ fi
 # TODOS:
 # notify-send styling
 # dropbox: https://linoxide.com/linux-how-to/install-dropbox-ubuntu/
+# vscode:
 # st: Ausgabe der letzten Befehle in Clipboard

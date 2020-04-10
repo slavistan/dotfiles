@@ -2,8 +2,8 @@ alias view='nvim -R'
 alias vim=nvim
 alias gst='git status'
 mkcd () {
-  if [ "$#" -eq 1 ]; then 
-    mkdir -p "$@" && cd "$@"
+  if [ "$#" -eq 1 ]; then
+    mkdir -p "$1" && cd "$1"
   else
     echo "Requires exactly one argument. Nothing done" 1>&2
     return 1

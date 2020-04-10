@@ -6,6 +6,8 @@
 git clone --recursive https://github.com/slavistan/dotfiles
 ```
 
+Mind the *--recursive* flag.
+
 ### Usage
 
 Run `./install.zsh --help` for a basic overview or
@@ -118,7 +120,7 @@ define you own function and variables inside your `install-mymodule` file and
 use them ad libitum in your `__install_mymodule` function. Available macros
 and variables include:
 
-**please** Wrapper around the sudo command. Will prompt the user for the sudo
+**please** Wrapper around the *sudo* command. Will prompt the user for the sudo
 command only if necessary. Reuses a running sudo session. Usage:
 
 ```sh
@@ -129,7 +131,20 @@ please echo "World"
 # > World
 ```
 
-WIP: THISFILE, THISDIR
+**mkcd** Like *cd* but silently creates the directory if it does not exist.
+
+```sh
+mkcd ~/bin/
+# Install something here ...
+```
+
+**THISDIR** Variable which contains the full path to the directory in which
+*install.zsh* resides. Useful as a basepoint to reference files stored
+somewhere in the directory structure.
+
+```sh
+cp $THISDIR/mymodule/config.cfg ~/.config/mymodule
+```
 
 ---
 

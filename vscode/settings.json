@@ -1,0 +1,12 @@
+{
+    "latex-workshop.message.update.show": false,
+    "latex-workshop.view.pdf.viewer": "browser",
+    "C_Cpp.default.intelliSenseMode": "clang-x64",
+    "C_Cpp.default.cppStandard": "c++20",
+    "C_Cpp.default.cStandard": "c11",
+    "C_Cpp.updateChannel": "Insiders",
+    "vscode-neovim.neovimPath": "/usr/local/bin/nvim",
+    "vscode-neovim.neovimInitPath": "/home/stan/prj/dotfiles/nvim/init.vim",
+    "keyboard.dispatch": "keyCode",
+    "workbench.colorTheme": "Monokai"
+}
