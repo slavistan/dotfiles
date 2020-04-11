@@ -20,13 +20,7 @@ else
   infile="$1";
 fi
 
-if [ ! "$infile" = "-" ] && [ ! -e "$infile" ]; then
-  $0 "-h"
-  exit 1
-fi
-
 re='(((http|https)://|www.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)'
-
 sed 's/.*│//g' "$infile" |  tr -d '\n' | grep -aEo "$re" | sort | uniq |
   case $(echo $opt) in
     o) dmenu -l 10 -p 'Open URL: ' | xargs $BROWSER ;;
@@ -34,3 +28,5 @@ sed 's/.*│//g' "$infile" |  tr -d '\n' | grep -aEo "$re" | sort | uniq |
     d) dmenu -l 10 -p 'Select URL: ' ;;
     *) cat ;;
   esac
+
+# TODO: Cancel when dmenu selection is aborted by user.
