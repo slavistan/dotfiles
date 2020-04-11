@@ -2,20 +2,35 @@
 
 if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ "$1" = "-?" ]; then
   printf "\
-Usage: $0 FILENAME
+Usage:
+  $0 [OPTION] FILENAME
 
-Scans file for hyperlinks and returns them one per line. Use '-' as filename
-to read from stdin.
+  Scan a file for URLs (use '-' as filename to read from stdin). By default
+  URLs are written to stdout. Option '-d' opens a dmenu to choose a single URL.
+  Options '-c' / '-o' open a dmenu to choose a single URL to be copied to
+  the clipboard / to be opened in the \$BROWSER.
 "
   exit 0
 fi
 
-if [ ! "$1" = "-" ] && [ ! -e "$1" ]; then
+if [ "$#" -eq 2 ]; then
+  infile="$2"
+  opt="$(echo $1 | tr -d '-')"
+else
+  infile="$1";
+fi
+
+if [ ! "$infile" = "-" ] && [ ! -e "$infile" ]; then
   $0 "-h"
   exit 1
 fi
 
-sed 's/.*│//g' "$1" |
-  tr -d '\n' |
-  grep -aEo '(((http|https)://|www.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)' |
-  sort | uniq
+re='(((http|https)://|www.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)'
+
+sed 's/.*│//g' "$infile" |  tr -d '\n' | grep -aEo "$re" | sort | uniq |
+  case $(echo $opt) in
+    o) dmenu -l 10 -p 'Open URL: ' | xargs $BROWSER ;;
+    c) dmenu -l 10 -p 'Copy URL: ' | xclip -selection clipboard ;;
+    d) dmenu -l 10 -p 'Select URL: ' ;;
+    *) cat ;;
+  esac
