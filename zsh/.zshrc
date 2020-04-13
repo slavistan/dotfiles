@@ -41,6 +41,7 @@ function chpwd() {
 # Edit commmand-line in vim
 zle -N edit-command-line
 bindkey -M vicmd '^e' edit-command-line
+bindkey '^e' edit-command-line
 
 # Enable vi-mode; Navigate completions menu via vim-keys
 bindkey -v
