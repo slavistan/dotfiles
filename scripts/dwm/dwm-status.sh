@@ -7,7 +7,8 @@ battery() {
 }
 
 power() {
-   [ $(cat /sys/class/power_supply/AC/online) -eq 1 ] && printf ⚡|| printf 🔋
+  device=$(ls /sys/class/power_supply/ | grep -v 'BAT')
+  [ "$(cat /sys/class/power_supply/$device/online)" -eq 1 ] && printf ⚡|| printf 🔋
 }
 
 time() {
@@ -18,9 +19,13 @@ status() {
   echo "$(power) $(battery) | $(time)"
 }
 
-while :; do
+if [ ! "$#" -eq 0 ]; then
+  $@
+else
+  while :; do
 
-  xsetroot -name "$(status | tr '\n' ' ')"
+    xsetroot -name "$(status | tr '\n' ' ')"
 
-  sleep 1m
-done
+    sleep 1m
+  done
+fi
