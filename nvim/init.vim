@@ -1,3 +1,7 @@
+let g:NVIMHOME=$XDG_CONFIG_HOME . '/nvim'
+
+""" Configuration for vscode's neovim plugin
+
 if exists('g:vscode')
   let &backupdir=g:NVIMHOME . '/backup'
   let &directory=&backupdir
@@ -15,6 +19,17 @@ if exists('g:vscode')
 
   nnoremap <Leader>yy ^yg_
   nnoremap <Leader>dd ^dg_
+
+  " <Tab> switches between opened tabs. We need the ':Tab' instead of ':tab'
+  " or things won't work. See #241.
+
+  nnoremap <Tab> :Tabnext<CR>
+  nnoremap <S-Tab> :Tabprev<CR>
+
+  execute 'call plug#begin(''' . g:NVIMHOME . '/plug-plugins'')'
+  Plug 'https://github.com/godlygeek/tabular.git'
+  call plug#end()
+
 else
 
 " TODO:
@@ -22,7 +37,6 @@ else
 "      Incsearch without the adhs jumps
 "      C++: Automatically add comment header for line comments '// ... '
 "      Use Ctrl + vimkeys to shift a line left, right, up and down
-let g:NVIMHOME=$XDG_CONFIG_HOME . '/nvim'
 
 
 """
@@ -120,9 +134,6 @@ onoremap <silent> k gk
 
 " Navigate across buffers using Tab
 
-set hidden " Change buffers without saving
-nnoremap <Tab> :bnext<CR>
-nnoremap <S-Tab> :bprevious<CR>
 set hidden " Change buffers without saving
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>

@@ -51,3 +51,7 @@ fi
 if [ -f "$DOTFILES/scripts/startup/machine-specific.sh" ]; then
   $DOTFILES/scripts/startup/machine-specific.sh
 fi
+
+# Display log
+
+libreoffice ~/Dropbox/log.ods &
