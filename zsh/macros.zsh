@@ -1,15 +1,20 @@
+# Aliases
+
 alias view='nvim -R'
 alias vim=nvim
 alias gst='git status'
-mkcd () {
-  if [ "$#" -eq 1 ]; then
-    mkdir -p "$1" && cd "$1"
-  else
-    echo "Requires exactly one argument. Nothing done" 1>&2
-    return 1
-  fi
+
+
+# Create directory and enter it
+
+function mkcd () {
+  [ "$#" -eq 1 ] && mkdir -p "$1" && cd "$1" || echo "Nothing done."
 }
-gsap () {
+
+
+# Git - Stage All & Push
+
+function gsap () {
   if [ "$(git rev-parse --is-inside-work-tree 2>&1)" = "true" ]; then
     git add -u
     git commit -am "stuff"
@@ -19,4 +24,6 @@ gsap () {
     return 1
   fi
 }
+
+
 
