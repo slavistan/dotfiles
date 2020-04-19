@@ -1,4 +1,4 @@
-# Global options
+# Zsh global options
 
 setopt globdots         # tab-complete dotfiles
 setopt menucomplete     # tab-expand to first option immediately
@@ -25,13 +25,13 @@ zstyle ':completion:*' matcher-list \
   'm:{a-zA-Z}={A-Za-z} l:|=* r:|=*' # case ins. & infix
 
 
-# vi-mode
+# vi-mode line edit
 
 bindkey -v # Enable vi-mode
 KEYTIMEOUT=1 # Remove timeout after <ESC>
 
 
-# Change cursor when switching vi-modes.
+# Change cursor when switching between insert and normal mode
 
 zle -N zle-line-init vicursor # Change cursor according to vi-mode.
 zle -N zle-keymap-select vicursor # Change cursor according to vi-mode.
@@ -73,9 +73,26 @@ source $DOTFILES/zsh/completions/cf # Cloud-Foundry CLI
 source $DOTFILES/zsh/completions/npm.plugin.zsh # npm
 
 
-# Import aliases and shell functions
+# Interactive shell aliases & functions
 
-source $DOTFILES/zsh/macros.zsh
+alias view='nvim -R'
+alias vim=nvim
+alias gst='git status'
+
+function mkcd () {
+  [ "$#" -eq 1 ] && mkdir -p "$1" && cd "$1" || echo "Nothing done."
+}
+
+function gsap () {
+  if [ "$(git rev-parse --is-inside-work-tree 2>&1)" = "true" ]; then
+    git add -u
+    git commit -am "stuff"
+    git push
+  else
+    echo "This is not a git repository. Nothing done."
+    return 1
+  fi
+}
 
 
 # Load zsh-syntax-highlighting; should be last.
