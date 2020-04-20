@@ -106,6 +106,7 @@ Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'https://github.com/dbridges/vim-markdown-runner.git'
 Plug 'https://github.com/alcesleo/vim-uppercase-sql'
 Plug 'https://github.com/tpope/vim-commentary'
+Plug 'https://github.com/tpope/vim-markdown.git'
 
 call plug#end()
 
@@ -198,7 +199,7 @@ autocmd FileType markdown nnoremap <buffer> <Leader>R :MarkdownRunnerInsert<CR>
 
 """ Markdown Fenced Code Syntax Highlighting
 
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'zsh=zsh']
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'zsh=zsh', 'javascript=js']
 
 colorscheme milton " postpone loading of colorscheme so that plugins' hi groups will be known
 
