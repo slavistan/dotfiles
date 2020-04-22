@@ -6,17 +6,11 @@ source ~/.profile
 
 ## Start sxhkd or, if running, reload config
 
-if [ -z "$(pgrep sxhkd)" ]; then
-  sxhkd &
-else
-  kill -SIGUSR1 "$(pgrep sxhkd)"
-fi
+[ "$(pgrep sxhkd)" ] && sxhkd & || kill -SIGUSR1 "$(pgrep sxhkd)"
 
 ## Start copyq daemon
 
-if [ -z "$(pgrep copyq)" ]; then
-  copyq &
-fi
+[ "$(pgrep copyq)" ] && copyq &
 
 ## Start dropbox daemon
 
@@ -24,9 +18,7 @@ dropbox start &
 
 ## Start compton (required for transparency)
 
-if [ -z "$(pgrep compton)" ]; then
-  compton &
-fi
+[ $(pgrep compton) ] && compton &
 
 ## Run dwm status bar script
 
@@ -34,7 +26,9 @@ $DOTFILES/scripts/dwm/dwm-status.sh &
 
 ## Set background image
 
-feh --bg-scale $DOTFILES/files/img/ubuntu-teal.jpg
+[ -f "~/dat/img/wall" ] \
+ && feh --bg-scale "~/dat/img/wall" \
+ || feh --bg-scale $DOTFILES/files/img/ubuntu-teal.jpg
 
 # Load custom keyboard layout
 
