@@ -23,6 +23,10 @@ if [ "$(hostname -s)" = "Berenice" ]; then
     arandr &
   fi
 elif [ "$(hostname -s)" = "Mortimer" ]; then
-  notify-send "Todo;"
-  arandr &
+
+  if [ echo "$mons" | grep -i hdmi ]; then
+    xrandr --output "HDMI-1-1" --right-of "eDP-1-1"
+  else
+    arandr &
+  fi
 fi
