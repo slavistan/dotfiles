@@ -228,7 +228,8 @@ list_installer_files() {
   # Lists files whose names match './*/install-.*sh'. These files will be
   # searched for aptly named shell functions ("modules").
   installer_files=""
-  for subdir in $(find '.' -maxdepth 1 -regextype sed -regex './[^.]*' -type d); do
+
+  for subdir in $(find "./" -maxdepth 1 -regextype sed -regex './[^.]*' -type d); do
     for file in $(find $subdir -maxdepth 1 -regextype sed -type f -regex "$subdir"'/install-.*sh'); do
       installer_files="$file\n$installer_files"
     done
@@ -242,6 +243,7 @@ list_installer_files() {
 
 THISFILE="${0:A}"
 THISDIR="${0:A:h}"
+cd $THISDIR
 INSTALLER_FILES=$(list_installer_files)
 SUDOPW=""
 
@@ -250,7 +252,6 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export DOTFILES="$THISDIR"
 
-cd $THISDIR
 for file in $(echo $INSTALLER_FILES); do
   source $file
 done
