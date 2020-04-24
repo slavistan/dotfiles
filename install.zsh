@@ -240,7 +240,7 @@ list_installer_files() {
 ######### Start ##########
 ##########################
 
-THISFILE="$0"
+THISFILE="${0:A}"
 THISDIR="${0:A:h}"
 INSTALLER_FILES=$(list_installer_files)
 SUDOPW=""

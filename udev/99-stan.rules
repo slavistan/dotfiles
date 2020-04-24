@@ -1,3 +1,3 @@
 ACTION=="add|remove", SUBSYSTEM=="thunderbolt", RUN="/usr/bin/su stan -c 'source ~/.profile; export DISPLAY=:0; sleep 1; $DOTFILES/scripts/startup/monitor-setup.sh'"
 
-ACTION=="change", SUBSYSTEM=="drm", RUN="/usr/local/bin/udev-trigger.sh change drm"
+ACTION=="change", SUBSYSTEM=="drm", RUN="/usr/bin/su stan -c 'source ~/.profile; export DISPLAY=:0; sleep 1; $DOTFILES/scripts/startup/monitor-setup.sh'"
