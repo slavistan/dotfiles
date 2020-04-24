@@ -29,6 +29,9 @@ zstyle ':completion:*' matcher-list \
 
 bindkey -v # Enable vi-mode
 KEYTIMEOUT=1 # Remove timeout after <ESC>
+bindkey -M viins '^?' backward-delete-char # Backspace, ^W and ^H may delete ...
+bindkey -M viins '^H' backward-delete-char # ... beyond start of current insert
+bindkey -M viins '^w' backward-delete-word
 
 
 # Change cursor when switching between insert and normal mode
