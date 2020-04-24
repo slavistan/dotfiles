@@ -4,12 +4,15 @@ __install_udev() {
 Usage:
   $0
 
-Symlinks udev-rules to '/etc/udev/rules.d'
+Symlinks udev-rules into '/etc/udev/rules.d'.
 "
     exit 0
   else
     loglnprefix "udev" "Symlinking rules ..."
     cd /etc/udev/rules.d
-    please ln -s $DOTFILES/udev/99-stan.rules
+    please ln -fs $DOTFILES/udev/99-stan.rules
+    cd /usr/local/bin
+    please ln -fs $DOTFILES/udev/udev-trigger.sh
+    please udevadm control --reload
   fi
 }
