@@ -34,7 +34,7 @@ $DOTFILES/scripts/dwm/dwm-status.sh &
 
 ## Set background image
 
-if [ -f "~/dat/img/wall" ]; then
+if [ -f ~/dat/img/wall ]; then
   feh --bg-scale ~/dat/img/wall
 else
   feh --bg-scale $DOTFILES/files/img/ubuntu-teal.jpg
