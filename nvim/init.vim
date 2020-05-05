@@ -199,7 +199,7 @@ autocmd FileType markdown nnoremap <buffer> <Leader>R :MarkdownRunnerInsert<CR>
 
 """ Markdown Fenced Code Syntax Highlighting
 
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'zsh=zsh', 'javascript=js']
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'zsh=zsh', 'js=javascript']
 
 colorscheme milton " postpone loading of colorscheme so that plugins' hi groups will be known
 
