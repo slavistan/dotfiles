@@ -74,6 +74,7 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 
 source $DOTFILES/zsh/completions/cf # Cloud-Foundry CLI
 source $DOTFILES/zsh/completions/npm.plugin.zsh # npm
+source $DOTFILES/zsh/completions/_cds
 
 
 # Interactive shell aliases & functions
