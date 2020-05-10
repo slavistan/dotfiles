@@ -74,6 +74,7 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 
 source $DOTFILES/zsh/completions/cf # Cloud-Foundry CLI
 source $DOTFILES/zsh/completions/npm.plugin.zsh # npm
+source $DOTFILES/zsh/completions/cds
 
 
 # Interactive shell aliases & functions
@@ -101,7 +102,6 @@ function gsap () {
 # Load zsh-syntax-highlighting; should be last.
 
 source $DOTFILES/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 
 # Source machine-specific part
 
