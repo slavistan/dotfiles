@@ -3,6 +3,7 @@ __install_vscode() {
     printf "\
 Usage:
   $0 [--force]
+  $0 [--config-only]
 
   Install Visual Studio Code.
 "
@@ -21,6 +22,13 @@ Usage:
     ln -fs $DOTFILES/vscode/settings.json
 
     loglnprefix "vscode" "... done installing 'vscode'."
+  elif [ "$1" = "--config-only" ]; then
+
+    loglnprefix "vscode" "Installing user configuration files ..."
+    mkcd ~/.config/Code/User/
+    ln -fs $DOTFILES/vscode/keybindings.json
+    ln -fs $DOTFILES/vscode/settings.json
+
   else
     loglnprefix "vscode" "Nothing to do."
   fi
