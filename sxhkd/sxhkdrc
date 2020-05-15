@@ -7,6 +7,9 @@ mod4 + o
 mod4 + Return
   $TERMINAL -e sh -c "cd $(xcwd); zsh"
 
+shift + mod4 + F12
+  $DOTFILES/scripts/xkbsel.sh
+
 ctrl + shift + mod4 + q
   $DOTFILES/scripts/dwm/dwm-logout.sh
 
