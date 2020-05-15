@@ -30,7 +30,7 @@ fi
 
 ## Run dwm status bar script
 
-$DOTFILES/scripts/dwm/dwm-status.sh &
+$DOTFILES/scripts/dwm-status.sh &
 
 ## Set background image
 
