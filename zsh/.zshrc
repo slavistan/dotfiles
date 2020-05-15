@@ -70,11 +70,10 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 
 
-# Source completion files
+# Completion files
 
 source $DOTFILES/zsh/completions/cf # Cloud-Foundry CLI
-source $DOTFILES/zsh/completions/npm.plugin.zsh # npm
-source $DOTFILES/zsh/completions/cds
+source $DOTFILES/zsh/completions/cds # @sap/cds-dk
 
 
 # Interactive shell aliases & functions

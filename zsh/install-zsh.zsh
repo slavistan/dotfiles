@@ -21,5 +21,9 @@ envvars. Expects 'zsh' to be already installed."
   rm -rf $XDG_CONFIG_HOME/zsh
   cd $XDG_CONFIG_HOME
   ln -fs $DOTFILES/zsh
+
+  mkdir -p $THISDIR/zsh/completions
+  wget -O $THISDIR/zsh/completions/cds "https://raw.githubusercontent.com/slavistan/zsh-cds-completion/master/cds"
+  wget -O $THISDIR/zsh/completions/cf "https://raw.githubusercontent.com/cloudfoundry/cli/master/ci/installers/completion/cf"
   loglnprefix "zsh" "... done installing 'zsh'"
 }
