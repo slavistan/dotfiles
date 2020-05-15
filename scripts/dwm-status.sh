@@ -20,7 +20,7 @@ systime() {
 }
 
 keymap() {
-  echo "⌨  $(setxkbmap -query | grep layout | awk '{ print $2 }')"
+  echo "⌨ $(setxkbmap -query | grep layout | awk '{ print $2 }')"
 }
 
 status() {
@@ -29,7 +29,7 @@ status() {
 
 
 ###
-### Process control
+### Process control. Usage: $0 -- <cmd>
 ###
 
 pidofrunning() {
@@ -44,13 +44,14 @@ killrunning() {
 
 kickrunning() {
   for pid in $(pidofrunning); do
-    echo "kicking pid $pid"
     kill -s USR1 "$pid"
   done
 }
 
-kick() {
-  xsetroot -name "$(status | tr '\n' ' ')"
+reloadrunning() {
+  for pid in $(pidofrunning); do
+    kill -s USR2 "$pid"
+  done
 }
 
 
@@ -58,9 +59,11 @@ kick() {
 ### main()
 ###
 
-sleeppid=
-trap 'echo kicked' USR1
-trap '[ ! -z "$sleeppid" ] && kill $sleeppid; exit' 0 1 2 3 9 15
+trap 'echo *kick*' USR1
+trap 'echo *reload*; [ $SLEEPPID ] && kill $SLEEPPID; exec $0' USR2
+trap '[ $SLEEPPID ] && kill $SLEEPPID; exit' 0 1 2 3 9 15
+
+SLEEPPID=
 
 case "$1" in
   --)
@@ -71,11 +74,11 @@ case "$1" in
     ;;
   *)
   while :; do
-    kick
-    [ ! -z "$sleeppid" ] && kill "$sleeppid" # kill last sleep &
+    xsetroot -name "$(status | tr '\n' ' ')"
+    kill $SLEEPPID 2>/dev/null # kill last sleep &
     sleep 1m &
-    sleeppid="$!"
-    wait $! # noexec-wait for sleep; skipped immediately by SIGUSR1
+    SLEEPPID="$!"
+    wait $SLEEPPID # noexec-wait for sleep; skipped immediately by SIGUSR1
   done
   ;;
 esac

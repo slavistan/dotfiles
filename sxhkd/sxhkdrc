@@ -2,7 +2,7 @@ mod4 + d
   dmenu_run -p "Run:"
 
 mod4 + o
-  kill -SIGUSR1 $(pgrep sxhkd);
+  kill -SIGUSR1 $(pgrep sxhkd); $DOTFILES/scripts/dwm-status.sh -- reloadrunning
 
 mod4 + Return
   $TERMINAL -e sh -c "cd $(xcwd); zsh"
