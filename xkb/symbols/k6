@@ -1,4 +1,3 @@
-// vim: set filetype:xkb
 default
 xkb_symbols "basic" {
 
