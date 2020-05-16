@@ -42,7 +42,7 @@ fi
 
 # Load custom keyboard layout
 
-setxkbmap -layout stan
+setxkbmap -layout k6
 
 # Run monitor setup
 
