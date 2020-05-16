@@ -39,9 +39,13 @@ bindkey -M viins '^?' backward-delete-char
 bindkey -M viins '^H' backward-delete-char
 bindkey -M viins '^w' backward-delete-word
 
-# Unbind some defaults
-bindkey -M viins -r '^n' # Unbind some defaults
-bindkey -M viins -r '^p' 
+# Unbind/rebind some defaults
+for k in '^a' '^b' '^c' '^d' '^f' '^n' '^n' '^o' '^p' '^q' '^r' '^s' '^t' '^j' '^x' '^y' '^z' '^X~' \
+  '^[,' '^[/' '^[OA' '^[OB' '^[OC' '^[OD' '^[[1~' '^[[200~' '^[[2~' '^[[3~' '^[[4~' '^[[A' '^[[B' \
+  '^[[C' '^[[D' '^[~'; do
+  bindkey -M viins -r "$k"
+done
+bindkey -M viins '^ ' list-choices
 
 # Edit line-buffer in vim
 autoload -U edit-command-line && zle -N edit-command-line
