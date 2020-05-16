@@ -50,7 +50,7 @@ if [ -f "$DOTFILES/scripts/startup/monitor-setup.sh" ]; then
   $DOTFILES/scripts/startup/monitor-setup.sh
 fi
 
-# Execution machine-specific startup script
+# Run machine-specific startup script
 
 if [ -f "$DOTFILES/scripts/startup/machine-specific.sh" ]; then
   $DOTFILES/scripts/startup/machine-specific.sh
