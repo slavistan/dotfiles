@@ -50,6 +50,7 @@ fi
 ## Load custom keyboard layout
 
 setxkbmap -layout k6
+$DOTFILES/scripts/dwm-status.sh -- kickrunning
 
 
 ## Run monitor setup
