@@ -46,6 +46,9 @@ for k in '^a' '^b' '^c' '^d' '^f' '^n' '^n' '^o' '^p' '^q' '^r' '^s' '^t' '^j' '
   bindkey -M viins -r "$k"
 done
 bindkey -M viins '^ ' list-choices
+bindkey -M viins '^p' up-history
+bindkey -M viins '^n' down-history
+
 
 # Edit line-buffer in vim
 autoload -U edit-command-line && zle -N edit-command-line
