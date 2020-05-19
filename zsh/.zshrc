@@ -41,7 +41,7 @@ bindkey -M viins '^w' backward-delete-word
 
 # Unbind/rebind some defaults
 for k in '^a' '^b' '^c' '^d' '^f' '^n' '^n' '^o' '^p' '^q' '^r' '^s' '^t' '^j' '^x' '^y' '^z' '^X~' \
-  '^[,' '^[/' '^[OA' '^[OB' '^[OC' '^[OD' '^[[1~' '^[[200~' '^[[2~' '^[[3~' '^[[4~' '^[[A' '^[[B' \
+  '^[,' '^[/' '^[OA' '^[OB' '^[OC' '^[OD' '^[[1~' '^[[2~' '^[[3~' '^[[4~' '^[[A' '^[[B' \
   '^[[C' '^[[D' '^[~'; do
   bindkey -M viins -r "$k"
 done
