@@ -4,9 +4,9 @@ if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
   echo \
 "Wrapper around the tool \033[1mcolorpicker\033[0m. Usage:
 
-  (1) $0 [ -c ]
-      Pick color from crosshair, print to stdout and, optionally, copy #RRGGBB
-      code to clipboard."
+  (1) $0
+      Pick color from crosshair, print #RRGGBB to stdout and copy to
+      clipboard."
 exit
 fi
 
@@ -14,4 +14,4 @@ fi
 color=$(colorpicker --short --one-shot)
 echo "$color"
 
-[ "$1" = "-c" ] && printf "$color" | xclip -selection clipboard
+printf "$color" | xclip -selection clipboard
