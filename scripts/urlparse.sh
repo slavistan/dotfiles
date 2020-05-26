@@ -20,7 +20,7 @@ else
   infile="$1";
 fi
 
-re='(((ftp|http|https)://|www.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)'
+re='(((http|https|ftp)://|www.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)'
 sed 's/.*│//g' "$infile" |  tr -d '\n' | grep -aEo "$re" | sort | uniq |
   case $(echo $opt) in
     o) dmenu -l 10 -p 'Open URL: ' | xargs $BROWSER ;;

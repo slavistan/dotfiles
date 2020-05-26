@@ -17,11 +17,11 @@ Installs many basic packages."
   libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev \
   autoconf xutils-dev libtool automake libxcb-xrm0 libxcb-shape0-dev \
   fonts-powerline fonts-inconsolata fonts-symbola python3-pip \
-  fonts-font-awesome libxinerama-dev copyq libnotify-dev libnotify-bin \
+  libxinerama-dev copyq libnotify-dev libnotify-bin \
   notification-daemon notify-osd yad xdotool imagemagick feh compton \
   htop hub libxcb-render0-dev libffi-dev python-dev python-cffi python-pip \
   redshift vifm sshfs curlftpfs fuse fuse-zip fusefat fuseiso libncurses-dev \
-  weechat youtube-dl entr fonts-hack-ttf pandoc exa
+  weechat youtube-dl entr fonts-hack-ttf pandoc exa xclip
 
   loglnprefix "prereq" "Installing fonts ..."
   tmp=$(mktemp -d)
