@@ -159,21 +159,33 @@ to reinstall even if 'light' is already installed."
   fi
 }
 
+
+## Preset functions
+
+# log with info tag
+
 logln() {
   printf "\033[32m[INFO]\033[0m $@\n"
 }
 
-loglnprefix() {
-  pre="$1"
-  shift
-  printf "\033[32m[$pre]\033[0m $@\n"
-}
+
+# log with err tag
 
 errln() {
   printf "\033[31m[ERR ]\033[0m $@\n"
 }
 
+
+# log with arbitrary tag
+
+loglnprefix() {
+  shift
+  printf "\033[32m[$1]\033[0m $@\n"
+}
+
+
 # Add a line to a file iff the line is not part of the file.
+
 addln() {
   if [ ! "$#" -eq 2 ]; then
     printf "addln requires 2 arguments.\n"
@@ -185,7 +197,8 @@ addln() {
   fi
 }
 
-# sudo wrapper
+
+# query for sudo pw and store in SUDOPW
 
 get_sudo_pw() {
   # Store sudo password for later usage.
@@ -198,11 +211,8 @@ get_sudo_pw() {
   echo 'OK.'
 }
 
-# Change into directory and silently create it if necessary
 
-mkcd() {
-  mkdir -p "$1" && cd "$1"
-}
+# sudo using pw from $SUDOPW
 
 please() {
   # Prompts user for sudo pw only if needed.
@@ -214,6 +224,16 @@ please() {
   sudo -Sp '' "$@" <<<${SUDOPW}
 }
 
+
+# change into directory and silently create it if necessary
+
+mkcd() {
+  mkdir -p "$1" && cd "$1"
+}
+
+
+# list all modules which may be installed
+
 list_available_modules() {
   # Search all installer files for functions whose names match the
   # expression '__installer_.*'. Return the name without the prefix.
@@ -223,6 +243,9 @@ list_available_modules() {
   done
   printf "$mods\n" | sort
 }
+
+
+# list all installer files
 
 list_installer_files() {
   # Lists files whose names match './*/install-.*sh'. These files will be
@@ -235,6 +258,21 @@ list_installer_files() {
     done
   done
   printf "$installer_files"
+}
+
+
+# create module template
+
+make_template() {
+  set -e
+  if ! echo "$1" | grep -E '^[a-zA-Z0-9_-]+$' > /dev/null || [ -d "$1" ]; then
+    echo "Module exists or the name sucks. Abort."
+    exit 1
+  fi
+
+  cp -r template "$1"
+  sed -i 's/template/'"$1"'/g' "$1"/install-template.zsh
+  mv "$1"/install-template.zsh "$1"/install-"$1".zsh
 }
 
 ##########################
@@ -264,12 +302,13 @@ if [ -z "$1" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
 Usage:
   (1) $0 --list-modules | -l
   (2) $0 -m <module> <args>
-  (3) $0 -- <args> ...
-  (4) $0 --help | -h
+  (3) $0 --template | -t <name>
+  (4) $0 -- <args> ...
+  (5) $0 --help | -h
 
-List available modules (1) or run a module (2). Use double
-dashes (3) to run script commands directly for debugging or
-print this help (4).
+List available modules (1) or run a module (2). (3) Setup template for new
+module. Use double dashes (4) to run script commands directly for debugging or
+print this help (5).
 "
   exit 0
 elif [ "$1" = "-l" ] || [ "$1" = "--list-modules" ]; then
@@ -282,6 +321,8 @@ elif [ "$1" = "-m" ]; then
   mod="$2"
   shift 2
   __install_$mod "$@"
+elif [ "$1" = "-t" ] || [ "$1" = "--template" ]; then
+  make_template "$2"
 elif [ "$1" = "--" ]; then
   shift
   "$@"
