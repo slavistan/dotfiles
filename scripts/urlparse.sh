@@ -20,13 +20,19 @@ else
   infile="$1";
 fi
 
-re='(((http|https|ftp)://|www.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)'
-sed 's/.*│//g' "$infile" |  tr -d '\n' | grep -aEo "$re" | sort | uniq |
-  case $(echo $opt) in
-    o) dmenu -l 10 -p 'Open URL: ' | xargs $BROWSER ;;
-    c) dmenu -l 10 -p 'Copy URL: ' | xclip -selection clipboard ;;
-    d) dmenu -l 10 -p 'Select URL: ' ;;
-    *) cat ;;
-  esac
+case $(echo $opt) in
+  o) prompt="Open URL in browser:" ;;
+  c) prompt="Copy URL to clipboard:" ;;
+  d) prompt="Write URL to stdout:" ;;
+esac
 
+re='(((http|https|ftp)://|www.)[a-zA-Z0-9.]*[:]?[a-zA-Z0-9./@&%?$#=_-]*)|((magnet:\\?xt=urn:btih:)[a-zA-Z0-9]*)'
+choice=$(sed 's/.*│//g' "$infile" |  tr -d '\n' | grep -aEo "$re" | sort | uniq | dmenu -l 10 -p "$prompt") || exit
+
+case $(echo $opt) in
+  o) printf '%s\n' "$choice" | xargs $BROWSER ;;
+  c) printf '%s\n' "$choice" | xclip -selection clipboard ;;
+  d) printf '%s\n' "$choice" ;;
+  *) cat ;;
+esac
 # TODO: Cancel when dmenu selection is aborted by user.
