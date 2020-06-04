@@ -179,8 +179,9 @@ errln() {
 # log with arbitrary tag
 
 loglnprefix() {
+  printf "\033[32m[$1]\033[0m "
   shift
-  printf "\033[32m[$1]\033[0m $@\n"
+  printf "$@\n"
 }
 
 
