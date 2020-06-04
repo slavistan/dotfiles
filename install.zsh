@@ -85,32 +85,6 @@ during startup. Configures XDG_.. paths and locale."
   loglnprefix "env" "... done setting up environment."
 }
 
-__install_st() {
-  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
-    printf "\
-Usage:
-  $0 [--force]
-
-Installs 'st', suckless' simple terminal from source. Use
-the force-flag to reinstall even if 'st' is already
-installed."
-    exit 0
-  elif [ -z "$(command -v st)" ] || [ "$1" = "--force" ]; then
-    loglnprefix "st" "Installing 'st' from source ..."
-    cd /tmp
-    rm -rf st
-    git clone https://github.com/slavistan/st.git
-    cd st
-    make clean
-    please make install
-    loglnprefix "st" "Exporting TERMINAL envvar to '$HOME/.profile'."
-    addln "export TERMINAL=$(command -v st)" $HOME/.profile
-    loglnprefix "st" "... done installing 'st'."
-  else
-    loglnprefix "st" "Nothing to be done."
-  fi
-}
-
 __install_dmenu() {
   if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     printf "\
@@ -330,6 +304,6 @@ elif [ "$1" = "--" ]; then
 fi
 
 # TODOS:
-# notify-send styling
+# notify-send styling / anderen daemon
 # dropbox: https://linoxide.com/linux-how-to/install-dropbox-ubuntu/
-# st: Ausgabe der letzten Befehle in Clipboard
+# rmln (Pendant zu addln) für --uninstalls
