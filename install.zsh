@@ -21,7 +21,7 @@ Installs many basic packages."
   notification-daemon notify-osd yad xdotool imagemagick feh compton \
   htop hub libxcb-render0-dev libffi-dev python-dev python-cffi python-pip \
   redshift vifm sshfs curlftpfs fuse fuse-zip fusefat fuseiso libncurses-dev \
-  weechat youtube-dl entr fonts-hack-ttf pandoc exa xclip
+  weechat youtube-dl entr fonts-hack-ttf pandoc exa xclip expect-dev
 
   loglnprefix "prereq" "Installing fonts ..."
   tmp=$(mktemp -d)
