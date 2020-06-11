@@ -11,7 +11,7 @@ disable r               # Remove irritating alias
 
 PS1='%F{138}%B[%l]%b%f %F{159}%B%n@%m%b%f %Bin%b %F{154}%B%(4~|%-1~/.../%2~|%~)%b%f
 %B%(?.%F{green}.%F{red})➤%b%f '
-RPROMPT=''
+PS2='%B➤ %b'
 
 
 ## Completion system init
