@@ -10,6 +10,6 @@
     "keyboard.dispatch": "keyCode",
     "workbench.colorTheme": "Monokai",
     "editor.acceptSuggestionOnCommitCharacter": false,
-    "window.zoomLevel": 2,
+    "window.zoomLevel": 1,
     "editor.minimap.enabled": false
 }
