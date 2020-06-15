@@ -303,7 +303,7 @@ elif [ "$1" = "--" ]; then
   "$@"
 fi
 
-# TODOS:
-# notify-send styling / anderen daemon
-# dropbox: https://linoxide.com/linux-how-to/install-dropbox-ubuntu/
-# rmln (Pendant zu addln) für --uninstalls
+# TODO(feat): notify-send styling / anderen daemon
+# TODO(feat): dropbox ersetzen
+# TODO(feat): rmln (Pendant zu addln) für --uninstalls implementieren
+# TODO(feat): mktempcd
