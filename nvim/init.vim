@@ -97,7 +97,13 @@ exe 'source ' . g:NVIMHOME . '/config/vimwiki.vim'
 """
 " Plugins
 """
+
+let g:pandoc#syntax#conceal#use=0
+let g:pandoc#syntax#codeblocks#embeds#langs = ['python', 'R=r', 'bash=sh', 'lua']
+
 execute 'call plug#begin(''' . g:NVIMHOME . '/plug-plugins'')'
+Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
+Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/godlygeek/tabular.git'
 Plug 'https://github.com/w0rp/ale.git'
@@ -106,8 +112,7 @@ Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'https://github.com/dbridges/vim-markdown-runner.git'
 Plug 'https://github.com/alcesleo/vim-uppercase-sql'
 Plug 'https://github.com/tpope/vim-commentary'
-Plug 'https://github.com/tpope/vim-markdown.git'
-
+" Plug 'https://github.com/tpope/vim-markdown.git'
 call plug#end()
 
 let g:ale_lint_on_text_changed = 'never' " Lint only on save
@@ -194,8 +199,8 @@ let g:gitgutter_sign_modified_removed = '≠≠'
 
 """ MarkdownRunner
 
-autocmd FileType markdown nnoremap <buffer> <Leader>r :MarkdownRunner<CR>
-autocmd FileType markdown nnoremap <buffer> <Leader>R :MarkdownRunnerInsert<CR>
+" autocmd FileType markdown nnoremap <buffer> <Leader>r :MarkdownRunner<CR>
+" autocmd FileType markdown nnoremap <buffer> <Leader>R :MarkdownRunnerInsert<CR>
 
 """ Markdown Fenced Code Syntax Highlighting
 
@@ -204,3 +209,4 @@ let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'zsh=zsh', 'js=j
 colorscheme milton " postpone loading of colorscheme so that plugins' hi groups will be known
 
 endif
+set conceallevel=0
