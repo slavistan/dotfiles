@@ -98,7 +98,8 @@ exe 'source ' . g:NVIMHOME . '/config/vimwiki.vim'
 " Plugins
 """
 
-let g:pandoc#syntax#conceal#use=0
+let g:pandoc#spell#enabled = 0
+let g:pandoc#syntax#conceal#use = 0
 let g:pandoc#syntax#codeblocks#embeds#langs = ['python', 'R=r', 'bash=sh', 'lua']
 
 execute 'call plug#begin(''' . g:NVIMHOME . '/plug-plugins'')'
@@ -112,7 +113,6 @@ Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'https://github.com/dbridges/vim-markdown-runner.git'
 Plug 'https://github.com/alcesleo/vim-uppercase-sql'
 Plug 'https://github.com/tpope/vim-commentary'
-" Plug 'https://github.com/tpope/vim-markdown.git'
 call plug#end()
 
 let g:ale_lint_on_text_changed = 'never' " Lint only on save
@@ -120,7 +120,7 @@ let g:ale_lint_on_enter = 0 " Don't lint when entering a file
 let g:ale_linters_explicit=1 " Don't use all linters by default
 
 " Enable powerline symbols for airline and vim-buffet
-let g:airline_powerline_fonts = 1
+" let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
