@@ -79,14 +79,13 @@ function vicursor {
 ## Display files when changing directories. Triggers automatically.
 
 function chpwd {
-  exa -T -a -L 1 -F --group-directories-first 2>/dev/null || ls
+  exa -T -a -L 1 -F --group-directories-first 2>/dev/null || ls -A
 }
 
 
 ## Interactive shell aliases & functions
 
 alias view='nvim -R'
-alias vim=nvim
 alias gst='git status'
 
 function mkcd {
@@ -98,7 +97,7 @@ function mkcdt {
 }
 
 function gsap {
-  if [ "$(git rev-parse --is-inside-work-tree 2>&1)" = "true" ]; then
+  if git rev-parse --is-inside-work-tree 2>&1; then
     git add -u
     git commit -am "stuff"
     git push
