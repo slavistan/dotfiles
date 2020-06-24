@@ -40,6 +40,7 @@ bindkey -M viins '^H' backward-delete-char
 bindkey -M viins '^w' backward-delete-word
 
 # Unbind/rebind some defaults
+# TODO(perf): Improve startup latency
 for k in '^a' '^b' '^c' '^d' '^f' '^n' '^n' '^o' '^p' '^q' '^r' '^s' '^t' '^j' '^x' '^y' '^z' '^X~' \
   '^[,' '^[/' '^[OA' '^[OB' '^[OC' '^[OD' '^[[1~' '^[[2~' '^[[3~' '^[[4~' '^[[A' '^[[B' \
   '^[[C' '^[[D' '^[~'; do
@@ -97,7 +98,7 @@ function mkcdt {
 }
 
 function gsap {
-  if git rev-parse --is-inside-work-tree 2>&1; then
+  if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
     git add -u
     git commit -am "stuff"
     git push
