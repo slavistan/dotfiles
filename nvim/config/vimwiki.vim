@@ -28,11 +28,12 @@ function! SetVimwikiOptions()
   " Misc settings
 
   set fillchars=fold:·
-  set wrap
+  set nowrap
 
   " Color settings
 
-  hi VimwikiLink guifg=#F4D03F guibg=None gui=bold,underline
-  hi Folded      guifg=FD971F  guibg=None gui=italic
+  hi VimwikiLink     guifg=#F4D03F guibg=None gui=bold,underline
+  hi VimwikiWebLink1 guifg=#66D9EF guibg=None gui=bold
+  hi Folded          guifg=#FD971F guibg=None gui=italic
 
 endfunction
