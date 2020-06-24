@@ -4,6 +4,7 @@ let g:vimwiki_key_mappings = { 'links': 0, }
 let g:vimwiki_list = [{'path': '~/dat/wiki', 'syntax': 'markdown', 'path_html': '~/dat/wiki/html'}]
 let g:vimwiki_global_ext = 0
 let g:vimwiki_listsyms = ' ○◐●✓'
+let g:vimwiki_folding = 'list'
 
 autocmd FileType vimwiki call SetVimwikiOptions()
 function! SetVimwikiOptions()
@@ -26,10 +27,12 @@ function! SetVimwikiOptions()
 
   " Misc settings
 
+  set fillchars=fold:·
   set wrap
 
   " Color settings
 
   hi VimwikiLink guifg=#F4D03F guibg=None gui=bold,underline
+  hi Folded      guifg=FD971F  guibg=None gui=italic
 
 endfunction
