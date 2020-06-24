@@ -92,17 +92,21 @@ set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 set autoindent " Keep indentation level for wrapped lines
 set breakindent " Wrapped lines preserve indentation
 
-exe 'source ' . g:NVIMHOME . '/config/vimwiki.vim'
-
 """
 " Plugins
 """
 
+" vim-pandoc et al.
 let g:pandoc#spell#enabled = 0
 let g:pandoc#syntax#conceal#use = 0
 let g:pandoc#syntax#codeblocks#embeds#langs = ['python', 'R=r', 'bash=sh', 'lua']
 
+" vimwiki
+" TODO(feat): envvar WIKIHOME
+exe 'source ' . g:NVIMHOME . '/config/vimwiki.vim'
+
 execute 'call plug#begin(''' . g:NVIMHOME . '/plug-plugins'')'
+Plug 'vimwiki/vimwiki'
 Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
@@ -201,10 +205,6 @@ let g:gitgutter_sign_modified_removed = '≠≠'
 
 " autocmd FileType markdown nnoremap <buffer> <Leader>r :MarkdownRunner<CR>
 " autocmd FileType markdown nnoremap <buffer> <Leader>R :MarkdownRunnerInsert<CR>
-
-""" Markdown Fenced Code Syntax Highlighting
-
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'zsh=zsh', 'js=javascript']
 
 colorscheme milton " postpone loading of colorscheme so that plugins' hi groups will be known
 
