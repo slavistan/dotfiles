@@ -307,3 +307,5 @@ fi
 # TODO(feat): dropbox ersetzen
 # TODO(feat): rmln (Pendant zu addln) für --uninstalls implementieren
 # TODO(feat): mktempcd
+# TODO(feat): Templates erweitern
+#             (1) download, build from source, make install
