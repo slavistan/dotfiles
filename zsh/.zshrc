@@ -114,6 +114,10 @@ function gsap {
 source $DOTFILES/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
+## Remove vim from muscle memory :(
+alias vim="echo nope; false"
+
+
 ## Source machine-specific setup
 
 [ -f $DOTFILES/zsh/.machinerc ] && source $DOTFILES/zsh/.machinerc

@@ -20,11 +20,6 @@ function! SetVimwikiOptions()
   nmap <Space>l <Plug>VimwikiIncrementListItem
   nmap <Space>h <Plug>VimwikiDecrementListItem
 
-  nnoremap <Leader>w<Leader>i <Plug>VimwikiDiaryGenerateLinks
-  nnoremap <Leader>wd <Plug>VimwikiDeleteLink
-  nnoremap <Leader>dn <Plug>VimwikiDiaryNextDay
-  nnoremap <Leader>dN <Plug>VimwikiDiaryPrevDay
-
   " Misc settings
 
   set fillchars=fold:·
