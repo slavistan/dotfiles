@@ -24,3 +24,12 @@ mod4 + e
 
 mod4 + F12
   $DOTFILES/scripts/webcam.sh view toggle
+
+mod4 + F11
+  dunstctl context
+
+mod4 + Escape
+  dunstctl close
+
+mod4 + shift + Escape
+  dunstctl close-all

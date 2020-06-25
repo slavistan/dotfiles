@@ -10,14 +10,20 @@ Takes a snapshot of your desktop.
   exit
 fi
 
-if [ "$1" = "-s" ] || [ "$1" = "--select-area" ]; then
-  outfile=$(mktemp --tmpdir=/tmp --suffix=.png snapshot_XXXXX)
-  import $outfile
-  if [ ! $(ls -l $outfile | awk '{ print $5 }') = "0" ]; then
+case "$1" in
+  -s|--select-area)
+    tmpdir=$(mktemp -d snapshot_XXXXXX)
+    outfile="$tmpdir/snapshot.png"
+    import "$outfile" || exit
     copyq copy image/png - < $outfile
-    notify-send -i $outfile "Saved to $outfile"
-  else
-    notify-send "Abort."
-  fi
-  exit 0
-fi
+    action=$(dunstify \
+      -I "$outfile" \
+      --timeout=3000 \
+      --action="default,Save to:" \
+      "Snapshot")
+    if [ "$action" = "default" ]; then
+      # TODO(feat): show lf save-file dialog
+      spacefm "$tmpdir" &
+    fi
+    ;;
+esac

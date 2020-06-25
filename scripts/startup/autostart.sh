@@ -5,6 +5,11 @@
 source ~/.profile
 
 
+## Start notification daemon
+
+dunst &
+
+
 ## Start sxhkd or, if running, reload config
 
 if [ -z "$(pgrep sxhkd)" ]; then
