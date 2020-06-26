@@ -18,7 +18,7 @@ case "$1" in
     copyq copy image/png - < $outfile
     action=$(dunstify \
       -I "$outfile" \
-      --timeout=3000 \
+      --timeout=5000 \
       --action="default,Save to:" \
       "Snapshot")
     if [ "$action" = "default" ]; then
