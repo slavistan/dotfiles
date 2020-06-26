@@ -12,7 +12,7 @@ fi
 
 case "$1" in
   -s|--select-area)
-    tmpdir=$(mktemp -d snapshot_XXXXXX)
+    tmpdir=$(mktemp -p /tmp/ -d snapshot_XXXXXX)
     outfile="$tmpdir/snapshot.png"
     import "$outfile" || exit
     copyq copy image/png - < $outfile
