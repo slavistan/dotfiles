@@ -20,7 +20,6 @@ fun! PreviewIfImg()
     " TODO(impr): Adjust regex to allow for parens in filepath
     let match=matchstr(mdurl, '^\['. g:ImgChar .'\](file:\zs[^)]\+\ze)')
     echom system('sxiv "' . match . '" &')
-    "echom system('sxiv ' . match . ' &')
   endif
 endfun
 
