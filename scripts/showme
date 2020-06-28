@@ -30,7 +30,7 @@ Preview control for images. Usage:
     \033[1;3minfo\033[0m
       Retrieve information about a session. Format: <NAME> <PID> <WID>.
 
-    \033[1;3mgeometry GEOMETRY\033[0m
+    \033[1;3mgeometry \033[4mGEOMETRY\033[0m
       Set window geometry; Not yet implemented.
 
 \033[1m$name list\033[0m
