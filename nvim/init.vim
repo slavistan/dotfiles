@@ -80,7 +80,8 @@ nnoremap \w :set wrap!<cr>
 " Enable line numbers by default and set a hotkey to toggle them
 
 set number " show linenumbers
-nnoremap \n :set number!<cr>
+set relativenumber "
+nnoremap \n :set rnu!<cr>:set nu!<cr>
 
 " Display tabs and trailing whitespaces
 set list
