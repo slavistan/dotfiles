@@ -54,7 +54,6 @@ let &t_EI .= "\<Esc>[3 q"
 let &backupdir=g:NVIMHOME . '/backup'
 let &directory=&backupdir
 let &shadafile=&backupdir . '/shada'
-let g:netrw_home=&backupdir
 
 set clipboard=unnamedplus
 set foldlevelstart=0 " Files are opened with all folds closed
@@ -71,6 +70,29 @@ set modeline
 set showbreak=↪
 let mapleader=","
 let maplocalleader="\\"
+
+" Netrw
+
+let g:netrw_home=&backupdir
+let g:netrw_liststyle=3
+let g:netrw_banner=0
+let g:netrw_browse_split=4
+let g:netrw_winsize=25
+fun! ToggleNetrw()
+  " TODO(perf): Hide window instead of deleting buffer each time
+  let s:netrw_found=0
+  fun! WinCommand()
+    if &filetype == 'netrw'
+      bd
+      let s:netrw_found=1
+    endif
+  endfun
+  windo call WinCommand()
+  if s:netrw_found==0
+    Vex
+  endif
+endfun
+nnoremap ` :call ToggleNetrw()<cr>
 
 " Disable line wrapping by default and set a hotkey to toggle it
 
