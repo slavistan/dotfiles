@@ -114,7 +114,6 @@ let g:pandoc#syntax#codeblocks#embeds#langs = ['python', 'R=r', 'bash=sh', 'lua'
 exe 'source ' . g:NVIMHOME . '/config/vimwiki.vim'
 
 execute 'call plug#begin(''' . g:NVIMHOME . '/plug-plugins'')'
-Plug 'vim-scripts/OnSyntaxChange'
 Plug 'vimwiki/vimwiki'
 Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
