@@ -29,7 +29,7 @@ hi DiffDelete      guifg=#960050 guibg=#1E0010
 hi DiffText                      guibg=#4C4745 gui=italic,bold
 
 hi Directory       guifg=#A6E22E           gui=bold
-hi Error           guifg=#E6DB74   guibg=#1E0010
+hi Error           guifg=#E6DB74 guibg=#1E0010
 hi ErrorMsg        guifg=#F92672 guibg=#232526 gui=bold
 hi Exception       guifg=#A6E22E               gui=bold
 hi Float           guifg=#AE81FF
@@ -100,12 +100,11 @@ hi WildMenu        guifg=#66D9EF guibg=#000000
 hi TabLineFill     guifg=#1B1D1E guibg=#1B1D1E
 hi TabLine         guibg=#1B1D1E guifg=#808080 gui=none
 
-hi Comment          guifg=#FFD1B3 gui=none
-hi CursorLine                    guibg=#293739
-hi CursorLineNr    guifg=#FD971F               gui=none
+hi Comment         guifg=#FFD1B3 gui=none
+hi CursorLineNr    guifg=#94918F               gui=none
 hi CursorColumn                  guibg=#293739
 hi ColorColumn                   guibg=#232526
-hi LineNr          guifg=#F4D03F guibg=None
+hi LineNr          guifg=#94918F guibg=None
 hi NonText         guifg=#465457
 hi SpecialKey      guifg=#465457
 
