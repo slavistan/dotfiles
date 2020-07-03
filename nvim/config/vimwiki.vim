@@ -36,6 +36,7 @@ function! SetVimwikiOptions()
   nmap <F12> <Plug>VimwikiRenameFile
   nmap <Space>l <Plug>VimwikiIncrementListItem
   nmap <Space>h <Plug>VimwikiDecrementListItem
+  nmap <Space><Space> <Plug>VimwikiToggleListItem
 
   " Misc settings
 

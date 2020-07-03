@@ -20,9 +20,20 @@ PS2='%B➤ %b'
 # them. However.. the -d flag is bullshit and does not do what it's supposed to.
 autoload -Uz compinit && compinit -d $XDG_CACHE_HOME/zsh/.zcompdump
 autoload -Uz bashcompinit && bashcompinit -d $XDG_CACHE_HOME/zsh/.zbashcompdump
-zstyle ':completion:*' menu select # select completions from menu
+# zstyle ':completion:*' menu select # select completions from menu
 zstyle ':completion:*' matcher-list \
-  'm:{a-zA-Z}={A-Za-z} l:|=* r:|=*' # case ins. & infix
+  'M:{a-zA-Z}={a-zA-Z}' \
+  'm:{a-zA-Z}={A-Za-z}' \
+  'm:{a-zA-Z}={A-Za-z} l:|=*'
+zstyle ':completion:*' accept-exact false
+
+# TODO(fix): Check with marlonrichert/zsh-autocomplete #65
+# TODO(fix): Show as many results as fit inside max-lines. Issue?
+# source /home/stan/prj/dotfiles/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+# zstyle ':autocomplete:list-choices*' max-lines 3
+# zstyle ':autocomplete:*' fuzzy-search off
+# zstyle ':autocomplete:*' frecent-dirs off
+# zstyle ':autocomplete:*' groups off
 
 # Additional completion files
 source $DOTFILES/zsh/completions/cf # Cloud-Foundry CLI
@@ -49,7 +60,6 @@ done
 bindkey -M viins '^ ' list-choices
 bindkey -M viins '^p' up-history
 bindkey -M viins '^n' down-history
-
 
 # Edit line-buffer in vim
 autoload -U edit-command-line && zle -N edit-command-line
@@ -112,10 +122,6 @@ function gsap {
 ## Load zsh-syntax-highlighting; should be last.
 
 source $DOTFILES/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-
-## Remove vim from muscle memory :(
-alias vim="echo nope; false"
 
 
 ## Source machine-specific setup

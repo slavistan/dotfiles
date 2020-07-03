@@ -78,21 +78,6 @@ let g:netrw_liststyle=3
 let g:netrw_banner=0
 let g:netrw_browse_split=4
 let g:netrw_winsize=25
-fun! ToggleNetrw()
-  " TODO(perf): Hide window instead of deleting buffer each time
-  let s:netrw_found=0
-  fun! WinCommand()
-    if &filetype == 'netrw'
-      bd
-      let s:netrw_found=1
-    endif
-  endfun
-  windo call WinCommand()
-  if s:netrw_found==0
-    Vex
-  endif
-endfun
-nnoremap ` :call ToggleNetrw()<cr>
 
 " Disable line wrapping by default and set a hotkey to toggle it
 
@@ -101,9 +86,9 @@ nnoremap \w :set wrap!<cr>
 
 " Enable line numbers by default and set a hotkey to toggle them
 
-set number " show linenumbers
+set nonumber " show linenumbers
 set relativenumber "
-nnoremap \n :set rnu!<cr>:set nu!<cr>
+" TODO(feat): Toggle between relative, absolute and no numbers
 
 " Display tabs and trailing whitespaces
 set list
