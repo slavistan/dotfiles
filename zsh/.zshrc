@@ -30,10 +30,17 @@ zstyle ':completion:*' accept-exact false
 # TODO(fix): Check with marlonrichert/zsh-autocomplete #65
 # TODO(fix): Show as many results as fit inside max-lines. Issue?
 # source /home/stan/prj/dotfiles/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-# zstyle ':autocomplete:list-choices*' max-lines 3
+# zstyle ':autocomplete:list-choices*' max-lines 60
 # zstyle ':autocomplete:*' fuzzy-search off
 # zstyle ':autocomplete:*' frecent-dirs off
 # zstyle ':autocomplete:*' groups off
+# add-zsh-hook precmd use-my-matcher-list
+# use-my-matcher-list() {
+#   zstyle ':completion:*' matcher-list \
+#     'M:{a-zA-Z}={a-zA-Z}' \
+#     'm:{a-zA-Z}={A-Za-z}' \
+#     'm:{a-zA-Z}={A-Za-z} l:|=*'
+# }
 
 # Additional completion files
 source $DOTFILES/zsh/completions/cf # Cloud-Foundry CLI
