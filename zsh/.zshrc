@@ -13,6 +13,11 @@ PS1='%F{138}%B[%l]%b%f %F{159}%B%n@%m%b%f %Bin%b %F{154}%B%(4~|%-1~/.../%2~|%~)%
 %B%(?.%F{green}.%F{red})➤%b%f '
 PS2='%B➤ %b'
 
+# EOL indicator
+setopt PROMPT_CR
+setopt PROMPT_SP
+export PROMPT_EOL_MARK='%F{black}%K{white}❱❱%k'
+
 
 ## Completion system init
 
