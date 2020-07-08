@@ -6,7 +6,6 @@ setopt autocd           # change dirs without 'cd'
 setopt hist_ignore_dups # don't add duplicate cmd to hist
 disable r               # Remove irritating alias
 
-
 ## Prompt setup
 
 PS1='%F{138}%B[%l]%b%f %F{159}%B%n@%m%b%f %Bin%b %F{154}%B%(4~|%-1~/.../%2~|%~)%b%f
