@@ -113,6 +113,15 @@ let g:pandoc#syntax#codeblocks#embeds#langs = ['python', 'R=r', 'bash=sh', 'lua'
 " TODO(feat): envvar WIKIHOME
 exe 'source ' . g:NVIMHOME . '/config/vimwiki.vim'
 
+" vim buffet
+let g:buffet_powerline_separators=1
+let g:buffet_tab_icon="📖"
+function! g:BuffetSetCustomColors()
+  hi BuffetTab           guifg=#BBBBBB gui=bold      guibg=#045B88
+  hi BuffetCurrentBuffer guifg=#FFFFFF guibg=#045B88
+  hi BuffetBuffer  guibg=#262833 guifg=#949184
+endfunction
+
 execute 'call plug#begin(''' . g:NVIMHOME . '/plug-plugins'')'
 Plug 'vim-scripts/OnSyntaxChange'
 Plug 'vimwiki/vimwiki'
