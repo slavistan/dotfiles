@@ -4,15 +4,13 @@ __install_jupyter() {
 Usage:
   $0 [--force]
 
-  Install jupyter; WIP.
+  Install jupyter, jupyterlab, assorted kernels and plugins."
 "
     exit 0
   elif [ -z "$(command -v jupyter)" ] || [ "$1" = "--force" ]; then
     loglnprefix "jupyter" "Installing 'jupyter' ..."
 
     # jupyterlab (& ipython kernel)
-    # TODO(fix): Install packages into system dir (NOT root's home)
-    #   pip3 has some --sys-dir flag. What about R?
     please pip3 install jupyterlab
 
     # R kernel
