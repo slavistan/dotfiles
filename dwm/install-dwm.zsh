@@ -12,10 +12,9 @@ login-manager."
     exit 0
   elif [ -z "$(command -v dwm)" ] || [ "$1" = "--force" ]; then
     loglnprefix "dwm" "Installing 'dwm' from source ..."
-    cd /tmp
+    cd $(mktemp -d)
     rm -rf suckless
-    git clone https://github.com/slavistan/suckless.git
-    cd suckless/dwm
+    git clone https://github.com/slavistan/suckless-dwm.git .
     make clean
     please make install
 
