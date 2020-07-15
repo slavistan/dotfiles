@@ -3,11 +3,6 @@ let g:NVIMHOME=$XDG_CONFIG_HOME . '/nvim'
 """ Configuration for vscode's neovim plugin
 
 if exists('g:vscode')
-  let &backupdir=g:NVIMHOME . '/backup'
-  let &directory=&backupdir
-  let &shadafile=&backupdir . '/shada'
-  let g:netrw_home=&backupdir
-
   set clipboard=unnamedplus
   set ignorecase
   set smartcase
@@ -42,7 +37,7 @@ else
 """
 " Settings
 "
-" Some settings must preceed the loading of plugins.
+" Some settings must precede the loading of plugins.
 """
 set termguicolors
 
@@ -50,10 +45,6 @@ set termguicolors
 let &t_SI .= "\<Esc>[5 q"
 let &t_SR .= "\<Esc>[4 q"
 let &t_EI .= "\<Esc>[3 q"
-
-let &backupdir=g:NVIMHOME . '/backup'
-let &directory=&backupdir
-let &shadafile=&backupdir . '/shada'
 
 set clipboard=unnamedplus
 set foldlevelstart=0 " Files are opened with all folds closed
@@ -114,6 +105,7 @@ let g:pandoc#syntax#codeblocks#embeds#langs = ['python', 'R=r', 'bash=sh', 'lua'
 exe 'source ' . g:NVIMHOME . '/config/vimwiki.vim'
 
 " vim buffet
+" TODO(impr): Write custom buffer/tab line. Leave the plugin madness behind.
 let g:buffet_powerline_separators=1
 let g:buffet_tab_icon="📖"
 function! g:BuffetSetCustomColors()
@@ -123,7 +115,6 @@ function! g:BuffetSetCustomColors()
 endfunction
 
 execute 'call plug#begin(''' . g:NVIMHOME . '/plug-plugins'')'
-Plug 'vim-scripts/OnSyntaxChange'
 Plug 'vimwiki/vimwiki'
 Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
@@ -140,11 +131,6 @@ call plug#end()
 let g:ale_lint_on_text_changed = 'never' " Lint only on save
 let g:ale_lint_on_enter = 0 " Don't lint when entering a file
 let g:ale_linters_explicit=1 " Don't use all linters by default
-
-" Enable powerline symbols for airline and vim-buffet
-" let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
 
 """
 " Key mappings
@@ -177,9 +163,6 @@ inoremap <S-Tab> <Backspace>
 exe 'source ' . g:NVIMHOME . '/config/cpp.vim'
 exe 'source ' . g:NVIMHOME . '/config/python.vim'
 exe 'source ' . g:NVIMHOME . '/config/rust.vim'
-
-" Make super star highlight but not jump around
-nnoremap * :keepjumps normal! *``<cr>
 
 """
 " Utility
@@ -218,11 +201,6 @@ let g:gitgutter_sign_modified = '≠≠'
 let g:gitgutter_sign_removed = '--'
 let g:gitgutter_sign_removed_first_line ='--'
 let g:gitgutter_sign_modified_removed = '≠≠'
-
-""" MarkdownRunner
-
-" autocmd FileType markdown nnoremap <buffer> <Leader>r :MarkdownRunner<CR>
-" autocmd FileType markdown nnoremap <buffer> <Leader>R :MarkdownRunnerInsert<CR>
 
 colorscheme milton " postpone loading of colorscheme so that plugins' hi groups will be known
 

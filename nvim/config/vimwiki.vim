@@ -1,7 +1,6 @@
 " Configuration pertaining to vimwikis
 
 let g:vimwiki_key_mappings = { 'links': 0, }
-let g:vimwiki_list = [{'path': '~/dat/wiki', 'syntax': 'markdown', 'path_html': '~/dat/wiki/html'}]
 let g:vimwiki_global_ext = 0
 let g:vimwiki_listsyms = ' ○◐●✓'
 let g:vimwiki_folding = 'list'
