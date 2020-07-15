@@ -4,7 +4,7 @@ __install_jupyter() {
 Usage:
   $0 [--force]
 
-  Install jupyter, jupyterlab, assorted kernels and plugins."
+  Install jupyter, jupyterlab, assorted kernels and plugins.
 "
     exit 0
   elif [ -z "$(command -v jupyter)" ] || [ "$1" = "--force" ]; then
