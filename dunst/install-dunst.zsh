@@ -8,7 +8,6 @@ Usage:
 "
     exit 0
   elif [ -z "$(command -v dunst)" ] || [ "$1" = "--force" ]; then
-    set -e
     loglnprefix "dunst" "Installing 'dunst' ..."
 
     tmpdir=$(mktemp -d)
@@ -16,9 +15,9 @@ Usage:
     git clone "https://github.com/dunst-project/dunst.git" .
     please make install
 
-    mkdir -p ~/.config/dunst
-    cd ~/.config/dunst
-    ln -sf $DOTFILES/dunst/dunstrc
+    mkdir -p "$XDG_CONFIG_HOME"/dunst
+    cd "$XDG_CONFIG_HOME"/dunst
+    ln -sf "$XDG_CONFIG_HOME"/dunst/dunstrc
     loglnprefix "dunst" "... done installing 'dunst'."
   else
     loglnprefix "dunst" "Nothing to do."
