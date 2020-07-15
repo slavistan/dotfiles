@@ -11,13 +11,14 @@ Usage:
     loglnprefix "dunst" "Installing 'dunst' ..."
 
     tmpdir=$(mktemp -d)
+    loglnprefix "dunst" "tempdir=$tmpdir"
     cd "$tmpdir"
     git clone "https://github.com/dunst-project/dunst.git" .
     please make install
 
     mkdir -p "$XDG_CONFIG_HOME"/dunst
     cd "$XDG_CONFIG_HOME"/dunst
-    ln -sf "$XDG_CONFIG_HOME"/dunst/dunstrc
+    ln -sf "$DOTFILES"/dunst/dunstrc
     loglnprefix "dunst" "... done installing 'dunst'."
   else
     loglnprefix "dunst" "Nothing to do."
