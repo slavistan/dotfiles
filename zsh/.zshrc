@@ -8,6 +8,7 @@ disable r               # Remove irritating alias
 
 ## Prompt setup
 
+# TODO(fix): Unfuck path expansion. 'prj' is abbrev'd to '...'.
 PS1='%F{138}%B[%l]%b%f %F{159}%B%n@%m%b%f %Bin%b %F{154}%B%(4~|%-1~/.../%2~|%~)%b%f
 %B%(?.%F{green}.%F{red})➤%b%f '
 PS2='%B➤ %b'

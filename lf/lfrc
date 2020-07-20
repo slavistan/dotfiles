@@ -1,1 +1,19 @@
+# View hidden files by default
+set hidden
+
+# Draw a nice box around the displayed colums
 set drawbox
+
+# Draw icons depending on file type
+set icons
+
+# Indicator for truncated file names
+set truncatechar '⋯'
+
+# Use 256 color ANSI color codes req. by promptfmt
+set color256
+
+# Configure prompt to resemble my zsh-prompt
+set promptfmt "\033[1;38;5;138m[ lf ] \033[1;38;5;159m%u@%h \033[38;5;15min \033[38;5;154m%w\033[0m"
+
+map <bs> set hidden! # CTRL-h: toggle hidden files
