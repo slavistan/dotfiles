@@ -15,10 +15,13 @@ Usage:
     cd "$tmpdir"
     GOPATH=$(realpath .) go get -u github.com/gokcehan/lf
     please cp bin/lf /usr/local/bin
+    cd -p ~/.config/lf
+    ln -sf $DOTFILES/lf/lfrc
     loglnprefix "lf" "... done installing 'lf'."
   elif [ "$1" = "--uninstall" ] || [ "$1" = "-x" ]; then
     loglnprefix "lf" "Uninstalling 'lf' ..."
     please rm -f /usr/local/bin/lf
+    rm -r ~/.config/lf
     loglnprefix "lf" "... done uninstalling 'lf'."
   else
     loglnprefix "lf" "Nothing to do."
