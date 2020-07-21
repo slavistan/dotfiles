@@ -303,7 +303,6 @@ elif [ "$1" = "--" ]; then
   "$@"
 fi
 
-# TODO(feat): notify-send styling / anderen daemon
 # TODO(feat): dropbox ersetzen
 # TODO(feat): rmln (Pendant zu addln) für --uninstalls implementieren
 # TODO(feat): mktempcd
