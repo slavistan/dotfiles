@@ -146,10 +146,11 @@ noremap <buffer> <silent> $ g$
 onoremap <silent> j gj
 onoremap <silent> k gk
 
-" Navigate across buffers using Tab
+" Buffer/Tab navigation
 
 set hidden " Change buffers without saving
 nnoremap <Tab> :bnext<CR>
+nnoremap <Backspace> :bprev<CR>
 nnoremap <S-Tab> :bprevious<CR>
 
 " Control line indent using Tab
