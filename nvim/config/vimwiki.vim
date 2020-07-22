@@ -31,7 +31,7 @@ function! SetVimwikiOptions()
   nmap <C-j> <Plug>VimwikiNextLink
   nmap <C-k> <Plug>VimwikiPrevLink
   nmap <CR> <Plug>VimwikiFollowLink
-  nmap <Backspace> <Plug>VimwikiGoBackLink
+  nmap <C-Backspace> <Plug>VimwikiGoBackLink
   nmap <F12> <Plug>VimwikiRenameFile
   nmap <Space>l <Plug>VimwikiIncrementListItem
   nmap <Space>h <Plug>VimwikiDecrementListItem
