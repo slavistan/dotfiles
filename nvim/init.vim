@@ -55,8 +55,9 @@ set linebreak
 set virtualedit=block
 set path+=**
 set scrolloff=999 " Center cursor vertically
+set mouse=a " comfy mouse mode: select, resize windows
 
-set textwidth=999
+set textwidth=120
 set modeline
 set showbreak=↪
 let mapleader=","
