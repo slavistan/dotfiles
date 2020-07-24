@@ -3,6 +3,8 @@
 """
 
 " TODO(fix): Implement a mutex for accesses into g:timer_to_win
+" TODO(feat): Highlight
+" TODO(feat): Error and Info notifications
 
 " [ [timer_id, win_id], [timer_id, win_id], ... ]
 let g:notif_stack = []
@@ -59,7 +61,7 @@ fun! NotifySend(title, body, ms)
         \ 'col': &columns-1, 'row': 3, 'anchor': 'NE',
         \ 'style': 'minimal'})
 
-  " Shift all existing notifications by num of lines
+  " Shift all existing notifications down by height of new notification
   for ii in range(len(g:notif_stack))
     let win_id = g:notif_stack[ii][1]
     let win_cfg = nvim_win_get_config(win_id)
@@ -78,6 +80,9 @@ endfun
 """
 
 fun! Notify(...)
-  call NotifySend("asd", ['asd', 'sdadsasda'], 10000)
-  " TODO(impl): Wrapper
+  if a:0 == 2
+    if type(a:1) == 1 && type(a:2) == 0
+      call NotifySend(a:1, [], a:2)
+    endif
+  endif
 endfun
