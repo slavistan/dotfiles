@@ -3,7 +3,7 @@
 """
 
 " TODO(fix): Implement a mutex for accesses into g:timer_to_win
-" TODO(feat): Highlight
+" TODO(feat): Highlight (:help winhighlight)
 " TODO(feat): Error and Info notifications
 
 " [ [timer_id, win_id], [timer_id, win_id], ... ]
