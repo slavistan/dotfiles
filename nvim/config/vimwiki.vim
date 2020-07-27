@@ -3,7 +3,7 @@
 " Allow temporary wikis but don't hijack every .md file
 
 let g:vimwiki_global_ext = 1
-let g:vimwiki_ext2syntax = {}
+let g:vimwiki_ext2syntax = {'.wiki': 'markdown'}
 
 " Todo-List marks
 
@@ -43,5 +43,17 @@ function! SetVimwikiOptions()
   hi VimwikiLink     guifg=#F4D03F guibg=None gui=bold,underline
   hi VimwikiWebLink1 guifg=#66D9EF guibg=None gui=bold
   hi Folded          guifg=#FD971F guibg=None gui=italic
+
+  """
+  """ Concealment logic
+  """
+
+  set conceallevel=3
+  set concealcursor=nv
+  au InsertEnter *.wiki :call Foo()
+  fun! Foo()
+    set conceallevel=0
+    au BufWritePost *.wiki ++once :set conceallevel=3
+  endfun
 
 endfunction
