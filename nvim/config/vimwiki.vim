@@ -17,6 +17,7 @@ let g:vimwiki_folding = 'list'
 
 let g:vimwiki_key_mappings = { 'links': 0, }
 
+
 autocmd FileType vimwiki call SetVimwikiOptions()
 function! SetVimwikiOptions()
 
@@ -57,3 +58,12 @@ function! SetVimwikiOptions()
   endfun
 
 endfunction
+
+let s:templates = {'link': '[🔗]()'}
+fun! vimwiki#Template(what)
+  let text = s:templates[a:what]
+  let line = getline('.')
+  call setline('.', strpart(line, 0, col('.') - 1) . text . strpart(line, col('.') - 1))
+endfun
+
+nmap ,wl :call vimwiki#Template('link')<CR>
