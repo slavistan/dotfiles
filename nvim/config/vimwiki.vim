@@ -1,26 +1,21 @@
-" Configuration pertaining to vimwikis
+""" Configuration pertaining to vimwikis
 
-let g:vimwiki_key_mappings = { 'links': 0, }
-let g:vimwiki_global_ext = 0
+" Allow temporary wikis but don't hijack every .md file
+
+let g:vimwiki_global_ext = 1
+let g:vimwiki_ext2syntax = {}
+
+" Todo-List marks
+
 let g:vimwiki_listsyms = ' ○◐●✓'
+
+"
+
 let g:vimwiki_folding = 'list'
 
-fun! CharUnderCursor()
-  return strcharpart(strpart(getline('.'), col('.') - 1), 0, 1)
-endfun
+"
 
-let g:ImgChar="📷"
-
-fun! PreviewIfImg()
-  if g:ImgChar == CharUnderCursor()
-    echom "ahahha"
-    let mdurl=strpart(getline('.'), col('.') - 2)
-    echom mdurl
-    " TODO(impr): Adjust regex to allow for parens in filepath
-    let match=matchstr(mdurl, '^\['. g:ImgChar .'\](file:\zs[^)]\+\ze)')
-    echom system('sxiv "' . match . '" &')
-  endif
-endfun
+let g:vimwiki_key_mappings = { 'links': 0, }
 
 autocmd FileType vimwiki call SetVimwikiOptions()
 function! SetVimwikiOptions()
@@ -48,8 +43,5 @@ function! SetVimwikiOptions()
   hi VimwikiLink     guifg=#F4D03F guibg=None gui=bold,underline
   hi VimwikiWebLink1 guifg=#66D9EF guibg=None gui=bold
   hi Folded          guifg=#FD971F guibg=None gui=italic
-
-  " Preview images in separate window
-  autocmd CursorMoved *.wiki call PreviewIfImg()
 
 endfunction
