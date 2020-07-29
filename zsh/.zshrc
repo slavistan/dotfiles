@@ -26,26 +26,11 @@ export PROMPT_EOL_MARK='%F{black}%K{white}❱❱%k'
 autoload -Uz compinit && compinit -d $XDG_CACHE_HOME/zsh/.zcompdump
 autoload -Uz bashcompinit && bashcompinit -d $XDG_CACHE_HOME/zsh/.zbashcompdump
 # zstyle ':completion:*' menu select # select completions from menu
-zstyle ':completion:*' matcher-list \
+zstyle ':completion:*:complete:*' matcher-list \
   'M:{a-zA-Z}={a-zA-Z}' \
   'm:{a-zA-Z}={A-Za-z}' \
   'm:{a-zA-Z}={A-Za-z} l:|=*'
 zstyle ':completion:*' accept-exact false
-
-# TODO(fix): Check with marlonrichert/zsh-autocomplete #65
-# TODO(fix): Show as many results as fit inside max-lines. Issue?
-# source /home/stan/prj/dotfiles/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-# zstyle ':autocomplete:list-choices*' max-lines 60
-# zstyle ':autocomplete:*' fuzzy-search off
-# zstyle ':autocomplete:*' frecent-dirs off
-# zstyle ':autocomplete:*' groups off
-# add-zsh-hook precmd use-my-matcher-list
-# use-my-matcher-list() {
-#   zstyle ':completion:*' matcher-list \
-#     'M:{a-zA-Z}={a-zA-Z}' \
-#     'm:{a-zA-Z}={A-Za-z}' \
-#     'm:{a-zA-Z}={A-Za-z} l:|=*'
-# }
 
 # Additional completion files
 source $DOTFILES/zsh/completions/cf # Cloud-Foundry CLI
@@ -131,9 +116,13 @@ function gsap {
 }
 
 
-## Load zsh-syntax-highlighting; should be last.
+## Plugins
 
-source $DOTFILES/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+for plug in \
+  "$DOTFILES/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+  do
+  [ -f "$plug" ] && source "$plug"
+done
 
 
 ## Source machine-specific setup

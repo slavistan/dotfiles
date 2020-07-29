@@ -160,6 +160,7 @@ loglnprefix() {
 
 
 # Add a line to a file iff the line is not part of the file.
+# TODO(feat): Rename to addlnq (add line unique)
 
 addln() {
   if [ ! "$#" -eq 2 ]; then
@@ -308,3 +309,5 @@ fi
 # TODO(feat): mktempcd
 # TODO(feat): Templates erweitern
 #             (1) download, build from source, make install
+# TODO(feat): logln sollte innerhalb jedes moduls automatisch Namespräfix generieren
+#   ohne loglnprefix
