@@ -10,10 +10,10 @@ envvars. Expects 'zsh' to be already installed."
   elif [ "$1" = "-p" ]; then
     loglnprefix "zsh" "Delete plugin directory"
     rm -rf $THISDIR/zsh/plugins
-    mkcd $THISDIR/zsh/plugins/zsh-autocomplete
     loglnprefix "zsh" "Install plugins"
-    git clone "https://github.com/marlonrichert/zsh-autocomplete.git" .
-    git checkout dev
+
+    mkcd "$THISDIR/zsh/plugins/zsh-syntax-highlighting"
+    git clone "https://github.com/zsh-users/zsh-syntax-highlighting.git" .
   else
     loglnprefix "zsh" "Setting up zsh ..."
     if [ -z "$(command -v zsh)" ]; then

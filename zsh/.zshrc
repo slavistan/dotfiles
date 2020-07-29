@@ -116,7 +116,7 @@ function gsap {
 }
 
 
-## Load zsh-syntax-highlighting; should be last.
+## Plugins
 
 for plug in \
   "$DOTFILES/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
