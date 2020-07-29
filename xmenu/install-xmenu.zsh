@@ -15,3 +15,5 @@ Usage:
     loglnprefix "xmenu" "... done installing 'xmenu'."
   else
     loglnprefix "xmenu" "Nothing to do."
+  fi
+}
