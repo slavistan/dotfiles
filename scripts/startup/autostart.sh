@@ -38,9 +38,9 @@ if [ -z "$(pgrep compton)" ]; then
 fi
 
 
-## Run dwm status bar script
+## Run dwm status bar
 
-$DOTFILES/scripts/dwm-status.sh &
+dwmblocks &
 
 
 ## Set background image

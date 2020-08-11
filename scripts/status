@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+
+battery() {
+  for p in /sys/class/power_supply/BAT?/capacity; do
+    echo "$(cat "$p")%"
+  done
+}
+
+power() {
+  device=$(ls /sys/class/power_supply/ | grep -v 'BAT') # AC device names differ
+  [ "$(cat /sys/class/power_supply/"$device"/online)" -eq 1 ] && printf ⚡|| printf 🔋
+
+  for p in /sys/class/power_supply/BAT?/capacity; do
+    echo " $(cat "$p")%"
+  done
+}
+
+systime() {
+  date '+%d. %B %H:%M:%S'
+}
+
+keymap() {
+  echo "⌨ $(setxkbmap -query | grep layout | awk '{ print $2 }')"
+}
+
+fischkopf() {
+  echo ahoi
+}
+
+"$@" | tr -d '\n'
