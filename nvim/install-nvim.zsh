@@ -26,7 +26,7 @@ install even if 'nvim' is already installed."
     ln -s $DOTFILES/nvim
     nvim +PlugClean +PlugInstall +quitall
     addln "export EDITOR=nvim" "$HOME/.profile"
-    loglnprefix "nvim" "... done installing 'st'."
+    loglnprefix "nvim" "... done installing 'nvim'."
   else
     loglnprefix "nvim" "Nothing to be done."
   fi
