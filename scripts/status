@@ -23,8 +23,10 @@ keymap() {
   echo "⌨ $(setxkbmap -query | grep layout | awk '{ print $2 }')"
 }
 
-fischkopf() {
-  echo ahoi
+ding() {
+  [ ! -f /tmp/foo ] && echo 0 > /tmp/foo
+  cat /tmp/foo
+  echo $(( $(cat /tmp/foo) + 1 )) > /tmp/foo
 }
 
 "$@" | tr -d '\n'
