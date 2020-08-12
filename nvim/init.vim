@@ -31,8 +31,6 @@ else
 "      List number of matches when searching (custom command?)
 "      Incsearch without the adhs jumps
 "      C++: Automatically add comment header for line comments '// ... '
-"      Use Ctrl + vimkeys to shift a line left, right, up and down
-
 
 """
 " Settings
@@ -56,6 +54,7 @@ set virtualedit=block
 set path+=**
 set scrolloff=999 " Center cursor vertically
 set mouse=a " comfy mouse mode: select, resize windows
+set signcolumn=number " integrate signcolumn into linenumber col
 
 set textwidth=120
 set modeline
@@ -71,16 +70,14 @@ let g:netrw_banner=0
 let g:netrw_browse_split=4
 let g:netrw_winsize=25
 
-" Disable line wrapping by default and set a hotkey to toggle it
+" Line wrapping
 
-set nowrap
+set wrap
 nnoremap \w :set wrap!<cr>
 
-" Enable line numbers by default and set a hotkey to toggle them
+" Line numbers
 
-set nonumber " show linenumbers
-set relativenumber "
-" TODO(feat): Toggle between relative, absolute and no numbers
+set number " show linenumbers
 
 " Display tabs and trailing whitespaces
 set list
