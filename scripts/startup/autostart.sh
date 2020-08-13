@@ -40,7 +40,7 @@ fi
 
 ## Run dwm status bar
 
-dwmblocks &
+dwmbricks &
 
 
 ## Set background image
