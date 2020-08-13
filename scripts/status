@@ -16,7 +16,7 @@ power() {
 }
 
 systime() {
-  date '+%d. %B %H:%M:%S'
+  date '+%d. %B %H:%M'
 }
 
 keymap() {
