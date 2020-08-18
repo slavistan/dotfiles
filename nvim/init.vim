@@ -102,33 +102,33 @@ let g:pandoc#syntax#codeblocks#embeds#langs = ['python', 'R=r', 'bash=sh', 'lua'
 " TODO(feat): envvar WIKIHOME
 exe 'source ' . g:NVIMHOME . '/config/vimwiki.vim'
 
-" vim buffet
-" TODO(impr): Write custom buffer/tab line. Leave the plugin madness behind.
-let g:buffet_powerline_separators=1
-let g:buffet_tab_icon="📖"
-function! g:BuffetSetCustomColors()
-  hi BuffetTab           guifg=#BBBBBB gui=bold      guibg=#045B88
-  hi BuffetCurrentBuffer guifg=#FFFFFF guibg=#045B88
-  hi BuffetBuffer  guibg=#262833 guifg=#949184
-endfunction
-
 execute 'call plug#begin(''' . g:NVIMHOME . '/plug-plugins'')'
 Plug 'vimwiki/vimwiki'
 Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/godlygeek/tabular.git'
-Plug 'https://github.com/w0rp/ale.git'
-Plug 'bagrat/vim-buffet'
+" Plug 'https://github.com/w0rp/ale.git'
+" Plug 'https://github.com/jackguo380/vim-lsp-cxx-highlight.git', { 'for' : ['c', 'cpp'] }
+Plug 'https://github.com/neoclide/coc.nvim.git', { 'branch': 'release', 'for': ['c', 'cpp', 'json'] }
+Plug 'https://github.com/lukelbd/vim-tabline.git'
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'https://github.com/dbridges/vim-markdown-runner.git'
 Plug 'https://github.com/alcesleo/vim-uppercase-sql'
 Plug 'https://github.com/tpope/vim-commentary'
 call plug#end()
 
+
 let g:ale_lint_on_text_changed = 'never' " Lint only on save
 let g:ale_lint_on_enter = 0 " Don't lint when entering a file
-let g:ale_linters_explicit=1 " Don't use all linters by default
+let g:ale_linters_explicit = 1 " Don't use all linters by default
+
+
+" nnoremap <F2> <cmd>lua vim.lsp.buf.rename()<CR>
+" nnoremap <F3> <cmd>lua vim.lsp.buf.references()<CR>
+" nnoremap <F4> <cmd>lua vim.lsp.buf.definition()<CR>
+" nnoremap K <cmd>lua vim.lsp.buf.hover()<CR>
+
 
 """
 " Key mappings
@@ -147,15 +147,10 @@ onoremap <silent> k gk
 " Buffer/Tab navigation
 
 set hidden " Change buffers without saving
-nnoremap <Tab> :bnext<CR>
-nnoremap <Backspace> :bprev<CR>
-nnoremap <S-Tab> :bprevious<CR>
+nnoremap <Tab> :tabnext<CR>
+nnoremap <Backspace> :tabprev<CR>
+nnoremap <S-Tab> :tabprev<CR>
 
-" Control line indent using Tab
-
-vnoremap <Tab> >gv
-vnoremap <S-Tab> <gv
-inoremap <S-Tab> <Backspace>
 
 " Source configuration submodules
 
@@ -204,4 +199,3 @@ let g:gitgutter_sign_modified_removed = '≠≠'
 colorscheme milton " postpone loading of colorscheme so that plugins' hi groups will be known
 
 endif
-set conceallevel=0

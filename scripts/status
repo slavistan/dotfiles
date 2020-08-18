@@ -16,7 +16,7 @@ power() {
 }
 
 systime() {
-  date '+%d. %B %H:%M'
+  date '+%d. %B %H:%M:%S'
 }
 
 keymap() {
@@ -27,6 +27,7 @@ ding() {
   [ ! -f /tmp/foo ] && echo 0 > /tmp/foo
   cat /tmp/foo
   echo $(( $(cat /tmp/foo) + 1 )) > /tmp/foo
+  notify-send "Button = $BUTTON"
 }
 
 "$@" | tr -d '\n'

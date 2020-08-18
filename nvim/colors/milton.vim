@@ -108,9 +108,30 @@ hi LineNr          guifg=#94918F guibg=None
 hi NonText         guifg=#465457
 hi SpecialKey      guifg=#465457
 
+"""
+" Gitgutter
+"""
+
 hi GitGutterAddLine guibg=#13354A
 hi GitGutterChangeLine guibg=#13354A
 hi GitGutterDeleteLine gui=underline
 hi GitGutterAdd guibg=None
 hi GitGutterChange guibg=None
 hi GitGutterDelete guibg=None
+
+"""
+" LSP
+"""
+
+hi LspDiagnosticsError               guifg=#E6DB74 guibg=#1E0010
+hi LspDiagnosticsErrorSign           gui=bold guifg=#FF0000 guibg=none
+hi LspDiagnosticsErrorFloating       guifg=#E6DB74 guibg=#1E0010
+hi LspDiagnosticsWarning             guifg=#E6DB74 guibg=#1E0010
+hi LspDiagnosticsWarningSign         gui=bold guifg=#E6DB74 guibg=none
+hi LspDiagnosticsWarningFloating     guifg=#E6DB74 guibg=#1E0010
+hi LspDiagnosticsInformation         guifg=#E6DB74 guibg=#1E0010
+hi LspDiagnosticsInformationSign     guifg=#E6DB74 guibg=#1E0010
+hi LspDiagnosticsInformationFloating guifg=#E6DB74 guibg=#1E0010
+hi LspDiagnosticsHint                guifg=#E6DB74 guibg=#1E0010
+hi LspDiagnosticsHintSign            guifg=#E6DB74 guibg=#1E0010
+hi LspDiagnosticsHintFloating        guifg=#E6DB74 guibg=#1E0010
