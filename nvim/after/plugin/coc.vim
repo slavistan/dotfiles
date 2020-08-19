@@ -1,23 +1,25 @@
-if !exists('g:coc_enabled')
-  finish
-endif
 
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+au BufEnter *.c,*.cpp,*.json call CocInit()
 
-" Rename symbol.
-nmap <F2> <Plug>(coc-rename)
+fun! CocInit()
+  " Highlight the symbol and its references when holding the cursor.
+  autocmd CursorHold * silent call CocActionAsync('highlight')
 
-nnoremap <silent> K :call CocAction('doHover')<cr>
+  " Rename symbol.
+  nmap <F2> <Plug>(coc-rename)
 
-" gd - go to definition of word under cursor
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
+  nnoremap <silent> K :call CocAction('doHover')<cr>
 
-" gi - go to implementation
-nmap <silent> gi <Plug>(coc-implementation)
+  " gd - go to definition of word under cursor
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
 
-" gr - find references
-nmap <silent> gr <Plug>(coc-references)
+  " gi - go to implementation
+  nmap <silent> gi <Plug>(coc-implementation)
 
-nmap <leader> cf  <Plug>(coc-format-selected)
+  " gr - find references
+  nmap <silent> gr <Plug>(coc-references)
+
+  " format selected range
+  vmap <silent> gf  <Plug>(coc-format-selected)
+endfun
