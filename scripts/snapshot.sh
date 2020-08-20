@@ -14,8 +14,8 @@ case "$1" in
   -s|--select-area)
     tmpdir=$(mktemp -p /tmp/ -d snapshot_XXXXXX)
     outfile="$tmpdir/snapshot.png"
-    import "$outfile" || exit
-    copyq copy image/png - < $outfile
+    import "$outfile" &&
+      xclip -t image/png -selection clipboard "$tmpdir/snapshot.png"
     action=$(dunstify \
       -I "$outfile" \
       --timeout=5000 \
