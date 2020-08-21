@@ -19,6 +19,9 @@ __install_jupyter() {
       please pip3 install --upgrade bash_kernel
       please python3 -m bash_kernel.install
 
+      please pip3 install --upgrade markdown-kernel
+      please python3 -m  markdown_kernel.install
+
       please pip3 install --upgrade sos-notebook
       please python3 -m sos_notebook.install
       please jupyter labextension install transient-display-data
@@ -52,6 +55,10 @@ __install_jupyter() {
       please python3 -m sos_notebook.install
       please jupyter labextension install transient-display-data
       please jupyter labextension install jupyterlab-sos
+
+      # markdown kernel
+      please pip3 install markdown-kernel
+      please python3 -m  markdown_kernel.install
 
       # jupyterlab extensions
       please jupyter labextension install @axlair/jupyterlab_vim
