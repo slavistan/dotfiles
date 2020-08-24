@@ -23,6 +23,23 @@ keymap() {
   echo "⌨ $(setxkbmap -query | grep layout | awk '{ print $2 }')"
 }
 
+backlight() {
+  case $BUTTON in
+    1) {
+      if [ -f /tmp/redshift-on ]; then
+        redshift -x
+        rm /tmp/redshift-on
+      else
+        redshift -PO 2500K
+        touch /tmp/redshift-on
+      fi } > /dev/null
+      ;;
+    4) light -A 10 ;;
+    5) light -U 10 ;;
+  esac
+  printf "☼ %.f" $(light)
+}
+
 ding() {
   [ ! -f /tmp/foo ] && echo 0 > /tmp/foo
   cat /tmp/foo
