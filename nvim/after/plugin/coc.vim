@@ -2,8 +2,8 @@
 au BufEnter *.c,*.cpp,*.json call CocInit()
 
 fun! CocInit()
-  " Highlight the symbol and its references when holding the cursor.
-  autocmd CursorHold * silent call CocActionAsync('highlight')
+  " Highlight the symbol and its references when holding the cursor. Lags hard.
+  " autocmd CursorHold * silent call CocActionAsync('highlight')
 
   " Rename symbol.
   nmap <F2> <Plug>(coc-rename)
@@ -23,3 +23,9 @@ fun! CocInit()
   " format selected range
   vmap <silent> gf  <Plug>(coc-format-selected)
 endfun
+
+" Notes on COC
+"
+"  + highlight on CursorHold lags when moving the cursor within the same identifier.
+"  + How can I disable suggestions popping up? I cannot read my code.
+"  + Cannot rename C macros ..
