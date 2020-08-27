@@ -15,7 +15,9 @@ case "$1" in
     tmpdir=$(mktemp -p /tmp/ -d snapshot_XXXXXX)
     outfile="$tmpdir/snapshot.png"
     import "$outfile" &&
-      xclip -t image/png -selection clipboard "$tmpdir/snapshot.png"
+      # TODO(fix): pngs are pale when using xclip
+      # xclip -t image/png -selection clipboard "$tmpdir/snapshot.png"
+      copyq copy image/png - < "$tmpdir/snapshot.png"
     action=$(dunstify \
       -I "$outfile" \
       --timeout=5000 \
