@@ -16,4 +16,5 @@ set color256
 # Configure prompt to resemble my zsh-prompt
 set promptfmt "\033[1;38;5;138m[ lf ] \033[1;38;5;159m%u@%h \033[38;5;15min \033[38;5;154m%w\033[0m"
 
-map <bs> set hidden! # CTRL-h: toggle hidden files
+# CTRL-h: toggle hidden files
+map <bs> set hidden!
