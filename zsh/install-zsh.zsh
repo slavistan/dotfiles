@@ -31,6 +31,8 @@ envvars. Expects 'zsh' to be already installed."
     mkdir -p $THISDIR/zsh/completions
     wget -O $THISDIR/zsh/completions/cf "https://raw.githubusercontent.com/cloudfoundry/cli/master/ci/installers/completion/cf"
 
+    please curl -L -s -o /usr/local/bin/zshi "https://raw.githubusercontent.com/romkatv/zshi/master/zshi"
+
     loglnprefix "zsh" "... done installing 'zsh'"
   fi
 }
