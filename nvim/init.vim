@@ -108,13 +108,10 @@ Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/godlygeek/tabular.git'
-" Plug 'https://github.com/w0rp/ale.git'
-" Plug 'https://github.com/jackguo380/vim-lsp-cxx-highlight.git', { 'for' : ['c', 'cpp'] }
 Plug 'https://github.com/neoclide/coc.nvim.git', { 'branch': 'release', 'for': ['c', 'cpp', 'json'] }
 Plug 'https://github.com/lukelbd/vim-tabline.git'
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'https://github.com/dbridges/vim-markdown-runner.git'
-Plug 'https://github.com/alcesleo/vim-uppercase-sql'
 Plug 'https://github.com/tpope/vim-commentary'
 call plug#end()
 
