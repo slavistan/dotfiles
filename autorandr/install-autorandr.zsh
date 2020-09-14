@@ -1,13 +1,19 @@
 __install_autorandr() {
-  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
-    printf "\
-Usage:
-  $0 [--force]
-
-  Install autorandr.
-"
-    exit 0
-  elif [ -z "$(command -v autorandr)" ] || [ "$1" = "--force" ]; then
+  case "$1" in
+  -h|--help)
+    cat <<-EOF
+			Usage:
+			  $0 [-s | --status]
+			  $0 [-i | --install]
+			  $0 [-u | --uninstall]
+			EOF
+    ;;
+  ""|-s|--status)
+    command -v autorandr &&
+      autorandr --version ||
+      loglnprefix "autorandr" "Not installed."
+      ;;
+  -i|--install)
     loglnprefix "autorandr" "Installing 'autorandr' ..."
 
     mkcd $(mktemp -d)
@@ -18,8 +24,13 @@ Usage:
     please mkdir -p /usr/local/bin/
     please cp autorandr.py /usr/local/bin/autorandr
 
+    # Refresh wallpaper after changing xrandr settings
+    mkcd $XDG_CONFIG_HOME/autorandr/postswitch
+    ln -s $DOTFILES/scripts/wallpaper.sh
+
     loglnprefix "autorandr" "... done installing 'autorandr'."
-  else
-    loglnprefix "autorandr" "Nothing to do."
-  fi
+    ;;
+  -u|--uninstall);;
+
+  esac
 }
