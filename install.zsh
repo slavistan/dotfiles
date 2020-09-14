@@ -274,20 +274,16 @@ git submodule init
 git submodule update
 
 if [ -z "$1" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
-  printf "\
-Usage:
-  (1) $0 --list-modules | -l
-  (2) $0 -m <module> <args>
-  (3) $0 --template | -t <name>
-  (4) $0 -- <args> ...
-  (5) $0 --help | -h
-
-List available modules (1) or run a module (2). (3) Setup template for new
-module. Use double dashes (4) to run script commands directly for debugging or
-print this help (5).
-"
+  cat <<-EOF
+		Usage:
+		  (1) $0 -l                  - list available modules
+		  (2) $0 -h [MODULE]         - show help
+		  (3) $0 -m MODULE [ARGS]... - run a module
+		  (4) $0 -t NAME             - create new module from template
+		  (5) $0 @ COMMAND           - run script-internal commands (debugging)
+		EOF
   exit 0
-elif [ "$1" = "-l" ] || [ "$1" = "--list-modules" ]; then
+elif [ "$1" = "-l" ]; then
   for mod in $(list_available_modules)
   do
     help=$(__install_$mod -h | sed 's@__install_@'"$THISFILE"' -m @g' | sed -ne 's/^/  /gp')
@@ -299,7 +295,7 @@ elif [ "$1" = "-m" ]; then
   __install_$mod "$@"
 elif [ "$1" = "-t" ] || [ "$1" = "--template" ]; then
   make_template "$2"
-elif [ "$1" = "--" ]; then
+elif [ "$1" = "@" ]; then
   shift
   "$@"
 fi
@@ -311,3 +307,6 @@ fi
 #             (1) download, build from source, make install
 # TODO(feat): logln sollte innerhalb jedes moduls automatisch Namespräfix generieren
 #   ohne loglnprefix
+#    - log ...
+#    - err ...
+#    - die ...
