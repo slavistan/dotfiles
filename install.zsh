@@ -146,7 +146,16 @@ logln() {
 # log with err tag
 
 errln() {
-  printf "\033[31m[ERR ]\033[0m $@\n"
+  printf "\033[31m[ERR ]\033[0m $@\n" >&2
+}
+
+err() {
+  printf "\033[31m[ERR ]\033[0m $@" >&2
+}
+
+die() {
+  err "$@"
+  exit 1
 }
 
 
@@ -236,6 +245,9 @@ list_installer_files() {
   printf "$installer_files"
 }
 
+module_exists() {
+  list_available_modules | grep -Fq "$1"
+}
 
 # create module template
 
@@ -256,6 +268,7 @@ make_template() {
 ##########################
 
 THISFILE="${0:A}"
+MYNAME="${0:A:t}"
 THISDIR="${0:A:h}"
 cd $THISDIR
 INSTALLER_FILES=$(list_installer_files)
@@ -273,32 +286,42 @@ source $(echo $INSTALLER_FILES)
 git submodule init
 git submodule update
 
-if [ -z "$1" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
-  cat <<-EOF
-		Usage:
-		  (1) $0 -l                  - list available modules
-		  (2) $0 -h [MODULE]         - show help
-		  (3) $0 -m MODULE [ARGS]... - run a module
-		  (4) $0 -t NAME             - create new module from template
-		  (5) $0 @ COMMAND           - run script-internal commands (debugging)
-		EOF
-  exit 0
-elif [ "$1" = "-l" ]; then
+case "$1" in
+-h|--help)
+  if [ -z "$2" ]; then
+    cat <<-EOF
+			Usage:
+			  (1) $0 -l                  - list available modules
+			  (2) $0 -h [MODULE]         - show help
+			  (3) $0 -m MODULE [ARGS]... - run a module
+			  (4) $0 -t NAME             - create new module from template
+			  (5) $0 @ COMMAND           - run script-internal commands (debugging)
+			EOF
+  else
+   module_exists "$2" || die "Module does not exist.\n"
+   __install_$2 -h | sed 's@__install_@'"$MYNAME"' -m @g'
+  fi
+  ;;
+-l)
   for mod in $(list_available_modules)
   do
-    help=$(__install_$mod -h | sed 's@__install_@'"$THISFILE"' -m @g' | sed -ne 's/^/  /gp')
+    help=$(__install_$mod -h | sed 's@__install_@'"$MYNAME"' -m @g' | sed -ne 's/^/  /gp')
     printf "Module \033[32;1m$mod\033[0m\n$help\n\n"
   done
-elif [ "$1" = "-m" ]; then
+  ;;
+-m)
   mod="$2"
   shift 2
   __install_$mod "$@"
-elif [ "$1" = "-t" ] || [ "$1" = "--template" ]; then
+  ;;
+-t)
   make_template "$2"
-elif [ "$1" = "@" ]; then
+  ;;
+@)
   shift
   "$@"
-fi
+  ;;
+esac
 
 # TODO(feat): dropbox ersetzen
 # TODO(feat): rmln (Pendant zu addln) für --uninstalls implementieren
