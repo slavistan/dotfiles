@@ -96,7 +96,7 @@ set breakindent " Wrapped lines preserve indentation
 " vim-pandoc et al.
 let g:pandoc#spell#enabled = 0
 let g:pandoc#syntax#conceal#use = 0
-let g:pandoc#syntax#codeblocks#embeds#langs = ['python', 'R=r', 'bash=sh', 'lua']
+let g:pandoc#syntax#codeblocks#embeds#langs = ['python', 'R=r', 'bash=sh', 'lua', 'sqlhana']
 
 " vimwiki
 " TODO(feat): envvar WIKIHOME
