@@ -25,8 +25,8 @@ __install_autorandr() {
     please cp autorandr.py /usr/local/bin/autorandr
 
     # Refresh wallpaper after changing xrandr settings
-    mkcd $XDG_CONFIG_HOME/autorandr/postswitch
-    ln -s $DOTFILES/scripts/wallpaper.sh
+    mkcd $XDG_CONFIG_HOME/autorandr/
+    ln -s $DOTFILES/scripts/wallpaper.sh postswitch
 
     loglnprefix "autorandr" "... done installing 'autorandr'."
     ;;
