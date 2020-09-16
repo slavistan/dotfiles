@@ -7,12 +7,14 @@ source ~/.profile
 
 ## Start notification daemon
 
-dunst &
+if ! pgrep dunst >/dev/null; then
+  dunst &
+fi
 
 
 ## Start sxhkd or, if running, reload config
 
-if [ -z "$(pgrep sxhkd)" ]; then
+if ! pgrep sxhkd >/dev/null; then
   sxhkd &
 else
   kill -SIGUSR1 "$(pgrep sxhkd)"
@@ -21,7 +23,7 @@ fi
 
 ## Start copyq daemon
 
-if [ -z "$(pgrep copyq)" ]; then
+if ! pgrep copyq >/dev/null; then
   copyq &
 fi
 
@@ -33,7 +35,7 @@ dropbox start &
 
 ## Start compton (required for transparency)
 
-if [ -z "$(pgrep compton)" ]; then
+if ! pgrep compton >/dev/null; then
   compton &
 fi
 
@@ -45,24 +47,13 @@ dwmbricks &
 
 ## Set background image
 
-if [ -f ~/dat/img/wall ]; then
-  feh --bg-scale ~/dat/img/wall
-else
-  feh --bg-scale $DOTFILES/files/img/ubuntu-teal.jpg
-fi
+wallpaper.sh -r
 
 
 ## Load custom keyboard layout
 
 setxkbmap -layout k6
-$DOTFILES/scripts/dwm-status.sh -- kickrunning
-
-
-## Run monitor setup
-
-if [ -f "$DOTFILES/scripts/startup/monitor-setup.sh" ]; then
-  $DOTFILES/scripts/startup/monitor-setup.sh
-fi
+status keymap
 
 
 ## Run machine-specific startup script
@@ -70,4 +61,3 @@ fi
 if [ -f "$DOTFILES/scripts/startup/machine-specific.sh" ]; then
   $DOTFILES/scripts/startup/machine-specific.sh
 fi
-
