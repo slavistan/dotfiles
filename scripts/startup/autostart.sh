@@ -28,11 +28,6 @@ if ! pgrep copyq >/dev/null; then
 fi
 
 
-## Start dropbox daemon
-
-dropbox start &
-
-
 ## Start compton (required for transparency)
 
 if ! pgrep compton >/dev/null; then
@@ -53,7 +48,7 @@ wallpaper.sh -r
 ## Load custom keyboard layout
 
 setxkbmap -layout k6
-status keymap
+dwmbricks -t keymap
 
 
 ## Run machine-specific startup script
