@@ -34,4 +34,15 @@ backlight() {
   printf "☼ %.f" $(light)
 }
 
-"$@" | tr -d '\n'
+dummy() {
+  [ ! -f /tmp/asdfbobo ] && echo 0 > /tmp/asdfbobo
+  add=$(env | grep "BUTTON=.\+" | cut -d '=' -f2)
+  [ "$add" = "" ] && add=-1
+  echo $(($(cat /tmp/asdfbobo) + $add)) > /tmp/asdfbobo
+  cat /tmp/asdfbobo
+}
+
+case $# in
+  0) ;;
+  *) "$@" | tr -d '\n' ;;
+esac
