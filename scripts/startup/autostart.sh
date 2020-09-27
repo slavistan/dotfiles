@@ -37,7 +37,7 @@ fi
 
 ## Run dwm status bar
 
-dwmbricks 2>>~/.dwmbricks.log &
+dwmbricks 2>&1 >> ~/.dwmbricks.log &
 
 
 ## Set background image

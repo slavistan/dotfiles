@@ -18,3 +18,7 @@ set promptfmt "\033[1;38;5;138m[ lf ] \033[1;38;5;159m%u@%h \033[38;5;15min \033
 
 # CTRL-h: toggle hidden files
 map <bs> set hidden!
+
+cmd exithere {{
+# TODO
+}}
