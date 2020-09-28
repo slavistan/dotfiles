@@ -19,6 +19,13 @@ set promptfmt "\033[1;38;5;138m[ lf ] \033[1;38;5;159m%u@%h \033[38;5;15min \033
 # CTRL-h: toggle hidden files
 map <bs> set hidden!
 
-cmd exithere {{
-# TODO
+map i ${{
+  /home/stan/prj/dotfiles/lf/preview.sh "$f" | less -R
 }}
+
+# TODO(fix): What the fuck is wrong with previews of
+#   shell scripts without file extensions? (fritzctl)
+set previewer /home/stan/prj/dotfiles/lf/preview.sh 
+
+# cmd printsel $printf "$fs\n"
+# cmd printdir $pwd
