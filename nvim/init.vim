@@ -56,7 +56,7 @@ set scrolloff=999 " Center cursor vertically
 set mouse=a " comfy mouse mode: select, resize windows
 set signcolumn=number " integrate signcolumn into linenumber col
 
-set textwidth=120
+set textwidth=0
 set modeline
 set showbreak=↪
 let mapleader=","

@@ -37,7 +37,9 @@ fi
 
 ## Run dwm status bar
 
-dwmbricks 2>&1 >> ~/.dwmbricks.log &
+{ dwmbricks 2>&1 | while read line; do
+  printf "$(date '+%H:%M:%S': $line\n)"
+done; } >> ~/.dwmbricks.log &
 
 
 ## Set background image
