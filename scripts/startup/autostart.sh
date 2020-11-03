@@ -2,7 +2,7 @@
 
 ## Source environment variables
 
-source ~/.profile
+. ~/.profile
 
 
 ## Start notification daemon
@@ -17,7 +17,7 @@ fi
 if ! pgrep sxhkd >/dev/null; then
   sxhkd &
 else
-  kill -SIGUSR1 "$(pgrep sxhkd)"
+  kill -USR1 "$(pgrep sxhkd)"
 fi
 
 

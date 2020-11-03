@@ -108,18 +108,10 @@ Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
 Plug 'https://github.com/godlygeek/tabular.git'
-Plug 'https://github.com/neoclide/coc.nvim.git', { 'branch': 'release', 'for': ['c', 'cpp', 'json'] }
 Plug 'https://github.com/lukelbd/vim-tabline.git'
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'https://github.com/dbridges/vim-markdown-runner.git'
 Plug 'https://github.com/tpope/vim-commentary'
 call plug#end()
-
-
-let g:ale_lint_on_text_changed = 'never' " Lint only on save
-let g:ale_lint_on_enter = 0 " Don't lint when entering a file
-let g:ale_linters_explicit = 1 " Don't use all linters by default
-
 
 " nnoremap <F2> <cmd>lua vim.lsp.buf.rename()<CR>
 " nnoremap <F3> <cmd>lua vim.lsp.buf.references()<CR>
