@@ -1,5 +1,8 @@
 # This script is executed during startup of dwm
 
+## TODO:
+##   Make startup sequence independent for different displays
+
 ## Source environment variables
 
 . ~/.profile

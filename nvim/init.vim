@@ -9,8 +9,8 @@ if exists('g:vscode')
   set virtualedit=block
 
   vnoremap <Tab> >gv
-  vnoremap <S-Tab> <gv
-  inoremap <S-Tab> <Backspace>
+  vnoremap <Backspace> <gv
+  "inoremap <S-Tab> <Backspace>
 
   nnoremap <Leader>yy ^yg_
   nnoremap <Leader>dd ^dg_
