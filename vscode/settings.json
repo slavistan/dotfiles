@@ -14,5 +14,6 @@
     "editor.minimap.enabled": false,
     "extensions.ignoreRecommendations": false,
     "editor.renderWhitespace": "all",
-    "debug.onTaskErrors": "showErrors"
+    "debug.onTaskErrors": "showErrors",
+    "terminal.integrated.commandsToSkipShell": ["-workbench.action.quickOpen"]
 }
