@@ -51,11 +51,11 @@ bindkey -M viins '^w' backward-delete-word
 
 # Unbind/rebind some defaults
 # TODO(perf): Improve startup latency
-for k in '^a' '^b' '^c' '^d' '^f' '^n' '^n' '^o' '^p' '^q' '^r' '^s' '^t' '^j' '^x' '^y' '^z' '^X~' \
-  '^[,' '^[/' '^[OA' '^[OB' '^[OC' '^[OD' '^[[1~' '^[[2~' '^[[3~' '^[[4~' '^[[A' '^[[B' \
-  '^[[C' '^[[D' '^[~'; do
-  bindkey -M viins -r "$k"
-done
+#for k in '^a' '^b' '^c' '^d' '^f' '^n' '^n' '^o' '^p' '^q' '^r' '^s' '^t' '^j' '^x' '^y' '^z' '^X~' \
+#  '^[,' '^[/' '^[OA' '^[OB' '^[OC' '^[OD' '^[[1~' '^[[2~' '^[[3~' '^[[4~' '^[[A' '^[[B' \
+#  '^[[C' '^[[D' '^[~'; do
+#  bindkey -M viins -r "$k"
+#done
 bindkey -M viins '^ ' list-choices
 bindkey -M viins '^p' up-history
 bindkey -M viins '^n' down-history
