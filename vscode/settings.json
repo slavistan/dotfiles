@@ -10,10 +10,11 @@
     "keyboard.dispatch": "keyCode",
     "workbench.colorTheme": "Monokai",
     "editor.acceptSuggestionOnCommitCharacter": false,
-    "window.zoomLevel": -1,
+    "window.zoomLevel": 0,
     "editor.minimap.enabled": false,
     "extensions.ignoreRecommendations": false,
     "editor.renderWhitespace": "all",
     "debug.onTaskErrors": "showErrors",
-    "terminal.integrated.commandsToSkipShell": ["-workbench.action.quickOpen"]
+    "terminal.integrated.commandsToSkipShell": ["-workbench.action.quickOpen"],
+    "editor.autoClosingBrackets": false,
 }
