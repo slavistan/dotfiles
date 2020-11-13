@@ -17,4 +17,5 @@
     "debug.onTaskErrors": "showErrors",
     "terminal.integrated.commandsToSkipShell": ["-workbench.action.quickOpen"],
     "editor.autoClosingBrackets": false,
+    "editor.autoClosingQuotes": "never"
 }
