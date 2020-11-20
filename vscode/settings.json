@@ -10,12 +10,13 @@
     "keyboard.dispatch": "keyCode",
     "workbench.colorTheme": "Monokai",
     "editor.acceptSuggestionOnCommitCharacter": false,
-    "window.zoomLevel": 0,
+    "window.zoomLevel": 1,
     "editor.minimap.enabled": false,
     "extensions.ignoreRecommendations": false,
     "editor.renderWhitespace": "all",
     "debug.onTaskErrors": "showErrors",
     "terminal.integrated.commandsToSkipShell": ["-workbench.action.quickOpen"],
     "editor.autoClosingBrackets": false,
-    "editor.autoClosingQuotes": "never"
+    "editor.autoClosingQuotes": "never",
+    "workbench.startupEditor": "newUntitledFile"
 }
