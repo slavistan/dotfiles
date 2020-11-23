@@ -13,10 +13,11 @@
     "window.zoomLevel": 1,
     "editor.minimap.enabled": false,
     "extensions.ignoreRecommendations": false,
-    "editor.renderWhitespace": "all",
+    "editor.renderWhitespace": "boundary",
     "debug.onTaskErrors": "showErrors",
     "terminal.integrated.commandsToSkipShell": ["-workbench.action.quickOpen"],
     "editor.autoClosingBrackets": false,
     "editor.autoClosingQuotes": "never",
-    "workbench.startupEditor": "newUntitledFile"
+    "workbench.startupEditor": "newUntitledFile",
+    "explorer.confirmDelete": false
 }
