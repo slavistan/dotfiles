@@ -1,12 +1,13 @@
 ## Zsh global options
 
-setopt globdots           # tab-complete dotfiles
-setopt menucomplete       # tab-expand to first option immediately
-setopt autocd             # change dirs without 'cd'
-setopt hist_ignore_dups   # don't add duplicate cmd to hist
-setopt no_autoremoveslash # keep trailing slash after dir completion
-ZLE_REMOVE_SUFFIX_CHARS=  # keep trailing space after completion
-disable r                 # remove irritating alias
+setopt globdots             # tab-complete dotfiles
+setopt menucomplete         # tab-expand to first option immediately
+setopt autocd               # change dirs without 'cd'
+setopt hist_ignore_dups     # don't add duplicate cmd to hist
+setopt no_autoremoveslash   # keep trailing slash after dir completion
+ZLE_REMOVE_SUFFIX_CHARS=    # keep trailing space after completion
+disable r                   # remove irritating alias
+zle_highlight+=(paste:none) # Don't highlight pasted text
 
 ## Prompt setup
 
