@@ -8,7 +8,7 @@
     "vscode-neovim.neovimPath": "/usr/local/bin/nvim",
     "vscode-neovim.neovimInitPath": "/home/stan/prj/dotfiles/nvim/init.vim",
     "keyboard.dispatch": "keyCode",
-    "workbench.colorTheme": "Monokai Classic",
+    "workbench.colorTheme": "Visual Studio Dark",
     "editor.acceptSuggestionOnCommitCharacter": false,
     "window.zoomLevel": 0,
     "editor.minimap.enabled": false,
