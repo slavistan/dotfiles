@@ -8,7 +8,7 @@
     "vscode-neovim.neovimPath": "/usr/local/bin/nvim",
     "vscode-neovim.neovimInitPath": "/home/stan/prj/dotfiles/nvim/init.vim",
     "keyboard.dispatch": "keyCode",
-    "workbench.colorTheme": "Monokai",
+    "workbench.colorTheme": "Monokai Classic",
     "editor.acceptSuggestionOnCommitCharacter": false,
     "window.zoomLevel": 0,
     "editor.minimap.enabled": false,
@@ -19,5 +19,7 @@
     "editor.autoClosingBrackets": false,
     "editor.autoClosingQuotes": "never",
     "workbench.startupEditor": "newUntitledFile",
-    "explorer.confirmDelete": false
+    "explorer.confirmDelete": false,
+    "workbench.iconTheme": "Monokai Classic Icons",
+    "window.titleBarStyle": "custom"
 }
