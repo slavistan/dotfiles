@@ -1,9 +1,0 @@
-{
-  "languageserver": {
-    "clangd": {
-      "command": "clangd",
-      "args": ["--background-index", "--cross-file-rename", "--all-scopes-completion", "--compile-commands-dir=build", "--clang-tidy"],
-      "filetypes": ["c", "cpp", "cc", "c++"]
-    }
-  }
-}

@@ -1,3 +1,5 @@
+""" Paths
+
 let g:NVIMHOME=$XDG_CONFIG_HOME . '/nvim'
 
 """ Configuration for vscode's neovim plugin
@@ -44,8 +46,11 @@ let &t_SI .= "\<Esc>[5 q"
 let &t_SR .= "\<Esc>[4 q"
 let &t_EI .= "\<Esc>[3 q"
 
+let g:sh_fold_enabled=5 " Must precede fold settings
+
 set clipboard=unnamedplus
 set foldlevelstart=0 " Files are opened with all folds closed
+set foldmethod=syntax
 set noincsearch
 set ignorecase
 set smartcase
@@ -75,18 +80,18 @@ let g:netrw_winsize=25
 set wrap
 nnoremap \w :set wrap!<cr>
 
-" Line numbers
-
 set number " show linenumbers
+set cursorline " highlight current line
 
 " Display tabs and trailing whitespaces
 set list
-set listchars=tab:⇤-⇥
+set listchars=tab:→\ 
 set listchars+=trail:·
 set listchars+=extends:⋯
 set listchars+=precedes:⋯
-set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-set autoindent " Keep indentation level for wrapped lines
+set tabstop=4 softtabstop=4 shiftwidth=4
+" set expandtab
+" set autoindent " Keep indentation level for wrapped lines
 set breakindent " Wrapped lines preserve indentation
 
 """
