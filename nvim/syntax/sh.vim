@@ -343,7 +343,9 @@ endif
 "================================
 syn match   shNumber	"\<\d\+\>#\="
 syn match   shNumber	"\<-\=\.\=\d\+\>#\="
-syn match   shCtrlSeq	"\\\d\d\d\|\\[abcfnrtv0]"			contained
+syn match   shCtrlSeq	"\\[abcfnrtv0]"			contained
+syn match   shCtrlSeq	"\\\d\d\d\[\(\d\+\(;\d\+\)*\)\?m"	contained
+syn match   shCtrlSeq	"\\\d\d\d\[[012]\?K"		contained
 if exists("b:is_bash")
  syn match   shSpecial	"[^\\]\(\\\\\)*\zs\\\o\o\o\|\\x\x\x\|\\c[^"]\|\\[abefnrtv]"	contained
  syn match   shSpecial	"^\(\\\\\)*\zs\\\o\o\o\|\\x\x\x\|\\c[^"]\|\\[abefnrtv]"	contained

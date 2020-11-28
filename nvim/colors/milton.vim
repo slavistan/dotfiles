@@ -16,7 +16,7 @@ hi Boolean         guifg=#AE81FF
 hi Character       guifg=#E6DB74
 hi Number          guifg=#AE81FF
 hi String          guifg=#E6DB74
-hi Conditional     guifg=#F92672               gui=bold
+hi Conditional     guifg=#F92672               gui=none
 hi Constant        guifg=#AE81FF               gui=bold
 hi Cursor          guifg=#000000 guibg=#F8F8F0
 hi iCursor         guifg=#000000 guibg=#F8F8F0
@@ -77,7 +77,7 @@ hi SpellCap        guisp=#7070F0 gui=undercurl
 hi SpellLocal      guisp=#70F0F0 gui=undercurl
 hi SpellRare       guisp=#FFFFFF gui=undercurl
 
-hi Statement       guifg=#F92672               gui=bold
+hi Statement       guifg=#F92672               gui=none
 hi StatusLine      guifg=#455354 guibg=fg
 hi StatusLineNC    guifg=#808080 guibg=#080808
 hi StorageClass    guifg=#FD971F               gui=italic
@@ -109,6 +109,14 @@ hi ColorColumn                   guibg=#232526
 hi LineNr          guifg=#94918F guibg=None
 hi NonText         guifg=#465457
 hi SpecialKey      guifg=#465457
+
+"""
+" .sh
+"""
+
+hi shQuote		guifg=#E0d571	guibg=none
+hi shCtrlSeq	guifg=#E0d571	guibg=none gui=underline
+
 
 """
 " Gitgutter
