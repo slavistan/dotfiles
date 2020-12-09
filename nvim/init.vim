@@ -57,7 +57,7 @@ set smartcase
 set linebreak
 set virtualedit=block
 set path+=**
-set scrolloff=999 " Center cursor vertically
+set scrolloff=3 " Center cursor vertically
 set mouse=a " comfy mouse mode: select, resize windows
 set signcolumn=number " integrate signcolumn into linenumber col
 
