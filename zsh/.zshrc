@@ -30,9 +30,9 @@ autoload -Uz compinit && compinit -d $XDG_CACHE_HOME/zsh/.zcompdump
 autoload -Uz bashcompinit && bashcompinit -d $XDG_CACHE_HOME/zsh/.zbashcompdump
 # zstyle ':completion:*' menu select # select completions from menu
 zstyle ':completion:*:complete:*' matcher-list \
-  'M:{a-zA-Z}={a-zA-Z}' \
-  'm:{a-zA-Z}={A-Za-z}' \
-  'm:{a-zA-Z}={A-Za-z} l:|=*'
+	'M:{a-zA-Z}={a-zA-Z}' \
+	'm:{a-zA-Z}={A-Za-z}' \
+	'm:{a-zA-Z}={A-Za-z} l:|=*'
 zstyle ':completion:*' accept-exact false
 
 # Additional completion files
@@ -78,19 +78,27 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 
 zle -N zle-line-init vicursor # Change cursor according to vi-mode.
 zle -N zle-keymap-select vicursor # Change cursor according to vi-mode.
-function vicursor {
-  case $KEYMAP in
-    vicmd) printf "\033[0 q";;
-    viins|main) printf "\033[5 q";;
-  esac
-  zle reset-prompt
+vicursor() {
+	case $KEYMAP in
+		vicmd) printf "\033[0 q";;
+		viins|main) printf "\033[5 q";;
+	esac
+	zle reset-prompt
 }
 
 
-## Display files when changing directories. Triggers automatically.
+## Wrapper around lf for changing directories and enable ueberzug previews
 
-function chpwd {
-  exa -T -a -L 1 -F --group-directories-first 2>/dev/null || ls -A
+lf () {
+	# Don't export LF_TEMPDIR as this would poison the shell. Or would it?
+	LF_TEMPDIR="$(mktemp -d -t lf-tempdir-XXXXXX)"
+	LF_TEMPDIR="$LF_TEMPDIR" lfrun -last-dir-path="$LF_TEMPDIR/lastdir" "$@"
+
+	if [ -f "$LF_TEMPDIR/cdtolastdir" ] && \
+		[ "$(cat "$LF_TEMPDIR/cdtolastdir")" = "1" ]; then
+		cd "$(cat "$LF_TEMPDIR/lastdir")"
+	fi
+	rm -r "$LF_TEMPDIR"
 }
 
 
@@ -99,32 +107,32 @@ function chpwd {
 alias view='nvim -R'
 alias gst='git status'
 
-function mkcd {
-  [ "$#" -eq 1 ] && mkdir -p "$1" && cd "$1" || echo "Nothing done."
+mkcd() {
+	[ "$#" -eq 1 ] && mkdir -p "$1" && cd "$1" || echo "Nothing done."
 }
 
-function mkcdt {
+mkcdt() {
   cd $(mktemp -d)
 }
 
-function gsap {
-  if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-    git add -u
-    git commit -am "stuff"
-    git push
-  else
-    echo "This is not a git repository. Nothing done."
-    return 1
-  fi
+gsap() {
+	if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+		git add -u
+		git commit -am "stuff"
+		git push
+	else
+		echo "This is not a git repository. Nothing done."
+		return 1
+	fi
 }
 
 
 ## Plugins
 
 for plug in \
-  "$DOTFILES/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-  do
-  [ -f "$plug" ] && source "$plug"
+	"$DOTFILES/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+	do
+	[ -f "$plug" ] && source "$plug"
 done
 
 
