@@ -29,7 +29,7 @@ map <backspace> set hidden!
 set previewer /home/stan/.config/lf/lf-preview.sh
 set cleaner /home/stan/.config/lf/lf-cleanpreview.sh
 
-cmd openswallow %{{
+cmd openswallow &{{
 	lf-open.sh "$f"
 }}
 
