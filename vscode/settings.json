@@ -22,5 +22,6 @@
     "workbench.startupEditor": "newUntitledFile",
     "explorer.confirmDelete": false,
     "workbench.iconTheme": "Monokai Classic Icons",
-    "window.titleBarStyle": "custom"
+    "window.titleBarStyle": "custom",
+	"editor.snippetSuggestions": "none"
 }
