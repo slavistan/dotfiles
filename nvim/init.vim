@@ -190,6 +190,11 @@ let g:gitgutter_sign_removed = '--'
 let g:gitgutter_sign_removed_first_line ='--'
 let g:gitgutter_sign_modified_removed = '≠≠'
 
+augroup highlight_yank
+    autocmd!
+    au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=100}
+augroup END
+
 colorscheme milton " postpone loading of colorscheme so that plugins' hi groups will be known
 
 endif
