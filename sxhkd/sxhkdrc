@@ -2,7 +2,7 @@ mod4 + d
   dmenu_run -p "Run:"
 
 mod4 + o
-  kill -SIGUSR1 $(pgrep sxhkd); $DOTFILES/scripts/dwm-status.sh -- reloadrunning; notify-send "Reloaded sxhkd"
+  kill -SIGUSR1 $(pgrep sxhkd); $DOTFILES/scripts/dwm-status.sh -- reloadrunning; notify-send -t 1000 "Reloaded sxhkd"
 
 mod4 + Return
   $TERMINAL -e sh -c "cd $(xcwd); exec zsh"
@@ -13,17 +13,8 @@ shift + mod4 + F12
 ctrl + shift + mod4 + q
   $DOTFILES/scripts/dwm-logout.sh
 
-ctrl + shift + mod4 + l
-  dm-tool lock
-
 mod4 + n
   $DOTFILES/scripts/snapshot.sh --select-area
-
-mod4 + e
-  spacefm
-
-mod4 + F12
-  $DOTFILES/scripts/webcam.sh view toggle
 
 mod4 + F11
   dunstctl context
@@ -33,3 +24,6 @@ mod4 + Escape
 
 mod4 + shift + Escape
   dunstctl close-all
+
+mod4 + shift + F11
+  $DOTFILES/scripts/screencast.sh

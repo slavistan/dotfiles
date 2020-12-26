@@ -50,13 +50,6 @@ bindkey -M viins '^?' backward-delete-char
 bindkey -M viins '^H' backward-delete-char
 bindkey -M viins '^w' backward-delete-word
 
-# Unbind/rebind some defaults
-# TODO(perf): Improve startup latency
-#for k in '^a' '^b' '^c' '^d' '^f' '^n' '^n' '^o' '^p' '^q' '^r' '^s' '^t' '^j' '^x' '^y' '^z' '^X~' \
-#  '^[,' '^[/' '^[OA' '^[OB' '^[OC' '^[OD' '^[[1~' '^[[2~' '^[[3~' '^[[4~' '^[[A' '^[[B' \
-#  '^[[C' '^[[D' '^[~'; do
-#  bindkey -M viins -r "$k"
-#done
 bindkey -M viins '^ ' list-choices
 bindkey -M viins '^p' up-history
 bindkey -M viins '^n' down-history
@@ -73,6 +66,15 @@ bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 
+# swallow opened window
+bindkey -M vicmd '^Xm' accept-line-swallow
+bindkey -M viins '^Xm' accept-line-swallow
+
+zle -N accept-line-swallow swallowandaccept
+swallowandaccept() {
+	dwmswallow $WINDOWID
+	zle accept-line
+}
 
 ## Proper cursor setup
 
@@ -106,6 +108,7 @@ lf () {
 
 alias view='nvim -R'
 alias gst='git status'
+alias s='dwmswallow $WINDOWID;'
 
 mkcd() {
 	[ "$#" -eq 1 ] && mkdir -p "$1" && cd "$1" || echo "Nothing done."

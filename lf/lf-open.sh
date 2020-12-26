@@ -1,8 +1,18 @@
 #!/usr/bin/env sh
 
-imgpath="$1"
-dwmswallow $WINDOWID
-case "$imgpath" in
-*.pdf) zathura "$imgpath" ;;
-*.jpg|*.jpeg|*.png|*.bmp) sxiv "$imgpath" ;;
+filepath="$1"
+
+case "$filepath" in
+*.pdf)
+	dwmswallow $WINDOWID
+	zathura "$filepath"
+	;;
+*.jpg|*.jpeg|*.png|*.bmp)
+	dwmswallow $WINDOWID
+	sxiv "$filepath"
+	;;
+*.mp4|*.avi)
+	dwmswallow $WINDOWID
+	mpv "$filepath"
+	;;
 esac
