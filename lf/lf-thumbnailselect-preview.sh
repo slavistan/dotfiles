@@ -13,8 +13,12 @@ declare -p -A cmd=([action]=remove [identifier]="preview") \
 	> "$LF_FIFO_UEBERZUG"
 
 imgpath="$1"
+titlefile=".$(basename "$imgpath").title"
+title="$(cat "$titlefile")"
 case "$imgpath" in
 *)
+	lf -remote "send $id set promptfmt \"Title: \033[1m$title\033[0m\""
+	lf -remote "send $id echo \"▶ \033[1mPlay \033[0;4mEnter\033[0m | ⏼  \033[1mQuit \033[0;4mq\033[0m | 📥 \033[1mDownload \033[0;4md\033[0m\""
 	declare -p -A cmd=([action]=add [identifier]="preview" \
 		[x]="$4" [y]="$5" [max_width]="$3" [max_height]="$2" \
 		[path]="$imgpath") > "$LF_FIFO_UEBERZUG"

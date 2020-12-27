@@ -26,9 +26,6 @@ set promptfmt "\033[1;38;5;138m[ lf ] \033[1;38;5;159m%u@%h \033[38;5;15min \033
 # CTRL-h: toggle hidden files
 map <backspace> set hidden!
 
-set previewer /home/stan/.config/lf/lf-preview.sh
-set cleaner /home/stan/.config/lf/lf-cleanpreview.sh
-
 cmd openswallow %{{
 	lf-open.sh "$f"
 }}
@@ -51,10 +48,15 @@ cmd thumbnailselect_accept %{{
 
 %{{
 if [ ! -z "$LF_THUMBNAILSELECT" ]; then
+	lf -remote "send reload"
+	lf -remote "send $id set nohidden"
 	lf -remote "send $id set ratios 1:3"
 	lf -remote "send $id set promptfmt \"\033[1m%f\033[0m\""
 	lf -remote "send $id map <enter> thumbnailselect_accept"
 	lf -remote "send $id set previewer lf-thumbnailselect-preview.sh"
-	lf -remote "send reload"
+	lf -remote "send $id echo \"\""
+else
+	lf -remote "send set previewer /home/stan/.config/lf/lf-preview.sh"
+	lf -remote "send set cleaner /home/stan/.config/lf/lf-cleanpreview.sh"
 fi
 }}
