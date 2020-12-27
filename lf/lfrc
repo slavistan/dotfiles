@@ -1,7 +1,7 @@
 %{{
-	if [ -z "$LF_TEMPDIR" ] || [ -z "$LF_FIFO_UEBERZUG" ]; then
-		lf -remote "send $id echoerr 'LF_TEMPDIR' or 'LF_FIFO_UEBERZUG' not defined. Did you run lf instead of lfrun?"
-	fi
+if [ -z "$LF_TEMPDIR" ] || [ -z "$LF_FIFO_UEBERZUG" ]; then
+	lf -remote "send $id echoerr 'LF_TEMPDIR' or 'LF_FIFO_UEBERZUG' not defined. Did you run lf instead of lfrun?"
+fi
 }}
 
 # View hidden files by default
@@ -41,3 +41,20 @@ cmd quitcd ${{
 }}
 
 map x quitcd
+
+# Thumbnail selection setup
+
+cmd thumbnailselect_accept %{{
+	basename "$f" >"$LF_THUMBNAILSELECT"
+	lf -remote "send $id quit"
+}}
+
+%{{
+if [ ! -z "$LF_THUMBNAILSELECT" ]; then
+	lf -remote "send $id set ratios 1:3"
+	lf -remote "send $id set promptfmt \"\033[1m%f\033[0m\""
+	lf -remote "send $id map <enter> thumbnailselect_accept"
+	lf -remote "send $id set previewer lf-thumbnailselect-preview.sh"
+	lf -remote "send reload"
+fi
+}}
