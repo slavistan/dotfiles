@@ -67,8 +67,8 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 
 # swallow opened window
-bindkey -M vicmd '^Xm' accept-line-swallow
-bindkey -M viins '^Xm' accept-line-swallow
+bindkey -M vicmd '^X^m' accept-line-swallow
+bindkey -M viins '^X^m' accept-line-swallow
 
 zle -N accept-line-swallow swallowandaccept
 swallowandaccept() {

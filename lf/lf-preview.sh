@@ -10,25 +10,38 @@
 declare -p -A cmd=([action]=remove [identifier]="preview") \
 	> "$LF_FIFO_UEBERZUG"
 
-imgpath="$1"
-case "$imgpath" in
-*.tar*) tar tf "$imgpath" ;;
-*.zip) unzip -l "$imgpath" ;;
-*.rar) unrar l "$imgpath" ;;
-*.7z) 7z l "$imgpath" ;;
-*.pdf) pdftotext "$imgpath" - ;;
+filepath="$1"
+case "$filepath" in
+*.tar*) tar tf "$filepath" ;;
+*.zip) unzip -l "$filepath" ;;
+*.rar) unrar l "$filepath" ;;
+*.7z) 7z l "$filepath" ;;
+*.avi|*.mp4)
+	thumbnail="$LF_TEMPDIR/thumbnail.png"
+	ffmpeg -y -i "$filepath" -vframes 1 "$thumbnail"
+	declare -p -A cmd=([action]=add [identifier]="preview" \
+		[x]="$4" [y]="$5" [max_width]="$3" [max_height]="$2" \
+		[path]="$thumbnail") > "$LF_FIFO_UEBERZUG"
+	;;
+*.pdf)
+	thumbnail="$LF_TEMPDIR/thumbnail.png"
+	gs -o "$thumbnail" -sDEVICE=pngalpha -dLastPage=1 "$filepath" >/dev/null
+	declare -p -A cmd=([action]=add [identifier]="preview" \
+		[x]="$4" [y]="$5" [max_width]="$3" [max_height]="$2" \
+		[path]="$thumbnail") > "$LF_FIFO_UEBERZUG"
+	;;
 *.jpg|*.jpeg|*.png|*.bmp)
 	declare -p -A cmd=([action]=add [identifier]="preview" \
 		[x]="$4" [y]="$5" [max_width]="$3" [max_height]="$2" \
-		[path]="$imgpath") > "$LF_FIFO_UEBERZUG"
+		[path]="$filepath") > "$LF_FIFO_UEBERZUG"
 	;;
 *.svg)
-	aspng="$LF_TEMPDIR/svg2png.png"
-	convert "$imgpath" "$aspng"
+	thumbnail="$LF_TEMPDIR/thumbnail.png"
+	convert "$filepath" "$thumbnail"
 	declare -p -A cmd=([action]=add [identifier]="preview" \
 		[x]="$4" [y]="$5" [max_width]="$3" [max_height]="$2" \
-		[path]="$aspng") > "$LF_FIFO_UEBERZUG"
+		[path]="$thumbnail") > "$LF_FIFO_UEBERZUG"
 	;;
-*) bat --style plain --paging never --color always "$imgpath" ;;
+*) bat --style plain --paging never --color always "$filepath" ;;
 esac
 return 127 # nonzero retcode required for lf previews to reload
