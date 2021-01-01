@@ -92,15 +92,13 @@ vicursor() {
 ## Wrapper around lf for changing directories and enable ueberzug previews
 
 lf () {
-	# Don't export LF_TEMPDIR as this would poison the shell. Or would it?
 	LF_TEMPDIR="$(mktemp -d -t lf-tempdir-XXXXXX)"
-	LF_TEMPDIR="$LF_TEMPDIR" lfrun -last-dir-path="$LF_TEMPDIR/lastdir" "$@"
-
-	if [ -f "$LF_TEMPDIR/cdtolastdir" ] && \
-		[ "$(cat "$LF_TEMPDIR/cdtolastdir")" = "1" ]; then
+	LF_TEMPDIR="$LF_TEMPDIR" lf-run -last-dir-path="$LF_TEMPDIR/lastdir" "$@"
+	if [ "$(cat "$LF_TEMPDIR/cdtolastdir" 2>/dev/null)" -eq 1 ]; then
 		cd "$(cat "$LF_TEMPDIR/lastdir")"
 	fi
 	rm -r "$LF_TEMPDIR"
+	unset LF_TEMPDIR
 }
 
 
@@ -109,6 +107,11 @@ lf () {
 alias view='nvim -R'
 alias gst='git status'
 alias s='dwmswallow $WINDOWID;'
+
+# TODO: Completion of commands
+mango() {
+	go doc "$@" | less
+}
 
 mkcd() {
 	[ "$#" -eq 1 ] && mkdir -p "$1" && cd "$1" || echo "Nothing done."

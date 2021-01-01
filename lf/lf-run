@@ -1,12 +1,8 @@
 #!/usr/bin/env sh
 
-##
-## Wrapper script enabling ueberzug image previews for lf.
-##
-
 cleanup() {
+	# Clean up the tempdir if and only if we created it.
 	if [ "$cleanup_tempdir" = "1" ]; then
-		# Clean up the tempdir only if we created it.
 		rm -r "$LF_TEMPDIR" 2>/dev/null
 	fi
 	kill $ueberzugpid 2>/dev/null
@@ -20,11 +16,10 @@ if [ -z "$LF_TEMPDIR" ]; then
 fi
 
 trap cleanup INT
+
 export LF_FIFO_UEBERZUG="$LF_TEMPDIR/fifo"
 mkfifo "$LF_FIFO_UEBERZUG"
-tail -f "$LF_FIFO_UEBERZUG" | ueberzug layer --silent --parser bash &
+tail -f "$LF_FIFO_UEBERZUG" | ueberzug layer --silent &
 ueberzugpid=$!
-# NOTE: This script uses the lfp from from 'gitlab.com/Provessor/lfp' for
-# better compatibility with terminal image previews
 lf "$@"
 cleanup

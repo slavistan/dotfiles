@@ -15,7 +15,7 @@ cleanup() {
 	[ ! -z "$1" ] && exit "$1"
 }
 
-maxresults=5
+maxresults=15
 if echo "$1" | grep -q '^_'; then
 	func="$1"
 	shift
