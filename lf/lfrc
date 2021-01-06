@@ -1,10 +1,3 @@
-%{{
-if [ -z "$LF_TEMPDIR" ] || [ -z "$LF_FIFO_UEBERZUG" ]; then
-	lf -remote "send $id \$echo 'Did you run lf instead of lf-run?'"
-	lf -remote "send $id quit"
-fi
-}}
-
 set ratios 1:3
 set nodrawbox
 set scrolloff 3
@@ -12,39 +5,13 @@ set icons
 set truncatechar '⋯'
 set timefmt '_2. Dec 2006 15:04'
 set promptfmt "\033[1;38;5;138m[ lf ] \033[1;38;5;159m%u@%h \033[38;5;15min \033[38;5;154m%w\033[0m"
-set previewer lf-previewer
-set cleaner lf-cleaner
-
-map q quitcd
 map <esc> quit
+
+# TODO: Set default cleaners
+# set previewer lf-previewer
+# set cleaner lf-cleaner
+
 map <enter> openswallow
-
-cmd quitcd ${{
-	echo "1" > "$LF_TEMPDIR"/cdtolastdir
-	lf -remote "send $id quit"
-}}
-
 cmd openswallow %{{
 	lf-open.sh "$f"
 }}
-
-# # Thumbnail selection setup
-# 
-# cmd thumbnailselect_accept %{{
-# 	basename "$f" >"$LF_THUMBNAILSELECT"
-# 	lf -remote "send $id quit"
-# }}
-# 
-# %{{
-# if [ ! -z "$LF_THUMBNAILSELECT" ]; then
-# 	lf -remote "send reload"
-# 	lf -remote "send $id set nohidden"
-# 	lf -remote "send $id set ratios 1:3"
-# 	lf -remote "send $id set promptfmt \"\033[1m%f\033[0m\""
-# 	lf -remote "send $id map <enter> thumbnailselect_accept"
-# 	lf -remote "send $id set previewer lf-thumbnailselect-preview.sh"
-# 	lf -remote "send $id echo \"\""
-# fi
-# 	# lf -remote "send set previewer /home/stan/.config/lf/lf-preview.sh"
-# 	# lf -remote "send set cleaner /home/stan/.config/lf/lf-cleanpreview.sh"
-# }}

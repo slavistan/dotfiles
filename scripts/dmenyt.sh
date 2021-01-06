@@ -60,9 +60,12 @@ geturlpid=$!
 
 # TODO: Howto set the returncode for lf?
 # An aborted selection should be indicated via the return code like dmenu does.
-if ! videoid="$(lf-thumbnailselect.sh "$tmpdir")"; then
-	cleanup 1
-fi
+export LF_THUMBNAILSELECT="$(mktemp -t lf-thumbnailselect-XXXXXX)"
+lf-run "$tmpdir"
+videoid="$(cat "$LF_THUMBNAILSELECT")"
+rm "$LF_THUMBNAILSELECT"
+
+
 pkill -P $geturlpid 2>/dev/null
 kill $geturlpid 2>/dev/null
 if [ -f "$tmpdir/.$videoid.videourl" ] && [ -f "$tmpdir/.$videoid.audiourl" ]; then
