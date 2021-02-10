@@ -1,12 +1,13 @@
 {
     "keyboard.dispatch": "keyCode",
     "workbench.colorTheme": "Monokai",
-    "window.zoomLevel": 1,
+    "window.zoomLevel": 0,
     "extensions.ignoreRecommendations": false,
 
     "editor.acceptSuggestionOnCommitCharacter": false,
     "editor.autoClosingBrackets": "never",
     "editor.autoClosingQuotes": "never",
+    "editor.occurrencesHighlight": false,
     "editor.minimap.enabled": false,
     "editor.parameterHints.enabled": false,
     "editor.renderWhitespace": "boundary",

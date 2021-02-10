@@ -67,11 +67,11 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 
 # swallow opened window
-bindkey -M vicmd '^X^m' accept-line-swallow
-bindkey -M viins '^X^m' accept-line-swallow
-
-zle -N accept-line-swallow swallowandaccept
-swallowandaccept() {
+bindkey -M vicmd '^X^m' accept-line-swallow # if you're using vim bindings in zsh
+bindkey -M viins '^X^m' accept-line-swallow # if you're using vim bindings in zsh
+bindkey '^X^m' accept-line-swallow
+zle -N accept-line-swallow acceptandswallow
+acceptandswallow() {
 	dwmswallow $WINDOWID
 	zle accept-line
 }
@@ -86,6 +86,11 @@ vicursor() {
 		viins|main) printf "\033[5 q";;
 	esac
 	zle reset-prompt
+}
+
+javaenv() {
+	export _JAVA_OPTIONS='-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dawt.useSystemAAFontSettings=gasp' 
+	export _JAVA_AWT_WM_NONREPARENTING=1
 }
 
 # lf alias for ueberzug and dir change
@@ -129,7 +134,6 @@ for plug in \
 	do
 	[ -f "$plug" ] && source "$plug"
 done
-
 
 ## Source machine-specific setup
 
