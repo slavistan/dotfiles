@@ -1,7 +1,6 @@
 {
     "keyboard.dispatch": "keyCode",
     "workbench.colorTheme": "Monokai",
-    "window.zoomLevel": 0,
     "extensions.ignoreRecommendations": false,
 
     "editor.acceptSuggestionOnCommitCharacter": false,
@@ -30,4 +29,9 @@
     "C_Cpp.updateChannel": "Insiders",
 
     "go.useLanguageServer": true,
+
+    "python.linting.enabled": true,
+    "python.linting.lintOnSave": true,
+    "python.pythonPath": "/bin/python3",
+
 }

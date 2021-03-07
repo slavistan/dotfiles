@@ -100,7 +100,6 @@ source "${XDG_CONFIG_HOME:-$HOME/.config}/lf-shellcd/lf-shellcd"
 
 alias view='nvim -R'
 alias gst='git status'
-alias s='dwmswallow $WINDOWID;'
 
 # TODO: Completion of commands
 mango() {
