@@ -27,6 +27,11 @@ if exists('g:vscode')
   Plug 'https://github.com/godlygeek/tabular.git'
   call plug#end()
 
+	augroup highlight_yank
+		autocmd!
+		au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=100}
+	augroup END
+
 else
 
 " TODO:
