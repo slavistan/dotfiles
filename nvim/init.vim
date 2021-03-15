@@ -10,18 +10,20 @@ if exists('g:vscode')
   set smartcase
   set virtualedit=block
 
-  vnoremap <Tab> >gv
-  vnoremap <Backspace> <gv
-  "inoremap <S-Tab> <Backspace>
-
   nnoremap <Leader>yy ^yg_
   nnoremap <Leader>dd ^dg_
 
-  " <Tab> switches between opened tabs. We need the ':Tab' instead of ':tab'
-  " or things won't work. See #241.
+	" VSCode spuriously opens closed folds when navigating over them.
+	" This ostensibly 'fixes' the issue. See #58.
 
-  nnoremap <Tab> :Tabnext<CR>
-  nnoremap <S-Tab> :Tabprev<CR>
+   nmap j gj
+   nmap k gk
+
+	" <Tab> switches between opened tabs. We need the ':Tab' instead of ':tab'
+	" or things won't work. See #241.
+
+	nnoremap <Tab> :Tabnext<CR>
+	nnoremap <S-Tab> :Tabprev<CR>
 
   execute 'call plug#begin(''' . g:NVIMHOME . '/plug-plugins'')'
   Plug 'https://github.com/godlygeek/tabular.git'
