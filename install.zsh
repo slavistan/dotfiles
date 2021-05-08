@@ -65,14 +65,14 @@ during startup. Configures XDG_.. paths and locale."
     printf "Continuing installation.\n"
   fi
   loglnprefix "env" "Setting up environment ..."
-  addln "export XDG_CONFIG_HOME=$XDG_CONFIG_HOME" "$HOME/.profile"
+  addln "export XDG_CONFIG_HOME=$XDG_CONFIG_HOME" "$HOME/.profile" # TODO: Use literal $HOME
   addln "export XDG_CACHE_HOME=$XDG_CACHE_HOME" "$HOME/.profile"
   addln "export XDG_DATA_HOME=$XDG_DATA_HOME" "$HOME/.profile"
   addln "export BROWSER=$(command -v firefox)" "$HOME/.profile"
   addln 'export LANG=en_US.utf8' "$HOME/.profile"
   addln 'export MANPAGER=less' "$HOME/.profile"
   addln 'export PAGER=cat' "$HOME/.profile"
-  addln 'export TZ="Europe/Berlin"' "$HOME/.profile"
+  addln 'export TZ="Europe/Berlin"' "$HOME/.profile" # TC and LC_NUMERIC should be set in /etc/locale.conf
   addln 'export LC_NUMERIC="C"' "$HOME/.profile" # make printf floats use '.' instead of ','
   addln "export DOTFILES=$DOTFILES" "$HOME/.profile"
   addln '[ -d "$DOTFILES/scripts" ] && export PATH="$DOTFILES/scripts:$PATH"' "$HOME/.profile"
@@ -334,3 +334,6 @@ esac
 #    - err ...
 #    - die ...
 # TODO(feat): Implement -s, -i, -u semantics (see autorandr module)
+# TODO: Create .profile
+# TODO: Assert that all envvars are set
+# Split installation of binary from configuration

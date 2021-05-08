@@ -36,8 +36,9 @@ zstyle ':completion:*:complete:*' matcher-list \
 zstyle ':completion:*' accept-exact false
 
 # Additional completion files
+# TODO: Iterate over existing files. Don't hardcode.
 source $DOTFILES/zsh/completions/cf # Cloud-Foundry CLI
-source $DOTFILES/zsh/completions/cds # @sap/cds-dk
+#source $DOTFILES/zsh/completions/cds # @sap/cds-dk
 
 
 ## Key bindings
@@ -88,6 +89,7 @@ vicursor() {
 	zle reset-prompt
 }
 
+# environment for java to play nice with non-reparenting window managers
 javaenv() {
 	export _JAVA_OPTIONS='-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dawt.useSystemAAFontSettings=gasp' 
 	export _JAVA_AWT_WM_NONREPARENTING=1
@@ -134,6 +136,4 @@ for plug in \
 	[ -f "$plug" ] && source "$plug"
 done
 
-## Source machine-specific setup
-
-[ -f $DOTFILES/zsh/.machinerc ] && source $DOTFILES/zsh/.machinerc
+# TODO: Speedup zsh startup. Can some functions be moved to a once-per-session file?

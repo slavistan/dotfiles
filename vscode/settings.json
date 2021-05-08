@@ -41,5 +41,5 @@
             "filenamePattern": "*.ipynb"
         }
     ],
-
+"javascript.suggest.names": false
 }

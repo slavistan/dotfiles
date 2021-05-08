@@ -5,7 +5,7 @@ mod4 + o
   kill -SIGUSR1 $(pgrep sxhkd); $DOTFILES/scripts/dwm-status.sh -- reloadrunning; notify-send -t 1000 "Reloaded sxhkd"
 
 mod4 + Return
-  $TERMINAL -e sh -c "cd $(xcwd); exec zsh"
+  $TERMINAL
 
 shift + mod4 + F12
   $DOTFILES/scripts/xkbsel.sh
