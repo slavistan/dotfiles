@@ -16,6 +16,9 @@ ctrl + shift + mod4 + q
 mod4 + n
   $DOTFILES/scripts/snapshot.sh --select-area
 
+mod4 + x
+  dunstify "zdotdir= $ZDOTDIR"
+
 mod4 + F11
   dunstctl context
 

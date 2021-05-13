@@ -10,6 +10,13 @@ set promptfmt "\033[1;38;5;138m[ lf ] \033[1;38;5;159m%u@%h \033[38;5;15min \033
 map <esc> quit
 map <space> toggle
 
+# Disable icons if LF_ICONS is not set
+%{{
+	if [ -z "$LF_ICONS" ]; then
+		lf -remote "send $id set noicons"
+	fi
+}}
+
 # TODO: Set default cleaners
 # set previewer lf-previewer
 # set cleaner lf-cleaner
@@ -18,3 +25,5 @@ map <enter> openswallow
 cmd openswallow %{{
 	lf-open.sh "$f"
 }}
+
+
