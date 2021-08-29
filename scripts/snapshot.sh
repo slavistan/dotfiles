@@ -15,10 +15,10 @@ case "$1" in
 		tmpdir=$(mktemp -p /tmp/ -d snapshot_XXXXXX)
 		outfile="$tmpdir/snapshot.png"
 		import "$outfile" &&
+			copyq copy image/png - < "$tmpdir/snapshot.png"
 			# FIXME: pngs are pale inside anki when using xclip
 			# xclip -t image/png -selection clipboard "$tmpdir/snapshot.png"
-			copyq copy image/png - < "$tmpdir/snapshot.png"
-		if saveto="$(lf-saveas -p "Save as:" -t f -s ~ -x)"; then
+		if saveto="$(lf-filedialog -p "Save as:" -t f -s ~ -x)"; then
 			cp "$outfile" "$saveto"
 			dunstify -I "$saveto" -t 5000
 		fi
@@ -27,3 +27,5 @@ esac
 
 # snapchad:
 #  - cache previous save-to directory
+#  - 
+#  - HOTKEY + Shift -> Additional options

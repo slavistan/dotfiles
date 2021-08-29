@@ -5,21 +5,44 @@ setopt menucomplete         # tab-expand to first option immediately
 setopt autocd               # change dirs without 'cd'
 setopt hist_ignore_dups     # don't add duplicate cmd to hist
 setopt no_autoremoveslash   # keep trailing slash after dir completion
+setopt interactivecomments  # enable comments in shell commands
 ZLE_REMOVE_SUFFIX_CHARS=    # keep trailing space after completion
 disable r                   # remove irritating alias
 zle_highlight+=(paste:none) # Don't highlight pasted text
 
+WORDCHARS=${WORDCHARS/\/}
+
 ## Prompt setup
 
+# xterm 8-bit color codes
+grey85=253
+dark_olive_green3=149
+hot_pink3=132
+light_goldenrod3=179
+light_salmon3=173
+steel_blue=67
+pale_turquoise=159
+rosy_brown=138
+indian_red1=203
+medium_purple2=140
+
 # TODO(fix): Unfuck path expansion. 'prj' is abbrev'd to '...'.
-PS1='%F{138}%B[%l]%b%f %F{159}%B%n@%m%b%f %Bin%b %F{154}%B%(4~|%-1~/.../%2~|%~)%b%f
-%B%(?.%F{green}.%F{red})➤%b%f '
-PS2='%B➤ %b'
+PS1="%F{$rosy_brown}%B[%l]%f %F{$pale_turquoise}%n@%m %F{$grey85}in %F{$dark_olive_green3}%(4~|%-1~/.../%2~|%~)%b%f
+%(?.%F{$dark_olive_green3}.%F{$indian_red1})➤ %f%b"
+PS2="%(?.%F{$dark_olive_green3}.%F{$indian_red1})➤ %f%b"
 
 # EOL indicator
 setopt PROMPT_CR
 setopt PROMPT_SP
-export PROMPT_EOL_MARK='%F{black}%K{white}❱❱%k'
+export PROMPT_EOL_MARK="%F{$light_goldenrod3}⤬%k"
+
+
+# direnv plugin
+# -------------
+
+. /home/stan/prj/dotfiles/zsh/plugins/zsh-autoenv/autoenv.zsh
+# ". scripts/testSetup.sh && node --inspect-brk node_modules/.bin/jest --testTimeout=36000000 --runInBand",
+
 
 
 ## Completion system init
@@ -37,8 +60,8 @@ zstyle ':completion:*' accept-exact false
 
 # Additional completion files
 # TODO: Iterate over existing files. Don't hardcode.
-source $DOTFILES/zsh/completions/cf # Cloud-Foundry CLI
-#source $DOTFILES/zsh/completions/cds # @sap/cds-dk
+# source $DOTFILES/zsh/completions/cf # Cloud-Foundry CLI
+# source $DOTFILES/zsh/completions/cds # @sap/cds-dk
 
 
 ## Key bindings
@@ -127,13 +150,51 @@ gsap() {
 	fi
 }
 
+s() {
+	nohup zsh-xi st <<<"cd $PWD" 2>/dev/null 1>&2 &
+	disown
+}
 
-## Plugins
 
-for plug in \
-	"$DOTFILES/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-	do
-	[ -f "$plug" ] && source "$plug"
-done
+
+# Syntax Highlighting
+# ===================
+
+. /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main)
+
+ZSH_HIGHLIGHT_STYLES[default]=fg=$grey85,bold
+ZSH_HIGHLIGHT_STYLES[path]=fg=$grey85,bold
+
+# Shell built-ins and keywords
+ZSH_HIGHLIGHT_STYLES[builtin]=fg=$light_goldenrod3,bold # e.g. echo, printf
+ZSH_HIGHLIGHT_STYLES[reserved-word]=fg=$light_goldenrod3,bold # e.g. while, for
+ZSH_HIGHLIGHT_STYLES[precommand]=fg=$light_goldenrod3,bold # e.g. command, builtin
+ZSH_HIGHLIGHT_STYLES[command]=fg=$dark_olive_green3,bold # regular binaries
+ZSH_HIGHLIGHT_STYLES[arg0]=fg=$dark_olive_green3,bold # ???
+
+ZSH_HIGHLIGHT_STYLES[comment]=fg=243,bold
+ZSH_HIGHLIGHT_STYLES[unknown-token]=fg=203,bold
+ZSH_HIGHLIGHT_STYLES[globbing]=fg=$steel_blue,bold # e.g. path globs ~/foo/*
+ZSH_HIGHLIGHT_STYLES[commandseparator]=fg=$pale_turquoise,bold # ; && |
+
+# Strings
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]=fg=$grey85,bold
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]=fg=$grey85,bold
+ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]=fg=$grey85,bold
+ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]=fg=$grey85,bold
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument-unclosed]=fg=$grey85
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument-unclosed]=fg=$grey85
+ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument-unclosed]=fg=$grey85
+ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument-unclosed]=fg=$light_goldenrod3
+ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]=fg=$light_salmon3
+ZSH_HIGHLIGHT_STYLES[back-dollar-quoted-argument]=fg=$light_salmon3
+
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=fg=$light_goldenrod3,bold
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=$light_goldenrod3,bold
+
+ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter]=fg=$medium_purple2,bold
+ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter-unquoted]=fg=$medium_purple2,bold
+ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]=fg=$medium_purple2,bold
 
 # TODO: Speedup zsh startup. Can some functions be moved to a once-per-session file?
