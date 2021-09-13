@@ -33,6 +33,8 @@ envvars. Expects 'zsh' to be already installed."
 
     please curl -L -s -o /usr/local/bin/zshi "https://raw.githubusercontent.com/romkatv/zshi/master/zshi"
 
+	# TODO: zsh-xi
+
     loglnprefix "zsh" "... done installing 'zsh'"
   fi
 }

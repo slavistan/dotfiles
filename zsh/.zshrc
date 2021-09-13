@@ -3,6 +3,7 @@
 setopt globdots             # tab-complete dotfiles
 setopt menucomplete         # tab-expand to first option immediately
 setopt autocd               # change dirs without 'cd'
+setopt no_unset             # throw error when using undefined vars
 setopt hist_ignore_dups     # don't add duplicate cmd to hist
 setopt no_autoremoveslash   # keep trailing slash after dir completion
 setopt interactivecomments  # enable comments in shell commands
@@ -40,7 +41,7 @@ export PROMPT_EOL_MARK="%F{$light_goldenrod3}⤬%k"
 # direnv plugin
 # -------------
 
-. /home/stan/prj/dotfiles/zsh/plugins/zsh-autoenv/autoenv.zsh
+# . /home/stan/prj/dotfiles/zsh/plugins/zsh-autoenv/autoenv.zsh
 # ". scripts/testSetup.sh && node --inspect-brk node_modules/.bin/jest --testTimeout=36000000 --runInBand",
 
 
@@ -118,9 +119,6 @@ javaenv() {
 	export _JAVA_AWT_WM_NONREPARENTING=1
 }
 
-# lf alias for ueberzug and dir change
-source "${XDG_CONFIG_HOME:-$HOME/.config}/lf-shellcd/lf-shellcd"
-
 ## Interactive shell aliases & functions
 
 alias view='nvim -R'
@@ -155,12 +153,17 @@ s() {
 	disown
 }
 
+source /home/stan/.config/lfbundle/lfbundle.zshrc
+
+
+svdir="$HOME/runit/service/" # user service direcory
+alias sv="SVDIR='$svdir' sv" # shell alias; 'sudo sv' will use system dir
 
 
 # Syntax Highlighting
 # ===================
 
-. /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main)
 
 ZSH_HIGHLIGHT_STYLES[default]=fg=$grey85,bold

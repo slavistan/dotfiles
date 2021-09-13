@@ -55,8 +55,8 @@ let &t_EI .= "\<Esc>[3 q"
 
 let g:sh_fold_enabled=5 " Must precede fold settings
 
-set clipboard=unnamedplus
-set foldlevelstart=0 " Files are opened with all folds closed
+set clipboard=unnamedplus " Copy to clipboard
+set foldlevelstart=99 " Open all folds
 set foldmethod=syntax
 set noincsearch
 set ignorecase
@@ -64,7 +64,7 @@ set smartcase
 set linebreak
 set virtualedit=block
 set path+=**
-set scrolloff=3 " Center cursor vertically
+set scrolloff=3
 set mouse=a " comfy mouse mode: select, resize windows
 set signcolumn=number " integrate signcolumn into linenumber col
 

@@ -12,8 +12,29 @@
 - install lf (github)/aur
 - TODO: Single setup ohne verteilte Dateien
 
-# xorg setup
+# Desktop environment setup
+# =========================
+
+# X11
+# ---
 - install xorg + libs, xinit
-- install dwm
-- install st
 - symlink ~/.xinitrc
+- setxkbmap + layout
+
+# Basisfunktionalität
+# -------------------
+- autorandr + config
+- xrandr, arandr
+- sxhkd + layout
+- copyq + config
+- dmenu + dmenu_run
+- install dwm + fonts
+- Dejavu, Nerdfonts complete
+- fonts (dwm, st)
+- dunst
+
+
+# Programs
+# --------
+- install st
+- sxiv

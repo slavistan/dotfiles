@@ -11,11 +11,11 @@ map <esc> quit
 map <space> toggle
 
 # Disable icons if LF_ICONS is not set
-%{{
-	if [ -z "$LF_ICONS" ]; then
-		lf -remote "send $id set noicons"
-	fi
-}}
+# %{{
+# 	if [ -z "$LF_ICONS" ]; then
+# 		lf -remote "send $id set noicons"
+# 	fi
+# }}
 
 # TODO: Set default cleaners
 # set previewer lf-previewer
