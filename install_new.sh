@@ -1,3 +1,12 @@
+# Basis installation
+# 
+# Szenario: Neuinstallation fertig, manuell git installieren.
+# Nach Basisinstallation soll sich System wie "daheim" anfühlen.
+#
+# 1. Manuell git und zsh installieren
+#
+# .profile, .zprofile, chsh
+
 # zsh installation
 
 - zsh installieren

@@ -1,0 +1,29 @@
+pkgname=slavistan-dwm-git
+pkgver=6.2.0
+pkgrel=1
+arch=('any')
+depends=('glibc' 'libx11' 'libxinerama' 'libxft' 'fontconfig' 'freetype2')
+makedepends=('cmake' 'git')
+conflicts=('dwm' 'dwm-git')
+url="https://github.com/slavistan/dwm"
+source=("$pkgname::git+https://github.com/slavistan/dwm")
+md5sums=('SKIP')
+
+pkgver() {
+	cd "$pkgname"
+	# Extract project version from CMakeLists.txt anticipating whitespaces,
+	# newlines and tabs.
+	cat CMakeLists.txt | tr '\t\n' ' ' | tr -s ' ' | grep -oE 'project\([^)]+' | grep -oE 'VERSION [^ ]+' | cut -d' ' -f2
+}
+
+build() {
+	mkdir -p build
+	cd build
+	cmake ../$pkgname -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
+	make
+}
+
+package() {
+	cd build
+	make DESTDIR="$pkgdir" install
+}

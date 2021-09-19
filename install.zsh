@@ -1,46 +1,5 @@
 #!/usr/bin/env zsh
 
-__install_prerequisites() {
-  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
-    printf "\
-Usage:
-  $0
-
-Installs many basic packages."
-    exit 0
-  fi
-  loglnprefix "prereq" "Setting up prerequisites ..."
-  please apt install -y git cmake curl libtool libtool-bin autogen fontconfig \
-  i3lock libfreetype6-dev libx11-dev libxft-dev libxcb1-dev libxcb-keysyms1-dev \
-  libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev \
-  libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev \
-  libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev \
-  autoconf xutils-dev libtool automake libxcb-xrm0 libxcb-shape0-dev \
-  fonts-powerline fonts-inconsolata fonts-symbola python3-pip \
-  libxinerama-dev copyq libnotify-dev libnotify-bin \
-  notification-daemon notify-osd yad xdotool imagemagick feh compton \
-  htop hub libxcb-render0-dev libffi-dev python-dev python-cffi python-pip \
-  redshift vifm sshfs curlftpfs fuse fuse-zip fusefat fuseiso libncurses-dev \
-  weechat youtube-dl entr fonts-hack-ttf pandoc exa xclip expect-dev groff
-
-  loglnprefix "prereq" "Installing fonts ..."
-  tmp=$(mktemp -d)
-  cd $tmp
-  wget -O Hack.zip "https://github.com/source-foundry/Hack/releases/download/v3.003/Hack-v3.003-ttf.zip"
-  unzip Hack.zip
-  cd ./ttf
-  please mkdir -p /usr/share/fonts/truetype/hack-nerdfonts
-  please cp -f ./*.ttf /usr/share/fonts/truetype/hack-nerdfonts
-  fc-cache -rfv
-
-  loglnprefix "prereq" "Installing xcwd from source ..."
-  tmp=$(mktemp -d)
-  git clone https://github.com/schischi/xcwd.git $tmp
-  cd $tmp
-  please make install
-
-  loglnprefix "prereq" "... done setting up prerequisites."
-}
 
 __install_environment() {
   if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then

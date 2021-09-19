@@ -21,9 +21,8 @@ login-manager."
     loglnprefix "dwm" "Symlinking startup scripts ..."
     rm -rf "$XDG_CONFIG_HOME/dwm"
     mkdir -p "$XDG_CONFIG_HOME/dwm"
-    ln -s "$DOTFILES/scripts/startup/autostart.sh" "$XDG_CONFIG_HOME/dwm"
-    ln -s "$DOTFILES/scripts/startup/autostart-blocking.sh" "$XDG_CONFIG_HOME/dwm"
 
+git clean -dxf
     loglnprefix "dwm" "Copying 'dwm/dwm.desktop' to '/usr/share/xsessions' ..."
     please cp -f $DOTFILES/dwm/dwm.desktop /usr/share/xsessions
 
