@@ -6,6 +6,9 @@
 # 1. Manuell git und zsh installieren
 #
 # .profile, .zprofile, chsh
+#
+
+- liste mit aurs und packages
 
 # zsh installation
 

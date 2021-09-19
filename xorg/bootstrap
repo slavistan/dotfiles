@@ -1,0 +1,3 @@
+ln -s .xinitrc "$HOME"
+sudo mkdir -p /usr/share/X11/xkb/symbols/
+sudo ln -s "$(realpath k6)" /usr/share/X11/xkb/symbols/

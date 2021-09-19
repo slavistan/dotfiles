@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+
+set -e
+
+# TODO: Check envvars
+# TODO: Check that script is run as a regular user
+# TODO: Record progress of installation
+
+rootdir="$(realpath "$(dirname "$0")")"
+cd "$rootdir"
+
+echo "$@" | while read target; do
+	if [ -f "$target" ]; then
+		break;
+	elif [ -d "$target" ] && [ -f "$target/bootstrap" ]; then
+		( cd "$target" && . "./bootstrap" )
+	else
+		echo "File '$target/bootstrap' doesn't exist. Abort." >&2
+		exit 1
+	fi
+done

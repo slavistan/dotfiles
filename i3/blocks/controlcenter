@@ -1,5 +1,0 @@
-#!/usr/bin/env sh
-echo '⚙ '
-if [ $button -eq 1 ]; then
-  XDG_CURRENT_DESKTOP=GNOME gnome-control-center &
-fi

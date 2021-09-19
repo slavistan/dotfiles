@@ -1,2 +1,0 @@
-#!/usr/bin/env sh
-echo '<span font="FontAwesome">&#xf073;</span> '$(date +'%d. %b')

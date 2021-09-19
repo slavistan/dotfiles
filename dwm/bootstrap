@@ -1,0 +1,2 @@
+makepkg -si --needed
+git clean -xff .  # cleans directory from makepkg's clutter
