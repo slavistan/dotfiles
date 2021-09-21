@@ -2,7 +2,17 @@
 
 set -e
 
-# TODO: Check envvars
+# Assert properly configured environment
+if [ ! "$1" = "-i" ]; then
+	if [ ${XDG_CONFIG_HOME+x} ] || [ ${XDG_CACHE_HOME+x} ] ||
+		[ ${XDG_DATA_HOME+x} ] || [ ${XDG_CACHE_HOME+x} ] ||
+		[ ${HOME+x} ] || [ ${USER+x} ]; then
+		echo "Environment is incomplete. Use -i to ignore. Abort." >&2
+		exit 1
+	fi
+	shift
+fi
+
 # TODO: Check that script is run as a regular user
 # TODO: Record progress of installation
 
@@ -13,7 +23,9 @@ echo "$@" | while read target; do
 	if [ -f "$target" ]; then
 		break;
 	elif [ -d "$target" ] && [ -f "$target/bootstrap" ]; then
-		( cd "$target" && . "./bootstrap" )
+		# don't use subshell in case we source something
+		cd "$target" && . "./bootstrap"
+		cd "$rootdir"
 	else
 		echo "File '$target/bootstrap' doesn't exist. Abort." >&2
 		exit 1

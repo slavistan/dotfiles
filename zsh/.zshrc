@@ -156,8 +156,7 @@ s() {
 source /home/stan/.config/lfbundle/lfbundle.zshrc
 
 
-svdir="$HOME/runit/service/" # user service direcory
-alias sv="SVDIR='$svdir' sv" # shell alias; 'sudo sv' will use system dir
+alias sv="SVDIR='$USERSVDIR' sv" # shell alias; 'sudo sv' will use system dir
 
 
 # Syntax Highlighting

@@ -1,0 +1,3 @@
+#!/bin/sh -u
+exec 2>&1
+exec pulseaudio --kill
