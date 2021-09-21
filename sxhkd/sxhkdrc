@@ -1,32 +1,23 @@
+# Run an application
 mod4 + d
-  dmenu_run -p "Run:"
+	dmenu_run -p "Run:"
 
-mod4 + o
-  kill -SIGUSR1 $(pgrep sxhkd); $DOTFILES/scripts/dwm-status.sh -- reloadrunning; notify-send -t 1000 "Reloaded sxhkd"
-
+# Spawn new terminal
 mod4 + Return
-  $TERMINAL
+	termcwd
 
+# Choose keyboard layout
 shift + mod4 + F12
-  $DOTFILES/scripts/xkbsel.sh
+	selxkbmap
 
+# Exit dwm
 ctrl + shift + mod4 + q
-  $DOTFILES/scripts/dwm-logout.sh
+	dwmquit
 
+# Take a snapshot
 mod4 + n
-  $DOTFILES/scripts/snapshot.sh --select-area
+	snapchad --select-area
 
-mod4 + x
-  dunstify "zdotdir= $ZDOTDIR"
-
-mod4 + F11
-  dunstctl context
-
+# Close active notification
 mod4 + Escape
-  dunstctl close
-
-mod4 + shift + Escape
-  dunstctl close-all
-
-mod4 + shift + F11
-  $DOTFILES/scripts/screencast.sh
+	dunstctl close

@@ -2,6 +2,13 @@
 
 let g:NVIMHOME=$XDG_CONFIG_HOME . '/nvim'
 
+" Crash if a directory is opened by accident
+for param in argv()
+  if isdirectory(param)
+    quit
+  endif
+endfor
+
 """ Configuration for vscode's neovim plugin
 
 if exists('g:vscode')
@@ -55,6 +62,7 @@ let &t_EI .= "\<Esc>[3 q"
 
 let g:sh_fold_enabled=5 " Must precede fold settings
 
+set updatetime=100
 set clipboard=unnamedplus " Copy to clipboard
 set foldlevelstart=99 " Open all folds
 set foldmethod=syntax
@@ -74,13 +82,7 @@ set showbreak=↪
 let mapleader=","
 let maplocalleader="\\"
 
-" Netrw
 
-let g:netrw_home=&backupdir
-let g:netrw_liststyle=3
-let g:netrw_banner=0
-let g:netrw_browse_split=4
-let g:netrw_winsize=25
 
 " Line wrapping
 
@@ -110,12 +112,8 @@ let g:pandoc#spell#enabled = 0
 let g:pandoc#syntax#conceal#use = 0
 let g:pandoc#syntax#codeblocks#embeds#langs = ['python', 'R=r', 'bash=sh', 'lua', 'sqlhana']
 
-" vimwiki
-" TODO(feat): envvar WIKIHOME
-exe 'source ' . g:NVIMHOME . '/config/vimwiki.vim'
 
 execute 'call plug#begin(''' . g:NVIMHOME . '/plug-plugins'')'
-Plug 'vimwiki/vimwiki'
 Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
 Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
 Plug 'https://github.com/airblade/vim-gitgutter.git'
@@ -124,12 +122,6 @@ Plug 'https://github.com/lukelbd/vim-tabline.git'
 Plug 'https://github.com/dbridges/vim-markdown-runner.git'
 Plug 'https://github.com/tpope/vim-commentary'
 call plug#end()
-
-" nnoremap <F2> <cmd>lua vim.lsp.buf.rename()<CR>
-" nnoremap <F3> <cmd>lua vim.lsp.buf.references()<CR>
-" nnoremap <F4> <cmd>lua vim.lsp.buf.definition()<CR>
-" nnoremap K <cmd>lua vim.lsp.buf.hover()<CR>
-
 
 """
 " Key mappings
@@ -153,12 +145,6 @@ nnoremap <Backspace> :tabprev<CR>
 nnoremap <S-Tab> :tabprev<CR>
 
 
-" Source configuration submodules
-
-exe 'source ' . g:NVIMHOME . '/config/cpp.vim'
-exe 'source ' . g:NVIMHOME . '/config/python.vim'
-exe 'source ' . g:NVIMHOME . '/config/rust.vim'
-
 """
 " Utility
 """
@@ -173,9 +159,7 @@ endfunc
 """
 " Git + gitgutter
 """
-exe 'source ' . g:NVIMHOME . '/scripts/vimtig/vimtig.vim'
-set updatetime=100 " lessen reaction time
-let g:gitgutter_enabled=1 " run by default
+let g:gitgutter_enabled=0 " disable by default
 let g:gitgutter_highlight_lines=1 " highlight lines by default
 " toggle on/off
 nnoremap <Leader>gg :GitGutterToggle<CR>

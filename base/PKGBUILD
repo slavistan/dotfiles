@@ -163,6 +163,8 @@ depends=(
 	'exa'
 	'evince'
 	'which'
+	'runit'
+	'runit-rc'
 	'acpid-runit'
 	'bluez-runit'
 	'bolt-runit'
@@ -172,6 +174,4 @@ depends=(
 	'elogind-runit'
 	'networkmanager-runit'
 	'openssh-runit'
-	'runit'
-	'runit-rc'
 )

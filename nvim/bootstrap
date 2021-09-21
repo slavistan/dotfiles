@@ -1,0 +1,2 @@
+ln -s "$(realpath .)" "$XDG_CONFIG_HOME"
+nvim +PlugInstall +quitall

@@ -2,12 +2,21 @@
 # for the installation of many other applications.
 ln -sf "$(realpath .profile)" ~
 . ~/.profile
+mkdir -p "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME" "$XDG_DATA_HOME" "$XDG_RUNTIME_DIR" "$XDG_STATE_HOME"
 
 # install base system configuration
 makepkg -si --needed
 git clean -xff .
+sudo ln -s /etc/runit/sv/NetworkManager /run/runit/service/
+sudo ln -s /etc/runit/sv/acpid /run/runit/service/
+sudo ln -s /etc/runit/sv/cronie /run/runit/service/
+sudo ln -s /etc/runit/sv/cupsd /run/runit/service/
+sudo ln -s /etc/runit/sv/sshd /run/runit/service/
+sudo ln -s /etc/runit/sv/udevd /run/runit/service/
+sudo ln -s /etc/runit/sv/bluetoothd /run/runit/service/
+sudo ln -s /etc/runit/sv/boltd /run/runit/service/
+sudo ln -s /etc/runit/sv/docker /run/runit/service/
+sudo ln -s /etc/runit/sv/dbusd /run/runit/service/
 
 # change shell
 chsh -s /usr/bin/zsh
-
-# runit user services
