@@ -1,15 +1,27 @@
-#!/usr/bin/env -S sh -ue
+#!/usr/bin/env -S bash -ue
 
-if [ ${1:-x} = "-h" ] || [ ${1:-x} = "--help" ];
+if [ ${1:-x} = "-h" ] || [ ${1:-x} = "--help" ] || [ $# -eq 0 ]; then
+	name="$(realpath "$(basename "$0")")"
 	cat <<EOF
+Automate system installation and configuration.
 
+Given a list of directories relative to the location of this script,
+enter each directory and source the file named 'bootstrap', one directory
+at a time in the specified order.
+
+Usage:
+
+    (1) $name DIR [DIR]...
+    (2) $name -
+
+    Pass directory names as arguments (1), or read directory names from stdin, one directory per line.
 EOF
-	exit
+	[ $# -eq 0 ] && exit 1 || exit 0
 fi
 
 
 # hack sudo to use PW envvar; must be defined.
-if [ ${PW+x} ]; then
+if [ ! ${PW+x} ]; then
 	echo "Envvar 'PW' must contain sudo password. Abort." >&2
 	exit 1
 fi
@@ -18,16 +30,21 @@ sudo() {
 }
 
 # TODO: Check that script is run as a regular user
+#       Actually, don't! Why not run this as a sysadmin?
 # TODO: Record progress of installation
 
 rootdir="$(realpath "$(dirname "$0")")"
 cd "$rootdir"
 
-echo "$@" | while read target; do
+if [ "$1" = "-" ]; then
+	cat -
+else
+	printf '%s\n' "$@"
+fi | while read target; do
 	if [ -f "$target" ]; then
 		break;
 	elif [ -d "$target" ] && [ -f "$target/bootstrap" ]; then
-		# don't use subshell in case we source something
+		# don't use subshells in case we source something
 		cd "$target"
 		. "./bootstrap"
 		cd "$rootdir"
