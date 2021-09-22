@@ -1,3 +1,5 @@
+# TODO: Enable arch repos
+
 # symlink and source .profile. This will provide the environment necessary
 # for the installation of many other applications.
 ln -sf "$(realpath .profile)" ~

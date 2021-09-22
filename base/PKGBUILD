@@ -172,6 +172,7 @@ depends=(
 	'cups-runit'
 	'dbus-runit'
 	'elogind-runit'
+	'ttf-liberation'
 	'networkmanager-runit'
 	'openssh-runit'
 )

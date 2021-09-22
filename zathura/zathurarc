@@ -1,3 +1,25 @@
 # Sandbox mode chowns zathura's process to root which prohibits reading of
 # /proc/PID/cwd to spawn terminals in zathura's cwd. Disable the sandbox.
-set sandbox strict
+set sandbox none
+
+
+set recolor "true" # use custom colors by default
+set recolor-reverse-video "true"
+set statusbar-home-tilde "true"
+set font "DejaVu Sans Mono"
+set selection-clipboard "clipboard"
+set selection-notification "false"
+
+# Toggle between custom colors
+map i recolor
+
+set recolor-lightcolor "#222222"
+set recolor-darkcolor "#DADADA"
+set highlight-color "#D7AF5F"
+set index-bg "#222222"
+set index-fg "#DADADA"
+set index-active-bg "#F90F47"
+set index-active-fg "#EEEEEE"
+
+
+
