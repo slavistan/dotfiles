@@ -1,0 +1,4 @@
+sudo pacman -S --needed zathura
+mkdir -p "$XDG_CONFIG_HOME/zathura"
+ln -s "$(realpath zathurarc)" "$XDG_CONFIG_HOME/zathura"
+

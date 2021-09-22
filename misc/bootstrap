@@ -1,0 +1,8 @@
+# Collection of modules and applications without dedicated config directory
+
+mkdir -p "$HOME/prj"
+
+(cd "$HOME/prj"
+git clone https://github.com/slavistan/scriptlib
+cd scriptlib
+sudo make symlink)

@@ -1,0 +1,3 @@
+# Sandbox mode chowns zathura's process to root which prohibits reading of
+# /proc/PID/cwd to spawn terminals in zathura's cwd. Disable the sandbox.
+set sandbox strict

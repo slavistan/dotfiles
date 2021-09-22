@@ -1,17 +1,21 @@
-#!/usr/bin/env sh
+#!/usr/bin/env -S sh -ue
 
-set -e
+if [ ${1:-x} = "-h" ] || [ ${1:-x} = "--help" ];
+	cat <<EOF
 
-# Assert properly configured environment
-if [ ! "$1" = "-i" ]; then
-	if [ ${XDG_CONFIG_HOME+x} ] || [ ${XDG_CACHE_HOME+x} ] ||
-		[ ${XDG_DATA_HOME+x} ] || [ ${XDG_CACHE_HOME+x} ] ||
-		[ ${HOME+x} ] || [ ${USER+x} ]; then
-		echo "Environment is incomplete. Use -i to ignore. Abort." >&2
-		exit 1
-	fi
-	shift
+EOF
+	exit
 fi
+
+
+# hack sudo to use PW envvar; must be defined.
+if [ ${PW+x} ]; then
+	echo "Envvar 'PW' must contain sudo password. Abort." >&2
+	exit 1
+fi
+sudo() {
+	echo "$PW" | /bin/sudo -Sp '' "$@"
+}
 
 # TODO: Check that script is run as a regular user
 # TODO: Record progress of installation
@@ -24,7 +28,8 @@ echo "$@" | while read target; do
 		break;
 	elif [ -d "$target" ] && [ -f "$target/bootstrap" ]; then
 		# don't use subshell in case we source something
-		cd "$target" && . "./bootstrap"
+		cd "$target"
+		. "./bootstrap"
 		cd "$rootdir"
 	else
 		echo "File '$target/bootstrap' doesn't exist. Abort." >&2
