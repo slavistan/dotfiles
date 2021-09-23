@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -ue
 
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
@@ -29,9 +29,14 @@ fi
 
 autorandr -c
 setxkbmap k6
-copyq &
 dunst &
-sxhkd &
 st &
+
+# Hotkey daemon with live reload
+sxhkd &
+(echo "$XDG_CONFIG_HOME/sxhkd/sxhkdrc" | entr pkill -SIGUSR1 sxhkd) &
+
+# Set typematic delay
+xset r rate 150 30
 
 exec dwm
