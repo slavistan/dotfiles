@@ -2,7 +2,26 @@
 
 mkdir -p "$HOME/prj"
 
-(cd "$HOME/prj"
-git clone https://github.com/slavistan/scriptlib
-cd scriptlib
-sudo make symlink)
+if [ ! -d "$HOME/prj/scriptlib" ]; then
+	(cd "$HOME/prj"
+	git clone https://github.com/slavistan/scriptlib
+	cd scriptlib
+	sudo make symlink)
+fi
+
+if [ ! -d "$HOME/prj/lfbundle" ]; then
+	(cd "$HOME/prj"
+	git clone https://github.com/slavistan/lfbundle
+	cd lfbundle
+	sudo mkdir -p /usr/local/lib/
+	sudo cp lfbundle-previewer lfbundle-cleaner lfbundle-opener /usr/local/lib/
+	mkdir -p "$XDG_CONFIG_HOME/lfbundle/"
+	cp lfbundle.zshrc lfbundle.lfrc "$XDG_CONFIG_HOME/lfbundle/")
+fi
+
+if [ ! -d "$HOME/prj/zshxi" ]; then
+	(cd "$HOME/prj"
+	git clone https://github.com/slavistan/zshxi
+	cd zshxi
+	sudo ln -s "$(realpath zshxi)" /usr/local/bin)
+fi

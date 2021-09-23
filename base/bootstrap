@@ -3,31 +3,50 @@
 # instructed on 'https://wiki.artixlinux.org/Main/Installation'.
 
 # Enable arch repos
-sudo pacman -Syu artix-archlinux-support
+sudo pacman -Syu --noconfirm
+sudo pacman -S artix-archlinux-support --noconfirm
 sudo cp /etc/pacman.conf /etc/pacman.conf.backup-"$(date -Iseconds)"
 sudo cp pacman.conf /etc/pacman.conf
-sudo pacman -Syu
+sudo pacman -Syu --noconfirm
 
 # symlink and source .profile. This will provide the environment necessary
 # for the installation of many other applications.
-ln -sf "$(realpath .profile)" ~
-. ~/.profile
+ln -sf "$(realpath .profile)" "$HOME"
+. "$HOME/.profile"
 mkdir -p "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME" "$XDG_DATA_HOME" \
 	"$XDG_RUNTIME_DIR" "$XDG_STATE_HOME"
 
-# install base system configuration
-makepkg -si --needed
+# install base system configuration and activate installed runit service
+makepkg -si --needed --noconfirm
 git clean -xff .
-sudo ln -sf /etc/runit/sv/NetworkManager /run/runit/service/
-sudo ln -sf /etc/runit/sv/acpid /run/runit/service/
-sudo ln -sf /etc/runit/sv/cronie /run/runit/service/
-sudo ln -sf /etc/runit/sv/cupsd /run/runit/service/
-sudo ln -sf /etc/runit/sv/sshd /run/runit/service/
-sudo ln -sf /etc/runit/sv/udevd /run/runit/service/
-sudo ln -sf /etc/runit/sv/bluetoothd /run/runit/service/
-sudo ln -sf /etc/runit/sv/boltd /run/runit/service/
-sudo ln -sf /etc/runit/sv/docker /run/runit/service/
-sudo ln -sf /etc/runit/sv/dbusd /run/runit/service/
+runitsv="/etc/runit/sv"
+runitsvdir="/run/runit/service"
+[ ! -d "$runitsvdir" ] && die "'$runitsvdir' doesn't exist"
+apps=(
+	'NetworkManager' 'acpid' 'cronie' 'cupsd' 'sshd' 'udevd' 'bluetoothd'
+	'boltd'	'docker' 'dbus'
+)
+for app in "${apps[@]}"; do
+	[ ! -d "$runitsv/$app" ] && die "'$runitsv/$app' doesn't exist"
+	sudo ln -sf "$runitsv/$app" "$runitsvdir"
+done
 
 # change shell
-chsh -s /usr/bin/zsh
+if [ ! "$(grep "^$USER" /etc/passwd | rev | cut -d/ -f1 | rev)" = "zsh" ]; then
+	chsh -s /usr/bin/zsh
+else
+	log "Shell is already set to 'zsh'."
+fi
+
+# Install aur helper
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si --needed --noconfirm
+cd ..
+git clean -xff .
+sudo yay -Y --gendb
+sudo yay -Syu --noconfirm
+
+# install additional software
+yay -S --needed --noconfirm anki visual-studio-code-bin \
+	drawio-desktop lf postman-bin scrcpy teams ventoy-bin zoom

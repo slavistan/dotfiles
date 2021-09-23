@@ -1,2 +1,2 @@
-makepkg -si --needed
+makepkg -si --needed --noconfirm
 git clean -xff .

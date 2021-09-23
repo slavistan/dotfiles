@@ -29,6 +29,9 @@ sudo() {
 	echo "$PW" | /bin/sudo -Sp '' "$@"
 }
 
+die() { echo -e "[\033[31;1m ERR\033[0m]" "$@" >&2; exit 1; }
+log() { echo -e "[\033[32;1mINFO\033[0m]" "$@"; }
+
 # TODO: Check that script is run as a regular user
 #       Actually, don't! Why not run this as a sysadmin?
 # TODO: Record progress of installation
@@ -45,6 +48,7 @@ fi | while read target; do
 		break;
 	elif [ -d "$target" ] && [ -f "$target/bootstrap" ]; then
 		# don't use subshells in case we source something
+		log "Preparing to install '$target'..."
 		cd "$target"
 		. "./bootstrap"
 		cd "$rootdir"
