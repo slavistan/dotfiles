@@ -34,7 +34,7 @@ st &
 
 # Hotkey daemon with live reload
 sxhkd &
-(echo "$XDG_CONFIG_HOME/sxhkd/sxhkdrc" | entr pkill -SIGUSR1 sxhkd) &
+#(echo "$XDG_CONFIG_HOME/sxhkd/sxhkdrc" | entr pkill -SIGUSR1 sxhkd) &
 
 # Set typematic delay
 xset r rate 150 30
