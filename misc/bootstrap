@@ -23,5 +23,5 @@ if [ ! -d "$HOME/prj/zshxi" ]; then
 	(cd "$HOME/prj"
 	git clone https://github.com/slavistan/zshxi
 	cd zshxi
-	sudo ln -s "$(realpath zshxi)" /usr/local/bin)
+	sudo ln -sf "$(realpath zshxi)" /usr/local/bin)
 fi

@@ -1,4 +1,4 @@
 #!/bin/sh -u
-logdir="$XDG_STATE_DIR/pulseaudio/log"
+logdir="$XDG_STATE_HOME/pulseaudio/log"
 mkdir -p "$logdir"
 exec svlogd -ttt "$logdir"
