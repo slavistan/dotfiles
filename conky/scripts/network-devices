@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+# Retrieve physical network devices
+find /sys/class/net -type l -execdir basename '{}' ';' | sort |
+	grep -v "^lo$" |
+	grep -v "^docker"
