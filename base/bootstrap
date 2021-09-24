@@ -49,4 +49,5 @@ sudo yay -Syu --noconfirm
 
 # install additional software
 yay -S --needed --noconfirm anki visual-studio-code-bin \
-	drawio-desktop lf postman-bin scrcpy teams ventoy-bin zoom
+	drawio-desktop lf postman-bin scrcpy teams ventoy-bin zoom \
+	ttf-symbola

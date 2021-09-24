@@ -37,7 +37,7 @@ export __GL_SHADER_DISK_CACHE_PATH=$XDG_CACHE_HOME # nvidia
 
 # Runit User Services
 # ===================
-export USERSVDIR="$XDG_RUNTIME_DIR/runit/service"
+export USERSVDIR="$XDG_DATA_HOME/runit/service"
 if [ -d "$USERSVDIR" ] && ! pgrep -U "$(id -u "$USER")" runsvdir >/dev/null; then
 	runsvdir "$USERSVDIR" &!
 fi
