@@ -50,6 +50,6 @@ sudo yay -Syu --noconfirm
 # install additional software
 yay -S --needed --noconfirm anki visual-studio-code-bin \
 	drawio-desktop lf postman-bin scrcpy teams ventoy-bin zoom \
-	ttf-symbola ttf-font-awesome-4 ttf-font-awesome
+	ttf-symbola ttf-font-awesome-4 ttf-font-awesome rofimoji-git
 
 echo "Now install osync from source (v2.1.2)"

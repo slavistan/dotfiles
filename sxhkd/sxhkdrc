@@ -6,6 +6,10 @@ mod4 + d
 mod4 + Return
 	termcwd
 
+# Pick and insert utf-8 characters
+mod4 + m
+	rofimoji --action type --typer xdotool
+
 # Choose keyboard layout
 shift + mod4 + F12
 	selxkbmap
