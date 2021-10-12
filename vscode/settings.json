@@ -20,7 +20,7 @@
     "explorer.confirmDelete": false,
     "window.titleBarStyle": "custom",
 
-    "vscode-neovim.neovimExecutablePaths.linux": "/usr/local/bin/nvim",
+    "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
     "vscode-neovim.neovimInitVimPaths.linux": "/home/stan/prj/dotfiles/nvim/init.vim",
 
     "C_Cpp.default.intelliSenseMode": "clang-x64",
