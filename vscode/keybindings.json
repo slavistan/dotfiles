@@ -1,12 +1,16 @@
-// Place your key bindings in this file to override the defaults
 [
+    /* *************************** */
+    /* Unbind conflicting defaults */
+    /* *************************** */
     {
-        "key": "ctrl+tab",
-        "command": "workbench.action.nextEditor"
+        "key": "ctrl+k f12",
+        "command": "-editor.action.revealDefinitionAside",
+        "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
     },
     {
-        "key": "ctrl+shift+tab",
-        "command": "workbench.action.previousEditor"
+        "key": "shift+f12",
+        "command": "-goToPreviousReference",
+        "when": "inReferenceSearchEditor || referenceSearchVisible"
     },
     {
         "key": "f11",
@@ -22,19 +26,18 @@
         "command": "-editor.action.goToReferences",
         "when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
     },
+
+    /* ******************* */
+    /* Custom key bindings */
+    /* ******************* */
     {
-        "key": "shift+f12",
-        "command": "-goToPreviousReference",
-        "when": "inReferenceSearchEditor || referenceSearchVisible"
-    },
-    {
-        "key": "shift+f12",
+        "key": "ctrl+l",
         "command": "editor.action.revealDefinitionAside",
         "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
     },
     {
-        "key": "ctrl+k f12",
-        "command": "-editor.action.revealDefinitionAside",
+        "key": "ctrl+j",
+        "command": "editor.action.revealDefinition",
         "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
     },
     {
