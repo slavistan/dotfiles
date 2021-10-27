@@ -8,7 +8,7 @@ mod4 + Return
 
 # Pick and insert utf-8 characters
 mod4 + m
-	rofimoji --action type --typer xdotool
+	rofimoji
 
 # Choose keyboard layout
 shift + mod4 + F12

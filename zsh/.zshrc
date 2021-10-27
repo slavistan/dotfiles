@@ -101,6 +101,16 @@ acceptandswallow() {
 	zle accept-line
 }
 
+# bind lf to hotkey ^l
+bindkey -M vicmd "^l" zsh-lf # if you're using vim bindings in zsh
+bindkey -M viins "^l" zsh-lf # if you're using vim bindings in zsh
+zle -N zsh-lf _zshlf
+_zshlf() {
+	BUFFER=lf
+	zle end-of-line
+	zle accept-line
+}
+
 ## Proper cursor setup
 
 zle -N zle-line-init vicursor # Change cursor according to vi-mode.
