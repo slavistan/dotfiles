@@ -25,3 +25,7 @@ mod4 + n
 # Close active notification
 mod4 + Escape
 	dunstctl close
+
+# Obsidian Quick Action
+mod4 + o
+	obsidian-cli

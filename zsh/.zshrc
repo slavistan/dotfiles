@@ -101,15 +101,16 @@ acceptandswallow() {
 	zle accept-line
 }
 
+# FIXME: ^l coincides with clear
 # bind lf to hotkey ^l
-bindkey -M vicmd "^l" zsh-lf # if you're using vim bindings in zsh
-bindkey -M viins "^l" zsh-lf # if you're using vim bindings in zsh
-zle -N zsh-lf _zshlf
-_zshlf() {
-	BUFFER=lf
-	zle end-of-line
-	zle accept-line
-}
+# bindkey -M vicmd "^l" zsh-lf # if you're using vim bindings in zsh
+# bindkey -M viins "^l" zsh-lf # if you're using vim bindings in zsh
+# zle -N zsh-lf _zshlf
+# _zshlf() {
+# 	BUFFER=lf
+# 	zle end-of-line
+# 	zle accept-line
+# }
 
 ## Proper cursor setup
 
@@ -156,11 +157,6 @@ gsap() {
 		echo "This is not a git repository. Nothing done."
 		return 1
 	fi
-}
-
-s() {
-	nohup zsh-xi st <<<"cd $PWD" 2>/dev/null 1>&2 &
-	disown
 }
 
 source /home/stan/.config/lfbundle/lfbundle.zshrc

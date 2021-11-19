@@ -1,13 +1,15 @@
 {
     "keyboard.dispatch": "keyCode",
     "workbench.colorTheme": "Monokai",
-    "extensions.ignoreRecommendations": false,
+    "extensions.ignoreRecommendations": true,
 
     "editor.acceptSuggestionOnCommitCharacter": false,
     "editor.autoClosingBrackets": "never",
     "editor.autoClosingQuotes": "never",
     "editor.occurrencesHighlight": false,
     "editor.minimap.enabled": false,
+    "editor.quickSuggestions": false,
+    "editor.suggestOnTriggerCharacters": false,
     "editor.parameterHints.enabled": false,
     "editor.renderWhitespace": "boundary",
     "editor.renderIndentGuides": false,
@@ -33,5 +35,7 @@
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter.notebook.ipynb"
     },
-    "javascript.suggest.names": false
+    "javascript.suggest.names": false,
+    "javascript.updateImportsOnFileMove.enabled": "never",
+    "window.zoomLevel": 1
 }
