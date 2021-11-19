@@ -149,9 +149,14 @@ gsap() {
 		git push
 }
 
-source "$XDG_CONFIG_HOME/lfbundle/lfbundle.zshrc"
+if [[ -f "$XDG_CONFIG_HOME/lfbundle/lfbundle.zshrc" ]]; then
+	source "$XDG_CONFIG_HOME/lfbundle/lfbundle.zshrc"
+fi
 
-alias sv="SVDIR='$USERSVDIR' sv" # shell alias; 'sudo sv' will use system dir
+
+if [[ ${USERSVDIR+x} ]]; then
+	alias sv="SVDIR='$USERSVDIR' sv" # shell alias; 'sudo sv' will use system dir
+fi
 
 
 # Syntax Highlighting
