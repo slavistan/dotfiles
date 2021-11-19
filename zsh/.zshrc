@@ -151,7 +151,7 @@ mkcdt() {
 gsap() {
 	if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
 		git add -u
-		git commit -am "stuff"
+		git commit --allow-empty-message -m ""
 		git push
 	else
 		echo "This is not a git repository. Nothing done."
