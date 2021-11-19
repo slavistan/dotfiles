@@ -135,11 +135,6 @@ javaenv() {
 alias view='nvim -R'
 alias gst='git status'
 
-# TODO: Completion of commands
-mango() {
-	go doc "$@" | less
-}
-
 mkcd() {
 	[ "$#" -eq 1 ] && mkdir -p "$1" && cd "$1" || echo "Nothing done."
 }
@@ -149,18 +144,12 @@ mkcdt() {
 }
 
 gsap() {
-	if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-		git add -u
-		git commit --allow-empty-message -m ""
+	git add -u &&
+		git commit --allow-empty-message -m "" &&
 		git push
-	else
-		echo "This is not a git repository. Nothing done."
-		return 1
-	fi
 }
 
-source /home/stan/.config/lfbundle/lfbundle.zshrc
-
+source "$XDG_CONFIG_HOME/lfbundle/lfbundle.zshrc"
 
 alias sv="SVDIR='$USERSVDIR' sv" # shell alias; 'sudo sv' will use system dir
 
