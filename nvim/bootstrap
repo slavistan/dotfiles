@@ -1,2 +1,3 @@
+mkdir -p "$XDG_CONFIG_HOME"
 ln -sf "$(realpath .)" "$XDG_CONFIG_HOME"
 nvim +PlugUpgrade +PlugInstall +PlugUpdate +quitall

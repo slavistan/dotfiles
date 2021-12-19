@@ -32,6 +32,7 @@ export SHELL=/usr/bin/zsh
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export DOTFILES=/home/stan/prj/dotfiles # TODO: Remove DOTFILES envvar
 export __GL_SHADER_DISK_CACHE_PATH=$XDG_CACHE_HOME # nvidia
+export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
 
 
 # Runit User Services
