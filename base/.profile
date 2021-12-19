@@ -25,12 +25,11 @@ export SHELL=/usr/bin/zsh
 [ -d "$DOTFILES/scripts" ] && export PATH="$DOTFILES/scripts:$PATH"
 [ -d "$HOME/go/bin" ] && export PATH="$HOME/go/bin:$PATH"
 [ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
-[ -d "$PATH:$HOME/.local/texlive/2021/bin/x86_64-linux/" ] && export PATH="$PATH:$HOME/.local/texlive/2021/bin/x86_64-linux/"
 
 
 # Miscellaneous
 # =============
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh/"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export DOTFILES=/home/stan/prj/dotfiles # TODO: Remove DOTFILES envvar
 export __GL_SHADER_DISK_CACHE_PATH=$XDG_CACHE_HOME # nvidia
 
@@ -38,6 +37,6 @@ export __GL_SHADER_DISK_CACHE_PATH=$XDG_CACHE_HOME # nvidia
 # Runit User Services
 # ===================
 export USERSVDIR="$XDG_DATA_HOME/runit/service"
-if [ -d "$USERSVDIR" ] && ! pgrep -U "$(id -u "$USER")" runsvdir >/dev/null; then
-	runsvdir "$USERSVDIR" &!
+if [ -d "$USERSVDIR" ] && ! pgrep -U "$USER" -x runsvdir >/dev/null; then
+	runsvdir -P "$USERSVDIR" &
 fi

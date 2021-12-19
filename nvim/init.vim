@@ -1,3 +1,9 @@
+"TODO:
+"
+" - [ ] vim: folds are all opened by default
+" - [ ] vim: Gitgutter is disabled by default
+" - [ ] vim: linewrap is off by default
+
 """ Paths
 
 let g:NVIMHOME=$XDG_CONFIG_HOME . '/nvim'

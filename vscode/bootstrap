@@ -1,4 +1,4 @@
-yay -S visual-studio-code-bin
+paru -S visual-studio-code-bin
 
 code --install-extension --force asvetliakov.vscode-neovim
 code --install-extension --force dbaeumer.vscode-eslint
