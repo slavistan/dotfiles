@@ -37,5 +37,5 @@
     },
     "javascript.suggest.names": false,
     "javascript.updateImportsOnFileMove.enabled": "never",
-    "window.zoomLevel": 1
+    "window.zoomLevel": 2
 }

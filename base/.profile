@@ -29,6 +29,7 @@ export SHELL=/usr/bin/zsh
 
 # Miscellaneous
 # =============
+export GOPATH="$HOME/go"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export DOTFILES=/home/stan/prj/dotfiles # TODO: Remove DOTFILES envvar
 export __GL_SHADER_DISK_CACHE_PATH=$XDG_CACHE_HOME # nvidia

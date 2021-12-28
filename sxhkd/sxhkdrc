@@ -6,6 +6,9 @@ mod4 + d
 mod4 + Return
 	termcwd
 
+mod4 + ctrl + Return
+	zshxi <<<lf
+
 # Pick and insert utf-8 characters
 mod4 + m
 	rofimoji
@@ -29,3 +32,6 @@ mod4 + Escape
 # Obsidian Quick Action
 mod4 + o
 	obsidian-cli
+
+mod4 + F5
+	pkill -SIGUSR1 sxhkd
