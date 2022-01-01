@@ -1,0 +1,5 @@
+#!/bin/sh
+exec 2>&1
+
+mkdir -p "$XDG_RUNTIME_DIR/dbus-1"
+exec dbus-daemon --session --nofork --nosyslog --address="unix:path=$XDG_RUNTIME_DIR/dbus-1/session_bus_socket"

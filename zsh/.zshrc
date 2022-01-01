@@ -149,9 +149,6 @@ gsap() {
 		git push
 }
 
-dummy() {
-	date
-}
 
 if [[ -f "$XDG_CONFIG_HOME/lfbundle/lfbundle.zshrc" ]]; then
 	source "$XDG_CONFIG_HOME/lfbundle/lfbundle.zshrc"

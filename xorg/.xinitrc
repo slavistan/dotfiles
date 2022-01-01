@@ -29,14 +29,15 @@ fi
 
 autorandr -c
 setxkbmap k6
-dunst &
+# dunst &
 st &
 
+# TODO: Use a user service
 # Hotkey daemon with live reload
 sxhkd &
 #(echo "$XDG_CONFIG_HOME/sxhkd/sxhkdrc" | entr pkill -SIGUSR1 sxhkd) &
 
 # Set typematic delay
-xset r rate 150 30
+xset r rate 150 50
 
 exec dwm

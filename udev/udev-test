@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+# udev event trigger bricht nach 3 Minuten ab
+
+# exec 1>/tmp/udevlog
+#
+for ((ii=1; ii<=10; ii++)); do
+	sleep 1
+	notify-send $ii
+done

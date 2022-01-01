@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Note that in order to check whether the session bus is active the
+# --print-reply flag must be used. Without it, dbus-send seems to do a simple
+# fire and forget which will always succeed.
+#
+# This seems to have been missed by the 'sv check dbus' system-level script.
+exec dbus-send --session --print-reply / org.freedesktop.DBus.Peer.Ping

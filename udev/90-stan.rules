@@ -1,0 +1,3 @@
+# SUBSYSTEM=="block", ACTION=="add", RUN+="/usr/local/bin/udev-dispatch -u stan udev-usb-block-device-plugged-in"
+SUBSYSTEM=="block", ACTION=="add", RUN+="/usr/local/bin/udev-dispatch -x -- udev-test"
+# SUBSYSTEM=="block", ACTION=="remove", RUN+="/usr/local/bin/udev-dispatch -x -u stan -- udev-test"
