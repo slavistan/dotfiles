@@ -1,3 +1,4 @@
-# SUBSYSTEM=="block", ACTION=="add", RUN+="/usr/local/bin/udev-dispatch -u stan udev-usb-block-device-plugged-in"
-SUBSYSTEM=="block", ACTION=="add", RUN+="/usr/local/bin/udev-dispatch -x -- udev-test"
-# SUBSYSTEM=="block", ACTION=="remove", RUN+="/usr/local/bin/udev-dispatch -x -u stan -- udev-test"
+SUBSYSTEMS=="usb", ACTION=="add", RUN+="/usr/local/bin/udev-dispatch -x -u root -- udev-usb-notify"
+SUBSYSTEMS=="usb", ACTION=="remove", RUN+="/usr/local/bin/udev-dispatch -x -u root -- udev-usb-notify"
+SUBSYSTEMS=="usb", SUBSYSTEM=="block", ACTION=="remove", RUN+="/usr/local/bin/udev-dispatch -x -u root -- udev-test"
+SUBSYSTEMS=="usb", SUBSYSTEM=="block", ACTION=="add", RUN+="/usr/local/bin/udev-dispatch -x -u root -- udev-test"

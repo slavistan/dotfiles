@@ -1,10 +1,17 @@
 #!/usr/bin/env zsh
 
-# udev event trigger bricht nach 3 Minuten ab
+notify() {
+	sudo -E -u stan notify-send "$@"
+}
 
-# exec 1>/tmp/udevlog
-#
-for ((ii=1; ii<=10; ii++)); do
-	sleep 1
-	notify-send $ii
-done
+
+[[ "$DEVTYPE" != "disk" ]] && exit
+
+#notify "$(env)"
+
+if [ "$ACTION" = "add" ]; then
+	notify "disk attached"
+elif [ "$ACTION" = "remove" ]; then
+	# Remove events don't provide busnum and devnum information.
+	notify "disk removed"
+fi

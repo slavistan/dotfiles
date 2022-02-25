@@ -40,4 +40,8 @@ sxhkd &
 # Set typematic delay
 xset r rate 150 50
 
+# Disable screen blanking
+xset s off
+xset s noblank
+
 exec dwm

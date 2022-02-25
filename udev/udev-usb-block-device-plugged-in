@@ -1,5 +1,0 @@
-#!/usr/bin/env sh
-
-notify-send hi
-date >>/dev/pts/10
-
