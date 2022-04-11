@@ -201,3 +201,4 @@ ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter-unquoted]=fg=$medium_purple2
 ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]=fg=$medium_purple2,bold
 
 # TODO: Speedup zsh startup. Can some functions be moved to a once-per-session file?
+source ${XDG_CONFIG_HOME}/lfbundle/lfbundle.zshrc

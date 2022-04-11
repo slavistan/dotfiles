@@ -27,21 +27,15 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-autorandr -c
 setxkbmap k6
-# dunst &
-st &
-
-# TODO: Use a user service
-# Hotkey daemon with live reload
+autorandr -c
+dunst &
 sxhkd &
-#(echo "$XDG_CONFIG_HOME/sxhkd/sxhkdrc" | entr pkill -SIGUSR1 sxhkd) &
-
-# Set typematic delay
-xset r rate 150 50
+xset r rate 150 50 # typematic delay and frequency
 
 # Disable screen blanking
 xset s off
 xset s noblank
 
+st &
 exec dwm

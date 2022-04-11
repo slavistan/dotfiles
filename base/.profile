@@ -39,12 +39,12 @@ export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/dbus-1/session_bus_s
 
 # Runit User Services
 # ===================
-export USERSVDIR="$XDG_DATA_HOME/runit/service"
-if [ -d "$USERSVDIR" ] && ! pgrep -U "$USER" -x runsvdir >/dev/null; then
-	# We define DISPLAY because many service won't start without it.
-	# Alternatively, DISPLAY=:0 can be exported in the service's 'run' file.
-	DISPLAY=:0 runsvdir -P "$USERSVDIR" &
-fi
+# export USERSVDIR="$XDG_DATA_HOME/runit/service"
+# if [ -d "$USERSVDIR" ] && ! pgrep -U "$USER" -x runsvdir >/dev/null; then
+# 	# We define DISPLAY because many service won't start without it.
+# 	# Alternatively, DISPLAY=:0 can be exported in the service's 'run' file.
+# 	DISPLAY=:0 runsvdir -P "$USERSVDIR" &
+# fi
 
 # Save user's environment to file for reference by system scripts (e.g. runit, udev)
 # ==================================================================================
