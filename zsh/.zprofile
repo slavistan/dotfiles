@@ -3,6 +3,4 @@
 # usage of ~/.profile for the sake of compatibility with other systems we
 # source ~/.profile.
 
-emulate sh
-. ~/.profile
-emulate zsh
+source ~/.profile

@@ -10,6 +10,7 @@ code --install-extension --force golang.go
 code --install-extension --force ms-vscode.cpptools
 code --install-extension --force twxs.cmake
 
-ln -sf "$(realpath ./keybindings.json)" "$XDG_CONFIG_HOME/Code/User/"
-ln -sf "$(realpath ./settings.json)" "$XDG_CONFIG_HOME/Code/User/"
+mkdir -p "$XDG_CONFIG_HOME/Code/User/"
+ln -sf "$(realpath ./keybindings.json)" "$XDG_CONFIG_HOME/Code/User"
+ln -sf "$(realpath ./settings.json)" "$XDG_CONFIG_HOME/Code/User"
 
