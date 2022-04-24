@@ -9,8 +9,10 @@ mod4 + Return
 mod4 + ctrl + Return
 	zshxi <<<lf
 
-# Pick and insert utf-8 characters
 mod4 + m
+	rofimoji -f ~/prj/dotfiles/rofimoji/obsidian.csv
+
+mod4 + shift + m
 	rofimoji
 
 # Choose keyboard layout
