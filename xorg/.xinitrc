@@ -31,6 +31,7 @@ setxkbmap k6
 autorandr -c
 dunst &
 sxhkd &
+clipster -d &
 xset r rate 150 50 # typematic delay and frequency
 
 # Disable screen blanking
