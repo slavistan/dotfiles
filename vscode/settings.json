@@ -12,9 +12,9 @@
     "editor.suggestOnTriggerCharacters": false,
     "editor.parameterHints.enabled": false,
     "editor.renderWhitespace": "boundary",
-    "editor.renderIndentGuides": false,
     "editor.scrollBeyondLastLine": false,
     "editor.snippetSuggestions": "none",
+    "explorer.compactFolders": false,
 
     "debug.onTaskErrors": "showErrors",
     "terminal.integrated.commandsToSkipShell": ["-workbench.action.quickOpen"],
@@ -37,7 +37,7 @@
     },
     "javascript.suggest.names": false,
     "javascript.updateImportsOnFileMove.enabled": "never",
-    "window.zoomLevel": 1,
+    "window.zoomLevel": 2,
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
@@ -49,5 +49,11 @@
         "**/.svn": false,
         "**/CVS": false,
         "**/Thumbs.db": false
-    }
+    },
+    "jupyter.askForKernelRestart": false,
+    "explorer.confirmDragAndDrop": false,
+    "notebook.lineNumbers": "on",
+    "jupyter.pylanceHandlesNotebooks": true,
+    "debug.javascript.autoAttachFilter": "onlyWithFlag",
+    "editor.guides.indentation": false
 }
