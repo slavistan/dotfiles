@@ -1,59 +1,73 @@
 {
-    "keyboard.dispatch": "keyCode",
-    "workbench.colorTheme": "Monokai",
-    "extensions.ignoreRecommendations": true,
+  "keyboard.dispatch": "keyCode",
+  "workbench.colorTheme": "Monokai",
+  "extensions.ignoreRecommendations": true,
 
-    "editor.acceptSuggestionOnCommitCharacter": false,
-    "editor.autoClosingBrackets": "never",
-    "editor.autoClosingQuotes": "never",
-    "editor.occurrencesHighlight": false,
-    "editor.minimap.enabled": false,
-    "editor.quickSuggestions": false,
-    "editor.suggestOnTriggerCharacters": false,
-    "editor.parameterHints.enabled": false,
-    "editor.renderWhitespace": "boundary",
-    "editor.scrollBeyondLastLine": false,
-    "editor.snippetSuggestions": "none",
-    "explorer.compactFolders": false,
+  "editor.acceptSuggestionOnCommitCharacter": false,
+  "editor.autoClosingBrackets": "never",
+  "editor.autoClosingQuotes": "never",
+  "editor.occurrencesHighlight": false,
+  "editor.minimap.enabled": false,
+  "editor.quickSuggestions": {
+    "comments": "off",
+    "strings": "off",
+    "other": "off"
+  },
+  "editor.suggestOnTriggerCharacters": false,
+  "editor.parameterHints.enabled": false,
+  "editor.renderWhitespace": "boundary",
+  "editor.scrollBeyondLastLine": false,
+  "editor.snippetSuggestions": "none",
+  "explorer.compactFolders": false,
 
-    "debug.onTaskErrors": "showErrors",
-    "terminal.integrated.commandsToSkipShell": ["-workbench.action.quickOpen"],
-    "workbench.startupEditor": "newUntitledFile",
-    "explorer.confirmDelete": false,
-    "window.titleBarStyle": "custom",
+  "debug.onTaskErrors": "showErrors",
+  "terminal.integrated.commandsToSkipShell": ["-workbench.action.quickOpen"],
+  "workbench.startupEditor": "newUntitledFile",
+  "explorer.confirmDelete": false,
+  "window.titleBarStyle": "custom",
 
-    "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
-    "vscode-neovim.neovimInitVimPaths.linux": "/home/stan/prj/dotfiles/nvim/init.vim",
+  "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+  "vscode-neovim.neovimInitVimPaths.linux": "/home/stan/prj/dotfiles/nvim/init.vim",
 
-    "C_Cpp.default.intelliSenseMode": "clang-x64",
-    "C_Cpp.default.cppStandard": "c++20",
-    "C_Cpp.default.cStandard": "c11",
-    "C_Cpp.updateChannel": "Insiders",
+  "C_Cpp.default.intelliSenseMode": "clang-x64",
+  "C_Cpp.default.cppStandard": "c++20",
+  "C_Cpp.default.cStandard": "c11",
+  "C_Cpp.updateChannel": "Insiders",
 
-    "go.useLanguageServer": true,
+  "go.useLanguageServer": true,
 
-    "workbench.editorAssociations": {
-        "*.ipynb": "jupyter.notebook.ipynb"
-    },
-    "javascript.suggest.names": false,
-    "javascript.updateImportsOnFileMove.enabled": "never",
-    "window.zoomLevel": 2,
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "editor.fontFamily": "'DroidSansMono Nerd Font Mono', 'monospace', monospace",
-    "files.exclude": {
-        "**/.DS_Store": false,
-        "**/.git": false,
-        "**/.hg": false,
-        "**/.svn": false,
-        "**/CVS": false,
-        "**/Thumbs.db": false
-    },
-    "jupyter.askForKernelRestart": false,
-    "explorer.confirmDragAndDrop": false,
-    "notebook.lineNumbers": "on",
-    "jupyter.pylanceHandlesNotebooks": true,
-    "debug.javascript.autoAttachFilter": "onlyWithFlag",
-    "editor.guides.indentation": false
+  "javascript.suggest.names": false,
+  "javascript.updateImportsOnFileMove.enabled": "never",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.fontFamily": "'DroidSansMono Nerd Font Mono', 'monospace', monospace",
+  "files.exclude": {
+    "**/.DS_Store": false,
+    "**/.git": false,
+    "**/.hg": false,
+    "**/.svn": false,
+    "**/CVS": false,
+    "**/Thumbs.db": false
+  },
+  "jupyter.askForKernelRestart": false,
+  "explorer.confirmDragAndDrop": false,
+  "notebook.lineNumbers": "on",
+  "jupyter.pylanceHandlesNotebooks": true,
+  "debug.javascript.autoAttachFilter": "onlyWithFlag",
+  "editor.guides.indentation": false,
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "right"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "files.associations": {
+    "log": "plaintext"
+  },
+  "window.zoomLevel": 2,
+
+  
+
 }

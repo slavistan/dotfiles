@@ -29,12 +29,12 @@ export SHELL=/usr/bin/zsh
 
 # Miscellaneous
 # =============
-export GOPATH="$HOME/go"
+export GOPATH="$HOME/.local/share/go"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export DOTFILES=/home/stan/prj/dotfiles # TODO: Remove DOTFILES envvar
 export __GL_SHADER_DISK_CACHE_PATH=$XDG_CACHE_HOME # nvidia
 export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
-export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/dbus-1/session_bus_socket"
+export PYTHONPYCACHEPREFIX=/tmp/pycache
 
 
 # Runit User Services
