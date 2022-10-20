@@ -5,6 +5,7 @@
         "**/.hg": false,
         "**/CVS": false,
         "**/.DS_Store": false,
+        "**/Thumbs.db": false
     },
     "keyboard.dispatch": "keyCode",
     "workbench.colorTheme": "Monokai",
@@ -42,39 +43,40 @@
     "explorer.confirmDelete": false,
     "window.titleBarStyle": "custom",
 
-    "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
-    "vscode-neovim.neovimInitVimPaths.linux": "/home/stan/prj/dotfiles/nvim/init.vim",
+  "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+  "vscode-neovim.neovimInitVimPaths.linux": "/home/stan/prj/dotfiles/nvim/init.vim",
 
     "C_Cpp.default.intelliSenseMode": "clang-x64",
     "C_Cpp.default.cppStandard": "c++20",
     "C_Cpp.default.cStandard": "c11",
 
-    "go.useLanguageServer": true,
+  "go.useLanguageServer": true,
 
-    "javascript.suggest.names": false,
-    "javascript.updateImportsOnFileMove.enabled": "never",
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
+  "javascript.suggest.names": false,
+  "javascript.updateImportsOnFileMove.enabled": "never",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.fontFamily": "'DroidSansMono Nerd Font Mono', 'monospace', monospace",
+  "jupyter.askForKernelRestart": false,
+  "notebook.lineNumbers": "on",
+  "jupyter.pylanceHandlesNotebooks": true,
+  "debug.javascript.autoAttachFilter": "onlyWithFlag",
+  "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "right"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "files.associations": {
+    "log": "plaintext"
+  },
+  "editor.unicodeHighlight.ambiguousCharacters": false,
 
-    "python.formatting.provider": "black",
-
-    "notebook.lineNumbers": "on",
-    "notebook.output.textLineLimit": 1024,
-
-    "[html]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-
-    "jupyter.askForKernelRestart": false,
-    "window.zoomLevel": 1,
-    "[json]": {
-        "editor.defaultFormatter": "vscode.json-language-features"
-    },
     
     /* Extension ArturoDent.launch-config */
     "launches": {
         "PythonAttachDebuggerLocalhost5678": "Python: Attach Debugger to localhost:5678"
     }
-    
 }

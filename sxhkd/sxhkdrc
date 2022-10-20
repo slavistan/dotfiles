@@ -1,37 +1,37 @@
-# Run an application
+# Run an application.
 mod4 + d
 	dmenu_run -p "Run:"
 
-# Spawn new terminal
+# Spawn new terminal.
 mod4 + Return
 	termcwd
 
+# Spawn a new terminal opening lf immediately.
+# TODO: This prints all kind of nonsense to the shell, due to lfbundle being an alias.
+#       Implement a --nohist option in zshxi and return here.
 mod4 + ctrl + Return
-	zshxi <<<lf
+	zshxi <<<lfbundle
 
-# Pick and insert utf-8 characters
-mod4 + m
+# Open rofimoji.
+mod4 + shift + m
 	rofimoji
 
-# Choose keyboard layout
+# Open rofimoji with symbols relevant to my Obsidian workflow.
+mod4 + m
+	rofimoji -f ~/prj/dotfiles/rofimoji/obsidian.csv
+
+# Choose keyboard layout.
 shift + mod4 + F12
 	selxkbmap
 
-# Exit dwm
+# Exit dwm.
 ctrl + shift + mod4 + q
 	dwmquit
 
-# Take a snapshot
+# Take a snapshot.
 mod4 + n
 	snapchad --select-area
 
-# Close active notification
-mod4 + Escape
-	dunstctl close
-
-# Obsidian Quick Action
-mod4 + o
-	obsidian-cli
-
+# Reload sxhkd.
 mod4 + F5
 	pkill -SIGUSR1 sxhkd

@@ -1,0 +1,14 @@
+{
+    // File Browser
+    // @jupyterlab/filebrowser-extension:browser
+    // File Browser settings.
+    // *****************************************
+
+    // Show hidden files
+    // Whether to show hidden files
+    "showHiddenFiles": true,
+
+    // Show last modified column
+    // Whether to show the last modified column
+    "showLastModifiedColumn": false
+}

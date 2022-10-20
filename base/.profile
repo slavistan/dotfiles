@@ -29,29 +29,29 @@ export SHELL=/usr/bin/zsh
 
 # Miscellaneous
 # =============
-export GOPATH="$HOME/go"
+export GOPATH="$HOME/.local/share/go"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export DOTFILES=/home/stan/prj/dotfiles # TODO: Remove DOTFILES envvar
 export __GL_SHADER_DISK_CACHE_PATH=$XDG_CACHE_HOME # nvidia
 export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
-export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/dbus-1/session_bus_socket"
+export PYTHONPYCACHEPREFIX=/tmp/pycache
 
 
 # Runit User Services
 # ===================
-export USERSVDIR="$XDG_DATA_HOME/runit/service"
-if [ -d "$USERSVDIR" ] && ! pgrep -U "$USER" -x runsvdir >/dev/null; then
-	# We define DISPLAY because many service won't start without it.
-	# Alternatively, DISPLAY=:0 can be exported in the service's 'run' file.
-	DISPLAY=:0 runsvdir -P "$USERSVDIR" &
-fi
+# export USERSVDIR="$XDG_DATA_HOME/runit/service"
+# if [ -d "$USERSVDIR" ] && ! pgrep -U "$USER" -x runsvdir >/dev/null; then
+# 	# We define DISPLAY because many service won't start without it.
+# 	# Alternatively, DISPLAY=:0 can be exported in the service's 'run' file.
+# 	DISPLAY=:0 runsvdir -P "$USERSVDIR" &
+# fi
 
 # Save user's environment to file for reference by system scripts (e.g. runit, udev)
 # ==================================================================================
 store_env=(
 	BROWSER DOTFILES EDITOR GOPATH GTK_MODULES HOME JUPYTER_CONFIG_DIR
 	LANG LC_COLLATE LC_NUMERIC LOGNAME MAIL MANPAGER PAGER PATH SHELL TERM
-	TERMINAL TZ USER USERSVDIR XAUTHORITY XDG_CACHE_HOME XDG_CONFIG_HOME
+	TERMINAL TZ USER XAUTHORITY XDG_CACHE_HOME XDG_CONFIG_HOME
 	XDG_DATA_HOME XDG_RUNTIME_DIR XDG_STATE_HOME ZDOTDIR
 	__GL_SHADER_DISK_CACHE_PATH
 )
