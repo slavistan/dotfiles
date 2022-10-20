@@ -1,4 +1,11 @@
 {
+    "files.exclude": {
+        "**/.git": false,
+        "**/.svm": false,
+        "**/.hg": false,
+        "**/CVS": false,
+        "**/.DS_Store": false,
+    },
     "keyboard.dispatch": "keyCode",
     "workbench.colorTheme": "Monokai",
     "extensions.ignoreRecommendations": true,
@@ -8,16 +15,29 @@
     "editor.autoClosingQuotes": "never",
     "editor.occurrencesHighlight": false,
     "editor.minimap.enabled": false,
-    "editor.quickSuggestions": false,
+    "editor.quickSuggestions": {
+        "comments": "off",
+        "strings": "off",
+        "other": "off"
+    },
     "editor.suggestOnTriggerCharacters": false,
     "editor.parameterHints.enabled": false,
     "editor.renderWhitespace": "boundary",
-    "editor.renderIndentGuides": false,
     "editor.scrollBeyondLastLine": false,
     "editor.snippetSuggestions": "none",
+    "editor.guides.indentation": false,
+    "explorer.confirmDragAndDrop": false,
+    "breadcrumbs.enabled": false,
 
     "debug.onTaskErrors": "showErrors",
-    "terminal.integrated.commandsToSkipShell": ["-workbench.action.quickOpen"],
+    "debug.saveBeforeStart": "none",
+    "terminal.integrated.commandsToSkipShell": [
+        /* Pass ctrl+p to shell. By default, this would open the command prompt. */
+        "-workbench.action.quickOpen",
+
+         /* Enable hotkeys for debug configurations while in terminal. */
+        "launches.PythonAttachDebuggerLocalhost5678"
+    ],
     "workbench.startupEditor": "newUntitledFile",
     "explorer.confirmDelete": false,
     "window.titleBarStyle": "custom",
@@ -28,17 +48,33 @@
     "C_Cpp.default.intelliSenseMode": "clang-x64",
     "C_Cpp.default.cppStandard": "c++20",
     "C_Cpp.default.cStandard": "c11",
-    "C_Cpp.updateChannel": "Insiders",
 
     "go.useLanguageServer": true,
 
-    "workbench.editorAssociations": {
-        "*.ipynb": "jupyter.notebook.ipynb"
-    },
     "javascript.suggest.names": false,
     "javascript.updateImportsOnFileMove.enabled": "never",
-    "window.zoomLevel": 1,
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+
+    "python.formatting.provider": "black",
+
+    "notebook.lineNumbers": "on",
+    "notebook.output.textLineLimit": 1024,
+
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+
+    "jupyter.askForKernelRestart": false,
+    "window.zoomLevel": 1,
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    
+    /* Extension ArturoDent.launch-config */
+    "launches": {
+        "PythonAttachDebuggerLocalhost5678": "Python: Attach Debugger to localhost:5678"
     }
+    
 }
