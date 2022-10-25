@@ -57,4 +57,4 @@ store_env=(
 	XDG_DATA_HOME XDG_RUNTIME_DIR XDG_STATE_HOME ZDOTDIR
 	__GL_SHADER_DISK_CACHE_PATH
 )
-env | grep -E "^(${(j:=|:)store_env})" >"$HOME/.environment"
+env | grep -E "^(${(j:=|:)store_env})" >"$HOME/.environment" # that's a zsh-ism
