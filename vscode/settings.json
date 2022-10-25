@@ -61,7 +61,7 @@
   "jupyter.askForKernelRestart": false,
   "notebook.lineNumbers": "on",
   "jupyter.pylanceHandlesNotebooks": true,
-  "debug.javascript.autoAttachFilter": "onlyWithFlag",
+  "debug.javascript.autoAttachFilter": "disabled",
   "notebook.cellToolbarLocation": {
     "default": "right",
     "jupyter-notebook": "right"
@@ -78,5 +78,11 @@
     /* Extension ArturoDent.launch-config */
     "launches": {
         "PythonAttachDebuggerLocalhost5678": "Python: Attach Debugger to localhost:5678"
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
     }
 }
