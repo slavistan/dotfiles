@@ -61,8 +61,7 @@ zstyle ':completion:*' accept-exact false
 
 # Additional completion files
 # TODO: Iterate over existing files. Don't hardcode.
-# source $DOTFILES/zsh/completions/cf # Cloud-Foundry CLI
-# source $DOTFILES/zsh/completions/cds # @sap/cds-dk
+source $DOTFILES/zsh/completions/papis.zshcomp
 
 
 ## Key bindings
