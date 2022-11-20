@@ -1,0 +1,79 @@
+#!/usr/bin/env zsh
+
+NAME="${ZSH_ARGZERO:A:t}"
+
+
+err() {
+	msg="$(printf -- "$@" | sed "s/^/\[$NAME\] ERROR: /g")"
+	printf "$msg" >&2
+	notify "$msg"
+}
+
+die() {
+	err "$@"
+	exit 1
+}
+
+log() {
+	msg="$(printf -- "$@" | sed "s/^/\[$NAME\] INFO: /g")"
+	printf "$msg" >&2
+	notify "$msg"
+}
+
+notify() {
+	sudo -E -u stan notify-send "$@"
+}
+
+# Retrieves relevant device information and returns it als JSON.
+get_usb_device_info() {
+	local busnum="$1"
+	local devnum="$2"
+	shift 2
+
+	if ! dev_info="$(lsusb -vv -s "$busnum:$devnum" 2>/dev/null)"; then
+		die "Cannot retrieve information about '/dev/bus/usb/$busnum/$devnum'. Abort."
+	fi
+
+	local idVendor="$(printf "$dev_info" | grep -oE 'idVendor.*$' | tr -s ' '| cut -d ' ' -f 3-)"
+	local idProduct="$(printf "$dev_info" | grep -oE 'idProduct.*$' | tr -s ' '| cut -d ' ' -f 3-)"
+	local bInterfaceClass="$(printf "$dev_info" | grep -oE 'bInterfaceClass.*$' | tr -s ' '| cut -d ' ' -f 3-)"
+	local bInterfaceSubClass="$(printf "$dev_info" | grep -oE 'bInterfaceSubClass.*$' | tr -s ' '| cut -d ' ' -f 3-)"
+	local bInterfaceProtocol="$(printf "$dev_info" | grep -oE 'bInterfaceProtocol.*$' | tr -s ' '| cut -d ' ' -f 3-)"
+	
+	cat <<EOF
+{
+	"idVendor": "$idVendor",
+	"idProduct": "$idProduct",
+	"bInterfaceClass": "$bInterfaceClass",
+	"bInterfaceSubClass": "$bInterfaceSubClass",
+	"bInterfaceProtocol": "$bInterfaceProtocol"
+}
+EOF
+}
+
+# Takes USB device info in JSON format as returned by get_usb_device_info().
+mknotif_device_added() {
+	local busnum="$1"
+	local devnum="$2"
+	shift 2
+
+	# create an associative array from json
+	eval "declare -A info=$(get_usb_device_info "$busnum" "$devnum" | jq --raw-output '. | to_entries | map("[\"\(.key)\"]=\"\(.value)\"") | reduce .[] as $item ("( "; . + $item + " ") + ")"')"
+	title="Attached USB Device $busnum/$devnum"
+	body="<b>idVendor</b>           ${info[idVendor]}
+<b>idProduct</b>          ${info[idProduct]}
+<b>bInterfaceClass</b>    ${info[bInterfaceClass]}
+<b>bInterfaceSubClass</b> ${info[bInterfaceSubClass]}
+<b>bInterfaceProtocol</b> ${info[bInterfaceProtocol]}
+"
+	notify -t 10000 "$title" "$body"
+}
+
+[[ "$DEVTYPE" != "usb_device" ]] && exit
+
+if [ "$ACTION" = "add" ]; then
+	mknotif_device_added "$BUSNUM" "$DEVNUM"
+elif [ "$ACTION" = "remove" ]; then
+	# Remove events don't provide busnum and devnum information.
+	notify "USB Device Removed"
+fi
