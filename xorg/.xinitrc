@@ -33,7 +33,7 @@ dunst &
 sxhkd &
 clipster -d &
 xset r rate 150 50 # typematic delay and frequency
-( while :; do sleep 0.9; xsetroot -name "$(date '+%H:%M:%S')"; done )
+( while :; do sleep 0.9; xsetroot -name "$(date '+%H:%M:%S')"; done ) &
 
 # Disable screen blanking
 xset s off
