@@ -1,38 +1,54 @@
 {
-  "keyboard.dispatch": "keyCode",
-  "workbench.colorTheme": "Monokai",
-  "extensions.ignoreRecommendations": true,
+    "files.exclude": {
+        "**/.git": false,
+        "**/.svm": false,
+        "**/.hg": false,
+        "**/CVS": false,
+        "**/.DS_Store": false,
+        "**/Thumbs.db": false
+    },
+    "keyboard.dispatch": "keyCode",
+    "workbench.colorTheme": "Monokai",
+    "extensions.ignoreRecommendations": true,
 
-  "editor.acceptSuggestionOnCommitCharacter": false,
-  "editor.autoClosingBrackets": "never",
-  "editor.autoClosingQuotes": "never",
-  "editor.occurrencesHighlight": false,
-  "editor.minimap.enabled": false,
-  "editor.quickSuggestions": {
-    "comments": "off",
-    "strings": "off",
-    "other": "off"
-  },
-  "editor.suggestOnTriggerCharacters": false,
-  "editor.parameterHints.enabled": false,
-  "editor.renderWhitespace": "boundary",
-  "editor.scrollBeyondLastLine": false,
-  "editor.snippetSuggestions": "none",
-  "explorer.compactFolders": false,
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "editor.autoClosingBrackets": "never",
+    "editor.autoClosingQuotes": "never",
+    "editor.occurrencesHighlight": false,
+    "editor.minimap.enabled": false,
+    "editor.quickSuggestions": {
+        "comments": "off",
+        "strings": "off",
+        "other": "off"
+    },
+    "editor.suggestOnTriggerCharacters": false,
+    "editor.parameterHints.enabled": false,
+    "editor.renderWhitespace": "boundary",
+    "editor.scrollBeyondLastLine": false,
+    "editor.snippetSuggestions": "none",
+    "editor.guides.indentation": false,
+    "explorer.confirmDragAndDrop": false,
+    "breadcrumbs.enabled": false,
 
-  "debug.onTaskErrors": "showErrors",
-  "terminal.integrated.commandsToSkipShell": ["-workbench.action.quickOpen"],
-  "workbench.startupEditor": "newUntitledFile",
-  "explorer.confirmDelete": false,
-  "window.titleBarStyle": "custom",
+    "debug.onTaskErrors": "showErrors",
+    "debug.saveBeforeStart": "none",
+    "terminal.integrated.commandsToSkipShell": [
+        /* Pass ctrl+p to shell. By default, this would open the command prompt. */
+        "-workbench.action.quickOpen",
+
+         /* Enable hotkeys for debug configurations while in terminal. */
+        "launches.PythonAttachDebuggerLocalhost5678"
+    ],
+    "workbench.startupEditor": "newUntitledFile",
+    "explorer.confirmDelete": false,
+    "window.titleBarStyle": "custom",
 
   "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
   "vscode-neovim.neovimInitVimPaths.linux": "/home/stan/prj/dotfiles/nvim/init.vim",
 
-  "C_Cpp.default.intelliSenseMode": "clang-x64",
-  "C_Cpp.default.cppStandard": "c++20",
-  "C_Cpp.default.cStandard": "c11",
-  "C_Cpp.updateChannel": "Insiders",
+    "C_Cpp.default.intelliSenseMode": "clang-x64",
+    "C_Cpp.default.cppStandard": "c++20",
+    "C_Cpp.default.cStandard": "c11",
 
   "go.useLanguageServer": true,
 
@@ -42,20 +58,10 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.fontFamily": "'DroidSansMono Nerd Font Mono', 'monospace', monospace",
-  "files.exclude": {
-    "**/.DS_Store": false,
-    "**/.git": false,
-    "**/.hg": false,
-    "**/.svn": false,
-    "**/CVS": false,
-    "**/Thumbs.db": false
-  },
   "jupyter.askForKernelRestart": false,
-  "explorer.confirmDragAndDrop": false,
   "notebook.lineNumbers": "on",
   "jupyter.pylanceHandlesNotebooks": true,
-  "debug.javascript.autoAttachFilter": "onlyWithFlag",
-  "editor.guides.indentation": false,
+  "debug.javascript.autoAttachFilter": "disabled",
   "notebook.cellToolbarLocation": {
     "default": "right",
     "jupyter-notebook": "right"
@@ -68,6 +74,15 @@
   },
   "editor.unicodeHighlight.ambiguousCharacters": false,
 
-  
-
+    
+    /* Extension ArturoDent.launch-config */
+    "launches": {
+        "PythonAttachDebuggerLocalhost5678": "Python: Attach Debugger to localhost:5678"
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }
