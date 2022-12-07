@@ -1,12 +1,25 @@
 {
   "shortcuts": [
     {
-      "command": "jupyterlab_code_formatter:format",
+      "command": "apputils:run-all-enabled",
+      "args": {
+        "commands": ["jupyterlab_code_formatter:black", "jupyterlab_code_formatter:isort"],
+      },
       "keys": [
         "Ctrl K",
         "Ctrl M"
       ],
-      "selector": ".jp-Notebook"
+      "selector": ".jp-CodeMirrorEditor"
+    },
+    {
+      "command": "jupyterlab_code_formatter:black",
+      "keys": [ "F1" ],
+      "selector": ".jp-CodeMirrorEditor"
+    },
+    {
+      "command": "jupyterlab_code_formatter:isort",
+      "keys": [ "F2" ],
+      "selector": ".jp-CodeMirrorEditor"
     }
   ]
 }
