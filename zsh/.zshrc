@@ -59,9 +59,11 @@ zstyle ':completion:*:complete:*' matcher-list \
 	'm:{a-zA-Z}={A-Za-z} l:|=*'
 zstyle ':completion:*' accept-exact false
 
-# Additional completion files
-# TODO: Iterate over existing files. Don't hardcode.
-source $DOTFILES/zsh/completions/papis.zshcomp
+# Load additional completion files
+# NOTE: (.N) sets the NULL_GLOB options for a single glob.
+for file in $DOTFILES/zsh/completions/*.zshcomp(.N); do
+	source $file
+done
 
 
 ## Key bindings
