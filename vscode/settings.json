@@ -8,7 +8,7 @@
     "**/Thumbs.db": false
   },
   "keyboard.dispatch": "keyCode",
-  "workbench.colorTheme": "Monokai",
+  "workbench.colorTheme": "Gray Matter Dark",
   "extensions.ignoreRecommendations": true,
 
   "editor.acceptSuggestionOnCommitCharacter": false,
@@ -27,7 +27,9 @@
   "editor.scrollBeyondLastLine": false,
   "editor.snippetSuggestions": "none",
   "editor.guides.indentation": false,
+  "editor.formatOnSave": false,
   "explorer.confirmDragAndDrop": false,
+  "explorer.compactFolders": false,
   "breadcrumbs.enabled": false,
 
   "debug.onTaskErrors": "showErrors",
@@ -41,17 +43,22 @@
   ],
   "terminal.integrated.shellIntegration.enabled": false,
   "workbench.startupEditor": "newUntitledFile",
+  "workbench.tree.indent": 18,
+  "workbench.tree.renderIndentGuides": "always",
   "explorer.confirmDelete": false,
   "window.titleBarStyle": "custom",
 
   "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
   "vscode-neovim.neovimInitVimPaths.linux": "/home/stan/prj/dotfiles/nvim/init.vim",
 
-  "C_Cpp.default.intelliSenseMode": "clang-x64",
-  "C_Cpp.default.cppStandard": "c++20",
-  "C_Cpp.default.cStandard": "c11",
-
   "go.useLanguageServer": true,
+  "[go]": {
+    "editor.defaultFormatter": "golang.go",
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": false
+    }
+  },
 
   "javascript.suggest.names": false,
   "javascript.updateImportsOnFileMove.enabled": "never",
@@ -88,5 +95,6 @@
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.enablePersistentSessions": false,
   "terminal.integrated.localEchoEnabled": "off",
-  "terminal.integrated.persistentSessionReviveProcess": "never"
+  "terminal.integrated.persistentSessionReviveProcess": "never",
+  "window.zoomLevel": 3
 }
