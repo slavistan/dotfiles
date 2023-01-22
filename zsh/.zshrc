@@ -210,3 +210,7 @@ conda() {
 	. /opt/miniconda3/etc/profile.d/conda.sh
 	conda $@
 }
+
+start.sh() {
+	~/prj/js-wp07-local-module/bundle/linux-x64/start.sh --nocd "$@"
+}

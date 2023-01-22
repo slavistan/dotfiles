@@ -8,13 +8,14 @@
     "**/Thumbs.db": false
   },
   "keyboard.dispatch": "keyCode",
-  "workbench.colorTheme": "Gray Matter Dark",
+  "workbench.colorTheme": "One Monokai",
   "extensions.ignoreRecommendations": true,
 
   "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.autoClosingBrackets": "never",
   "editor.autoClosingQuotes": "never",
   "editor.occurrencesHighlight": false,
+  "editor.inlayHints.enabled": "off",
   "editor.minimap.enabled": false,
   "editor.quickSuggestions": {
     "comments": "off",
@@ -30,7 +31,6 @@
   "editor.formatOnSave": false,
   "explorer.confirmDragAndDrop": false,
   "explorer.compactFolders": false,
-  "breadcrumbs.enabled": false,
 
   "debug.onTaskErrors": "showErrors",
   "debug.saveBeforeStart": "none",
@@ -96,5 +96,5 @@
   "terminal.integrated.enablePersistentSessions": false,
   "terminal.integrated.localEchoEnabled": "off",
   "terminal.integrated.persistentSessionReviveProcess": "never",
-  "window.zoomLevel": 3
+  "window.zoomLevel": 2
 }

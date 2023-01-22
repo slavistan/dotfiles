@@ -1,2 +1,4 @@
 [alias]
 	commit0 = commit --allow-empty-message -m \"\"
+[core]
+	quotepath = off
