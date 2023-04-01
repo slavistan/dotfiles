@@ -16,7 +16,7 @@ export DOTFILES="$HOME/prj/dotfiles" # TODO: Remove DOTFILES envvar
 export EDITOR=nvim
 export BROWSER=brave
 export MANPAGER=less
-export TERMINAL=st
+export TERMINAL=kitty
 export PAGER=cat
 export SHELL=/usr/bin/zsh
 
