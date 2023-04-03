@@ -3,7 +3,6 @@
 setopt globdots             # tab-complete dotfiles
 setopt menucomplete         # tab-expand to first option immediately
 setopt autocd               # change dirs without 'cd'
-setopt no_unset             # throw error when using undefined vars
 setopt hist_ignore_dups     # don't add duplicate cmd to hist
 setopt no_autoremoveslash   # keep trailing slash after dir completion
 setopt interactivecomments  # enable comments in shell commands
@@ -42,9 +41,6 @@ export PROMPT_EOL_MARK="%F{$light_goldenrod3}⤬%k"
 # -------------
 
 # . /home/stan/prj/dotfiles/zsh/plugins/zsh-autoenv/autoenv.zsh
-# ". scripts/testSetup.sh && node --inspect-brk node_modules/.bin/jest --testTimeout=36000000 --runInBand",
-
-
 
 ## Completion system init
 
@@ -102,16 +98,7 @@ acceptandswallow() {
 	zle accept-line
 }
 
-# FIXME: ^l coincides with clear
-# bind lf to hotkey ^l
-# bindkey -M vicmd "^l" zsh-lf # if you're using vim bindings in zsh
-# bindkey -M viins "^l" zsh-lf # if you're using vim bindings in zsh
-# zle -N zsh-lf _zshlf
-# _zshlf() {
-# 	BUFFER=lf
-# 	zle end-of-line
-# 	zle accept-line
-# }
+
 
 ## Proper cursor setup
 
@@ -207,8 +194,15 @@ source ${XDG_CONFIG_HOME}/lfbundle/lfbundle.zshrc
 # Initialize conda on demand only. Delete any conda.sh in /etc/profile.d/.
 conda() {
 	unset -f conda
-	. /opt/miniconda3/etc/profile.d/conda.sh
+	source /opt/miniconda3/etc/profile.d/conda.sh
 	conda $@
+}
+
+# On-demand initialization of nvm.
+nvm() {
+	unset -f nvm
+	source /usr/share/nvm/init-nvm.sh
+	nvm $@
 }
 
 start.sh() {

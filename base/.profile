@@ -33,6 +33,7 @@ export SHELL=/usr/bin/zsh
 export GOPATH="$HOME/.local/share/go" # clean $HOME
 export PATH="$GOPATH/bin:$PATH"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh" # clean $HOME
+export NVM_DIR="$XDG_DATA_HOME/nvm" # clean $HOME
 export NODE_REPL_HISTORY="$XDG_DATA_HOME/node_repl_history" # clean $HOME
 export TS_NODE_HISTORY="$XDG_DATA_HOME/ts-node_repl_history" # clean $HOME
 export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter" # clean $HOME
