@@ -210,6 +210,6 @@ nvm() {
 	nvm $@
 }
 
-# Direnv bootstrap
-eval "$(direnv hook zsh)"
+# Zsh autoenv init.
+source "/usr/local/lib/zsh-autoenv/autoenv.zsh"
 
