@@ -191,11 +191,16 @@ ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]=fg=$medium_purple2,bold
 # TODO: Speedup zsh startup. Can some functions be moved to a once-per-session file?
 source ${XDG_CONFIG_HOME}/lfbundle/lfbundle.zshrc
 
-# Initialize conda on demand only. Delete any conda.sh in /etc/profile.d/.
+# On-demand initialization of conda. Delete any conda.sh in /etc/profile.d/.
 conda() {
-	unset -f conda
-	source /opt/miniconda3/etc/profile.d/conda.sh
-	conda $@
+	fpath="/opt/miniconda3/etc/profile.d/conda.sh"
+	if [ -f  "$fpath" ]; then
+		unset -f conda
+		source "$fpath"
+		export CONDA_ENVS_PATH="$XDG_DATA_HOME/conda/envs"
+		export CONDA_PKGS_DIRS="$XDG_DATA_HOME/conda/pkgs"
+		conda "$@"
+	fi
 }
 
 # On-demand initialization of nvm.
@@ -205,6 +210,6 @@ nvm() {
 	nvm $@
 }
 
-start.sh() {
-	~/prj/js-wp07-local-module/bundle/linux-x64/start.sh --nocd "$@"
-}
+# Direnv bootstrap
+eval "$(direnv hook zsh)"
+
