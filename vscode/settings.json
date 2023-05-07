@@ -96,5 +96,6 @@
   "terminal.integrated.enablePersistentSessions": false,
   "terminal.integrated.localEchoEnabled": "off",
   "terminal.integrated.persistentSessionReviveProcess": "never",
-  "window.zoomLevel": 2
+  "window.zoomLevel": 2,
+  "git.openRepositoryInParentFolders": "never"
 }
