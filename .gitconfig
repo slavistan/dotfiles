@@ -1,0 +1,2 @@
+[filter "vscode-settings"]
+	clean = grep -vF 'window.zoomLevel'
