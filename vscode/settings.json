@@ -14,7 +14,12 @@
   "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.autoClosingBrackets": "never",
   "editor.autoClosingQuotes": "never",
+  "editor.autoClosingDelete": "never",
+  "editor.autoSurround": "never",
   "editor.occurrencesHighlight": false,
+  "html.autoClosingTags": false,
+  "javascript.autoClosingTags": false,
+  "typescript.autoClosingTags": false,
   "editor.inlayHints.enabled": "off",
   "editor.minimap.enabled": false,
   "editor.quickSuggestions": {
@@ -96,5 +101,11 @@
   "terminal.integrated.enablePersistentSessions": false,
   "terminal.integrated.localEchoEnabled": "off",
   "terminal.integrated.persistentSessionReviveProcess": "never",
-  "git.openRepositoryInParentFolders": "never"
+  "git.openRepositoryInParentFolders": "never",
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
