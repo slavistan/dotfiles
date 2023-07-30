@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+battery_lvl="$(cat /sys/class/power_supply/BAT0/capacity)"
+ac_connected="$(cat /sys/class/power_supply/AC/online)"
+
+if [[ "$ac_connected" == "1" ]]; then
+	symbol="🔌"
+else 
+	symbol="🔋"
+fi
+printf "%s %d%%" "$symbol" "$battery_lvl"

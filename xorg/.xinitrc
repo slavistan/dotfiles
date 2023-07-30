@@ -30,7 +30,12 @@ fi
 autorandr -c
 dunst &
 sxhkd &
-( while :; do sleep 0.9; xsetroot -name "$(date '+%H:%M:%S')"; done ) &
+
+# machine-dependent dwm status bar
+statusbar="$HOME/.local/bin/statusbar"
+if [[ -x "$statusbar" ]]; then
+	( while :; do sleep 0.9; xsetroot -name "$("$statusbar")"; done ) &
+fi
 
 # HACK: Why does this not work without the hack?
 ( sleep 3; DISPLAY=:0 xset r rate 150 50 )& # typematic delay and frequency
