@@ -1,2 +1,5 @@
 [filter "vscode-settings"]
+	# vscode is stupid and persists the zoom level in its settings
+	# file, causing changes in the working tree each time the zoom
+	# level is adjusted. This clean-filter solves this problem.
 	clean = grep -vF 'window.zoomLevel'
