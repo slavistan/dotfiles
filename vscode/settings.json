@@ -107,5 +107,9 @@
   },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "editor.largeFileOptimizations": false,
+  "redhat.telemetry.enabled": false,
+  "xml.server.vmargs": "-Xmx5G",
+  "editor.unicodeHighlight.invisibleCharacters": true
 }

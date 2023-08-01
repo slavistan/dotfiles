@@ -1,0 +1,2 @@
+mkdir -p "$XDG_CONFIG_HOME/git"
+ln -s "$(realpath ./config)" "$XDG_CONFIG_HOME/git"

@@ -1,0 +1,3 @@
+mkdir -p "$XDG_CONFIG_HOME/lf"
+ln -s "$(realpath ./colors)" "$XDG_CONFIG_HOME/lf"
+ln -s "$(realpath ./icons)" "$XDG_CONFIG_HOME/lf"
