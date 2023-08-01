@@ -37,6 +37,12 @@ if [[ -x "$statusbar" ]]; then
 	( while :; do sleep 0.9; xsetroot -name "$("$statusbar")"; done ) &
 fi
 
+# machine-dependent background image
+bgimg="$XDG_DATA_HOME/desktop-background"
+if [[ -f "$bgimg" ]]; then
+	feh --bg-scale "$bgimg"
+fi
+
 # HACK: Why does this not work without the hack?
 ( sleep 3; DISPLAY=:0 xset r rate 150 50 )& # typematic delay and frequency
 ( sleep 3; DISPLAY=:0 setxkbmap k6 )&
@@ -45,5 +51,4 @@ fi
 xset s off
 xset s noblank
 
-st &
 exec dwm

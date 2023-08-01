@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-echo "$(batcap) 🕑  $(date -Id) 📅  $(date '+%H:%M:%S')"
+echo "$(batcap) 📅 $(date -Id) 🕑 $(date '+%H:%M')"
