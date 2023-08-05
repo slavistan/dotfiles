@@ -1,0 +1,2 @@
+mkdir -p "$XDG_CONFIG_HOME/discord"
+ln -sf "$(realpath ./settings.json)" "$XDG_CONFIG_HOME/discord"

@@ -40,7 +40,7 @@ fi
 # machine-dependent background image
 bgimg="$XDG_DATA_HOME/desktop-background"
 if [[ -f "$bgimg" ]]; then
-	feh --bg-scale "$bgimg"
+	feh --no-fehbg --bg-scale "$bgimg"
 fi
 
 # HACK: Why does this not work without the hack?
