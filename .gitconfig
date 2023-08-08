@@ -3,3 +3,7 @@
 	# file, causing changes in the working tree each time the zoom
 	# level is adjusted. This clean-filter solves this problem.
 	clean = grep -vF 'window.zoomLevel'
+
+[filter "discord-settings"]
+	# discord has similar issues pertaining to its window size.
+	clean = jq 'del(.WINDOW_BOUNDS)'
