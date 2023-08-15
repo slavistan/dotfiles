@@ -8,4 +8,4 @@
 
 [filter "discord-settings"]
 	# discord has similar issues pertaining to its window size.
-	clean = jq 'del(.WINDOW_BOUNDS)'
+	clean = jq -j 'del(.WINDOW_BOUNDS)'
