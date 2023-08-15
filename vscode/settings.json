@@ -12,7 +12,6 @@
   /* Use the system's keyboard layout. Necessary for custom layouts. */
   "keyboard.dispatch": "keyCode",
 
-  "workbench.colorTheme": "One Monokai",
   "extensions.ignoreRecommendations": true,
   "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.autoClosingBrackets": "never",

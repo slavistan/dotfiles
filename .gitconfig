@@ -1,8 +1,10 @@
 [filter "vscode-settings"]
 	# vscode is stupid and persists the zoom level in its settings
 	# file, causing changes in the working tree each time the zoom
-	# level is adjusted. This clean-filter solves this problem.
-	clean = grep -vF 'window.zoomLevel'
+	# level is adjusted. This clean-filter solves this problem. Also,
+	# ignores the color theme as it may differ between setups.
+	clean = grep -vF 'window.zoomLevel' | \
+		grep -vF 'workbench.colorTheme'
 
 [filter "discord-settings"]
 	# discord has similar issues pertaining to its window size.
