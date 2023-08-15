@@ -1,4 +1,5 @@
 {
+  /* Show files and directories hidden by vscode's dumb default settings. */
   "files.exclude": {
     "**/.git": false,
     "**/.svm": false,
@@ -7,10 +8,12 @@
     "**/.DS_Store": false,
     "**/Thumbs.db": false
   },
+
+  /* Use the system's keyboard layout. Necessary for custom layouts. */
   "keyboard.dispatch": "keyCode",
+
   "workbench.colorTheme": "One Monokai",
   "extensions.ignoreRecommendations": true,
-
   "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.autoClosingBrackets": "never",
   "editor.autoClosingQuotes": "never",
@@ -73,7 +76,6 @@
   "editor.fontFamily": "'DroidSansMono Nerd Font Mono', 'monospace', monospace",
   "jupyter.askForKernelRestart": false,
   "notebook.lineNumbers": "on",
-  "jupyter.pylanceHandlesNotebooks": true,
   "debug.javascript.autoAttachFilter": "disabled",
   "notebook.cellToolbarLocation": {
     "default": "right",
@@ -87,10 +89,6 @@
   },
   "editor.unicodeHighlight.ambiguousCharacters": false,
 
-  /* Extension ArturoDent.launch-config */
-  "launches": {
-    "PythonAttachDebuggerLocalhost5678": "Python: Attach Debugger to localhost:5678"
-  },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -111,5 +109,9 @@
   "editor.largeFileOptimizations": false,
   "redhat.telemetry.enabled": false,
   "xml.server.vmargs": "-Xmx5G",
-  "editor.unicodeHighlight.invisibleCharacters": true
+  "editor.unicodeHighlight.invisibleCharacters": true,
+  "notebook.output.textLineLimit": 128,
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  }
 }
