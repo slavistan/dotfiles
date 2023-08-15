@@ -1,0 +1,11 @@
+# See https://github.com/tmcdonell/config-alacritty/blob/master/alacritty.yml
+
+live_config_reload: true
+font:
+  normal:
+    family: DejaVuSansM Nerd Font
+  bold:
+    family: DejaVuSansM Nerd Font
+  italic:
+    family: DejaVuSansM Nerd Font
+  size: 8.0
