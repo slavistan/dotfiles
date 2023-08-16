@@ -1,0 +1,1 @@
+ln -s "$(realpath ./black)" "$XDG_CONFIG_HOME/black"
