@@ -112,5 +112,5 @@
   "notebook.output.textLineLimit": 128,
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1
-  }
+  },
 }
