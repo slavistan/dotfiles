@@ -114,4 +114,18 @@
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1
   },
+
+  "todo-tree.regex.regex": "(?:(?://|#|<!--|;|/\\*\\*?|\\*)\\s*($TAGS)|^\\s*- \\[ \\])",
+  "todo-tree.general.tags": [
+    "BUG",
+    "HACK",
+    "FIXME",
+    "TODO",
+    "XXX",
+    "???",
+    "[ ]",
+    "[x]"
+  ],
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "explorer.autoReveal": false
 }
