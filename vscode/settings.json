@@ -127,5 +127,7 @@
     "[x]"
   ],
   "typescript.preferences.importModuleSpecifier": "relative",
-  "explorer.autoReveal": false
+  "explorer.autoReveal": false,
+  "python.analysis.typeCheckingMode": "strict",
+  "files.trimTrailingWhitespace": true
 }
