@@ -26,6 +26,34 @@
     "command": "-editor.action.goToReferences",
     "when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
   },
+  {
+    "key": "ctrl+g",
+    "command": "-workbench.action.terminal.goToRecentDirectory"
+  },
+  {
+    "key": "ctrl+w",
+    "command": "-workbench.action.closeActiveEditor"
+  },
+  {
+    "key": "ctrl+n",
+    "command": "-workbench.action.files.newUntitledFile"
+  },
+  {
+    "key": "ctrl+g",
+    "command": "-workbench.action.gotoLine"
+  },
+  {
+    "key": "ctrl-p",
+    "command": "-workbench.action.quickOpen"
+  },
+  {
+    "key": "ctrl+r",
+    "command": "-workbench.action.openRecent"
+  },
+  {
+    "key": "ctrl+shift+m",
+    "command": "-workbench.actions.view.problems"
+  },
 
   /* ******************* */
   /* Custom key bindings */
@@ -50,11 +78,6 @@
     "when": "terminalFocus"
   },
   {
-    "key": "ctrl+`",
-    "command": "workbench.action.focusActiveEditorGroup",
-    "when": "terminalFocus"
-  },
-  {
     "key": "ctrl+k ctrl+m",
     "command": "editor.action.format"
   },
@@ -62,8 +85,34 @@
     /* Choose obscure hotkey to bind attach-to-debugger config to. To be used
      * by xdotool to mimick the missing vscode cli integration so we can just
      * start a debugging process via the shell. Utterly retarded. */
-    "key": "shift+f5",
-    "command": "launches.PythonAttachDebuggerLocalhost5678",
-    // "when": "terminalFocus"
+    "key": "ctrl+shift+f5",
+    "command": "launches.PythonAttachDebuggerLocalhost56789"
+  },
+  {
+    "key": "ctrl+n",
+    "command": "multiCommand.nextSearchResult",
+    "when": "sideBarFocus && activeViewlet == 'workbench.view.search'"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "multiCommand.previousSearchResult",
+    "when": "sideBarFocus && activeViewlet == 'workbench.view.search'"
+  },
+  {
+    // FIXME: Ctrl+r doesn't work :( have to use alt+r
+    "key": "ctrl+r",
+    "command": "toggleSearchEditorRegex",
+    "when": "sideBarFocus && activeViewlet == 'workbench.view.search'"
+  },
+  {
+    /* Show and hide sidebar. */
+    "key": "ctrl+shift+m",
+    "command": "workbench.action.toggleSidebarVisibility"
+  },
+  {
+    /* Place focus on editor. Used to jump from sidebar focus to the editor. */
+    "key": "ctrl+shift+q",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "!editorTextFocus"
   }
 ]

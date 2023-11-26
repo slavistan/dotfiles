@@ -42,13 +42,23 @@
 
   "debug.onTaskErrors": "showErrors",
   "debug.saveBeforeStart": "none",
+
   "terminal.integrated.commandsToSkipShell": [
     /* Pass ctrl+p to shell. By default, this would open the command prompt. */
     "-workbench.action.quickOpen",
 
-    /* Enable hotkeys for debug configurations while in terminal. */
-    "launches.PythonAttachDebuggerLocalhost5678"
+    /* Enable hotkeys for debug configurations while in terminal. Part of a
+    disgusting hack. */
+    "launches.PythonAttachDebuggerLocalhost56789"
   ],
+
+  /* Keybinds for launch configs. */
+  "launches": {
+    /** Part of the disgusting hack to start debugging session from inside
+    vscode's terminal. */
+    "PythonAttachDebuggerLocalhost56789": "Python: Attach Debugger to localhost:56789"
+  },
+
   "terminal.integrated.shellIntegration.enabled": false,
   "workbench.startupEditor": "newUntitledFile",
   "workbench.tree.indent": 18,
@@ -101,7 +111,8 @@
   "terminal.integrated.persistentSessionReviveProcess": "never",
   "git.openRepositoryInParentFolders": "never",
   "[python]": {
-    "editor.formatOnType": true
+    "editor.formatOnType": false,
+    "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -117,17 +128,39 @@
 
   "todo-tree.regex.regex": "(?:(?://|#|<!--|;|/\\*\\*?|\\*)\\s*($TAGS)|^\\s*- \\[ \\])",
   "todo-tree.general.tags": [
-    "BUG",
-    "HACK",
-    "FIXME",
-    "TODO",
-    "XXX",
-    "???",
-    "[ ]",
-    "[x]"
+    "BUG:",
+    "HACK:",
+    "FIXME:",
+    "TODO:",
+    "XXX:",
+    "???:"
   ],
+  "todo-tree.filtering.excludeGlobs": [".git/"],
   "typescript.preferences.importModuleSpecifier": "relative",
   "explorer.autoReveal": false,
-  "python.analysis.typeCheckingMode": "strict",
-  "files.trimTrailingWhitespace": true
+  "python.analysis.typeCheckingMode": "basic",
+  "files.trimTrailingWhitespace": true,
+  "github.copilot.enable": {
+    "*": false,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  },
+
+  /* Multi-Command macros. See https://github.com/ryuta46/vscode-multi-command.
+   * The built-in `runCommands` command to run sequences of commands does not
+   * offer the ability to set a delay between commands, which is needed for
+   * asynchronously executed commands. */
+  "multiCommand.commands": {
+    /* Move between search results without losing focus on the search menu. */
+    "multiCommand.nextSearchResult": {
+      "interval": 128,
+      "sequence": ["search.action.focusNextSearchResult", "workbench.view.search.focus"]
+    },
+    "multiCommand.previousSearchResult": {
+      "interval": 128,
+      "sequence": ["search.action.focusPreviousSearchResult", "workbench.view.search.focus"]
+    }
+
+  }
 }
