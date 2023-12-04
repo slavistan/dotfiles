@@ -114,5 +114,51 @@
     "key": "ctrl+shift+q",
     "command": "workbench.action.focusActiveEditorGroup",
     "when": "!editorTextFocus"
-  }
+  },
+  /**
+   * Navigate between editor groups with ctrl+w and vim-keys.
+   */
+  {
+    "key": "ctrl+w l",
+    "command": "workbench.action.focusRightGroupWithoutWrap",
+    "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))"
+  },
+  {
+    "key": "ctrl+w h",
+    "command": "workbench.action.focusLeftGroupWithoutWrap",
+    "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))"
+  },
+  {
+    "key": "ctrl+w k",
+    "command": "workbench.action.focusAboveGroupWithoutWrap",
+    "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))"
+  },
+  {
+    "key": "ctrl+w j",
+    "command": "workbench.action.focusBelowGroupWithoutWrap",
+    "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))"
+  },
+  /**
+   * Move active editor between editor groups with ctrl+w and ctrl+vim-keys.
+   */
+  {
+    "key": "ctrl+w ctrl+l",
+    "command": "workbench.action.moveEditorToRightGroup",
+    "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))"
+  },
+  {
+    "key": "ctrl+w ctrl+h",
+    "command": "workbench.action.moveEditorToLeftGroup",
+    "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))"
+  },
+  {
+    "key": "ctrl+w ctrl+k",
+    "command": "workbench.action.moveEditorToAboveGroup",
+    "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))"
+  },
+  {
+    "key": "ctrl+w ctrl+j",
+    "command": "workbench.action.moveEditorToBelowGroup",
+    "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))"
+  },
 ]

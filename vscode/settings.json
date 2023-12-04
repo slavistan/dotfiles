@@ -155,12 +155,17 @@
     /* Move between search results without losing focus on the search menu. */
     "multiCommand.nextSearchResult": {
       "interval": 128,
-      "sequence": ["search.action.focusNextSearchResult", "workbench.view.search.focus"]
+      "sequence": [
+        "search.action.focusNextSearchResult",
+        "workbench.view.search.focus"
+      ]
     },
     "multiCommand.previousSearchResult": {
       "interval": 128,
-      "sequence": ["search.action.focusPreviousSearchResult", "workbench.view.search.focus"]
+      "sequence": [
+        "search.action.focusPreviousSearchResult",
+        "workbench.view.search.focus"
+      ]
     }
-
   }
 }
