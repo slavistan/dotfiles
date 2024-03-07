@@ -55,9 +55,11 @@
     "command": "-workbench.actions.view.problems"
   },
   {
+    // FIXME: Ctrl+x schneidet Zeile aus, überschreibt nvim ^x mode.
+    //        Unbind geht nicht.
     "key": "ctrl+x",
     "command": "-editor.action.clipboardCutAction"
-  }
+  },
 
   /* ******************* */
   /* Custom key bindings */

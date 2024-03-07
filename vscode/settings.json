@@ -18,7 +18,7 @@
   "editor.autoClosingQuotes": "never",
   "editor.autoClosingDelete": "never",
   "editor.autoSurround": "never",
-  "editor.occurrencesHighlight": false,
+  "editor.occurrencesHighlight": "off",
   "html.autoClosingTags": false,
   "javascript.autoClosingTags": false,
   "typescript.autoClosingTags": false,
@@ -29,7 +29,7 @@
     "strings": "off",
     "other": "off"
   },
-  "editor.wordBasedSuggestions": false,
+  "editor.wordBasedSuggestions": "off",
   "editor.suggestOnTriggerCharacters": false,
   "editor.parameterHints.enabled": false,
   "editor.renderWhitespace": "boundary",
@@ -74,7 +74,7 @@
     "editor.defaultFormatter": "golang.go",
     "editor.formatOnSave": false,
     "editor.codeActionsOnSave": {
-      "source.organizeImports": false
+      "source.organizeImports": "never"
     }
   },
 
@@ -110,18 +110,22 @@
   "terminal.integrated.localEchoEnabled": "off",
   "terminal.integrated.persistentSessionReviveProcess": "never",
   "git.openRepositoryInParentFolders": "never",
+  "git.ignoreLimitWarning": true,
   "[python]": {
     "editor.formatOnType": false,
-    "editor.defaultFormatter": "ms-python.black-formatter"
+    "editor.defaultFormatter": "ms-python.black-formatter",
+  },
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportShadowedImports": false
   },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.largeFileOptimizations": false,
   "redhat.telemetry.enabled": false,
-  "xml.server.vmargs": "-Xmx5G",
   "editor.unicodeHighlight.invisibleCharacters": true,
   "notebook.output.textLineLimit": 128,
+  "notebook.output.wordWrap": true,
   "extensions.experimental.affinity": {
     "asvetliakov.vscode-neovim": 1
   },
@@ -133,7 +137,8 @@
     "FIXME:",
     "TODO:",
     "XXX:",
-    "???:"
+    "???:",
+    "COMBAK"
   ],
   "todo-tree.filtering.excludeGlobs": [".git/"],
   "typescript.preferences.importModuleSpecifier": "relative",
@@ -167,5 +172,7 @@
         "workbench.view.search.focus"
       ]
     }
-  }
+  },
+  "go.toolsManagement.autoUpdate": true,
+  "editor.codeActionsOnSave": {}
 }
