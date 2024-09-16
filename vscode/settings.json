@@ -20,6 +20,7 @@
   "editor.autoSurround": "never",
   "editor.occurrencesHighlight": "off",
   "html.autoClosingTags": false,
+  "html.autoCreateQuotes": false,
   "javascript.autoClosingTags": false,
   "typescript.autoClosingTags": false,
   "editor.inlayHints.enabled": "off",
@@ -174,5 +175,5 @@
     }
   },
   "go.toolsManagement.autoUpdate": true,
-  "editor.codeActionsOnSave": {}
+  "editor.codeActionsOnSave": {},
 }
