@@ -167,4 +167,17 @@
     "command": "workbench.action.moveEditorToBelowGroup",
     "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))"
   },
+  /**
+   * Leave cell edit-mode in Jupyter notebooks with Shift+Esc instead of the default Esc.
+   */
+  {
+    "key": "shift+escape",
+    "command": "notebook.cell.quitEdit",
+    "when": "inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !inlineChatFocused"
+  },
+  {
+    "key": "escape",
+    "command": "-notebook.cell.quitEdit",
+    "when": "inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !inlineChatFocused"
+  },
 ]
