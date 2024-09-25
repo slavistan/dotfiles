@@ -37,10 +37,10 @@ dunst &
 sxhkd &
 
 # machine-dependent dwm status bar
-statusbar="$HOME/.local/bin/statusbar"
-if [[ -x "$statusbar" ]]; then
-	( while :; do sleep 0.9; xsetroot -name "$("$statusbar")"; done ) &
-fi
+# statusbar="$HOME/.local/bin/statusbar"
+# if [[ -x "$statusbar" ]]; then
+# 	( while :; do sleep 0.9; xsetroot -name "$("$statusbar")"; done ) &
+# fi
 
 # machine-dependent background image
 bgimg="$XDG_DATA_HOME/desktop-background"
@@ -53,6 +53,7 @@ fi
 ( sleep 3; DISPLAY=:0 setxkbmap k6 )&
 
 # Disable screen blanking
+# TODO: doesn't work
 xset s off
 xset s noblank
 
