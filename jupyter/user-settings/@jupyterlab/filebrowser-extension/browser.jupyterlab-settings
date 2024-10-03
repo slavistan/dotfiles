@@ -4,11 +4,27 @@
     // File Browser settings.
     // *****************************************
 
+    // Use checkboxes to select items
+    // Whether to show checkboxes next to files and folders
+    "showFileCheckboxes": true,
+
+    // Show file size column
+    // Whether to show the file size column
+    "showFileSizeColumn": true,
+
+    // Show full path in browser bread crumbs
+    // Whether to show full path in browser bread crumbs
+    "showFullPath": true,
+
     // Show hidden files
-    // Whether to show hidden files
+    // Whether to show hidden files. The server parameter `ContentsManager.allow_hidden` must be set to `True` to display hidden files.
     "showHiddenFiles": true,
 
     // Show last modified column
     // Whether to show the last modified column
-    "showLastModifiedColumn": false
+    "showLastModifiedColumn": false,
+
+    // When sorting by name, group notebooks before other files
+    // Whether to group the notebooks away from files
+    "sortNotebooksFirst": true
 }
