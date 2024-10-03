@@ -29,6 +29,7 @@
     "strings": "off",
     "other": "off"
   },
+  "editor.foldingStrategy": "auto",
   "editor.wordBasedSuggestions": "off",
   "editor.suggestOnTriggerCharacters": false,
   "editor.parameterHints.enabled": false,
@@ -175,5 +176,11 @@
   "go.toolsManagement.autoUpdate": true,
   "githubPullRequests.fileListLayout": "flat",
   "editor.codeActionsOnSave": {},
-  "github.copilot.editor.enableAutoCompletions": true
+  "github.copilot.editor.enableAutoCompletions": true,
+  "githubPullRequests.pullBranch": "never",
+  "java.configuration.runtimes": [],
+  "jupyter.widgetScriptSources": [
+    "jsdelivr.com",
+    "unpkg.com"
+  ]
 }

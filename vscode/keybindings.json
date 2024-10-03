@@ -180,4 +180,34 @@
     "command": "-notebook.cell.quitEdit",
     "when": "inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !inlineChatFocused"
   },
+  /**
+   * ALT+j: Merge active cell with next cell.
+   * ALT+k: Merge active cell with previous cell.
+   * ALT+l: Split active cell at cursor position.
+   */
+  {
+    "key": "alt+j",
+    "command": "notebook.cell.joinBelow",
+    "when": "notebookEditorFocused"
+  },
+  {
+    "key": "alt+meta+j",
+    "command": "-notebook.cell.joinBelow",
+    "when": "notebookEditorFocused"
+  },
+  {
+    "key": "alt+k",
+    "command": "notebook.cell.joinAbove",
+    "when": "notebookEditorFocused"
+  },
+  {
+    "key": "shift+alt+meta+j",
+    "command": "-notebook.cell.joinAbove",
+    "when": "notebookEditorFocused"
+  },
+  {
+    "key": "alt+l",
+    "command": "-toggleFindInSelection",
+    "when": "editorFocus"
+  },
 ]
