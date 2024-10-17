@@ -69,7 +69,10 @@
   "window.titleBarStyle": "custom",
 
   "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
-  "vscode-neovim.neovimInitVimPaths.linux": "/home/stan/prj/dotfiles/nvim/init.vim",
+  "vscode-neovim.neovimInitVimPaths.linux": "$HOME/prj/dotfiles/nvim/init.vim",
+  "vscode-neovim.logLevel": "debug",
+  "vscode-neovim.logOutputToConsole": true,
+  "vscode-neovim.logPath": "/tmp/vscode-neovim",
 
   "go.useLanguageServer": true,
   "[go]": {

@@ -4,7 +4,7 @@ mod4 + d
 
 # Spawn new terminal.
 mod4 + Return
-	termcwd
+	st
 
 # Spawn a new terminal opening lf immediately.
 # TODO: This prints all kind of nonsense to the shell, due to lfbundle being an alias.
