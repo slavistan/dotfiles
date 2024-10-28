@@ -118,11 +118,13 @@
   "git.ignoreLimitWarning": true,
   "[python]": {
     "editor.formatOnType": false,
-    "editor.defaultFormatter": "ms-python.black-formatter"
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "diffEditor.ignoreTrimWhitespace": false
   },
   "python.analysis.diagnosticSeverityOverrides": {
     "reportShadowedImports": false
   },
+  "python.terminal.activateEnvironment": false,
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
