@@ -1,11 +1,3 @@
-"TODO:
-"
-" - [ ] vim: folds are all opened by default
-" - [ ] vim: Gitgutter is disabled by default
-" - [ ] vim: linewrap is off by default
-
-""" Paths
-
 let g:NVIMHOME=$XDG_CONFIG_HOME . '/nvim'
 
 " Crash if a directory is opened by accident
@@ -15,12 +7,12 @@ for param in argv()
   endif
 endfor
 
-""" Configuration for vscode's neovim plugin
-
+""" Configuration for vscode's neovim plugin (github.com/vscode-neovim/vscode-neovim)
 if exists('g:vscode')
   set clipboard=unnamedplus
   set ignorecase
   set smartcase
+  set noincsearch " Fixes spurious crashes (sometimes?), see issues/2165#issuecomment-2337491521
   set virtualedit=block
 
   nnoremap <Leader>yy ^yg_
@@ -49,10 +41,6 @@ if exists('g:vscode')
 
 else
 
-" TODO:
-"      List number of matches when searching (custom command?)
-"      Incsearch without the adhs jumps
-"      C++: Automatically add comment header for line comments '// ... '
 
 """
 " Settings
