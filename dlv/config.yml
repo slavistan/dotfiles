@@ -1,0 +1,5 @@
+# Maximum number of elements loaded from an array.
+max-array-values: 1000
+
+# Maximum loaded string length.
+max-string-len: 10000

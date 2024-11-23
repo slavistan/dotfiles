@@ -39,8 +39,11 @@
   "editor.snippetSuggestions": "none",
   "editor.guides.indentation": false,
   "editor.formatOnSave": false,
+
   "explorer.confirmDragAndDrop": false,
   "explorer.compactFolders": false,
+  "explorer.autoReveal": false,
+  "explorer.confirmDelete": false,
 
   "debug.onTaskErrors": "showErrors",
   "debug.saveBeforeStart": "none",
@@ -65,7 +68,6 @@
   "workbench.startupEditor": "newUntitledFile",
   "workbench.tree.indent": 18,
   "workbench.tree.renderIndentGuides": "always",
-  "explorer.confirmDelete": false,
   "window.titleBarStyle": "custom",
 
   "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
@@ -116,6 +118,7 @@
   "terminal.integrated.persistentSessionReviveProcess": "never",
   "git.openRepositoryInParentFolders": "never",
   "git.ignoreLimitWarning": true,
+
   "[python]": {
     "editor.formatOnType": false,
     "editor.defaultFormatter": "ms-python.black-formatter",
@@ -125,9 +128,13 @@
     "reportShadowedImports": false
   },
   "python.terminal.activateEnvironment": false,
+  "python.terminal.activateEnvInCurrentTerminal": false,
+  "python.experiments.optOutFrom": ["pythonTerminalEnvVarActivation"],
+
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+
   "editor.largeFileOptimizations": false,
   "redhat.telemetry.enabled": false,
   "editor.unicodeHighlight.invisibleCharacters": true,
@@ -149,14 +156,7 @@
   ],
   "todo-tree.filtering.excludeGlobs": [".git/"],
   "typescript.preferences.importModuleSpecifier": "relative",
-  "explorer.autoReveal": false,
   "files.trimTrailingWhitespace": true,
-  "github.copilot.enable": {
-    "*": false,
-    "plaintext": false,
-    "markdown": false,
-    "scminput": false
-  },
 
   /* Multi-Command macros. See https://github.com/ryuta46/vscode-multi-command.
    * The built-in `runCommands` command to run sequences of commands does not
@@ -181,13 +181,29 @@
   },
   "go.toolsManagement.autoUpdate": true,
 
-  "githubPullRequests.fileListLayout": "flat",
   "editor.codeActionsOnSave": {},
+
   "github.copilot.editor.enableAutoCompletions": true,
+  "github.copilot.enable": {
+    "*": false,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  },
+
+  "githubPullRequests.fileListLayout": "flat",
   "githubPullRequests.pullBranch": "never",
-  "java.configuration.runtimes": [],
   "jupyter.widgetScriptSources": [
     "jsdelivr.com",
     "unpkg.com"
-  ]
+  ],
+  "notebook.editorOptionsCustomizations": {
+    "editor.tabSize": 4,
+    "editor.indentSize": 4,
+    "editor.insertSpaces": true
+  },
+
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
