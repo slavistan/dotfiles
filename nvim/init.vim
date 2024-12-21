@@ -1,11 +1,14 @@
 let g:NVIMHOME=$XDG_CONFIG_HOME . '/nvim'
 
-" Crash if a directory is opened by accident
-for param in argv()
-  if isdirectory(param)
-    quit
-  endif
-endfor
+
+""" Jump to and erasae placeholder (-++-) and enter insert mode
+nnoremap <Leader><Space> /-++-<CR>4x:noh<CR>i
+
+
+augroup highlight_yank
+	autocmd!
+	au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=100}
+augroup END
 
 """ Configuration for vscode's neovim plugin (github.com/vscode-neovim/vscode-neovim)
 if exists('g:vscode')
@@ -34,11 +37,6 @@ if exists('g:vscode')
   Plug 'https://github.com/godlygeek/tabular.git'
   call plug#end()
 
-	augroup highlight_yank
-		autocmd!
-		au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=100}
-	augroup END
-
 else
 
 
@@ -59,6 +57,7 @@ let g:sh_fold_enabled=5 " Must precede fold settings
 set updatetime=100
 set clipboard=unnamedplus " Copy to clipboard
 set foldlevelstart=99 " Open all folds
+set foldlevel=99 " Open all folds
 set foldmethod=syntax
 set noincsearch
 set ignorecase
@@ -73,8 +72,6 @@ set signcolumn=number " integrate signcolumn into linenumber col
 set textwidth=0
 set modeline
 set showbreak=↪
-let mapleader=","
-let maplocalleader="\\"
 
 
 
@@ -174,11 +171,6 @@ let g:gitgutter_sign_modified = '≠≠'
 let g:gitgutter_sign_removed = '--'
 let g:gitgutter_sign_removed_first_line ='--'
 let g:gitgutter_sign_modified_removed = '≠≠'
-
-augroup highlight_yank
-    autocmd!
-    au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=100}
-augroup END
 
 colorscheme milton " postpone loading of colorscheme so that plugins' hi groups will be known
 
