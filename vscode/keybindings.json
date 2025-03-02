@@ -94,6 +94,7 @@
     "key": "ctrl+shift+f5",
     "command": "launches.PythonAttachDebuggerLocalhost56789"
   },
+  /* Nativate search results with ^n, ^p */
   {
     "key": "ctrl+n",
     "command": "multiCommand.nextSearchResult",
@@ -181,6 +182,7 @@
     "when": "inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !inlineChatFocused"
   },
   /**
+   * Jupyter Notebooks:
    * ALT+j: Merge active cell with next cell.
    * ALT+k: Merge active cell with previous cell.
    * ALT+l: Split active cell at cursor position.
@@ -191,6 +193,7 @@
     "when": "notebookEditorFocused"
   },
   {
+    // unbind default
     "key": "alt+meta+j",
     "command": "-notebook.cell.joinBelow",
     "when": "notebookEditorFocused"
@@ -201,6 +204,7 @@
     "when": "notebookEditorFocused"
   },
   {
+    // unbind default
     "key": "shift+alt+meta+j",
     "command": "-notebook.cell.joinAbove",
     "when": "notebookEditorFocused"
@@ -210,4 +214,13 @@
     "command": "-toggleFindInSelection",
     "when": "editorFocus"
   },
+  /*
+    Explorer:
+      - o: Create new file in selected direcotry
+  */
+  {
+    "key": "o",
+    "command": "explorer.newFile",
+    "when": "explorerViewletFocus"
+  }
 ]
