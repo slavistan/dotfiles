@@ -8,6 +8,7 @@
     "**/.DS_Store": false,
     "**/Thumbs.db": false
   },
+  "explorer.excludeGitIgnore": false,
 
   /* Use the system's keyboard layout. Necessary for custom layouts. */
   "keyboard.dispatch": "keyCode",
@@ -144,18 +145,13 @@
     "asvetliakov.vscode-neovim": 1
   },
 
-  "todo-tree.regex.regex": "(?:(?://|#|<!--|;|/\\*\\*?|\\*)\\s*($TAGS)|^\\s*- \\[ \\])",
-  "todo-tree.general.tags": [
-    "BUG:",
-    "HACK:",
-    "FIXME:",
-    "TODO:",
-    "XXX:",
-    "???:",
-    "COMBAK"
-  ],
-  "todo-tree.filtering.excludeGlobs": [".git/"],
+  // ExodiusStudios.comment-anchors extension
+  "commentAnchors.tags.displayInSidebar": false,
+  "commentAnchors.tags.displayInGutter": false,
+  "commentAnchors.epic.provideAutoCompletion": false,
+
   "typescript.preferences.importModuleSpecifier": "relative",
+
   "files.trimTrailingWhitespace": true,
 
   /* Multi-Command macros. See https://github.com/ryuta46/vscode-multi-command.
@@ -177,26 +173,25 @@
         "search.action.focusPreviousSearchResult",
         "workbench.view.search.focus"
       ]
+    },
+    "multiCommand.formatAndSortImports": {
+      "sequence": [
+        "editor.action.formatDocument",
+        "editor.action.organizeImports"
+      ]
     }
   },
   "go.toolsManagement.autoUpdate": true,
 
   "editor.codeActionsOnSave": {},
 
-  "github.copilot.editor.enableAutoCompletions": true,
   "github.copilot.enable": {
-    "*": false,
-    "plaintext": false,
-    "markdown": false,
-    "scminput": false
+    "*": false
+    // "plaintext": false,
+    // "markdown": false,
+    // "scminput": false
   },
 
-  "githubPullRequests.fileListLayout": "flat",
-  "githubPullRequests.pullBranch": "never",
-  "jupyter.widgetScriptSources": [
-    "jsdelivr.com",
-    "unpkg.com"
-  ],
   "notebook.editorOptionsCustomizations": {
     "editor.tabSize": 4,
     "editor.indentSize": 4,
@@ -205,5 +200,8 @@
 
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+
+  /* Search all files when fuzzy-finding a file by its name. */
+  "search.useIgnoreFiles": false
 }

@@ -210,8 +210,6 @@ nvm() {
 	nvm $@
 }
 
-# Pyenv configuration
-
 # Zsh autoenv init.
 source "/usr/local/lib/zsh-autoenv/autoenv.zsh"
 

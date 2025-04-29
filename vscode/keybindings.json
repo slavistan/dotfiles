@@ -214,6 +214,11 @@
     "command": "-toggleFindInSelection",
     "when": "editorFocus"
   },
+  {
+    "key": "ctrl+h",
+    "command": "workbench.action.navigateBack",
+    "when": "editorTextFocus && neovim.init && neovim.mode = 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'"
+  },
   /*
     Explorer:
       - o: Create new file in selected direcotry
@@ -249,5 +254,10 @@
     "key": "ctrl+i",
     "command": "-editor.action.triggerSuggest",
     "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible"
+  },
+  {
+    "key": "ctrl+shift+i",
+    "command": "multiCommand.formatAndSortImports",
+    "when": "editorTextFocus"
   }
 ]

@@ -42,6 +42,11 @@ export __GL_SHADER_DISK_CACHE_PATH=$XDG_CACHE_HOME # nvidia
 export PYTHONPYCACHEPREFIX=/tmp/pycache
 export PYENV_ROOT="$XDG_CACHE_HOME/pyenv" # clean HOME
 
+
+# Pyenv bootstrap for interactive and login shells.
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
+
 # Save user's environment to file for reference by system scripts (e.g. runit, udev)
 # ==================================================================================
 store_env=(
