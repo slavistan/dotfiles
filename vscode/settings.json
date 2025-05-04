@@ -153,7 +153,6 @@
   "commentAnchors.tags.displayInRuler": false,
   "commentAnchors.tags.displayLineNumber": false,
   "commentAnchors.epic.provideAutoCompletion": false,
-  "commentAnchors.workspace.lazyLoad": false,
   "commentAnchors.workspace.excludeFiles": "**/{node_modules,.git,.idea,target,out,build,bin,obj,vendor,.venv,.ruff_cache}/**/*",
 
   "typescript.preferences.importModuleSpecifier": "relative",
