@@ -1,13 +1,13 @@
 {
   /* Show files and directories hidden by vscode's dumb default settings. */
-  "files.exclude": {
-    "**/.git": false,
-    "**/.svm": false,
-    "**/.hg": false,
-    "**/CVS": false,
-    "**/.DS_Store": false,
-    "**/Thumbs.db": false
-  },
+  "files.exclude": {}, // "**/*",
+//     "**/.git": false,
+//     "**/.svm": false,
+//     "**/.hg": false,
+//     "**/CVS": false,
+//     "**/.DS_Store": false,
+//     "**/Thumbs.db": false
+  //},
   "explorer.excludeGitIgnore": false,
 
   /* Use the system's keyboard layout. Necessary for custom layouts. */
@@ -70,10 +70,12 @@
   "workbench.tree.indent": 18,
   "workbench.tree.renderIndentGuides": "always",
   "window.titleBarStyle": "custom",
+  "window.customMenuBarAltFocus": false,
+  "window.enableMenuBarMnemonics": false,
+  "window.menuBarVisibility": "hidden",
 
   "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
   "vscode-neovim.neovimInitVimPaths.linux": "$HOME/prj/dotfiles/nvim/init.vim",
-  "vscode-neovim.logLevel": "debug",
   "vscode-neovim.logOutputToConsole": true,
   "vscode-neovim.logPath": "/tmp/vscode-neovim",
 
@@ -148,7 +150,11 @@
   // ExodiusStudios.comment-anchors extension
   "commentAnchors.tags.displayInSidebar": false,
   "commentAnchors.tags.displayInGutter": false,
+  "commentAnchors.tags.displayInRuler": false,
+  "commentAnchors.tags.displayLineNumber": false,
   "commentAnchors.epic.provideAutoCompletion": false,
+  "commentAnchors.workspace.lazyLoad": false,
+  "commentAnchors.workspace.excludeFiles": "**/{node_modules,.git,.idea,target,out,build,bin,obj,vendor,.venv,.ruff_cache}/**/*",
 
   "typescript.preferences.importModuleSpecifier": "relative",
 

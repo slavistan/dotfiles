@@ -41,6 +41,7 @@ export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter" # clean $HOME
 export __GL_SHADER_DISK_CACHE_PATH=$XDG_CACHE_HOME # nvidia
 export PYTHONPYCACHEPREFIX=/tmp/pycache
 export PYENV_ROOT="$XDG_CACHE_HOME/pyenv" # clean HOME
+export RUFF_CACHE_DIR="$XDG_CACHE_HOME/ruff" # don't pollute python projects with ruff caches.
 
 
 # Pyenv bootstrap for interactive and login shells.

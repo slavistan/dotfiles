@@ -219,6 +219,24 @@
     "command": "workbench.action.navigateBack",
     "when": "editorTextFocus && neovim.init && neovim.mode = 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'"
   },
+  /* Increase/decrease active vertical split's width. */
+  {
+      "key": "alt+f",
+      "command": "workbench.action.toggleEditorWidths",
+      "when": "editorTextFocus",
+  },
+  /* Increase/decrease bottom panel height. */
+  {
+      "key": "alt+f",
+      "command": "workbench.action.toggleMaximizedPanel",
+      "when": "panelFocus",
+  },
+  /* Format and sort imports with one keypress. */
+  {
+    "key": "ctrl+shift+i",
+    "command": "multiCommand.formatAndSortImports",
+    "when": "editorTextFocus"
+  },
   /*
     Explorer:
       - o: Create new file in selected direcotry
@@ -255,9 +273,4 @@
     "command": "-editor.action.triggerSuggest",
     "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible"
   },
-  {
-    "key": "ctrl+shift+i",
-    "command": "multiCommand.formatAndSortImports",
-    "when": "editorTextFocus"
-  }
 ]
