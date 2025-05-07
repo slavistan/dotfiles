@@ -1,7 +1,7 @@
 paru -S visual-studio-code-bin
 
 code --install-extension --force asvetliakov.vscode-neovim
-
+code --install-extension --force exodiusstudios.comment-anchors
 code --install-extension --force dbaeumer.vscode-eslint
 code --install-extension --force esbenp.prettier-vscode
 code --install-extension --force usernamehw.errorlens

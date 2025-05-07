@@ -1,12 +1,12 @@
 {
   /* Show files and directories hidden by vscode's dumb default settings. */
   "files.exclude": {}, // "**/*",
-//     "**/.git": false,
-//     "**/.svm": false,
-//     "**/.hg": false,
-//     "**/CVS": false,
-//     "**/.DS_Store": false,
-//     "**/Thumbs.db": false
+  //     "**/.git": false,
+  //     "**/.svm": false,
+  //     "**/.hg": false,
+  //     "**/CVS": false,
+  //     "**/.DS_Store": false,
+  //     "**/Thumbs.db": false
   //},
   "explorer.excludeGitIgnore": false,
 
@@ -154,6 +154,13 @@
   "commentAnchors.tags.displayLineNumber": false,
   "commentAnchors.epic.provideAutoCompletion": false,
   "commentAnchors.workspace.excludeFiles": "**/{node_modules,.git,.idea,target,out,build,bin,obj,vendor,.venv,.ruff_cache}/**/*",
+  "commentAnchors.tags.anchors": {
+    "XXX": {
+      "iconColor": "red",
+      "highlightColor": "#F44336",
+      "scope": "workspace"
+    }
+  },
 
   "typescript.preferences.importModuleSpecifier": "relative",
 
