@@ -40,6 +40,7 @@
   "editor.snippetSuggestions": "none",
   "editor.guides.indentation": false,
   "editor.formatOnSave": false,
+  "editor.detectIndentation": false,
 
   "explorer.confirmDragAndDrop": false,
   "explorer.compactFolders": false,
@@ -57,13 +58,6 @@
     disgusting hack. */
     "launches.PythonAttachDebuggerLocalhost56789"
   ],
-
-  /* Keybinds for launch configs. */
-  "launches": {
-    /** Part of the disgusting hack to start debugging session from inside
-    vscode's terminal. */
-    "PythonAttachDebuggerLocalhost56789": "Python: Attach Debugger to localhost:56789"
-  },
 
   "terminal.integrated.shellIntegration.enabled": false,
   "workbench.startupEditor": "newUntitledFile",
@@ -123,8 +117,7 @@
   "git.ignoreLimitWarning": true,
 
   "[python]": {
-    "editor.formatOnType": false,
-    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.defaultFormatter": "charliermarsh.ruff",
     "diffEditor.ignoreTrimWhitespace": false
   },
   "python.analysis.diagnosticSeverityOverrides": {
@@ -139,7 +132,6 @@
   },
 
   "editor.largeFileOptimizations": false,
-  "redhat.telemetry.enabled": false,
   "editor.unicodeHighlight.invisibleCharacters": true,
   "notebook.output.textLineLimit": 128,
   "notebook.output.wordWrap": true,
@@ -215,5 +207,5 @@
   },
 
   /* Search all files when fuzzy-finding a file by its name. */
-  "search.useIgnoreFiles": false
+  "search.useIgnoreFiles": true
 }
