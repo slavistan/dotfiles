@@ -1,13 +1,13 @@
 {
   /* Show files and directories hidden by vscode's dumb default settings. */
-  "files.exclude": {}, // "**/*",
-  //     "**/.git": false,
-  //     "**/.svm": false,
-  //     "**/.hg": false,
-  //     "**/CVS": false,
-  //     "**/.DS_Store": false,
-  //     "**/Thumbs.db": false
-  //},
+  "files.exclude": {
+    "**/.git": false,
+    "**/.svm": false,
+    "**/.hg": false,
+    "**/CVS": false,
+    "**/.DS_Store": false,
+    "**/Thumbs.db": false
+  },
   "explorer.excludeGitIgnore": false,
 
   /* Use the system's keyboard layout. Necessary for custom layouts. */
