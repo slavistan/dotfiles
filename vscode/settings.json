@@ -207,5 +207,8 @@
   },
 
   /* Search all files when fuzzy-finding a file by its name. */
-  "search.useIgnoreFiles": true
+  "search.useIgnoreFiles": true,
+
+  "gitlens.codeLens.authors.enabled": false,
+  "gitlens.codeLens.recentChange.enabled": false
 }
