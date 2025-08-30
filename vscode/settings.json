@@ -208,6 +208,8 @@
 
   /* Search all files when fuzzy-finding a file by its name. */
   "search.useIgnoreFiles": true,
+  "terminal.integrated.gpuAcceleration": "on",
+  "terminal.integrated.enableImages": true,
 
   "gitlens.codeLens.authors.enabled": false,
   "gitlens.codeLens.recentChange.enabled": false
