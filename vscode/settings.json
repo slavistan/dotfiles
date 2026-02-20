@@ -195,5 +195,6 @@
   "terminal.integrated.enableImages": true,
 
   "githubPullRequests.codingAgent.codeLens": false,
-  "chat.viewSessions.orientation": "stacked"
+"chat.viewSessions.orientation": "stacked",
+"editor.aiStats.enabled": false
 }

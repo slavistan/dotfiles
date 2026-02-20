@@ -49,8 +49,8 @@ if [[ -f "$bgimg" ]]; then
 fi
 
 # HACK: Why does this not work without the hack?
-( sleep 3; DISPLAY=:0 xset r rate 150 50 )& # typematic delay and frequency
-( sleep 3; DISPLAY=:0 setxkbmap k6 )&
+# ( sleep 3; DISPLAY=:0 xset r rate 150 50 )& # typematic delay and frequency
+# ( sleep 3; DISPLAY=:0 setxkbmap k6 )&
 
 # Disable screen blanking
 # TODO: doesn't work
