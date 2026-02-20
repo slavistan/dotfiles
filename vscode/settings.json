@@ -191,10 +191,10 @@
 
   /* Search all files when fuzzy-finding a file by its name. */
   "search.useIgnoreFiles": true,
+
   "terminal.integrated.gpuAcceleration": "on",
   "terminal.integrated.enableImages": true,
 
-  "githubPullRequests.codingAgent.codeLens": false,
-"chat.viewSessions.orientation": "stacked",
-"editor.aiStats.enabled": false
+  "chat.viewSessions.orientation": "stacked",
+  "editor.aiStats.enabled": false
 }
