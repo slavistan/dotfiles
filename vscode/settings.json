@@ -34,6 +34,7 @@
   "editor.foldingStrategy": "auto",
   "editor.wordBasedSuggestions": "off",
   "editor.suggestOnTriggerCharacters": false,
+  "editor.suggest.showKeywords": false,
   "editor.parameterHints.enabled": false,
   "editor.renderWhitespace": "boundary",
   "editor.scrollBeyondLastLine": false,
@@ -139,21 +140,6 @@
     "asvetliakov.vscode-neovim": 1
   },
 
-  // ExodiusStudios.comment-anchors extension
-  "commentAnchors.tags.displayInSidebar": false,
-  "commentAnchors.tags.displayInGutter": false,
-  "commentAnchors.tags.displayInRuler": false,
-  "commentAnchors.tags.displayLineNumber": false,
-  "commentAnchors.epic.provideAutoCompletion": false,
-  "commentAnchors.workspace.excludeFiles": "**/{node_modules,.git,.idea,target,out,build,bin,obj,vendor,.venv,.ruff_cache}/**/*",
-  "commentAnchors.tags.anchors": {
-    "XXX": {
-      "iconColor": "red",
-      "highlightColor": "#F44336",
-      "scope": "workspace"
-    }
-  },
-
   "typescript.preferences.importModuleSpecifier": "relative",
 
   "files.trimTrailingWhitespace": true,
@@ -191,9 +177,6 @@
 
   "github.copilot.enable": {
     "*": false
-    // "plaintext": false,
-    // "markdown": false,
-    // "scminput": false
   },
 
   "notebook.editorOptionsCustomizations": {
@@ -212,6 +195,9 @@
   "terminal.integrated.enableImages": true,
 
   "gitlens.codeLens.authors.enabled": false,
-"gitlens.codeLens.recentChange.enabled": false,
-"workbench.editor.enablePreview": false
+  "gitlens.codeLens.recentChange.enabled": false,
+  "workbench.editor.enablePreview": false,
+  "githubPullRequests.codingAgent.codeLens": false,
+  "chat.viewSessions.orientation": "stacked",
+  "editor.aiStats.enabled": false
 }

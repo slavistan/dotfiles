@@ -3,62 +3,103 @@
   /* Unbind conflicting defaults */
   /* *************************** */
   {
+    "key": "ctrl+shift+w",
+    "command": "-workbench.action.closeWindow",
+  },
+  {
     "key": "ctrl+k f12",
     "command": "-editor.action.revealDefinitionAside",
-    "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+    "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor",
   },
   {
     "key": "shift+f12",
     "command": "-goToPreviousReference",
-    "when": "inReferenceSearchEditor || referenceSearchVisible"
+    "when": "inReferenceSearchEditor || referenceSearchVisible",
   },
   {
     "key": "f11",
-    "command": "-workbench.action.toggleFullScreen"
+    "command": "-workbench.action.toggleFullScreen",
   },
   {
     "key": "f11",
     "command": "-workbench.action.debug.stepInto",
-    "when": "debugState != 'inactive'"
+    "when": "debugState != 'inactive'",
   },
   {
     "key": "shift+f12",
     "command": "-editor.action.goToReferences",
-    "when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+    "when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor",
   },
   {
     "key": "ctrl+g",
-    "command": "-workbench.action.terminal.goToRecentDirectory"
+    "command": "-workbench.action.terminal.goToRecentDirectory",
   },
   {
     "key": "ctrl+w",
-    "command": "-workbench.action.closeActiveEditor"
+    "command": "-workbench.action.closeActiveEditor",
   },
   {
     "key": "ctrl+n",
-    "command": "-workbench.action.files.newUntitledFile"
+    "command": "-workbench.action.files.newUntitledFile",
   },
   {
     "key": "ctrl+g",
-    "command": "-workbench.action.gotoLine"
+    "command": "-workbench.action.gotoLine",
   },
   {
     "key": "ctrl-p",
-    "command": "-workbench.action.quickOpen"
+    "command": "-workbench.action.quickOpen",
   },
   {
     "key": "ctrl+r",
-    "command": "-workbench.action.openRecent"
+    "command": "-workbench.action.openRecent",
   },
   {
     "key": "ctrl+shift+m",
-    "command": "-workbench.actions.view.problems"
+    "command": "-workbench.actions.view.problems",
   },
   {
     // FIXME: Ctrl+x schneidet Zeile aus, überschreibt nvim ^x mode.
     //        Unbind geht nicht.
     "key": "ctrl+x",
-    "command": "-editor.action.clipboardCutAction"
+    "command": "-editor.action.clipboardCutAction",
+  },
+  {
+    // unbind default
+    "key": "alt+meta+j",
+    "command": "-notebook.cell.joinBelow",
+    "when": "notebookEditorFocused",
+  },
+  {
+    // unbind default
+    "key": "shift+alt+meta+j",
+    "command": "-notebook.cell.joinAbove",
+    "when": "notebookEditorFocused",
+  },
+  {
+    "key": "ctrl+i",
+    "command": "-workbench.action.chat.startVoiceChat",
+    "when": "chatIsEnabled && hasSpeechProvider && inChatInput && !chatSessionRequestInProgress && !editorFocus && !notebookEditorFocused && !scopedVoiceChatGettingReady && !speechToTextInProgress || chatIsEnabled && hasSpeechProvider && inlineChatFocused && !chatSessionRequestInProgress && !editorFocus && !notebookEditorFocused && !scopedVoiceChatGettingReady && !speechToTextInProgress",
+  },
+  {
+    "key": "ctrl+i",
+    "command": "-workbench.action.chat.stopListeningAndSubmit",
+    "when": "inChatInput && voiceChatInProgress && scopedVoiceChatInProgress == 'editor' || inChatInput && voiceChatInProgress && scopedVoiceChatInProgress == 'inline' || inChatInput && voiceChatInProgress && scopedVoiceChatInProgress == 'quick' || inChatInput && voiceChatInProgress && scopedVoiceChatInProgress == 'view' || inlineChatFocused && voiceChatInProgress && scopedVoiceChatInProgress == 'editor' || inlineChatFocused && voiceChatInProgress && scopedVoiceChatInProgress == 'inline' || inlineChatFocused && voiceChatInProgress && scopedVoiceChatInProgress == 'quick' || inlineChatFocused && voiceChatInProgress && scopedVoiceChatInProgress == 'view'",
+  },
+  {
+    "key": "ctrl+i",
+    "command": "-vscode-neovim.send",
+    "when": "editorTextFocus && neovim.ctrlKeysNormal.i && neovim.init && neovim.mode != 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'",
+  },
+  {
+    "key": "ctrl+i",
+    "command": "-vscode-neovim.send",
+    "when": "editorTextFocus && neovim.ctrlKeysInsert.i && neovim.init && neovim.mode == 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'",
+  },
+  {
+    "key": "ctrl+i",
+    "command": "-editor.action.triggerSuggest",
+    "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible",
   },
 
   /* ******************* */
@@ -67,60 +108,60 @@
   {
     "key": "ctrl+l",
     "command": "editor.action.revealDefinitionAside",
-    "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+    "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor",
   },
   {
     "key": "ctrl+j",
     "command": "editor.action.revealDefinition",
-    "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor"
+    "when": "editorHasDefinitionProvider && editorTextFocus && !isInEmbeddedEditor",
   },
   {
     "key": "ctrl+`",
-    "command": "workbench.action.terminal.focus"
+    "command": "workbench.action.terminal.focus",
   },
   {
     "key": "ctrl+`",
     "command": "workbench.action.focusActiveEditorGroup",
-    "when": "terminalFocus"
+    "when": "terminalFocus",
   },
   {
     "key": "ctrl+k ctrl+m",
-    "command": "editor.action.format"
+    "command": "editor.action.format",
   },
   {
     /* Choose obscure hotkey to bind attach-to-debugger config to. To be used
      * by xdotool to mimick the missing vscode cli integration so we can just
      * start a debugging process via the shell. Utterly retarded. */
     "key": "ctrl+shift+f5",
-    "command": "launches.PythonAttachDebuggerLocalhost56789"
+    "command": "launches.PythonAttachDebuggerLocalhost56789",
   },
   /* Nativate search results with ^n, ^p */
   {
     "key": "ctrl+n",
     "command": "multiCommand.nextSearchResult",
-    "when": "sideBarFocus && activeViewlet == 'workbench.view.search'"
+    "when": "sideBarFocus && activeViewlet == 'workbench.view.search'",
   },
   {
     "key": "ctrl+p",
     "command": "multiCommand.previousSearchResult",
-    "when": "sideBarFocus && activeViewlet == 'workbench.view.search'"
+    "when": "sideBarFocus && activeViewlet == 'workbench.view.search'",
   },
   {
     // FIXME: Ctrl+r doesn't work :( have to use alt+r
     "key": "ctrl+r",
     "command": "toggleSearchEditorRegex",
-    "when": "sideBarFocus && activeViewlet == 'workbench.view.search'"
+    "when": "sideBarFocus && activeViewlet == 'workbench.view.search'",
   },
   {
     /* Show and hide sidebar. */
     "key": "ctrl+shift+m",
-    "command": "workbench.action.toggleSidebarVisibility"
+    "command": "workbench.action.toggleSidebarVisibility",
   },
   {
     /* Place focus on editor. Used to jump from sidebar focus to the editor. */
     "key": "ctrl+shift+q",
     "command": "workbench.action.focusActiveEditorGroup",
-    "when": "!editorTextFocus"
+    "when": "!editorTextFocus",
   },
   /**
    * Navigate between editor groups with ctrl+w and vim-keys.
@@ -128,22 +169,22 @@
   {
     "key": "ctrl+w l",
     "command": "workbench.action.focusRightGroupWithoutWrap",
-    "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))"
+    "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))",
   },
   {
     "key": "ctrl+w h",
     "command": "workbench.action.focusLeftGroupWithoutWrap",
-    "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))"
+    "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))",
   },
   {
     "key": "ctrl+w k",
     "command": "workbench.action.focusAboveGroupWithoutWrap",
-    "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))"
+    "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))",
   },
   {
     "key": "ctrl+w j",
     "command": "workbench.action.focusBelowGroupWithoutWrap",
-    "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))"
+    "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))",
   },
   /**
    * Move active editor between editor groups with ctrl+w and ctrl+vim-keys.
@@ -151,22 +192,22 @@
   {
     "key": "ctrl+w ctrl+l",
     "command": "workbench.action.moveEditorToRightGroup",
-    "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))"
+    "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))",
   },
   {
     "key": "ctrl+w ctrl+h",
     "command": "workbench.action.moveEditorToLeftGroup",
-    "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))"
+    "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))",
   },
   {
     "key": "ctrl+w ctrl+k",
     "command": "workbench.action.moveEditorToAboveGroup",
-    "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))"
+    "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))",
   },
   {
     "key": "ctrl+w ctrl+j",
     "command": "workbench.action.moveEditorToBelowGroup",
-    "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))"
+    "when": "!terminalFocus && (( editorFocus && neovim.mode == normal ) || ( activeEditor == workbench.editor.notebook && neovim.mode != insert ))",
   },
   /**
    * Leave cell edit-mode in Jupyter notebooks with Shift+Esc instead of the default Esc.
@@ -174,12 +215,12 @@
   {
     "key": "shift+escape",
     "command": "notebook.cell.quitEdit",
-    "when": "inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !inlineChatFocused"
+    "when": "inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !inlineChatFocused",
   },
   {
     "key": "escape",
     "command": "-notebook.cell.quitEdit",
-    "when": "inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !inlineChatFocused"
+    "when": "inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !inlineChatFocused",
   },
   /**
    * Jupyter Notebooks:
@@ -190,52 +231,40 @@
   {
     "key": "alt+j",
     "command": "notebook.cell.joinBelow",
-    "when": "notebookEditorFocused"
-  },
-  {
-    // unbind default
-    "key": "alt+meta+j",
-    "command": "-notebook.cell.joinBelow",
-    "when": "notebookEditorFocused"
+    "when": "notebookEditorFocused",
   },
   {
     "key": "alt+k",
     "command": "notebook.cell.joinAbove",
-    "when": "notebookEditorFocused"
-  },
-  {
-    // unbind default
-    "key": "shift+alt+meta+j",
-    "command": "-notebook.cell.joinAbove",
-    "when": "notebookEditorFocused"
+    "when": "notebookEditorFocused",
   },
   {
     "key": "alt+l",
     "command": "-toggleFindInSelection",
-    "when": "editorFocus"
+    "when": "editorFocus",
   },
   {
     "key": "ctrl+h",
     "command": "workbench.action.navigateBack",
-    "when": "editorTextFocus && neovim.init && neovim.mode = 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'"
+    "when": "editorTextFocus && neovim.init && neovim.mode = 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'",
   },
   /* Increase/decrease active vertical split's width. */
   {
-      "key": "alt+f",
-      "command": "workbench.action.toggleEditorWidths",
-      "when": "editorTextFocus",
+    "key": "alt+f",
+    "command": "workbench.action.toggleEditorWidths",
+    "when": "editorTextFocus",
   },
   /* Increase/decrease bottom panel height. */
   {
-      "key": "alt+f",
-      "command": "workbench.action.toggleMaximizedPanel",
-      "when": "panelFocus",
+    "key": "alt+f",
+    "command": "workbench.action.toggleMaximizedPanel",
+    "when": "panelFocus",
   },
   /* Format and sort imports with one keypress. */
   {
     "key": "ctrl+shift+i",
     "command": "multiCommand.formatAndSortImports",
-    "when": "editorTextFocus"
+    "when": "editorTextFocus",
   },
   /*
     Explorer:
@@ -247,30 +276,4 @@
   //   "command": "explorer.newFile",
   //   "when": "explorerViewletFocus"
   // },
-  /* Disable defaults */
-  {
-    "key": "ctrl+i",
-    "command": "-workbench.action.chat.startVoiceChat",
-    "when": "chatIsEnabled && hasSpeechProvider && inChatInput && !chatSessionRequestInProgress && !editorFocus && !notebookEditorFocused && !scopedVoiceChatGettingReady && !speechToTextInProgress || chatIsEnabled && hasSpeechProvider && inlineChatFocused && !chatSessionRequestInProgress && !editorFocus && !notebookEditorFocused && !scopedVoiceChatGettingReady && !speechToTextInProgress"
-  },
-  {
-    "key": "ctrl+i",
-    "command": "-workbench.action.chat.stopListeningAndSubmit",
-    "when": "inChatInput && voiceChatInProgress && scopedVoiceChatInProgress == 'editor' || inChatInput && voiceChatInProgress && scopedVoiceChatInProgress == 'inline' || inChatInput && voiceChatInProgress && scopedVoiceChatInProgress == 'quick' || inChatInput && voiceChatInProgress && scopedVoiceChatInProgress == 'view' || inlineChatFocused && voiceChatInProgress && scopedVoiceChatInProgress == 'editor' || inlineChatFocused && voiceChatInProgress && scopedVoiceChatInProgress == 'inline' || inlineChatFocused && voiceChatInProgress && scopedVoiceChatInProgress == 'quick' || inlineChatFocused && voiceChatInProgress && scopedVoiceChatInProgress == 'view'"
-  },
-  {
-    "key": "ctrl+i",
-    "command": "-vscode-neovim.send",
-    "when": "editorTextFocus && neovim.ctrlKeysNormal.i && neovim.init && neovim.mode != 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'"
-  },
-  {
-    "key": "ctrl+i",
-    "command": "-vscode-neovim.send",
-    "when": "editorTextFocus && neovim.ctrlKeysInsert.i && neovim.init && neovim.mode == 'insert' && editorLangId not in 'neovim.editorLangIdExclusions'"
-  },
-  {
-    "key": "ctrl+i",
-    "command": "-editor.action.triggerSuggest",
-    "when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible"
-  },
 ]

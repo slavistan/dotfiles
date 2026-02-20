@@ -2,5 +2,9 @@
   "OPEN_ON_STARTUP": false,
   "MINIMIZE_TO_TRAY": false,
   "IS_MAXIMIZED": false,
-  "IS_MINIMIZED": false
+  "IS_MINIMIZED": false,
+  "BACKGROUND_COLOR": "#121214",
+  "offloadAdmControls": true,
+  "enableHardwareAcceleration": true,
+  "chromiumSwitches": {}
 }
