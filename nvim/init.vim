@@ -4,6 +4,28 @@ let g:NVIMHOME=$XDG_CONFIG_HOME . '/nvim'
 """ Jump to and erasae placeholder (-++-) and enter insert mode
 nnoremap <Leader><Space> /-++-<CR>4x:noh<CR>i
 
+nnoremap <Leader>yy ^yg_
+nnoremap <Leader>dd ^dg_
+
+function! s:real_path(path) abort
+  let l:path = a:path
+
+  " VS Code Remote SSH URI:
+  " vscode-remote://ssh-remote%2Bhost/home/user/file
+  if l:path =~# '^vscode-remote://'
+    let l:path = substitute(l:path, '^vscode-remote://[^/]*/', '/', '')
+  endif
+
+  return l:path
+endfunction
+
+command! CopyRelativeFilepath let @+ = fnamemodify(<SID>real_path(expand('%')), ':.') | echo 'Copied: ' . @+
+command! CopyAbsoluteFilepath let @+ = <SID>real_path(expand('%:p')) | echo 'Copied: ' . @+
+command! CopyFilename         let @+ = expand('%:t') | echo 'Copied: ' . @+
+
+nnoremap <Leader>crp :CopyRelativeFilepath<CR>
+nnoremap <Leader>cap :CopyAbsoluteFilepath<CR>
+nnoremap <Leader>cn :CopyFilename<CR>
 
 augroup highlight_yank
 	autocmd!
@@ -94,31 +116,10 @@ set tabstop=4 softtabstop=4 shiftwidth=4
 " set autoindent " Keep indentation level for wrapped lines
 set breakindent " Wrapped lines preserve indentation
 
-"""
-" Plugins
-"""
-
-" vim-pandoc et al.
-let g:pandoc#spell#enabled = 0
-let g:pandoc#syntax#conceal#use = 0
-let g:pandoc#syntax#codeblocks#embeds#langs = ['python', 'R=r', 'bash=sh', 'lua', 'sqlhana']
-
-
-execute 'call plug#begin(''' . g:NVIMHOME . '/plug-plugins'')'
-Plug 'https://github.com/vim-pandoc/vim-pandoc-syntax.git'
-Plug 'https://github.com/vim-pandoc/vim-pandoc.git'
-Plug 'https://github.com/airblade/vim-gitgutter.git'
-Plug 'https://github.com/godlygeek/tabular.git'
-Plug 'https://github.com/lukelbd/vim-tabline.git'
-Plug 'https://github.com/dbridges/vim-markdown-runner.git'
-Plug 'https://github.com/tpope/vim-commentary'
-call plug#end()
 
 """
 " Key mappings
 """
-nnoremap <Leader>yy ^yg_
-nnoremap <Leader>dd ^dg_
 
 " Use regular movement keys to navigate normally across wrapped lines
 noremap <buffer> <silent> k gk
@@ -146,31 +147,6 @@ function! SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
-
-"""
-" Git + gitgutter
-"""
-let g:gitgutter_enabled=0 " disable by default
-let g:gitgutter_highlight_lines=1 " highlight lines by default
-" toggle on/off
-nnoremap <Leader>gg :GitGutterToggle<CR>
-" toggle folding of unchanged lines
-nnoremap <Leader>gi :GitGutterFold<CR>
-nnoremap <Leader>gn :GitGutterNextHunk<CR>
-nnoremap <Leader>gN :GitGutterPrevHunk<CR>
-nnoremap <Leader>gs :GitGutterStageHunk<CR>
-nnoremap <Leader>gu :GitGutterUndoHunk<CR>
-" reView a hunk in split screen
-nnoremap <Leader>gv :GitGutterPreviewHunk<CR>
-nnoremap <Leader>gc :call VimtigCommit()<CR>
-nnoremap <Leader>ga :call VimtigStageFullBuffer()<CR>
-nnoremap <Leader>gp :call VimtigPush()<CR>
-
-let g:gitgutter_sign_added = '++'
-let g:gitgutter_sign_modified = '≠≠'
-let g:gitgutter_sign_removed = '--'
-let g:gitgutter_sign_removed_first_line ='--'
-let g:gitgutter_sign_modified_removed = '≠≠'
 
 colorscheme milton " postpone loading of colorscheme so that plugins' hi groups will be known
 
