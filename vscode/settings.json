@@ -200,5 +200,6 @@
   "workbench.editor.enablePreview": false,
   "githubPullRequests.codingAgent.codeLens": false,
   "chat.viewSessions.orientation": "stacked",
-  "editor.aiStats.enabled": false
+"editor.aiStats.enabled": false,
+"claudeCode.preferredLocation": "sidebar"
 }
