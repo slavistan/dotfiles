@@ -201,5 +201,6 @@
   "githubPullRequests.codingAgent.codeLens": false,
   "chat.viewSessions.orientation": "stacked",
 "editor.aiStats.enabled": false,
-"claudeCode.preferredLocation": "sidebar"
+"claudeCode.preferredLocation": "sidebar",
+"claudeCode.selectedModel": "opus"
 }

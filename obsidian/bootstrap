@@ -1,0 +1,1 @@
+ln -sf "$(realpath open-claude.sh)" "$HOME/.local/bin"

@@ -7,10 +7,8 @@ mod4 + Return
 	st
 
 # Spawn a new terminal opening lf immediately.
-# TODO: This prints all kind of nonsense to the shell, due to lfbundle being an alias.
-#       Implement a --nohist option in zshxi and return here.
 mod4 + ctrl + Return
-	zshxi <<<lfbundle
+	open-claude.sh
 
 # Open rofimoji.
 mod4 + shift + m
