@@ -30,7 +30,7 @@ spawn_claude_tui() {
 	instruction="$1"
 
 	vault_root="$(obsidian vault info=path)"
-	"$TERMINAL" -g 100x30 -c floating -e \
+	"$TERMINAL" -e \
 		zsh -ic 'cd -- "$1" && exec claude "$2"' zsh "$vault_root" "$instruction" &
 	sleep 0.2
 	wid="$(xdotool search --class "floating" | tail -n1)"
