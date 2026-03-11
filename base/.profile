@@ -48,13 +48,7 @@ export RUFF_CACHE_DIR="$XDG_CACHE_HOME/ruff" # don't pollute python projects wit
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
 
-# Save user's environment to file for reference by system scripts (e.g. runit, udev)
-# ==================================================================================
-store_env=(
-	BROWSER DOTFILES EDITOR GOPATH GTK_MODULES HOME JUPYTER_CONFIG_DIR
-	LANG LC_COLLATE LC_NUMERIC LOGNAME MAIL MANPAGER PAGER PATH SHELL TERM
-	TERMINAL TZ USER XAUTHORITY XDG_CACHE_HOME XDG_CONFIG_HOME
-	XDG_DATA_HOME XDG_RUNTIME_DIR XDG_STATE_HOME ZDOTDIR
-	__GL_SHADER_DISK_CACHE_PATH
-)
-env | grep -E "^(${(j:=|:)store_env})" >"$HOME/.environment" # that's a zsh-ism
+
+# Dart toolschain
+[ -d "$HOME/.pub-cache/bin" ] && export PATH="$HOME/.pub-cache/bin:$PATH"
+
