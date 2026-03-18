@@ -55,6 +55,59 @@ if exists('g:vscode')
 	nnoremap <Tab> :Tabnext<CR>
 	nnoremap <S-Tab> :Tabprev<CR>
 
+  " Hide diagnostic squiggles in insert mode by making them transparent
+  lua << EOF
+  local vscode = require('vscode')
+
+  local function set_diagnostics(visible)
+    local js = [[
+      const config = vscode.workspace.getConfiguration('workbench');
+      const current = config.get('colorCustomizations') || {};
+      const updated = { ...current };
+      const keys = [
+        'editorError.foreground',
+        'editorWarning.foreground',
+        'editorInfo.foreground',
+        'editorHint.foreground',
+        'editorError.background',
+        'editorWarning.background',
+        'editorInfo.background',
+        'editorHint.background',
+        'errorLens.errorForeground',
+        'errorLens.errorBackground',
+        'errorLens.errorForegroundLight',
+        'errorLens.warningForeground',
+        'errorLens.warningBackground',
+        'errorLens.warningForegroundLight',
+        'errorLens.infoForeground',
+        'errorLens.infoBackground',
+        'errorLens.infoForegroundLight',
+        'errorLens.hintForeground',
+        'errorLens.hintBackground',
+        'errorLens.hintForegroundLight',
+        'errorLens.statusBarErrorForeground',
+        'errorLens.statusBarWarningForeground',
+        'errorLens.statusBarInfoForeground',
+        'errorLens.statusBarHintForeground',
+      ];
+      if (args) {
+        for (const k of keys) delete updated[k];
+      } else {
+        for (const k of keys) updated[k] = '#00000000';
+      }
+      await config.update('colorCustomizations', updated, vscode.ConfigurationTarget.Global);
+    ]]
+    vscode.eval_async(js, { args = visible })
+  end
+
+  vim.api.nvim_create_autocmd('InsertEnter', {
+    callback = function() set_diagnostics(false) end,
+  })
+  vim.api.nvim_create_autocmd('InsertLeave', {
+    callback = function() set_diagnostics(true) end,
+  })
+EOF
+
   execute 'call plug#begin(''' . g:NVIMHOME . '/plug-plugins'')'
   Plug 'https://github.com/godlygeek/tabular.git'
   call plug#end()

@@ -6,7 +6,7 @@
     "**/.hg": false,
     "**/CVS": false,
     "**/.DS_Store": false,
-    "**/Thumbs.db": false
+    "**/Thumbs.db": false,
   },
   "explorer.excludeGitIgnore": false,
 
@@ -22,14 +22,13 @@
   "editor.occurrencesHighlight": "off",
   "html.autoClosingTags": false,
   "html.autoCreateQuotes": false,
-  "javascript.autoClosingTags": false,
-  "typescript.autoClosingTags": false,
+  "js/ts.autoClosingTags.enabled": false,
   "editor.inlayHints.enabled": "off",
   "editor.minimap.enabled": false,
   "editor.quickSuggestions": {
     "comments": "off",
     "strings": "off",
-    "other": "off"
+    "other": "off",
   },
   "editor.foldingStrategy": "auto",
   "editor.wordBasedSuggestions": "off",
@@ -54,10 +53,6 @@
   "terminal.integrated.commandsToSkipShell": [
     /* Pass ctrl+p to shell. By default, this would open the command prompt. */
     "-workbench.action.quickOpen",
-
-    /* Enable hotkeys for debug configurations while in terminal. Part of a
-    disgusting hack. */
-    "launches.PythonAttachDebuggerLocalhost56789"
   ],
 
   "terminal.integrated.shellIntegration.enabled": false,
@@ -79,14 +74,14 @@
     "editor.defaultFormatter": "golang.go",
     "editor.formatOnSave": false,
     "editor.codeActionsOnSave": {
-      "source.organizeImports": "never"
-    }
+      "source.organizeImports": "never",
+    },
   },
 
   "javascript.suggest.names": false,
   "javascript.updateImportsOnFileMove.enabled": "never",
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "editor.fontFamily": "Inconsolata",
   "jupyter.askForKernelRestart": false,
@@ -94,21 +89,21 @@
   "debug.javascript.autoAttachFilter": "disabled",
   "notebook.cellToolbarLocation": {
     "default": "right",
-    "jupyter-notebook": "right"
+    "jupyter-notebook": "right",
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "files.associations": {
-    "log": "plaintext"
+    "log": "plaintext",
   },
   "editor.unicodeHighlight.ambiguousCharacters": false,
 
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.enablePersistentSessions": false,
@@ -119,17 +114,17 @@
 
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff",
-    "diffEditor.ignoreTrimWhitespace": false
+    "diffEditor.ignoreTrimWhitespace": false,
   },
   "python.analysis.diagnosticSeverityOverrides": {
-    "reportShadowedImports": false
+    "reportShadowedImports": false,
   },
   "python.terminal.activateEnvironment": false,
   "python.terminal.activateEnvInCurrentTerminal": false,
   "python.experiments.optOutFrom": ["pythonTerminalEnvVarActivation"],
 
   "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
 
   "editor.largeFileOptimizations": false,
@@ -137,7 +132,7 @@
   "notebook.output.textLineLimit": 128,
   "notebook.output.wordWrap": true,
   "extensions.experimental.affinity": {
-    "asvetliakov.vscode-neovim": 1
+    "asvetliakov.vscode-neovim": 1,
   },
 
   "typescript.preferences.importModuleSpecifier": "relative",
@@ -154,39 +149,39 @@
       "interval": 128,
       "sequence": [
         "search.action.focusNextSearchResult",
-        "workbench.view.search.focus"
-      ]
+        "workbench.view.search.focus",
+      ],
     },
     "multiCommand.previousSearchResult": {
       "interval": 128,
       "sequence": [
         "search.action.focusPreviousSearchResult",
-        "workbench.view.search.focus"
-      ]
+        "workbench.view.search.focus",
+      ],
     },
     "multiCommand.formatAndSortImports": {
       "sequence": [
         "editor.action.formatDocument",
-        "editor.action.organizeImports"
-      ]
-    }
+        "editor.action.organizeImports",
+      ],
+    },
   },
   "go.toolsManagement.autoUpdate": true,
 
   "editor.codeActionsOnSave": {},
 
   "github.copilot.enable": {
-    "*": false
+    "*": false,
   },
 
   "notebook.editorOptionsCustomizations": {
     "editor.tabSize": 4,
     "editor.indentSize": 4,
-    "editor.insertSpaces": true
+    "editor.insertSpaces": true,
   },
 
   "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
 
   /* Search all files when fuzzy-finding a file by its name. */
@@ -195,12 +190,14 @@
   "terminal.integrated.gpuAcceleration": "on",
   "terminal.integrated.enableImages": true,
 
-  "gitlens.codeLens.authors.enabled": false,
-  "gitlens.codeLens.recentChange.enabled": false,
   "workbench.editor.enablePreview": false,
-  "githubPullRequests.codingAgent.codeLens": false,
   "chat.viewSessions.orientation": "stacked",
-"editor.aiStats.enabled": false,
-"claudeCode.preferredLocation": "sidebar",
-"claudeCode.selectedModel": "opus"
+  "editor.aiStats.enabled": false,
+  "claudeCode.preferredLocation": "sidebar",
+  "claudeCode.selectedModel": "opus[1m]",
+  "task.allowAutomaticTasks": "off",
+  "[dart]": {
+    "editor.defaultFormatter": "Dart-Code.dart-code",
+},
+"workbench.colorCustomizations": {},
 }
