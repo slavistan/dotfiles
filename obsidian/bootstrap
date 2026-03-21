@@ -1,1 +1,4 @@
+# obsidian installieren
+# plugins installieren
+# ... Rest macht sync .. oder sind die Plugins auch synced?
 ln -sf "$(realpath open-claude.sh)" "$HOME/.local/bin"

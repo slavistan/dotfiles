@@ -195,7 +195,7 @@
   "editor.aiStats.enabled": false,
   "claudeCode.preferredLocation": "sidebar",
   "claudeCode.selectedModel": "opus[1m]",
-  "task.allowAutomaticTasks": "off",
+  "task.allowAutomaticTasks": "on",
   "[dart]": {
     "editor.defaultFormatter": "Dart-Code.dart-code",
 },
