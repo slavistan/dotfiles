@@ -1,4 +1,6 @@
 # obsidian installieren
 # plugins installieren
+# - hotreload
+# - snippetctl plugin (eigenes)
 # ... Rest macht sync .. oder sind die Plugins auch synced?
 ln -sf "$(realpath open-claude.sh)" "$HOME/.local/bin"
