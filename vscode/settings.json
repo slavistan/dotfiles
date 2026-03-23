@@ -200,4 +200,5 @@
     "editor.defaultFormatter": "Dart-Code.dart-code",
 },
 "workbench.colorCustomizations": {},
+"editor.dragAndDrop": false,
 }
