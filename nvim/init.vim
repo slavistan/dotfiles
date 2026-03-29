@@ -100,12 +100,11 @@ if exists('g:vscode')
     vscode.eval_async(js, { args = visible })
   end
 
-  vim.api.nvim_create_autocmd('InsertEnter', {
-    callback = function() set_diagnostics(false) end,
-  })
-  vim.api.nvim_create_autocmd('InsertLeave', {
-    callback = function() set_diagnostics(true) end,
-  })
+  local diagnostics_visible = true
+  vim.keymap.set('n', '<leader>d', function()
+    diagnostics_visible = not diagnostics_visible
+    set_diagnostics(diagnostics_visible)
+  end)
 EOF
 
   execute 'call plug#begin(''' . g:NVIMHOME . '/plug-plugins'')'

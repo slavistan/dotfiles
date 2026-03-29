@@ -193,12 +193,16 @@
   "workbench.editor.enablePreview": false,
   "chat.viewSessions.orientation": "stacked",
   "editor.aiStats.enabled": false,
-  "claudeCode.preferredLocation": "sidebar",
+  "claudeCode.preferredLocation": "panel",
   "claudeCode.selectedModel": "opus[1m]",
   "task.allowAutomaticTasks": "on",
   "[dart]": {
     "editor.defaultFormatter": "Dart-Code.dart-code",
-},
-"workbench.colorCustomizations": {},
-"editor.dragAndDrop": false,
+  },
+  "workbench.colorCustomizations": {},
+  "editor.dragAndDrop": false,
+  "json.schemaDownload.trustedDomains": {
+    "https://aka.ms/codetour-schema": true,
+  },
+  "codetour.showMarkers": false,
 }
