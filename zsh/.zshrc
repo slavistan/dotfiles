@@ -128,7 +128,19 @@ mkcd() {
 }
 
 mkcdt() {
-  cd $(mktemp -d)
+	dirname_="$(date +"%Y-%m-%dT%H:%M:%S")"
+	tmpdir="/tmp/$dirname_"
+	if [[ -d "$tmpdir" ]]; then
+		echo "'$tmpdir' exists. Abort." >&2
+		return 1
+	fi
+	mkdir "$tmpdir"
+	cd "$tmpdir"
+
+	if xhost >/dev/null 2>&1; then
+		notify-send "Copied '$tmpdir' to clipboard."
+		xclip -selection clipboard <<<"$tmpdir"
+	fi
 }
 
 gsap() {

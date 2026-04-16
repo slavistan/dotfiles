@@ -201,8 +201,5 @@
   },
   "workbench.colorCustomizations": {},
   "editor.dragAndDrop": false,
-  "json.schemaDownload.trustedDomains": {
-    "https://aka.ms/codetour-schema": true,
-  },
-  "codetour.showMarkers": false,
+  "c4.decorations.enabled": "off",
 }
