@@ -128,7 +128,7 @@ mkcd() {
 }
 
 mkcdt() {
-	dirname_="$(date +"%Y-%m-%dT%H:%M:%S")"
+	dirname_="$(date +"%Y-%m-%dT%H-%M-%S")"  # must not contain colons
 	tmpdir="/tmp/$dirname_"
 	if [[ -d "$tmpdir" ]]; then
 		echo "'$tmpdir' exists. Abort." >&2
