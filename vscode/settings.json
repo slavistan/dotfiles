@@ -199,7 +199,5 @@
   "[dart]": {
     "editor.defaultFormatter": "Dart-Code.dart-code",
   },
-  "workbench.colorCustomizations": {},
   "editor.dragAndDrop": false,
-  "c4.decorations.enabled": "off",
 }

@@ -1,0 +1,10 @@
+# Todos
+
+- Hintergrundfarbe
+- neuer Standard: ctrl+shift als Modifier
+- nerd font für coole Symbole in lf
+- tty-Prefix aus PS1 entfernen, nutze ich nicht
+- info:
+	- mod+q -> killt window
+	- mod+{1,2,3,..} -> wechselt zwischen windows 
+- fokuswechsel mulit-window mittels mod+jk (wie dwm)
