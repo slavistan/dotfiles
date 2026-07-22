@@ -33,6 +33,8 @@ augroup highlight_yank
 augroup END
 
 """ Configuration for vscode's neovim plugin (github.com/vscode-neovim/vscode-neovim)
+" FIXME: Das sollte in vscode/ leben und als eigenes Plugin
+"        Auch den anderen Vscode Rotz hier mitnehmen
 if exists('g:vscode')
   set clipboard=unnamedplus
   set ignorecase
