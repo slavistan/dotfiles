@@ -55,6 +55,14 @@ if exists('g:vscode')
 	nnoremap <Tab> :Tabnext<CR>
 	nnoremap <S-Tab> :Tabprev<CR>
 
+  " Jupyter: Zell-Output ein-/ausklappen (nur in Notebookzellen)
+  function! s:toggle_cell_output() abort
+    if bufname('%') =~# '^vscode-notebook-cell:'
+      call luaeval("require('vscode').action('notebook.cell.toggleOutputs')")
+    endif
+  endfunction
+  nnoremap <silent> <Leader>zo :<C-u>call <SID>toggle_cell_output()<CR>
+
   execute 'call plug#begin(''' . g:NVIMHOME . '/plug-plugins'')'
   Plug 'https://github.com/godlygeek/tabular.git'
   call plug#end()
