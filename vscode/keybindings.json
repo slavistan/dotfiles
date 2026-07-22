@@ -276,4 +276,16 @@
   //   "command": "explorer.newFile",
   //   "when": "explorerViewletFocus"
   // },
+
+  /**
+   * Always show replace field in find-in-files menu.
+   */
+  {
+    "key": "ctrl+shift+f",
+    "command": "-workbench.action.findInFiles",
+  },
+  {
+    "key": "ctrl+shift+f",
+    "command": "workbench.action.replaceInFiles",
+  },
 ]

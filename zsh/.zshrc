@@ -27,20 +27,14 @@ indian_red1=203
 medium_purple2=140
 
 # TODO(fix): Unfuck path expansion. 'prj' is abbrev'd to '...'.
-PS1="%F{$rosy_brown}%B[%l]%f %F{$pale_turquoise}%n@%m %F{$grey85}in %F{$dark_olive_green3}%(4~|%-1~/.../%2~|%~)%b%f
+PS1="%F{$rosy_brown}%B%F{$pale_turquoise}%n@%m %F{$grey85}in %F{$dark_olive_green3}%(4~|%-1~/.../%2~|%~)%b%f
 %(?.%F{$dark_olive_green3}.%F{$indian_red1})➤ %f%b"
 PS2="%(?.%F{$dark_olive_green3}.%F{$indian_red1})➤ %f%b"
 
 # EOL indicator
-setopt PROMPT_CR
 setopt PROMPT_SP
 export PROMPT_EOL_MARK="%F{$light_goldenrod3}⤬%k"
 
-
-# direnv plugin
-# -------------
-
-# . /home/stan/prj/dotfiles/zsh/plugins/zsh-autoenv/autoenv.zsh
 
 ## Completion system init
 
@@ -115,6 +109,7 @@ vicursor() {
 # environment for java to play nice with non-reparenting window managers
 javaenv() {
 	export _JAVA_OPTIONS='-Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dawt.useSystemAAFontSettings=gasp' 
+
 	export _JAVA_AWT_WM_NONREPARENTING=1
 }
 
@@ -128,7 +123,19 @@ mkcd() {
 }
 
 mkcdt() {
-  cd $(mktemp -d)
+	dirname_="$(date +"%Y-%m-%dT%H-%M-%S")"  # must not contain colons
+	tmpdir="/tmp/$dirname_"
+	if [[ -d "$tmpdir" ]]; then
+		echo "'$tmpdir' exists. Abort." >&2
+		return 1
+	fi
+	mkdir "$tmpdir"
+	cd "$tmpdir"
+
+	if xhost >/dev/null 2>&1; then
+		notify-send "Copied '$tmpdir' to clipboard."
+		xclip -selection clipboard <<<"$tmpdir"
+	fi
 }
 
 gsap() {
@@ -140,11 +147,6 @@ gsap() {
 
 if [[ -f "$XDG_CONFIG_HOME/lfbundle/lfbundle.zshrc" ]]; then
 	source "$XDG_CONFIG_HOME/lfbundle/lfbundle.zshrc"
-fi
-
-
-if [[ ${USERSVDIR+x} ]]; then
-	alias sv="SVDIR='$USERSVDIR' sv" # shell alias; 'sudo sv' will use system dir
 fi
 
 
