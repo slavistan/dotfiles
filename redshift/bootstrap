@@ -1,0 +1,2 @@
+mkdir -p "$XDG_CONFIG_HOME/redshift"
+ln -s "$(realpath ./redshift.conf)" "$XDG_CONFIG_HOME/redshift"
