@@ -1,0 +1,6 @@
+{
+  "python.defaultInterpreterPath": "/usr/bin/python3",
+  "python.analysis.extraPaths": [".kitty-src", "/usr/lib/kitty"],
+  "python.analysis.typeCheckingMode": "off",
+  "python.analysis.autoImportCompletions": true
+}
