@@ -1,0 +1,29 @@
+<!DOCTYPE okularQuickAnnotatingTools>
+<!--
+Refer to tools.xml for the documentation of the attribues not documented here.
+
+Tool
+  [id]              {int = unique id identifying the quick tool}
+-->
+<quickAnnotatingTools>
+    <tool id="1" type="underline" name="Highlight">
+        <engine type="TextSelector" color="#00ff00">
+            <annotation type="Underline" color="#00ff00" opacity="1.0"/>
+        </engine>
+    </tool>
+    <tool id="2" type="highlight" name="Anmerkung">
+        <engine type="TextSelector" color="#00ff00">
+            <annotation type="Highlight" color="#00ff00" opacity="0.5"/>
+        </engine>
+    </tool>
+    <tool id="3" type="highlight" name="Unklar">
+        <engine type="TextSelector" color="#ffff00">
+            <annotation type="Highlight" color="#ffff00" opacity="0.5"/>
+        </engine>
+    </tool>
+    <tool id="4" type="highlight" name="Todo">
+        <engine type="TextSelector" color="#7f00ff">
+            <annotation type="Highlight" color="#7f00ff" opacity="0.5"/>
+        </engine>
+    </tool>
+</quickAnnotatingTools>

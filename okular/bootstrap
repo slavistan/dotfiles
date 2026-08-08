@@ -1,0 +1,2 @@
+mkdir -p ~/.local/share/okular
+ln -sf "$(realpath toolsQuick.xml)" ~/.local/share/okular/
