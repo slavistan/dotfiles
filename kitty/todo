@@ -1,10 +1,43 @@
 # Todos
 
 - Hintergrundfarbe
+
 - neuer Standard: ctrl+shift als Modifier
-- nerd font für coole Symbole in lf
-- tty-Prefix aus PS1 entfernen, nutze ich nicht
+
+- Settings:
+	- [ ] Buffersize aufdrehen (64MB z.B.)
+
+- Hotkeys einstellen:
+	- [ ] Letzten Output in nvim/pager öffnen
+	- [ ] Durch alle Outputs navigieren und in pager öffnen
+	- [ ] innerhalb von Terminaloutput zu letzten Prompts springen (braucht das ZSH-support?)
+	- [ ] Windows aus Split befreien und zu eigenem X-Client machen
+
+	- [ ] Tabmgmt
+		- erstellen, navigieren, benennen, befreien (in eigenes Fenster), ...
+	
+	- Shell Navigation
+		- ctrl+shift+{z,x} - zu {vorherigen,nächstem} Prompt springen:
+			- [ ] leere Outputs überspringen
+			- [ ] beim Jump Prompts immer ganz oben im Terminal anzeigen (standardmäßig springt er zum nächsten Prompt, der out of view ist - verwirren)
+			- [ ] beim Pagen den PS1 der Ausgabe anzeigen, sonst Verwirrungsgefahr
+			- [ ] Alternativ: dmenu-esque Auswahl des Kommandos, dessen Output angezeigt werden soll
+
+- [ ] In PS1 (rechte Seite) Command-Counter (e.g. '13'), Startzeit und Ausführungsdauer (Wallclock) anzeigen. Hilft bei Navigation und Paging
+- [ ] nerd font für coole Symbole in lf
+- [ ] Shellprogramm in DWM-Statusbar zeigen, z.B. 'kitty @ nvim' oder 'nvim', dynamisch aktualisiert bei kitty-Windowwechsel
+
+- [x] tty-Prefix aus PS1 entfernen, nutze ich nicht
+
 - info:
 	- mod+q -> killt window
 	- mod+{1,2,3,..} -> wechselt zwischen windows 
 - fokuswechsel mulit-window mittels mod+jk (wie dwm)
+
+- Advanced Kitty/Nvim Stuff: https://github.com/mikesmithgh/kitty-scrollback.nvim/wiki#recommended-configurations-for-other-plugins
+
+# Future
+
+- Kitty-vscode Integration als dedizierter Terminalwindow (== /ide-Mode mit Claude Code)
+- Nvim als Pager (https://github.com/neovim/neovim/issues/30415)
+- Advanced Workflows (IDE, .. ) https://github.com/stefan-hacks/ikitty

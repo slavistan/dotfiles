@@ -1,0 +1,6 @@
+{
+  "extraPaths": [".kitty-src", "/usr/lib/kitty"],
+  "exclude": [".kitty-src"],
+  "typeCheckingMode": "standard",
+  "reportMissingModuleSource": "none"
+}
