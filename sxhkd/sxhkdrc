@@ -6,7 +6,7 @@ mod4 + d
 mod4 + Return
 	st
 
-# Spawn a new terminal opening lf immediately.
+#
 mod4 + ctrl + Return
 	open-claude.sh
 
