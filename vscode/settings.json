@@ -199,5 +199,9 @@
   "[dart]": {
     "editor.defaultFormatter": "Dart-Code.dart-code",
   },
-  "editor.dragAndDrop": false,
+"editor.dragAndDrop": false,
+"jupyter.widgetScriptSources": [
+    "jsdelivr.com",
+    "unpkg.com"
+],
 }

@@ -212,14 +212,10 @@
   /**
    * Leave cell edit-mode in Jupyter notebooks with Shift+Esc instead of the default Esc.
    */
+  { "key": "escape", "command": "-notebook.cell.quitEdit" },
   {
     "key": "shift+escape",
     "command": "notebook.cell.quitEdit",
-    "when": "inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !inlineChatFocused",
-  },
-  {
-    "key": "escape",
-    "command": "-notebook.cell.quitEdit",
     "when": "inputFocus && notebookEditorFocused && !editorHasMultipleSelections && !editorHasSelection && !editorHoverVisible && !inlineChatFocused",
   },
   /**
