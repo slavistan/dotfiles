@@ -18,10 +18,19 @@ ssh-Destination-String; User, Port, Key, ProxyJump usw. gehoeren nach
 
 Zusaetzliche ssh-Optionen bei Bedarf ueber $PODNOTES_SSH_OPTS.
 
-    podnotes.py folge-42.mp3                  # -> folge-42.json + folge-42.md
-    podnotes.py *.mp3 --outdir ~/wiki/podcasts
-    podnotes.py folge-42.mp3 --local          # ohne ssh, auf dieser Maschine
-    podnotes.py folge-42.mp3                  # JSON existiert schon -> nur neu rendern
+Ausgegeben werden zwei gleichnamige Dateien, PREFIX.json und PREFIX.md. Der
+Prefix ist per Default das aktuelle Verzeichnis plus Dateiname der Quelle und
+laesst sich mit -o frei setzen; endet -o auf einem Schraegstrich, wird er als
+Verzeichnis behandelt und der Dateiname angehaengt. Vorhandene Ausgaben werden
+nie ueberschrieben, sondern durchnummeriert (--force ueberschreibt doch).
+
+    podnotes.py folge-42.mp3            # -> ./folge-42.json + ./folge-42.md
+    podnotes.py folge-42.mp3 -o ./snu/foo-   # -> ./snu/foo-.json + ./snu/foo-.md
+    podnotes.py folge-42.mp3 -o ./snu/   # -> ./snu/folge-42.json + .md
+    podnotes.py folge-42.mp3            # nochmal -> ./folge-42-2.json + .md
+    podnotes.py *.mp3 -o ~/wiki/podcasts/
+    podnotes.py folge-42.mp3 --local    # ohne ssh, auf dieser Maschine
+    podnotes.py folge-42.json --block-seconds 35   # nur neu rendern, keine GPU
 """
 
 from __future__ import annotations
@@ -77,7 +86,8 @@ except Exception as exc:
     log(f"batched pipeline nicht verfuegbar ({type(exc).__name__}), sequentiell")
     segments, info = model.transcribe(audio, **kw)
     mode = "sequential"
-log(f"audio {info.duration:.0f}s, sprache {info.language}, modus {mode}")
+lang_prob = getattr(info, "language_probability", 1.0) or 1.0
+log(f"audio {info.duration:.0f}s, sprache {info.language} (p={lang_prob:.2f}), modus {mode}")
 
 segs, nwords = [], 0
 for s in segments:
@@ -96,8 +106,8 @@ for s in segments:
 
 log(f"fertig: {nwords} woerter in {len(segs)} segmenten")
 json.dump({"model": model_name, "device": device, "mode": mode,
-           "language": info.language, "duration": info.duration,
-           "segments": segs}, sys.stdout)
+           "language": info.language, "language_probability": round(lang_prob, 3),
+           "duration": info.duration, "segments": segs}, sys.stdout)
 '''
 
 # ------------------------------------------------------------------- Segmentierung
@@ -224,7 +234,10 @@ def render_markdown(data: dict, asset: str, embed_every: float) -> str:
         "",
         f"- Quelle: `{asset}`",
         f"- Laenge: {hms(data['duration'])} · {len(blocks)} Bloecke · {words} Woerter",
-        f"- Modell: `{data['model']}` ({data['mode']}, {data['device']}) · Sprache: {data['language']}",
+        f"- Modell: `{data['model']}` ({data['mode']}, {data['device']}) · Sprache: {data['language']}"
+        # Nur vermerken, wenn die Erkennung wirklich unsicher war
+        + (f" (erkannt, p={data['language_probability']:.2f})"
+           if data.get("language_probability", 1.0) < 0.99 else ""),
         f"- Schlechtester Block: mean_prob {worst:.3f}",
     ]
     if fragments:
@@ -340,28 +353,65 @@ def transcribe_local(audio: Path, args: argparse.Namespace) -> dict:
     return json.loads(proc.stdout)
 
 
-def process(audio: Path, args: argparse.Namespace) -> None:
-    outdir = Path(args.outdir).expanduser() if args.outdir else audio.parent
-    outdir.mkdir(parents=True, exist_ok=True)
-    json_path, md_path = outdir / f"{audio.stem}.json", outdir / f"{audio.stem}.md"
+OUT_EXTENSIONS = (".json", ".md")
 
-    if json_path.is_file() and not args.force:
-        print(f"podnotes: {json_path.name} existiert, rendere neu (--force transkribiert neu)",
-              file=sys.stderr)
-        data = json.loads(json_path.read_text())
+
+def output_prefix(stem: str, out: str | None) -> Path:
+    """Prefix, an den .json und .md angehaengt werden."""
+    if not out:
+        return Path.cwd() / stem
+    raw = os.path.expanduser(out)
+    # Verzeichnis-Semantik: Schraegstrich am Ende oder existierendes Verzeichnis
+    if raw.endswith(os.sep) or Path(raw).is_dir():
+        return Path(raw) / stem
+    return Path(raw)
+
+
+def unique_prefix(prefix: Path, force: bool) -> Path:
+    """Weicht auf prefix-2, prefix-3, ... aus, solange etwas im Weg ist."""
+    def free(p: Path) -> bool:
+        return not any(p.with_name(p.name + ext).exists() for ext in OUT_EXTENSIONS)
+
+    if force or free(prefix):
+        return prefix
+    # Endet der Prefix schon auf einem Trenner ("foo-"), reicht die Zahl allein.
+    sep = "" if prefix.name.endswith(("-", "_", ".")) else "-"
+    n = 2
+    while not free(candidate := prefix.with_name(f"{prefix.name}{sep}{n}")):
+        n += 1
+    return candidate
+
+
+def process(src: Path, args: argparse.Namespace) -> None:
+    if src.suffix.lower() == ".json":
+        # Frueher erzeugtes JSON: nur neu rendern, keine Transkription
+        data = json.loads(src.read_text())
+        stem = Path(data.get("audio", src.name)).stem
     else:
-        data = (transcribe_local(audio, args) if args.local
-                else transcribe_remote(audio, resolve_host(args.host), args))
-        data["audio"] = audio.name
+        data = (transcribe_local(src, args) if args.local
+                else transcribe_remote(src, resolve_host(args.host), args))
+        data["audio"] = src.name
+        stem = src.stem
+
+    prefix = output_prefix(stem, args.out)
+    prefix.parent.mkdir(parents=True, exist_ok=True)
+    prefix = unique_prefix(prefix, args.force)
+    json_path = prefix.with_name(prefix.name + ".json")
+    md_path = prefix.with_name(prefix.name + ".md")
+
+    if data.get("language_probability", 1.0) < 0.85:
+        print(f"podnotes: warnung: Sprache '{data['language']}' nur mit "
+              f"p={data['language_probability']:.2f} erkannt — bei falschem Ergebnis "
+              f"--language <code> setzen und --force", file=sys.stderr)
 
     words = [w for s in data["segments"] for w in s["words"]]
     if not words:
-        sys.exit(f"podnotes: keine Wort-Timestamps fuer {audio.name} — nichts zu rendern")
+        sys.exit(f"podnotes: keine Wort-Timestamps fuer {src.name} — nichts zu rendern")
     data["blocks"] = [summarize(r) for r in
                       build_blocks(words, args.block_seconds, args.max_words)]
 
     json_path.write_text(json.dumps(data))
-    md_path.write_text(render_markdown(data, data.get("audio", audio.name), args.embed_every))
+    md_path.write_text(render_markdown(data, data.get("audio", src.name), args.embed_every))
 
     blocks = data["blocks"]
     spans = sorted(b["end"] - b["start"] for b in blocks)
@@ -376,10 +426,13 @@ def main() -> None:
         epilog="SSH-Ziel: --host, sonst $PODNOTES_HOST, sonst ~/.config/podnotes/host.\n"
                "User/Port/Key gehoeren nach ~/.ssh/config. Extra-Flags: $PODNOTES_SSH_OPTS.",
     )
-    p.add_argument("audio", nargs="+", type=Path, help="Audiodatei(en)")
+    p.add_argument("audio", nargs="+", type=Path,
+                   help="Audiodatei(en), oder eine frueher erzeugte .json zum Neurendern")
     p.add_argument("--host", help="ssh-Destination des Rechners mit GPU")
     p.add_argument("--local", action="store_true", help="auf dieser Maschine rechnen")
-    p.add_argument("-o", "--outdir", help="Zielverzeichnis (Default: neben der Audiodatei)")
+    p.add_argument("-o", "--out", metavar="PREFIX",
+                   help="Ausgabe-Prefix, es entstehen PREFIX.json und PREFIX.md "
+                        "(Default: ./<dateiname>; endet er auf / gilt er als Verzeichnis)")
     p.add_argument("--model", default="large-v3", help="Whisper-Modell (Default: large-v3)")
     p.add_argument("--language", default="", help="Sprachcode, z.B. de/en (Default: automatisch)")
     p.add_argument("--block-seconds", type=float, default=20.0,
@@ -389,7 +442,8 @@ def main() -> None:
     p.add_argument("--embed-every", type=float, default=120.0,
                    help="Abstand der ![[...#t=]]-Sprungmarken in s; 0 = jeder Block (Default: 120)")
     p.add_argument("--batch-size", type=int, default=16, help="GPU-Batchgroesse (Default: 16)")
-    p.add_argument("--force", action="store_true", help="neu transkribieren, auch wenn JSON existiert")
+    p.add_argument("--force", action="store_true",
+                   help="vorhandene Ausgabe ueberschreiben statt durchzunummerieren")
     p.add_argument("--keep-remote", action="store_true",
                    help="kopierte Audiodatei auf dem Zielrechner nicht loeschen")
     args = p.parse_args()
@@ -403,7 +457,7 @@ def main() -> None:
         a = a.expanduser()
         if not a.is_file():
             sys.exit(f"podnotes: keine Datei: {a}")
-        if a.suffix.lower() not in AUDIO_SUFFIXES:
+        if a.suffix.lower() not in AUDIO_SUFFIXES and a.suffix.lower() != ".json":
             print(f"podnotes: warnung: {a.name} sieht nicht wie Audio aus", file=sys.stderr)
         files.append(a)
 
