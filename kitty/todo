@@ -26,6 +26,22 @@
 - [ ] In PS1 (rechte Seite) Command-Counter (e.g. '13'), Startzeit und Ausführungsdauer (Wallclock) anzeigen. Hilft bei Navigation und Paging
 - [ ] nerd font für coole Symbole in lf
 - [ ] Shellprogramm in DWM-Statusbar zeigen, z.B. 'kitty @ nvim' oder 'nvim', dynamisch aktualisiert bei kitty-Windowwechsel
+- [ ] Laufendes Kommando mit Notification armen (Benachrichtigung, sobald fertig)
+- [ ] Hotkey für Light/Darkmode Switch
+
+- [x] Clear killt die History -> Ctrl+R funktioniert nicht mehr. Ich nutze clear einfach nur zum "Wegwischen" des Outputs für freie Fahrt
+	-> erledigt: ctrl+l (scroll_prompt_to_top) wischt weg, History bleibt.
+	   cmdjump nutzt denselben Mechanismus, wenn ein Sprungziel unten liegt.
+
+fzf-History:
+- [ ] in der Previewregion kann man nach unten über den aktuellen Prompt hinausscrollen, useless und verwirrend. Beim aktiven Prompt stoppen.
+- [ ] Kann man in fzf Hotkeys belegen um im Preview zu scrollen? (alt+j/k = 1 hoch/runter, alt+u/d = View hoch/runter sind meine st-Hotkeys)
+
+---
+- [ ] Ansicht-Bruchfreier Sprung in nvim Pager beim Scrollen (view wird direkt in Nvim übernommen)
+
+- [ ] Idee: Es gibt fzf Python bindings, die wären doch gewiss besser als der Shell-Wrapper.
+- [ ] Idee: Aktuellen Prompt in Kitty-Window-Split editieren. Existierender View wird beibehalten, neues Fenster geht darunter auf -> weniger "Flickern"/visuelle Deltas, mehr Konstanz/Kontinuität.
 
 - [x] tty-Prefix aus PS1 entfernen, nutze ich nicht
 
@@ -35,6 +51,11 @@
 - fokuswechsel mulit-window mittels mod+jk (wie dwm)
 
 - Advanced Kitty/Nvim Stuff: https://github.com/mikesmithgh/kitty-scrollback.nvim/wiki#recommended-configurations-for-other-plugins
+
+- [x] cmdjump: markierten Prompt in der ctrl+r-Vorschau hervorheben.
+	-> als Fade umgesetzt: alles ausser dem selektierten Block ist SGR-2-
+	   gedimmt (vorberechnet in Python, Preview mischt nur per head/sed/tail).
+	   Staerke regelt kittys dim_opacity (Default 0.4).
 
 # Future
 
