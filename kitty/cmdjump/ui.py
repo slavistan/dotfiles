@@ -15,6 +15,8 @@ unten Inhalt, macht der Dispatch die Zeilen real (History bleibt erhalten)
 und landet bei scrolled_by == 0 -- Tippen bewegt die Ansicht dann nicht.
 
   Enter   Kommandozeile in die Shell legen; Ansicht springt ans Ende
+  Ctrl-E  Kommandozeile in nvim bearbeiten (Kontext-Split oben);
+          :w/:x uebernimmt in die Shell, Beenden ohne Schreiben bricht ab
   Ctrl-O  Prompt und Ausgabe im scrollback_pager oeffnen
   Ctrl-Y  Prompt und Ausgabe in die Zwischenablage
   Esc     schliessen, Ansicht bleibt beim markierten Prompt
@@ -30,6 +32,8 @@ import subprocess
 import sys
 from dataclasses import asdict
 from datetime import datetime
+
+from kittens.tui.handler import result_handler
 
 from model import Selection, Session, from_dict
 
@@ -127,12 +131,21 @@ def preview_cmd(session: Session) -> str:
     """
     orig = shlex.quote(os.path.join(session.spool, session.buffer))
     dim = shlex.quote(os.path.join(session.spool, session.buffer_dim))
+    ready = shlex.quote(os.path.join(session.spool, 'ready'))
     # fzf setzt {2}/{3} shell-QUOTIERT ein ('4'); in $((...)) waere das ein
     # Syntaxfehler. Deshalb zuerst als Variablen uebernehmen, dann rechnen.
+    #
+    # Der Schwanz meldet kitty nach dem ERSTEN Vorschau-Lauf, dass das Bild
+    # vollstaendig ist (overlay-ready): erst dann kommt das versteckte
+    # Overlay nach vorn -- frueher zu melden hiesse, einen Frame mit leerer
+    # Vorschau-Pane zu zeigen. Das Flag im Spool verhindert Wiederholungen.
     return (f'a={{2}} b={{3}}; '
             f'head -n "$(( a - 1 ))" {dim}; '
             f'sed -n "${{a}},${{b}}p" {orig}; '
-            f'tail -n "+$(( b + 1 ))" {dim}')
+            f'tail -n "+$(( b + 1 ))" {dim}; '
+            f'[ -e {ready} ] || {{ '
+            r"printf '\033P@kitty-overlay-ready|\033\\' > /dev/tty; "
+            f': > {ready}; }}')
 
 
 def run_fzf(session: Session, items: list) -> tuple:
@@ -140,7 +153,7 @@ def run_fzf(session: Session, items: list) -> tuple:
     argv = [
         'fzf', '--read0', '--print0', '--ansi', '--no-sort', '--gap',
         '--delimiter=\t', '--with-nth=4..',
-        '--expect=ctrl-o,ctrl-y,esc', '--prompt=cmd> ', '--info=inline',
+        '--expect=ctrl-o,ctrl-y,ctrl-e,esc', '--prompt=cmd> ', '--info=inline',
         # Kontext des Views vorwaehlen (Stufe 1 hat ihn bestimmt): Stream ist
         # neuester-zuerst, Block b liegt also an Match-Position len - b.
         # --sync stellt sicher, dass die Position erst nach dem Einlesen
@@ -174,8 +187,8 @@ def run_fzf(session: Session, items: list) -> tuple:
         # Trennlinie, damit die Liste nicht wie Ausgabe des letzten Prompts
         # in der Vorschau aussieht.
         '--list-border=top',
-        '--header=enter: to shell   ctrl-o: pager   ctrl-y: copy   '
-        'ctrl-p/n: older/newer',
+        '--header=enter: to shell   ctrl-e: edit   ctrl-o: pager   '
+        'ctrl-y: copy   ctrl-p/n: older/newer',
     ]
     proc = subprocess.run(argv, input='\0'.join(items) + '\0',
                           stdout=subprocess.PIPE, text=True)
@@ -187,7 +200,20 @@ def run_fzf(session: Session, items: list) -> tuple:
 
 # Esc laeuft ueber --expect, damit wir wissen, welcher Prompt markiert war
 # und die Ansicht dort stehen lassen koennen.
-ACTIONS = {'': 'paste', 'ctrl-o': 'pager', 'ctrl-y': 'clipboard', 'esc': 'jump'}
+ACTIONS = {'': 'paste', 'ctrl-o': 'pager', 'ctrl-y': 'clipboard',
+           'ctrl-e': 'edit', 'esc': 'jump'}
+
+
+@result_handler(has_ready_notification=True)
+def handle_result(args: list, answer, target_window_id: int, boss) -> None:
+    """Der Rueckweg laeuft ueber den custom_callback in launch.py -- diese
+    Funktion existiert nur als Traeger von has_ready_notification: damit
+    startet das Overlay unsichtbar HINTER dem Fenster und wird erst nach
+    vorn geholt, wenn die erste Vorschau erzeugt ist -- das Signal haengt
+    am Ende des Preview-Kommandos (kitty leitet Tasten solange ans
+    versteckte Overlay um). Ohne das sieht man beim Oeffnen erst ein leeres
+    Fenster, dann den Python-Start, dann fzf -- beim Wiederoeffnen nach Esc
+    ein Flackern zwischen zwei identischen Bildern."""
 
 
 def main(args: list) -> dict:

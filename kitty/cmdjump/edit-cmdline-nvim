@@ -1,0 +1,111 @@
+#!/usr/bin/env python3
+"""Tuer 2: Editor fuer die Live-Kommandozeile.
+
+Wird von zsh's edit-command-line als Editor aufgerufen (zstyle in
+cmdjump.zsh). Der Dateiname MUSS 'vim' enthalten: nur dann nimmt das
+Widget seinen vim-Zweig und uebergibt die Cursorposition als
+'-c "normal! <byteoffset>go" -- <datei>' -- daher heisst dieses Skript
+edit-cmdline-nvim. Das letzte Argument ist die Tempdatei mit $BUFFER;
+das Widget liest sie nach dem Beenden ersetzend zurueck -- Accept/Abbruch
+entscheidet sich also allein dadurch, ob geschrieben wurde.
+
+Den zle-Modus reicht das Widget nicht durch; das erledigt das kleine
+Wrapper-Widget in cmdjump.zsh per $CMDJUMP_KEYMAP: viins -> Insert-Mode
+an der zle-Cursorposition, vicmd -> Normal-Mode.
+
+Kontext oben kommt per kitty-Remote-Control (get-text ueber das tty,
+allow_remote_control vorausgesetzt); schlaegt das fehl, oeffnet der Editor
+ohne Kontext statt gar nicht. Geankert wird auf der obersten Zeile des
+aktuellen Views (beim Tippen ist scrolled_by praktisch immer 0, kitty
+springt bei Tastendruck ans Ende).
+"""
+
+import os
+import subprocess
+import sys
+import tempfile
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from editor import editor_argv  # noqa: E402
+
+
+def cursor_cmds(edit_path: str) -> list:
+    """Cursor und Modus aus der zle-Session uebernehmen.
+
+    Byteoffset aus dem vom Widget angehaengten '-c normal! Ngo'; steht der
+    zle-Cursor am Zeilenende (Offset hinter dem letzten Byte), waere Ngo
+    auf das letzte Zeichen geklemmt und Insert landete davor -- dann
+    stattdessen ans Ende anhaengen (startinsert!).
+    """
+    offset = None
+    for i, a in enumerate(sys.argv):
+        if a == '-c' and i + 1 < len(sys.argv) and sys.argv[i + 1].endswith('go'):
+            digits = ''.join(ch for ch in sys.argv[i + 1] if ch.isdigit())
+            if digits:
+                offset = int(digits)
+    insert = os.environ.get('CMDJUMP_KEYMAP', '') != 'vicmd'
+    if offset is None:
+        return ['-c', 'startinsert'] if insert else []
+    size = os.path.getsize(edit_path)          # Inhalt + '\n' vom Widget
+    if offset >= size:
+        return ['-c', 'execute "normal! G$"', '-c', 'startinsert!'] if insert \
+            else ['-c', 'execute "normal! G$"']
+    cmds = ['-c', f'execute "normal! {offset}go"']
+    if insert:
+        cmds += ['-c', 'startinsert']
+    return cmds
+
+
+def main() -> None:
+    edit_path = sys.argv[-1]
+    spool = tempfile.mkdtemp(prefix='cmdjump-zle-')
+    ctx_path = os.path.join(spool, 'context')
+
+    def raster_rows(extent):
+        """Der Extent als Liste von RASTERZEILEN.
+
+        get-text ohne Marker liefert logische Zeilen (weiche Umbrueche
+        zusammengefuegt) -- deren Zaehlung passt nicht zur Fenstergeometrie,
+        der Anker verrutscht, sobald Zeilen wrappen. Mit --add-wrap-markers
+        steht hinter JEDER Rasterzeile ein \\r und nur zwischen harten
+        Zeilen ein \\n (kitty as_text-Konvention, wie in Tuer 1): ein Split
+        auf \\r ist exakt eine Zeile pro Bildschirmzeile.
+        """
+        try:
+            out = subprocess.run(['kitten', '@', 'get-text', f'--extent={extent}',
+                                  '--ansi', '--add-wrap-markers'],
+                                 capture_output=True, timeout=5).stdout.decode()
+        except Exception:
+            return []
+        chunks = out.split('\r')
+        if chunks and not chunks[-1].strip():
+            chunks.pop()
+        return [c.lstrip('\n') for c in chunks]
+
+    rows_all = raster_rows('all')
+    rows_scr = raster_rows('screen')
+    if not rows_all:
+        rows_all = ['(kein Kontext -- kitty remote control nicht erreichbar)']
+        rows_scr = []
+    # Beide Extents enden auf derselben letzten Inhaltszeile; die Differenz
+    # der Rasterzaehlungen ist damit exakt die oberste sichtbare Zeile.
+    anchor = max(1, len(rows_all) - len(rows_scr) + 1) if rows_scr else 1
+    with open(ctx_path, 'w') as f:
+        # Reset vor jeder Zeile, sonst blutet eine offene Farbe in die
+        # Folgezeilen (dieselbe Massnahme wie im Ctrl+R-Puffer).
+        f.write('\n'.join('\x1b[0m' + r for r in rows_all))
+        f.write('\n')
+    argv = editor_argv(ctx_path, anchor, edit_path,
+                       os.path.join(spool, 'accepted'), len(rows_all))
+    argv += cursor_cmds(edit_path)
+    if os.environ.get('CMDJUMP_DRYRUN'):
+        print('\0'.join(argv))
+        return
+    subprocess.run(argv)
+    # Spool aufraeumen; die Editdatei gehoert dem Widget.
+    import shutil
+    shutil.rmtree(spool, ignore_errors=True)
+
+
+if __name__ == '__main__':
+    main()

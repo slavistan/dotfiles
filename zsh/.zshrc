@@ -75,6 +75,10 @@ autoload -U edit-command-line && zle -N edit-command-line
 bindkey -M vicmd '^e' edit-command-line # Edit line-buffer in vim
 bindkey -M viins '^e' edit-command-line # Edit line-buffer in vim
 
+# cmdjump (kitty Ctrl+R): uebernommene Kommandos ersetzen die Zeile,
+# statt angehaengt zu werden. Ohne kitty ein No-op.
+[[ -r ~/.config/kitty/cmdjump/cmdjump.zsh ]] && source ~/.config/kitty/cmdjump/cmdjump.zsh
+
 # vi-keys selection menu navigation
 zmodload zsh/complist
 bindkey -M menuselect 'h' vi-backward-char # Menu navigation using vi-keys
@@ -123,7 +127,11 @@ mkcd() {
 }
 
 mkcdt() {
-	dirname_="$(date +"%Y-%m-%dT%H-%M-%S")"  # must not contain colons
+    # Make sure we're first in line for easy navigation and tab path completion
+	# /tmp/.__<TAB> -> completes to tmpdirs.
+	PREFIX=".__tmp_"  
+
+	dirname_="${PREFIX}$(date "+%y%m%H%M%S")"
 	tmpdir="/tmp/$dirname_"
 	if [[ -d "$tmpdir" ]]; then
 		echo "'$tmpdir' exists. Abort." >&2
@@ -131,11 +139,6 @@ mkcdt() {
 	fi
 	mkdir "$tmpdir"
 	cd "$tmpdir"
-
-	if xhost >/dev/null 2>&1; then
-		notify-send "Copied '$tmpdir' to clipboard."
-		xclip -selection clipboard <<<"$tmpdir"
-	fi
 }
 
 gsap() {

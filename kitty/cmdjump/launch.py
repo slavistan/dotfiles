@@ -23,8 +23,10 @@ from functools import partial
 
 from kittens.tui.handler import result_handler
 from kitty.clipboard import set_clipboard_string
+from kitty.tabs import SpecialWindow
 from kitty.utils import kitty_ansi_sanitizer_pat
 
+from editor import editor_argv
 from model import Block, CommandRun, Selection, Session, from_dict
 
 # Kopfzeile eines Eintrags von Screen.dump_lines_with_attrs (kitty/screen.c):
@@ -380,13 +382,18 @@ def collect(window) -> Session | None:
 
 
 def dispatch(session: Session, data: dict, target_window_id: int, boss) -> None:
-    """Rueckweg aus der UI. Raeumt den Spool in jedem Fall auf."""
+    """Rueckweg aus der UI. Raeumt den Spool auf -- ausser der Editor
+    laeuft noch, dann uebernimmt finish_edit das am Ende."""
+    cleanup = True
     try:
         sel = from_dict(Selection, data)
         w = boss.window_id_map.get(target_window_id)
         if w is None or sel.action == 'none' or not 0 <= sel.block_index < len(session.blocks):
             return
         block = session.blocks[sel.block_index]
+        if sel.action == 'edit':
+            cleanup = not open_editor(boss, w, session, block)
+            return
         if sel.action == 'paste':
             # Nur in den Hauptpuffer: waehrend das Menue offen war, kann im
             # Fenster ein Vollbildprogramm gestartet sein -- dann wuerde die
@@ -404,7 +411,8 @@ def dispatch(session: Session, data: dict, target_window_id: int, boss) -> None:
         elif sel.action == 'clipboard':
             set_clipboard_string(plain(read_output(session, block)))
     finally:
-        shutil.rmtree(session.spool, ignore_errors=True)
+        if cleanup:
+            shutil.rmtree(session.spool, ignore_errors=True)
 
 
 def scroll_to_bottom(w) -> None:
@@ -483,8 +491,70 @@ def show_in_pager(boss, w, session: Session, block: Block) -> None:
                             title=title or 'Ausgabe', report_cursor=False)
 
 
+EDIT_FILE = 'edit.zsh'
+ACCEPT_FLAG = 'accepted'
+def open_editor(boss, w, session: Session, block: Block) -> bool:
+    """Tuer 1: Editor-Overlay fuer die selektierte historische Kommandozeile.
+
+    True = Overlay laeuft, der Spool muss es ueberleben (finish_edit raeumt
+    dann auf). Die Ansicht darunter bleibt unangetastet -- gesprungen wird
+    erst beim Annehmen, und zwar ans Ende, wie beim Enter-Pfad.
+    """
+    tab = w.tabref()
+    if tab is None:
+        return False
+    edit_path = os.path.join(session.spool, EDIT_FILE)
+    with open(edit_path, 'w') as f:
+        f.write(block.run.cmdline)
+        if not block.run.cmdline.endswith('\n'):
+            f.write('\n')
+    ctx = os.path.join(session.spool, session.buffer)
+    with open(ctx) as f:
+        ctx_lines = sum(1 for _ in f)
+    argv = editor_argv(ctx, block.prompt_line, edit_path,
+                       os.path.join(session.spool, ACCEPT_FLAG), ctx_lines)
+    win = tab.new_special_window(
+        SpecialWindow(argv, override_title=f'edit: {squeeze(block.run.cmdline)[:50]}',
+                      overlay_for=w.id, overlay_behind=True),
+        copy_colors_from=w)
+    win.actions_on_close.append(partial(finish_edit, boss, session, w.id))
+    return True
+
+
+def finish_edit(boss, session: Session, target_window_id: int, editor_window) -> None:
+    """Schliessen des Editors: ok-Flag da -> uebernehmen, sonst Abbruch."""
+    try:
+        if not os.path.exists(os.path.join(session.spool, ACCEPT_FLAG)):
+            return                        # :q!/:qa -- Ansicht bleibt, nichts passiert
+        with open(os.path.join(session.spool, EDIT_FILE)) as f:
+            cmdline = f.read().rstrip('\n')
+        w = boss.window_id_map.get(target_window_id)
+        if not cmdline or w is None or not w.screen.is_main_linebuf():
+            return
+        scroll_to_bottom(w)               # zur Kommandozeile, gleich wird gefeuert
+        paste_command(w, cmdline)
+        w.cmdjump_viewed = None
+    finally:
+        shutil.rmtree(session.spool, ignore_errors=True)
+
+
+# Accept-Protokoll: hat die Shell den Empfaenger aus cmdjump.zsh geladen,
+# meldet sie das als Fenster-Variable an (OSC 1337 SetUserVar). Der Paste
+# traegt dann dieses Praefix, und der zsh-Wrapper ERSETZT die Kommandozeile
+# statt anzuhaengen. Muss mit _CMDJUMP_MAGIC in cmdjump.zsh uebereinstimmen.
+PASTE_MAGIC = '%%cmdjump-paste%%'
+
+
 def paste_command(w, cmdline: str) -> None:
-    """Legt das Kommando in die Kommandozeile, ohne es auszufuehren."""
+    """Legt das Kommando in die Kommandozeile, ohne es auszufuehren.
+
+    Mit angemeldetem cmdjump.zsh-Empfaenger wird die Zeile ersetzt; sonst
+    universeller Paste (anhaengen) -- fremde Shells und ssh ohne Dotfiles
+    bekommen nie Protokoll-Bytes zu sehen.
+    """
+    if w.user_vars.get('cmdjump') and w.screen.in_bracketed_paste_mode:
+        w.paste_text(PASTE_MAGIC + cmdline)
+        return
     if not w.screen.in_bracketed_paste_mode:
         # Ohne Bracketed Paste macht paste_text aus \n ein \r -- ein
         # mehrzeiliges Kommando wuerde damit sofort losfahren.
