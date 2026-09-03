@@ -129,9 +129,9 @@ mkcd() {
 mkcdt() {
     # Make sure we're first in line for easy navigation and tab path completion
 	# /tmp/.__<TAB> -> completes to tmpdirs.
-	PREFIX=".__tmp_"  
+	PREFIX=".__tmp_"
 
-	dirname_="${PREFIX}$(date "+%y%m%H%M%S")"
+	dirname_="${PREFIX}$(date "+%y%m%d%H%M%S")"
 	tmpdir="/tmp/$dirname_"
 	if [[ -d "$tmpdir" ]]; then
 		echo "'$tmpdir' exists. Abort." >&2
