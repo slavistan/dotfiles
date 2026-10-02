@@ -1,0 +1,153 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.13"
+# dependencies = ["beautifulsoup4", "pygments", "pypandoc"]
+# ///
+"""
+Markdown to the clipboard as rich text for Outlook on the web.
+
+pandoc renders the Markdown (GitHub flavour, every newline is a line break), code blocks get Pygments
+syntax highlighting as inline styles in a shaded box, inline code a shaded background, tables get borders, quotes a bar on the left. Outlook keeps
+inline styles when pasting with "Keep source formatting" (it drops them with "Merge formatting").
+TeX math works only as far as pandoc can write it as plain HTML (sin x, x², Greek letters); fractions,
+roots and the like stay TeX, because Outlook on the web neither renders MathML nor keeps it.
+Needs pandoc and xclip (X11) on the PATH; both fail loudly when missing.
+
+    md2outlook mail.md            # into the clipboard as text/html
+    md2outlook mail.md --print    # the HTML on stdout instead, e.g. to check it in a browser
+"""
+
+import argparse
+import subprocess
+import sys
+from dataclasses import dataclass
+from pathlib import Path
+
+import pypandoc
+from bs4 import BeautifulSoup, Tag
+from pygments import highlight
+from pygments.formatters import HtmlFormatter
+from pygments.lexer import Lexer
+from pygments.lexers import get_lexer_by_name
+from pygments.util import ClassNotFound
+
+BLOCK_STYLE = (
+    "font-family: monospace; font-size: 90%; line-height: 1.45; white-space: pre-wrap; "
+    "background-color: #f3f4f6; border: 1px solid #d0d7de; border-radius: 6px; padding: 10px 12px;"
+)
+BLOCK_UNDER_HEADER_STYLE = "border-top-left-radius: 0; border-top-right-radius: 0; margin-top: 0;"
+HEADER_STYLE = (
+    "font-family: monospace; font-size: 80%; color: #57606a; background-color: #e8eaed; "
+    "border: 1px solid #d0d7de; border-bottom: none; border-radius: 6px 6px 0 0; padding: 4px 12px; margin: 0;"
+)
+INLINE_STYLE = "font-family: monospace; font-size: 90%; background-color: #e8eaed; border-radius: 4px;"
+TABLE_STYLE = "border-collapse: collapse; margin: 8px 0;"
+CELL_STYLE = "border: 1px solid #d0d7de; padding: 4px 10px; text-align: left; vertical-align: top;"
+HEADER_CELL_STYLE = f"{CELL_STYLE} background-color: #e8eaed; font-weight: bold;"
+QUOTE_STYLE = "margin: 8px 0; padding: 0 12px; border-left: 4px solid #d0d7de; color: #57606a;"
+QUOTE_PARAGRAPH_STYLE = "margin: 0;"
+
+
+@dataclass(frozen=True)
+class Params:
+    markdown: Path
+    print_html: bool
+
+
+def parse_args() -> Params:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("markdown", type=Path, help="the Markdown file")
+    parser.add_argument(
+        "--print", dest="print_html", action="store_true", help="write the HTML to stdout instead of the clipboard"
+    )
+    args = parser.parse_args()
+    return Params(markdown=args.markdown, print_html=args.print_html)
+
+
+def convert(markdown: str) -> str:
+    html = pypandoc.convert_text(
+        markdown, "html", format="gfm+hard_line_breaks", extra_args=["--syntax-highlighting=none"]
+    )
+    soup = BeautifulSoup(html, "html.parser")
+    for code in soup.find_all("code"):
+        block = enclosing_block(code)
+        if block is None:
+            code["style"] = INLINE_STYLE
+        else:
+            style_block(soup, block, code)
+    style_tables(soup)
+    style_quotes(soup)
+    return str(soup)
+
+
+def style_tables(soup: BeautifulSoup) -> None:
+    """Borders, cell padding and a shaded header row; pandoc emits bare tables."""
+    for table in soup.find_all("table"):
+        table["style"] = TABLE_STYLE
+    for cell in soup.find_all("th"):
+        cell["style"] = HEADER_CELL_STYLE
+    for cell in soup.find_all("td"):
+        cell["style"] = CELL_STYLE
+
+
+def style_quotes(soup: BeautifulSoup) -> None:
+    """A bar on the left and a muted color; Outlook would only indent, and its paragraph margins would stretch the bar."""
+    for quote in soup.find_all("blockquote"):
+        quote["style"] = QUOTE_STYLE
+        for paragraph in quote.find_all("p"):
+            paragraph["style"] = QUOTE_PARAGRAPH_STYLE
+
+
+def enclosing_block(code: Tag) -> Tag | None:
+    """The <pre> around a code element, None for inline code."""
+    parent = code.parent
+    return parent if isinstance(parent, Tag) and parent.name == "pre" else None
+
+
+def style_block(soup: BeautifulSoup, block: Tag, code: Tag) -> None:
+    """Box the block; with a language in the fence put it above, and highlight when Pygments knows it."""
+    block["style"] = BLOCK_STYLE
+    language = language_of(block)
+    if language is None:
+        return
+    add_header(soup, block, language)
+    lexer = lexer_for(language)
+    if lexer is None:
+        return
+    highlighted = highlight(code.get_text(), lexer, HtmlFormatter(noclasses=True, nowrap=True)).rstrip("\n")
+    code.clear()
+    code.extend(BeautifulSoup(highlighted, "html.parser").contents)
+
+
+def language_of(block: Tag) -> str | None:
+    """pandoc puts the fence's language into the <pre> class: <pre class="js"><code>."""
+    classes = block.get("class") or []
+    return classes[0] if classes else None
+
+
+def lexer_for(language: str) -> Lexer | None:
+    try:
+        return get_lexer_by_name(language)
+    except ClassNotFound:
+        return None
+
+
+def add_header(soup: BeautifulSoup, block: Tag, name: str) -> None:
+    """A tab-like line with the language's name, docked onto the top of the block."""
+    header = soup.new_tag("div", attrs={"style": HEADER_STYLE})
+    header.string = name
+    block.insert_before(header)
+    block["style"] = f"{BLOCK_STYLE} {BLOCK_UNDER_HEADER_STYLE}"
+
+
+def main() -> None:
+    params = parse_args()
+    html = convert(params.markdown.read_text(encoding="utf-8"))
+    if params.print_html:
+        sys.stdout.write(html)
+        return
+    subprocess.run(["xclip", "-selection", "clipboard", "-t", "text/html"], input=html.encode(), check=True)
+
+
+if __name__ == "__main__":
+    main()

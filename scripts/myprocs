@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# List my running processes of a given name, with start time and cwd:
+#
+#     myprocs claude
+#
+# The name is matched exactly against the process name (pgrep -x), so
+# "claude" does not drag in claude-desktop. Exits 1 if nothing matches,
+# the same way pgrep does.
+
+set -euo pipefail
+
+if [[ $# -ne 1 ]]; then
+	printf 'usage: %s <process-name>\n' "${0##*/}" >&2
+	exit 2
+fi
+
+pids="$(pgrep -x -u "$USER" -- "$1" || true)"
+[[ -n "$pids" ]] || exit 1
+
+for p in $pids; do
+	printf '%7d  %s  %s\n' \
+		"$p" \
+		"$(ps -o lstart= -p "$p" 2>/dev/null)" \
+		"$(readlink "/proc/$p/cwd" 2>/dev/null)"
+done
